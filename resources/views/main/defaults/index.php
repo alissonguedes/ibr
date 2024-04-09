@@ -2,18 +2,18 @@
 
 <head>
   <title>Igreja Batista Renovada</title>
-  <?php include "head.php"; ?>
+  <?php include "head.php";?>
 </head>
 
 <body>
 
-<?php include "loading.php"; ?>
+<?php include "loading.php";?>
 
 
   <div class="corpo" id="corpo">
 
   <!--menu-->
-  <?php include "topo.php"; ?>
+  <?php include "topo.php";?>
 
 
   <!--banners-->
@@ -221,4 +221,4 @@
     </section>
 
 
-<?php include "footer.php"; ?>
+<?php include "footer.php";?>
