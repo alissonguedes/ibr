@@ -6,16 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Main\HomeModel;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller {
+class MinisteriosController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 */
 	public function index() {
-		return view('main.home.index');
-	}
-
-	public function seja_membro() {
-		return view('main.home.seja-membro');
+		return view('main.ministerios.index');
 	}
 
 	/**
