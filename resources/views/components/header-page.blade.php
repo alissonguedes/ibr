@@ -9,10 +9,12 @@
 
 <x-slot:header>
 	<div id="search-on-page">
-		<button id="open-search" class="btn btn-floating btn-flat -45deg-blue-grey-blue mr-3 waves-effect">
-			<i class="material-symbols-outlined grey-text">search</i>
+		<button id="open-search" class="btn btn-floating btn-flat mr-3 waves-effect waves-purple white-text">
+			<i class="material-symbols-outlined">search</i>
 		</button>
 		<x-text-input type="search" id="input-search-header" :data-url="$url" :placeholder="$placeholder" autocomplete="off" />
 	</div>
-	<x-button id="card-button" :title="$btn_title" :data-trigger="$trigger" {{ $attributes->merge(['type' => 'button', 'class' => 'btn btn-floating gradient-45deg-deep-orange-orange waves-effect']) }}>{{ $slot }}</x-button>
+	<x-button id="card-button" {{ $attributes->merge(['type' => 'button', 'class' => 'btn btn-floating waves-effect']) }} :title="$btn_title" :data-trigger="$trigger">
+		{{ $slot }}
+	</x-button>
 </x-slot:header>

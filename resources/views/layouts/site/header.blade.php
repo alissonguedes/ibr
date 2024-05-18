@@ -3,7 +3,7 @@
 	<div class="logo"><img src="{{ asset('assets/img/logo1.png') }}" class="img_cem"></div>
 	<div class="logo2"><img src="{{ asset('assets/img/logo2.png') }}" class="img_cem"></div>
 	<div class="menu">
-		@include('navigation')
+		@include('main.navigation')
 	</div>
 	<div class="socialtop">
 		<a href="https://www.instagram.com/igrejabatistarenovadajp/" target="_blank">

@@ -10,31 +10,31 @@
 	</x-slot:styles>
 	{{-- END Styles --}}
 
-	{{-- BEGIN #Page --}}
-	<div id="page">
+	{{-- BGIN Header --}}
+	@include('layouts.admin.header')
+	{{-- END Header --}}
 
-		{{-- BGIN Header --}}
-		@include('layouts.admin.header')
-		{{-- END Header --}}
+	{{-- BGIN Sidebar --}}
+	@include('layouts.admin.sidebar')
+	{{-- END Sidebar --}}
 
-		{{-- BGIN Sidebar --}}
-		@include('layouts.admin.sidebar')
-		{{-- END Sidebar --}}
+	{{-- BEGIN Body --}}
+	<main id="body" class="">
 
-		{{-- BEGIN Body --}}
-		<main id="body">
-
+		@if (isset($main))
+			{{ $main }}
+		@else
 			<div class="card no-padding no-margin">
 
 				@if (isset($header))
-					<section>
+					<section class="animated fadeIn">
 						<header class="z-depth-0 border-bottom">
 							{{ $header }}
 						</header>
 					</section>
 				@endif
 
-				<div class="card-content scroller">
+				<div class="card-content scroller animated fadeIn">
 					@if (isset($body))
 						{{ $body }}
 					@endif
@@ -59,6 +59,10 @@
 							</div>
 						@endif
 
+						@isset($scripts_form)
+							{{ $scripts_form }}
+						@endisset
+
 					</form>
 				@endif
 
@@ -68,17 +72,24 @@
 
 			</div>
 
-		</main>
-		{{-- END Body --}}
+		@endif
 
-		{{-- BEGIN Footer --}}
-		@include('layouts.admin.footer')
-		{{-- END Footer --}}
+		@if (session()->has('message'))
+			<x-toast class="green darken-2">{{ session()->get('message') }}</x-toast>
+		@endif
 
-	</div>
-	{{-- END #Page --}}
+		@if (count($errors) > 0)
+			<x-toast class="red darken-2">Existem erros no formulário!</x-toast>
+		@endif
 
-	{{-- BEGIN Scripts  --}}
+	</main>
+	{{-- END Body --}}
+
+	{{-- BEGIN Footer --}}
+	@include('layouts.admin.footer')
+	{{-- END Footer --}}
+
+	{{-- BEGIN Scripts --}}
 	<x-slot:scripts>
 
 		@include('layouts.admin.scripts')

@@ -7,6 +7,7 @@ use App\Models\Main\HomeModel;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller {
+
 	/**
 	 * Display a listing of the resource.
 	 */
@@ -14,6 +15,9 @@ class HomeController extends Controller {
 		return view('main.home.index');
 	}
 
+	/**
+	 * Display a listing of the resource.
+	 */
 	public function seja_membro() {
 		return view('main.home.seja-membro');
 	}

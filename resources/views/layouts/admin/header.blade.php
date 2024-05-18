@@ -8,7 +8,7 @@
 
 	<div class="navbar navbar-fixed">
 
-		<nav class="navbar-main navbar-color navbar-light z-depth-0">
+		<nav class="navbar-main navbar-color navbar-dark z-depth-0">
 
 			<div class="nav-wrapper">
 
@@ -38,22 +38,22 @@
 
 				<ul class="navbar-nav right">
 					<li>
-						<a class="waves-effect">
+						<a class="waves-effect waves-light">
 							<i class="material-symbols-outlined">event</i>
 						</a>
 					</li>
 					<li>
-						<a class="waves-effect">
+						<a class="waves-effect waves-light">
 							<i class="material-symbols-outlined">mail</i>
 						</a>
 					</li>
 					<li class="logo animated infinite slow hide-on-large-only">
-						<a href="{{ route('admin.index') }}">
+						<a href="{{ route('admin.dashboard') }}">
 							<span></span>
 						</a>
 					</li>
 					<li>
-						<a href="#" class="waves-effect notification-button">
+						<a href="#" class="waves-effect waves-light notification-button">
 							<i class="material-symbols-outlined">
 								notifications
 								<small class="notification-badge">+99</small>
@@ -66,7 +66,7 @@
 						</a>
 					</li> --}}
 					<li>
-						<a class="waves-effect sidenav-trigger" data-target="slide-out">
+						<a class="waves-effect waves-light sidenav-trigger" data-target="slide-out">
 							<i class="material-symbols-outlined">menu</i>
 						</a>
 					</li>
@@ -86,7 +86,7 @@
 			<div class="hide">
 				<x-dropdown align="right" width="48">
 					<x-slot name="trigger">
-						<button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+						<button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
 							<div>{{ Auth::user()->name }}</div>
 
 							<div class="ms-1">
@@ -131,10 +131,6 @@
 						</x-responsive-nav-link>
 					</form>
 				</div>
-			</div>
-
-			<div class="progress">
-				<div class="indeterminate teal lighten-1"></div>
 			</div>
 
 		</nav>

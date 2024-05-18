@@ -8,7 +8,7 @@
 @if (!$is_icon)
 	<span class="icon material-symbols-outlined">{{ $slot }}</span>
 @else
-	<button {{ $attributes->merge(['type' => 'button', 'class' => implode(' ', [$classes, 'waves-effect'])]) }}>
-		{{ $slot }}
+	<button {{ $attributes->merge(['type' => 'button', 'class' => implode(' ', [$classes, 'waves-effect waves-purple material-symbols-outlined'])]) }}>
+		arrow_back
 	</button>
 @endif
