@@ -166,8 +166,6 @@ Route::middleware([
 
 			$get = BannerModel::all();
 
-			dd($get);
-
 		})->name('admin.home.banners.post');
 
 		Route::put('/', function () {
