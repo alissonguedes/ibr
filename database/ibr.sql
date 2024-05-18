@@ -154,10 +154,10 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `users`
+-- Estrutura para tabela `tb_usuario`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `tb_usuario` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -169,10 +169,10 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Despejando dados para a tabela `users`
+-- Despejando dados para a tabela `tb_usuario`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+INSERT INTO `tb_usuario` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Alisson Guedes Pereira', 'alissonguedes87@gmail.com', NULL, '$2y$12$unhwMr4Mh43KrzZqAXGmm.v9cKSs8RuxcvdVPR18u2PtFFXC0K.lW', NULL, '2024-05-16 00:57:32', '2024-05-16 00:57:32');
 
 --
@@ -232,9 +232,9 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
--- Índices de tabela `users`
+-- Índices de tabela `tb_usuario`
 --
-ALTER TABLE `users`
+ALTER TABLE `tb_usuario`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
@@ -261,9 +261,9 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de tabela `users`
+-- AUTO_INCREMENT de tabela `tb_usuario`
 --
-ALTER TABLE `users`
+ALTER TABLE `tb_usuario`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 

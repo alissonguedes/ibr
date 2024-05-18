@@ -152,6 +152,33 @@
 	--green-darken-3: #2e7d32 !important;
 	--green-darken-4: #1b5e20 !important;
 
+	/** Light Green */
+
+	--light-green: #c3c907 !important;
+	--light-green-2: #8bc34a !important;
+
+	--light-green-lighten-1: #9ccc65 !important;
+	--light-green-lighten-2: #aed581 !important;
+	--light-green-lighten-3: #c5e1a5 !important;
+	--light-green-lighten-4: #dcedc8 !important;
+	--light-green-lighten-5: #f1f8e9 !important;
+
+	--light-green-darken-1: #7cb342 !important;
+	--light-green-darken-2: #689f38 !important;
+	--light-green-darken-3: #558b2f !important;
+	--light-green-darken-4: #33691e !important;
+
+	--light-green-accent-1: #ccff90 !important;
+	--light-green-accent-2: #b2ff59 !important;
+	--light-green-accent-3: #76ff03 !important;
+	--light-green-accent-4: #70dd17 !important;
+
+	--gradient-45deg-green-light-green: -webkit-linear-gradient(45deg, var(--green-darken-4), var(--light-green)) !important;
+	--gradient-45deg-green-light-green: linear-gradient(45deg, var(--green-darken-4), var(--light-green)) !important;
+
+	--gradient-45deg-light-green-green: -webkit-linear-gradient(45deg, var(--light-green), var(--green-darken-4)) !important;
+	--gradient-45deg-light-green-green: linear-gradient(45deg, var(--light-green), var(--green-darken-4)) !important;
+
 	/** Orange */
 	--orange: #ff9800 !important;
 
@@ -191,6 +218,26 @@
 	--yellow-darken-2: #fbc02d !important;
 	--yellow-darken-3: #f9a825 !important;
 	--yellow-darken-4: #f57f17 !important;
+
+	/** Lime */
+
+	--lime: #cddc39 !important;
+
+	--lime-darken-1: #c0ca33 !important;
+	--lime-darken-2: #afb42b !important;
+	--lime-darken-3: #9e9d24 !important;
+	--lime-darken-4: #827717 !important;
+
+	--lime-lighten-1: #d4e157 !important;
+	--lime-lighten-2: #dce775 !important;
+	--lime-lighten-3: #e6ee9c !important;
+	--lime-lighten-4: #f0f4c3 !important;
+	--lime-lighten-5: #f9fbe7 !important;
+
+	--lime-accent-1: #f4ff81 !important;
+	--lime-accent-2: #eeff41 !important;
+	--lime-accent-3: #c6ff00 !important;
+	--lime-accent-4: #aeea00 !important;
 
 	/** Purple */
 	--purple: #9c27b0 !important;
@@ -1385,111 +1432,111 @@
 }
 
 .light-green {
-	background-color: #8bc34a !important
+	background-color: var(--light-green) !important;
 }
 
 .light-green-text {
-	color: #8bc34a !important
+	color: var(--light-green) !important;
 }
 
 .light-green.lighten-5 {
-	background-color: #f1f8e9 !important
+	background-color: var(--light-green-lighten-5) !important;
 }
 
 .light-green-text.text-lighten-5 {
-	color: #f1f8e9 !important
+	color: var(--light-green-lighten-5) !important;
 }
 
 .light-green.lighten-4 {
-	background-color: #dcedc8 !important
+	background-color: var(--light-green-lighten-4) !important;
 }
 
 .light-green-text.text-lighten-4 {
-	color: #dcedc8 !important
+	color: var(--light-green-lighten-4) !important;
 }
 
 .light-green.lighten-3 {
-	background-color: #c5e1a5 !important
+	background-color: var(--light-green-lighten-3) !important
 }
 
 .light-green-text.text-lighten-3 {
-	color: #c5e1a5 !important
+	color: var(--light-green-lighten-3) !important
 }
 
 .light-green.lighten-2 {
-	background-color: #aed581 !important
+	background-color: var(--light-green-lighten-2) !important
 }
 
 .light-green-text.text-lighten-2 {
-	color: #aed581 !important
+	color: var(--light-green-lighten-2) !important
 }
 
 .light-green.lighten-1 {
-	background-color: #9ccc65 !important
+	background-color: var(--light-green-lighten-1) !important
 }
 
 .light-green-text.text-lighten-1 {
-	color: #9ccc65 !important
+	color: var(--light-green-lighten-1) !important
 }
 
 .light-green.darken-1 {
-	background-color: #7cb342 !important
+	background-color: var(--light-green-darken-1) !important
 }
 
 .light-green-text.text-darken-1 {
-	color: #7cb342 !important
+	color: var(--light-green-darken-1) !important
 }
 
 .light-green.darken-2 {
-	background-color: #689f38 !important
+	background-color: var(--light-green-darken-2) !important
 }
 
 .light-green-text.text-darken-2 {
-	color: #689f38 !important
+	color: var(--light-green-darken-2) !important
 }
 
 .light-green.darken-3 {
-	background-color: #558b2f !important
+	background-color: var(--light-green-darken-3) !important
 }
 
 .light-green-text.text-darken-3 {
-	color: #558b2f !important
+	color: var(--light-green-darken-3) !important
 }
 
 .light-green.darken-4 {
-	background-color: #33691e !important
+	background-color: var(--light-green-darken-4) !important
 }
 
 .light-green-text.text-darken-4 {
-	color: #33691e !important
+	color: var(--light-green-darken-4) !important
 }
 
 .light-green.accent-1 {
-	background-color: #ccff90 !important
+	background-color: var(--light-green-accent-1) !important
 }
 
 .light-green-text.text-accent-1 {
-	color: #ccff90 !important
+	color: var(--light-green-accent-1) !important
 }
 
 .light-green.accent-2 {
-	background-color: #b2ff59 !important
+	background-color: var(--light-green-accent-2) !important;
 }
 
 .light-green-text.text-accent-2 {
-	color: #b2ff59 !important
+	color: var(--light-green-accent-2) !important;
 }
 
 .light-green.accent-3 {
-	background-color: #76ff03 !important
+	background-color: var(--light-green-accent-3) !important;
 }
 
 .light-green-text.text-accent-3 {
-	color: #76ff03 !important
+	color: var(--light-green-accent-3) !important
 }
 
 .light-green.accent-4 {
-	background-color: #64dd17 !important
+	background-color: var(--light-green-accent-4) !important;
 }
 
 .light-green-text.text-accent-4 {
@@ -1497,115 +1544,123 @@
 }
 
 .lime {
-	background-color: #cddc39 !important
+	background-color: var(--lime) !important
 }
 
 .lime-text {
-	color: #cddc39 !important
+	color: var(--lime) !important
 }
 
 .lime.lighten-5 {
-	background-color: #f9fbe7 !important
+	background-color: var(--lime-lighten-5) !important
 }
 
 .lime-text.text-lighten-5 {
-	color: #f9fbe7 !important
+	color: var(--lime-lighten-5) !important
 }
 
 .lime.lighten-4 {
-	background-color: #f0f4c3 !important
+	background-color: var(--lime-lighten-4) !important
 }
 
 .lime-text.text-lighten-4 {
-	color: #f0f4c3 !important
+	color: var(--lime-lighten-4) !important
 }
 
 .lime.lighten-3 {
-	background-color: #e6ee9c !important
+	background-color: var(--lime-lighten-3) !important
 }
 
 .lime-text.text-lighten-3 {
-	color: #e6ee9c !important
+	color: var(--lime-lighten-3) !important
 }
 
 .lime.lighten-2 {
-	background-color: #dce775 !important
+	background-color: var(--lime-lighten-2) !important
 }
 
 .lime-text.text-lighten-2 {
-	color: #dce775 !important
+	color: var(--lime-lighten-2) !important
 }
 
 .lime.lighten-1 {
-	background-color: #d4e157 !important
+	background-color: var(--lime-lighten-1) !important
 }
 
 .lime-text.text-lighten-1 {
-	color: #d4e157 !important
+	color: var(--lime-lighten-1) !important
 }
 
 .lime.darken-1 {
-	background-color: #c0ca33 !important
+	background-color: var(--lime-darken-1) !important
 }
 
 .lime-text.text-darken-1 {
-	color: #c0ca33 !important
+	color: var(--lime-darken-1) !important
 }
 
 .lime.darken-2 {
-	background-color: #afb42b !important
+	background-color: var(--lime-darken-2) !important
 }
 
 .lime-text.text-darken-2 {
-	color: #afb42b !important
+	color: var(--lime-darken-2) !important
 }
 
 .lime.darken-3 {
-	background-color: #9e9d24 !important
+	background-color: var(--lime-darken-3) !important
 }
 
 .lime-text.text-darken-3 {
-	color: #9e9d24 !important
+	color: var(--lime-darken-3) !important
 }
 
 .lime.darken-4 {
-	background-color: #827717 !important
+	background-color: var(--lime-darken-4) !important
 }
 
 .lime-text.text-darken-4 {
-	color: #827717 !important
+	color: var(--lime-darken-4) !important
+}
+
+.lime.darken-5 {
+	background-color: var(--lime-darken-5) !important
+}
+
+.lime-text.text-darken-5 {
+	color: var(--lime-darken-5) !important
 }
 
 .lime.accent-1 {
-	background-color: #f4ff81 !important
+	background-color: var(--lime-accent-1) !important
 }
 
 .lime-text.text-accent-1 {
-	color: #f4ff81 !important
+	color: var(--lime-accent-1) !important
 }
 
 .lime.accent-2 {
-	background-color: #eeff41 !important
+	background-color: var(--lime-accent-2) !important
 }
 
 .lime-text.text-accent-2 {
-	color: #eeff41 !important
+	color: var(--lime-accent-2) !important
 }
 
 .lime.accent-3 {
-	background-color: #c6ff00 !important
+	background-color: var(--lime-accent-3) !important
 }
 
 .lime-text.text-accent-3 {
-	color: #c6ff00 !important
+	color: var(--lime-accent-3) !important
 }
 
 .lime.accent-4 {
-	background-color: #aeea00 !important
+	background-color: var(--lime-accent-4) !important
 }
 
 .lime-text.text-accent-4 {
-	color: #aeea00 !important
+	color: var(--lime-accent-4) !important
 }
 
 .yellow {
@@ -2396,12 +2451,24 @@
 }
 
 .gradient-45deg-light-green-amber {
-	background: -webkit-linear-gradient(45deg, #c5e1a5, #fff8e1) !important;
-	background: linear-gradient(45deg, #c5e1a5, #fff8e1) !important
+	background: -webkit-linear-gradient(45deg, var(--light-green-lighten-3), #fff8e1) !important;
+	background: linear-gradient(45deg, var(--light-green-lighten-3), #fff8e1) !important
 }
 
 .gradient-45deg-light-green-amber.gradient-shadow {
 	box-shadow: 0 6px 20px 0 rgba(255, 248, 225, .5) !important
+}
+
+.gradient-45deg-green-light-green {
+	/* background: -webkit-linear-gradient(45deg, var(--green-darken-4), var(--light-green)) !important;
+	background: linear-gradient(45deg, var(--green-darken-4), var(--light-green)) !important */
+	background: var(--gradient-45deg-green-light-green);
+	background: var(--gradient-45deg-green-light-green);
+}
+
+.gradient-45deg-light-green-green {
+	background: var(--gradient-45deg-light-green-green);
+	background: var(--gradient-45deg-light-green-green);
 }
 
 .gradient-45deg-amber-amber {
@@ -2537,8 +2604,8 @@
 }
 
 .gradient-45deg-cyan-light-green {
-	background: -webkit-linear-gradient(45deg, #0097a7, #b2ff59) !important;
-	background: linear-gradient(45deg, #0097a7, #b2ff59) !important
+	background: -webkit-linear-gradient(45deg, #0097a7, var(--light-green-accent-2)) !important;
+	background: linear-gradient(45deg, #0097a7, var(--light-green-accent-2)) !important
 }
 
 .gradient-45deg-cyan-light-green.gradient-shadow {
@@ -2874,47 +2941,47 @@
 }
 
 .btn-light-light-green {
-	color: #8bc34a !important;
-	background-color: #f1f8e9
+	color: var(--light-green) !important;
+	background-color: var(--light-green-lighten-5) !important;
 }
 
 .btn-light-light-green.hover,
 .btn-light-light-green:focus,
 .btn-light-light-green:hover {
 	color: #fff !important;
-	background-color: #9ccc65 !important
+	background-color: var(--light-green-lighten-1) !important;
 }
 
 .btn-light-light-green.active,
 .btn-light-light-green:active {
 	color: #fff !important;
-	background-color: #7cb342 !important
+	background-color: var(--light-green-darken-1) !important;
 }
 
 .widget-timeline li.timeline-items.timeline-icon-light-green:before {
-	background: #8bc34a !important
+	background: var(--light-green) !important;
 }
 
 .btn-light-lime {
-	color: #cddc39 !important;
-	background-color: #f9fbe7
+	color: var(--lime) !important;
+	background-color: var(--lime-lighten-5)
 }
 
 .btn-light-lime.hover,
 .btn-light-lime:focus,
 .btn-light-lime:hover {
 	color: #fff !important;
-	background-color: #d4e157 !important
+	background-color: var(--lime-lighten-1) !important
 }
 
 .btn-light-lime.active,
 .btn-light-lime:active {
 	color: #fff !important;
-	background-color: #c0ca33 !important
+	background-color: var(--lime-darken-1) !important
 }
 
 .widget-timeline li.timeline-items.timeline-icon-lime:before {
-	background: #cddc39 !important
+	background: var(--lime) !important
 }
 
 .btn-light-yellow {
@@ -3172,14 +3239,14 @@ label>checkbox {
 
 [type=checkbox].light-light-green:indeterminate+span:not(.lever):before,
 [type=checkbox].light-light-green:checked+span:not(.lever):before {
-	border-right-color: #7cb342;
-	border-bottom-color: #7cb342;
+	border-right-color: var(--light-green-darken-1);
+	border-bottom-color: var(--light-green-darken-1);
 }
 
 [type=checkbox].light-lime:indeterminate+span:not(.lever):before,
 [type=checkbox].light-lime:checked+span:not(.lever):before {
-	border-right-color: #c0ca33;
-	border-bottom-color: #c0ca33;
+	border-right-color: var(--lime-darken-1);
+	border-bottom-color: var(--lime-darken-1);
 }
 
 [type=checkbox].light-yellow:indeterminate+span:not(.lever):before,

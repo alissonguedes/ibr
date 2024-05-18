@@ -1,6 +1,6 @@
 <x-admin-layout>
 
-	<x-slot:icon href="{{ route('admin.dashboard') }}"> wallpaper_slideshow </x-slot:icon>
+	<x-slot:icon href="{{ request('id') ? route('admin.home.banners.index') : route('admin.dashboard') }}"> wallpaper_slideshow </x-slot:icon>
 	<x-slot:title> Banners </x-slot:title>
 
 	<x-slot:body>
@@ -19,8 +19,8 @@
 								I am convenient because I require little markup to use effectively.</p> --}}
 						</div>
 						<div class="card-action black right-align">
-							<x-button class="gradient-45deg-amber-amber black-text btn-small mr-3"> add </x-button>
-							<x-button class="gradient-45deg-amber-amber black-text btn-small"> edit </x-button>
+							<x-button class="gradient-45deg-green-light-green black-text btn-small mr-3"> add </x-button>
+							<x-button class="gradient-45deg-green-light-green black-text btn-small" :data-href="route('admin.home.banners.edit', 1)"> edit </x-button>
 						</div>
 					</div>
 				</div>

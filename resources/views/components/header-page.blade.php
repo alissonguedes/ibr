@@ -9,7 +9,7 @@
 
 <x-slot:header>
 	<div id="search-on-page">
-		<button id="open-search" class="btn btn-floating btn-flat mr-3 waves-effect waves-purple white-text">
+		<button id="open-search" class="btn btn-floating btn-flat mr-3 waves-effect waves-green white-text">
 			<i class="material-symbols-outlined">search</i>
 		</button>
 		<x-text-input type="search" id="input-search-header" :data-url="$url" :placeholder="$placeholder" autocomplete="off" />

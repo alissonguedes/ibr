@@ -41,7 +41,7 @@
 				</div>
 
 				@if (isset($form))
-					<form {{ $form->attributes->merge(['class' => 'card-reveal no-padding']) }}>
+					<form enctype="multipart/form-data" {{ $form->attributes->merge(['class' => 'card-reveal no-padding']) }}>
 
 						@if (isset($form_tabs))
 							<div {{ $form_tabs->attributes->merge(['class' => 'card-tabs']) }}>

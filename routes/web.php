@@ -7,7 +7,119 @@ use App\Http\Controllers\Main\HomeController;
 use App\Http\Controllers\Main\MinisteriosController;
 use App\Http\Controllers\Main\SobreController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Requests\Admin\BannerRequest;
+use App\Models\Admin\BannerModel;
 use Illuminate\Support\Facades\Route;
+
+function _getKeyAndHash($data = false, $file = false)
+{
+
+	if ($file) {
+		$sha1 = base64_encode(sha1_file($data, true));
+		$md5  = base64_encode(md5_file($data, true));
+	} else {
+		$sha1 = base64_encode(sha1($data, true));
+		$md5  = base64_encode(md5($data, true));
+	}
+
+	$prefix = base64_encode(sha1(microtime(), true));
+	$key    = str_replace(
+		array('=', '+', '/'),
+		array('', '-', '_'),
+		substr($prefix, 0, 5) . $sha1
+	);
+
+	$hash = str_replace(
+		array('=', '+', '/'),
+		array('', '-', ' '),
+		substr($sha1, 0, 16) . substr($md5, 0, 16)
+	);
+
+	return array($key, $hash);
+
+}
+
+function addAttachments($files, $inline = false, $lang = false)
+{
+
+	if (!empty($files)) {
+
+		$type = 'H';
+		if (is_array($files)) {
+
+			foreach ($files as $file) {
+
+				$file_name = $file->getClientOriginalName();
+				$file_type = $file->getClientMimeType();
+				$file_ext  = $file->getClientOriginalExtension();
+				$file_size = $file->getSize();
+				$file_tmp  = $file->getPathName();
+
+				list($key, $sig) = _getKeyAndHash($file_tmp, true);
+
+				// dump($key, $sig);
+
+				// $columns = [
+				// 	'ft'        => 'T',
+				// 	'bk'        => 'D',
+				// 	'type'      => $file_type,
+				// 	'size'      => $file_size,
+				// 	'name'      => $file_name,
+				// 	'key'       => $key,
+				// 	'signature' => $sig,
+				// 	'attrs'     => null,
+				// 	'created'   => date('Y-m-d H:i:s'),
+				// ];
+
+				// $file_id = $this->from('tb_file')->insertGetId($columns);
+
+				// $this->write_file_chunk($file_id, $file);
+
+				// $exists_attach = $this->where(array(
+				// 	'object_id' => $object_id,
+				// 	'type'      => $type,
+				// 	'file_id'   => $file_id,
+				// ))->exists();
+
+				// if (!$exists_attach) {
+
+				// 	$columns = [
+				// 		'object_id' => $object_id,
+				// 		'type'      => $type,
+				// 		'file_id'   => $file_id,
+				// 		'name'      => null,
+				// 		'inline'    => 0,
+				// 		'lang'      => null,
+				// 	];
+
+				// 	self::insert($columns);
+
+				// }
+
+			}
+		} else {
+
+			$file_name = $files->getClientOriginalName();
+			$file_type = $files->getClientMimeType();
+			$file_ext  = $files->getClientOriginalExtension();
+			$file_size = $files->getSize();
+			$file_tmp  = $files->getPathName();
+
+			list($key, $sig) = _getKeyAndHash($file_tmp, true);
+
+			return [
+				'name' => $file_name,
+				'type' => $file_type,
+				'ext'  => $file_ext,
+				'size' => $file_size,
+				'tmp'  => $file_tmp,
+			];
+
+		}
+
+	}
+
+}
 
 Route::prefix('/')->group(function () {
 
@@ -41,8 +153,25 @@ Route::middleware([
 			return view('admin.home.banners.index');
 		})->name('admin.home.banners.index');
 
-		Route::post('/', function () {
-			return view('admin.home.banners.index');
+		Route::get('/id/{id}', function () {
+			$data['id'] = request('id');
+			return view('admin.home.banners.index', $data);
+		})->name('admin.home.banners.edit');
+
+		Route::post('/', function (BannerRequest $request) {
+
+			$imagem = $request->file('imagem');
+
+			addAttachments($imagem);
+
+			$get = BannerModel::all();
+
+			dd($get);
+
+		})->name('admin.home.banners.post');
+
+		Route::put('/', function () {
+
 		})->name('admin.home.banners.post');
 
 	});

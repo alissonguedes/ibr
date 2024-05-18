@@ -27,7 +27,7 @@
 
 				<ul class="navbar-list right">
 					<li>
-						<a href="#" class="waves-effect waves-block waves-light profile-button">
+						<a href="#" class="waves-effect waves-block waves-green profile-button">
 							<span class="avatar-status avatar-online">
 								<img src="{{ asset('assets/img/avatar/avatar-1.png') }}" alt="">
 								<i></i>
@@ -38,12 +38,12 @@
 
 				<ul class="navbar-nav right">
 					<li>
-						<a class="waves-effect waves-light">
+						<a class="waves-effect waves-green">
 							<i class="material-symbols-outlined">event</i>
 						</a>
 					</li>
 					<li>
-						<a class="waves-effect waves-light">
+						<a class="waves-effect waves-green">
 							<i class="material-symbols-outlined">mail</i>
 						</a>
 					</li>
@@ -53,7 +53,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="waves-effect waves-light notification-button">
+						<a href="#" class="waves-effect waves-green notification-button">
 							<i class="material-symbols-outlined">
 								notifications
 								<small class="notification-badge">+99</small>
@@ -66,7 +66,7 @@
 						</a>
 					</li> --}}
 					<li>
-						<a class="waves-effect waves-light sidenav-trigger" data-target="slide-out">
+						<a class="waves-effect waves-green sidenav-trigger" data-target="slide-out">
 							<i class="material-symbols-outlined">menu</i>
 						</a>
 					</li>
