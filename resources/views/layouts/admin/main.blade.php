@@ -75,7 +75,7 @@
 		@endif
 
 		@if (session()->has('message'))
-			<x-toast class="green darken-2">{{ session()->get('message') }}</x-toast>
+			<x-toast class="green darken-4">{{ session()->get('message') }}</x-toast>
 		@endif
 
 		@if (count($errors) > 0)

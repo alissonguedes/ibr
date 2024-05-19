@@ -242,8 +242,8 @@
 		}
 
 		main {
-			padding-left: 0;
-			padding-right: 64px;
+			padding-left: 20px;
+			padding-right: 20px;
 		}
 
 		.nav-collapsed aside {
@@ -268,7 +268,7 @@
 			right: 2%;
 			width: 94%;
 			height: 52px;
-			background-color: var(--red-lighten-1);
+			background-color: var(--light-green);
 			color: #fff;
 			margin: 0 auto;
 			padding: 0px 5px 0 5px !important;
@@ -280,12 +280,12 @@
 
 		.navbar-nav .logo span {
 			position: relative;
-			top: -25px;
+			top: -15px;
 			display: block;
 			width: 45px;
 			height: 45px;
 			border-radius: 100%;
-			background-image: url("{{ asset('assets/img/logo/coracao.png') }}");
+			background-image: url("{{ asset('assets/img/logo1.png') }}");
 			background-repeat: no-repeat;
 			background-size: contain;
 			background-position: bottom;
@@ -296,7 +296,7 @@
 			width: 60px;
 			height: 60px;
 			position: absolute;
-			background-color: #ffffff;
+			background-color: var(--light-green);
 			background-repeat: no-repeat;
 			background-size: 100%;
 			background-position: center;
@@ -341,6 +341,10 @@
 			margin: 0;
 			padding: 0;
 			font-size: 24px;
+		}
+
+		.card-action {
+			padding: 4% 1% !important;
 		}
 	}
 </style>

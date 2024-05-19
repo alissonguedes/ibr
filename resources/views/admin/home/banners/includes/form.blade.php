@@ -1,17 +1,22 @@
-<x-header-page data-url="{{ route('admin.home.banners.index') }}" placeholder="Pesquisar banners..." title="Adicionar Banner">add</x-header-page>
+<x-header-page data-href="{{ route('admin.home.banners.index') }}" placeholder="Pesquisar banners..." title="Adicionar Banner">add</x-header-page>
 
 @if (request('id'))
 	@php
+		$id = $row->id;
+		$titulo = $row->titulo;
+		$descricao = $row->descricao;
+		$url = $row->url;
+		$imagem = route('admin.home.banners.show-image', $id) . '?action=preview';
 	@endphp
 @endif
 
-<x-slot:form action="{{ route('admin.home.banners.post') }}" method="post" style="{{ $errors->any() || request('id') ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}">
+<x-slot:form action="{{ route('admin.home.banners.post') }}" method="post" style="{{ $errors->any() || request('id') ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" autocomplete="off">
 
 	@csrf
 
 	@if (request('id'))
 		<input type="hidden" name="_method" value="put">
-		<input type="hidden" name="id" :value="{{ $id }}">
+		<input type="hidden" name="id" value="{{ $id }}">
 	@endif
 
 	{{-- <x-slot:form_tabs>
@@ -27,10 +32,12 @@
 
 	<div class="col row">
 
-		<div class="col s3">
+		<div class="col s12 l3">
 			<div class="row">
 				<div class="col s12">
-					<img src="{{ asset('assets/img/slides/img1.jpg') }}" class="responsive-img" alt="">
+					@if (request('id'))
+						<img src="{{ $imagem ?? asset('assets/img/slides/img2.jpg') }}" class="responsive-img materialboxed" alt="">
+					@endif
 				</div>
 			</div>
 			<div class="row">
@@ -39,14 +46,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="col s9">
+		<div class="col s12 l9">
 
 			<!-- BEGIN título -->
 			<div class="row">
 				<div class="col s12">
 					<div class="input-field amber-text mb-2 @error('titulo') error @enderror">
 						<label id="titulo">Título</label>
-						<x-text-input type="text" name="titulo" id="titulo" :value="old('titulo', $row->titulo ?? null)" autofocus="autofocus" />
+						<x-text-input type="text" name="titulo" id="titulo" :value="old('titulo', $titulo ?? null)" autofocus="autofocus" />
 						@error('titulo')
 							<small class="error">{{ $message }}</small>
 						@enderror
@@ -60,7 +67,7 @@
 				<div class="col s12">
 					<div class="input-field amber-text mb-2">
 						<label for="descricao">Descrição</label>
-						<x-text-input type="text" name="descricao" id="descricao" :value="old('descricao', $row->descricao ?? null)" />
+						<x-text-input type="text" name="descricao" id="descricao" :value="old('descricao', $descricao ?? null)" />
 					</div>
 				</div>
 			</div>
@@ -71,7 +78,7 @@
 				<div class="col s12">
 					<div class="input-field amber-text mb-2 @error('url') error @enderror">
 						<label for="url">Link</label>
-						<x-text-input type="text" name="url" id="url" :value="old('url', $row->url ?? null)" />
+						<x-text-input type="url" name="url" id="url" :value="old('url', $url ?? null)" />
 						@error('url')
 							<small class="error">{{ $message }}</small>
 						@enderror
@@ -96,24 +103,6 @@
 						@enderror
 					</div>
 				</div>
-
-				{{-- <div class="input-field media conj_img_edit">
-					<div class="img_icon_pdf image_view z-depth-4 material-icons">
-						@if (isset($row) && $row->imagem)
-						<img src="$row->imagem " class="img_cem materialboxed original">
-						<x-text-input type="hidden" name="original_name">
-						 @endif;
-					</div>
-					<div class="nome_arquivo" data-placeholder="isset($row) && $row->imagem ? basename($row->imagem) : 'Selecione uma imagem' "></div>
-					<div class="bt_excluir waves-effect redefinir amber" style="isset($row) && !empty($row->imagem) ? 'display: none;' : '' ">
-						<i class="material-icons">undo</i>
-					</div>
-					<div class="btn_add_new_image waves-effect image_alt amber">
-						<i class="material-icons">add_photo_alternate</i>
-					</div>
-					<x-text-input type="file" name="imagem" id="img_perfil" accept="image">
-				</div> --}}
-
 			</div>
 			<!-- END imagem -->
 

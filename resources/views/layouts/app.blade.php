@@ -45,7 +45,7 @@
 	<body>
 
 		<div class="progress">
-			<div class="indeterminate-center teal lighten-1"></div>
+			<div class="indeterminate-center"></div>
 		</div>
 
 		{{-- BEGIN #Page --}}

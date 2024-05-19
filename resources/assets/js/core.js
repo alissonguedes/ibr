@@ -42,6 +42,24 @@ function redirect(url, method = 'get') {
 
 }
 
+function delay(func, wait, immediate) {
+
+    var timeout;
+
+    return function (args) {
+        const context = this;
+        const later = function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+
+        const callnow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callnow) func.apply(context, args);
+    }
+
+}
 
 window.onload = () => {
 
@@ -115,6 +133,8 @@ $(document).ready(function () {
         // swipeable: true
     });
 
+    $('.materialboxed').materialbox();
+
     tabs.find('a').unbind().bind('click', function () {
         setTimeout(function () {
             t.tabs('updateTabIndicator');
@@ -177,7 +197,7 @@ $(document).ready(function () {
 
         var action = $(this).parents('form').attr('action');
 
-        $(this).parents('.card-reveal').css({
+        $(this).parents('form.card-reveal').css({
             'transform': 'translateY(0%)',
         });
 
@@ -187,8 +207,8 @@ $(document).ready(function () {
 
 
     $('#card-button,.icon-background').unbind().bind('click', function () {
-        var url = $(this).data('url');
-        $('.card-reveal').show();
+        var url = $(this).data('href');
+        $('form.card-reveal').show();
         if (typeof url !== 'undefined') {
             Url.update(url);
             $.ajax({
@@ -197,7 +217,7 @@ $(document).ready(function () {
                 success: (response) => {
                     var form = $(response).find('form.card-reveal');
                     $('form.card-reveal').html(form.html());
-                    $('.card-reveal').css({
+                    $('form.card-reveal').css({
                         'transform': 'translateY(-100%)',
                     });
                     $.getScript(BASE_PATH + 'assets/js/core.js');
@@ -278,11 +298,36 @@ $(document).ready(function () {
         $(this).parents().find('li:not(.search)').addClass('disabled')
     });
 
-    // $('[data-href]').unbind().bind('click', function () {
-    //     var href = $(this).data('href');
-    //     // alert('Href')
-    //     // location.href = href;
-    // });
+    $('#input-search-header').unbind().bind('keyup', function () {
+
+        $('.progress').show();
+
+    }).bind('keyup', delay(function () {
+
+        var url = window.location.href;
+        var search = $(this).val();
+
+        $.ajax({
+            url: url + '/' + search,
+            method: 'get',
+            success: (response) => {
+
+                var parser = new DOMParser();
+                var content = parser.parseFromString(response, 'text/html');
+
+                $('main > .card > .card-content').html($(content).find('main > .card > .card-content').html());
+                // Url.update(url + '/' + search);
+                $('.progress').hide();
+                $.getScript(BASE_PATH + 'assets/js/core.js');
+
+            }
+        })
+
+    }, 500));
+
+    $('.card>.card-reveal').unbind().bind('mouseleave', function () {
+        $(this).find('.card-title').click();
+    });
 
     $('.input-field.error').find('input,textarea,select').each(function () {
         $(this).bind('keyup', function () {
@@ -294,7 +339,7 @@ $(document).ready(function () {
     });
 
     $('.editor').each(function () {
-        var height = $(this).parent().parent().height();
+        var height = $(this).attr('rows') || $(this).parent().parent().height();
         var placeholder = ($(this).attr('placeholder') || 'Escreva aqui') + '...';
         new FroalaEditor(this, {
             theme: 'dark',
@@ -304,8 +349,8 @@ $(document).ready(function () {
             key: '1C%kZV[IX)_SL}UJHAEFZMUJOYGYQE[\\ZJ]RAe)+%$==',
             attribution: false,
             toolbarBottom: false,
-            wordCounterCount: false,
-            charCounterCount: false,
+            wordCounterCount: true,
+            charCounterCount: true,
         });
     });
 

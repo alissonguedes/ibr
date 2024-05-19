@@ -5,7 +5,7 @@
 	<li><x-nav-link href="javascript:void(0);" class="submenu-open" data-id="#menu-5" :active="request()->routeIs('admin.teste')">Menu 5 </x-nav-link></li>
 </ul>
 
-<ul id="home-page" class="{{ request()->routeIs('admin.home.banners.index') || request()->routeIs('admin.home.banners.edit') || request()->routeIs('admin.home.nossa-crenca') || request()->routeIs('admin.home.pastores') ? 'in' : 'submenu' }} scroller">
+<ul id="home-page" class="{{ request()->routeIs('admin.home.banners.index') || request()->routeIs('admin.home.banners.edit') || request()->routeIs('admin.home.nossa-crenca.index') || request()->routeIs('admin.home.pastores') ? 'in' : 'submenu' }} scroller">
 	<li><x-nav-link href="javascript:void(0);" class="menu-close" data-id="#main-menu"> Página Inicial </x-nav-link></li>
 	<li>
 		<x-nav-link :href="route('admin.home.banners.index')" :active="request()->routeIs('admin.home.banners.index') || request()->routeIs('admin.home.banners.edit')">
@@ -14,7 +14,7 @@
 		</x-nav-link>
 	</li>
 	<li>
-		<x-nav-link :href="route('admin.home.nossa-crenca')" :active="request()->routeIs('admin.home.nossa-crenca')">
+		<x-nav-link :href="route('admin.home.nossa-crenca.index')" :active="request()->routeIs('admin.home.nossa-crenca.index')">
 			<i class="material-symbols-outlined">wallpaper_slideshow</i>
 			Nossa Crença
 		</x-nav-link>

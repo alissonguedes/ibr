@@ -1,5 +1,10 @@
 <?php
 
+// Admin Controllers
+use App\Http\Controllers\Admin\BannersController as Banners;
+use App\Http\Controllers\Admin\SobrenosController as Sobrenos;
+
+// Main Controllers
 use App\Http\Controllers\Main\AgendaController;
 use App\Http\Controllers\Main\CultosController;
 use App\Http\Controllers\Main\EventosController;
@@ -7,119 +12,13 @@ use App\Http\Controllers\Main\HomeController;
 use App\Http\Controllers\Main\MinisteriosController;
 use App\Http\Controllers\Main\SobreController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Requests\Admin\BannerRequest;
-use App\Models\Admin\BannerModel;
+
+// Admin Requests
+
+// Admin Models
+
+// Illuminate
 use Illuminate\Support\Facades\Route;
-
-function _getKeyAndHash($data = false, $file = false)
-{
-
-	if ($file) {
-		$sha1 = base64_encode(sha1_file($data, true));
-		$md5  = base64_encode(md5_file($data, true));
-	} else {
-		$sha1 = base64_encode(sha1($data, true));
-		$md5  = base64_encode(md5($data, true));
-	}
-
-	$prefix = base64_encode(sha1(microtime(), true));
-	$key    = str_replace(
-		array('=', '+', '/'),
-		array('', '-', '_'),
-		substr($prefix, 0, 5) . $sha1
-	);
-
-	$hash = str_replace(
-		array('=', '+', '/'),
-		array('', '-', ' '),
-		substr($sha1, 0, 16) . substr($md5, 0, 16)
-	);
-
-	return array($key, $hash);
-
-}
-
-function addAttachments($files, $inline = false, $lang = false)
-{
-
-	if (!empty($files)) {
-
-		$type = 'H';
-		if (is_array($files)) {
-
-			foreach ($files as $file) {
-
-				$file_name = $file->getClientOriginalName();
-				$file_type = $file->getClientMimeType();
-				$file_ext  = $file->getClientOriginalExtension();
-				$file_size = $file->getSize();
-				$file_tmp  = $file->getPathName();
-
-				list($key, $sig) = _getKeyAndHash($file_tmp, true);
-
-				// dump($key, $sig);
-
-				// $columns = [
-				// 	'ft'        => 'T',
-				// 	'bk'        => 'D',
-				// 	'type'      => $file_type,
-				// 	'size'      => $file_size,
-				// 	'name'      => $file_name,
-				// 	'key'       => $key,
-				// 	'signature' => $sig,
-				// 	'attrs'     => null,
-				// 	'created'   => date('Y-m-d H:i:s'),
-				// ];
-
-				// $file_id = $this->from('tb_file')->insertGetId($columns);
-
-				// $this->write_file_chunk($file_id, $file);
-
-				// $exists_attach = $this->where(array(
-				// 	'object_id' => $object_id,
-				// 	'type'      => $type,
-				// 	'file_id'   => $file_id,
-				// ))->exists();
-
-				// if (!$exists_attach) {
-
-				// 	$columns = [
-				// 		'object_id' => $object_id,
-				// 		'type'      => $type,
-				// 		'file_id'   => $file_id,
-				// 		'name'      => null,
-				// 		'inline'    => 0,
-				// 		'lang'      => null,
-				// 	];
-
-				// 	self::insert($columns);
-
-				// }
-
-			}
-		} else {
-
-			$file_name = $files->getClientOriginalName();
-			$file_type = $files->getClientMimeType();
-			$file_ext  = $files->getClientOriginalExtension();
-			$file_size = $files->getSize();
-			$file_tmp  = $files->getPathName();
-
-			list($key, $sig) = _getKeyAndHash($file_tmp, true);
-
-			return [
-				'name' => $file_name,
-				'type' => $file_type,
-				'ext'  => $file_ext,
-				'size' => $file_size,
-				'tmp'  => $file_tmp,
-			];
-
-		}
-
-	}
-
-}
 
 Route::prefix('/')->group(function () {
 
@@ -149,38 +48,31 @@ Route::middleware([
 	/** banners */
 	Route::prefix('/banners')->group(function () {
 
-		Route::get('/', function () {
-			return view('admin.home.banners.index');
-		})->name('admin.home.banners.index');
-
-		Route::get('/id/{id}', function () {
-			$data['id'] = request('id');
-			return view('admin.home.banners.index', $data);
-		})->name('admin.home.banners.edit');
-
-		Route::post('/', function (BannerRequest $request) {
-
-			$imagem = $request->file('imagem');
-
-			addAttachments($imagem);
-
-			$get = BannerModel::all();
-
-		})->name('admin.home.banners.post');
-
-		Route::put('/', function () {
-
-		})->name('admin.home.banners.post');
+		Route::get('/', [Banners::class, 'index'])->name('admin.home.banners.index');
+		Route::get('/{search}', [Banners::class, 'search'])->name('admin.home.banners.search');
+		Route::get('/id/{id}', [Banners::class, 'create'])->name('admin.home.banners.edit');
+		Route::get('/imagem/{file_id}', [Banners::class, 'show'])->name('admin.home.banners.show-image');
+		Route::post('/', [Banners::class, 'store'])->name('admin.home.banners.post');
+		Route::put('/', [Banners::class, 'store'])->name('admin.home.banners.post');
+		Route::delete('/', [Banners::class, 'destroy'])->name('admin.home.banners.delete');
 
 	});
 
 	/** nossa-crenca */
-	Route::get('/nossa-crenca', function () {
-		return view('admin.home.nossa-crenca');
-	})->name('admin.home.nossa-crenca');
+	Route::prefix('/nossa-crenca')->group(function () {
+
+		Route::get('/', [Sobrenos::class, 'index'])->name('admin.home.nossa-crenca.index');
+		Route::get('/{search}', [Sobrenos::class, 'search'])->name('admin.home.nossa-crenca.search');
+		Route::get('/id/{id}', [Sobrenos::class, 'create'])->name('admin.home.nossa-crenca.edit');
+		Route::get('/imagem/{file_id}', [Sobrenos::class, 'show'])->name('admin.home.nossa-crenca.show-image');
+		Route::post('/', [Sobrenos::class, 'store'])->name('admin.home.nossa-crenca.post');
+		Route::put('/', [Sobrenos::class, 'store'])->name('admin.home.nossa-crenca.post');
+		Route::delete('/', [Sobrenos::class, 'destroy'])->name('admin.home.nossa-crenca.delete');
+
+	});
 
 	Route::get('/pastores', function () {
-		return view('admin.home.nossa-crenca');
+		return view('admin.home.nossa-crenca.index');
 	})->name('admin.home.pastores');
 
 	Route::middleware('auth')->group(function () {
