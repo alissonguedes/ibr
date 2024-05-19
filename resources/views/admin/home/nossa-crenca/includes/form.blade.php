@@ -9,7 +9,6 @@
 @endif
 
 <form action="{{ route('admin.home.nossa-crenca.post') }}" method="post" class="card" style="display: block; transform: translateY(0%);" autocomplete="off">
-
 	@csrf
 
 	@if (request('id'))
@@ -26,9 +25,9 @@
 				<!-- BEGIN título -->
 				<div class="row">
 					<div class="col s12">
-						<div class="input-field amber-text mb-2 @error('titulo') error @enderror">
+						<div class="input-field @error('titulo') error @enderror">
 							<label id="titulo">Título</label>
-							<x-text-input type="text" name="titulo" id="titulo" :value="old('titulo', $titulo ?? null)" autofocus="autofocus" />
+							<x-text-input type="text" name="titulo" id="titulo" :value="old('titulo', $titulo ?? null)" autofocus="autofocus" maxlength="250" />
 							@error('titulo')
 								<small class="error">{{ $message }}</small>
 							@enderror
@@ -40,9 +39,12 @@
 				<!-- BEGIN descrição -->
 				<div class="row">
 					<div class="col s12">
-						<div class="input-field amber-text mb-2">
+						<div class="input-field @error('titulo') error @enderror">
 							<label for="descricao">Descrição</label>
 							<x-text-input type="text" name="descricao" id="descricao" :value="old('descricao', $descricao ?? null)" />
+							@error('descricao')
+								<small class="error">{{ $message }}</small>
+							@enderror
 						</div>
 					</div>
 				</div>
@@ -51,9 +53,9 @@
 				<!-- BEGIN Texto -->
 				<div class="row">
 					<div class="col s12">
-						<div class="input-field @error('url') error @enderror">
+						<div class="input-field @error('texto') error @enderror">
 							{{-- <label for="texto">Texto</label> --}}
-							<textarea type="text" name="texto" id="texto" class="editor" rows="300">{{ old('url', $url ?? null) }}</textarea>
+							<textarea type="text" name="texto" id="texto" class="editor" rows="300">{{ old('texto', $texto ?? null) }}</textarea>
 							@error('texto')
 								<small class="error">{{ $message }}</small>
 							@enderror

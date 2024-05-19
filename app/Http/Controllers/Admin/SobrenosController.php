@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\BannerRequest;
-use App\Models\Admin\BannerModel;
+use App\Http\Requests\Admin\SobreRequest;
+use App\Models\Admin\SobreModel;
 use Illuminate\Http\Request;
 
 class SobrenosController extends Controller {
@@ -13,7 +13,7 @@ class SobrenosController extends Controller {
 	 */
 	public function index() {
 
-		// $data['banners'] = BannerModel::all();
+		// $data['banners'] = SobreModel::all();
 
 		return view('admin.home.nossa-crenca.index');
 
@@ -22,9 +22,9 @@ class SobrenosController extends Controller {
 	/**
 	 * Search banners
 	 */
-	public function search(Request $request, BannerModel $banner) {
+	public function search(Request $request, SobreModel $banner) {
 
-		$data['banners'] = BannerModel::where('titulo', 'like', $request->search . '%')->get();
+		$data['banners'] = SobreModel::where('titulo', 'like', $request->search . '%')->get();
 
 		return view('admin.home.banners.index', $data);
 
@@ -33,11 +33,11 @@ class SobrenosController extends Controller {
 	/**
 	 * Show the form for creating a new resource.
 	 */
-	public function create(Request $request, BannerModel $banner) {
+	public function create(Request $request, SobreModel $banner) {
 
 		$data['id']      = $request->id;
 		$data['row']     = $banner->getWhere('id', $request->id);
-		$data['banners'] = BannerModel::all();
+		$data['banners'] = SobreModel::all();
 
 		return view('admin.home.banners.index', $data);
 
@@ -46,14 +46,14 @@ class SobrenosController extends Controller {
 	/**
 	 * Store a newly created resource in storage.
 	 */
-	public function store(BannerRequest $request, BannerModel $banner) {
+	public function store(SobreRequest $request, SobreModel $banner) {
 
 		$banner->insert_or_update($request);
 
 		if ($request->_method === 'put') {
-			$message = 'Banner atualizado com sucesso!';
+			$message = 'Sobre atualizado com sucesso!';
 		} else {
-			$message = 'Banner cadastrado com sucesso!';
+			$message = 'Sobre cadastrado com sucesso!';
 		}
 
 		return redirect()->route('admin.home.banners.index')->with(['message' => $message]);
@@ -63,7 +63,7 @@ class SobrenosController extends Controller {
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(Request $request, BannerModel $attachment, int $file_id) {
+	public function show(Request $request, SobreModel $attachment, int $file_id) {
 
 		$info   = $attachment->getInfoFromFile($file_id);
 		$chunks = $attachment->getFile($file_id);
@@ -119,7 +119,7 @@ class SobrenosController extends Controller {
 	/**
 	 * Remove the specified resource from storage.
 	 */
-	public function destroy(Request $request, BannerModel $banner) {
+	public function destroy(Request $request, SobreModel $banner) {
 
 		return $banner->forge($request->id);
 

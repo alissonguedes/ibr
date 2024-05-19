@@ -1570,6 +1570,11 @@ textarea.materialize-textarea[readonly="readonly"]+label,
 	color: var(--red-lighten-1) !important;
 }
 
+.input-field.error .dark-theme.fr-toolbar,
+.input-field.error .dark-theme .fr-second-toolbar,
+.input-field.error .dark-theme.fr-box.fr-basic .fr-wrapper {
+	border-color: var(--red-lighten-1);
+}
 
 .progress .indeterminate:after {
 	-webkit-animation: indeterminate-right 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
