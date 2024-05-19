@@ -6,6 +6,21 @@ function redirect(url, method = 'get') {
 
     xhr.open(method, url);
 
+    xhr.onreadystatechange = function () {
+
+        // if (xhr.readyState === xhr.HEADERS_RECEIVED) {
+        //     const contentType = client.getResponseHeader("Content-Type");
+        //     if (contentType !== my_expected_type) {
+        //         client.abort();
+        //     }
+        // }
+        // console.log(xhr);
+        // if (xhr.status === 302) {
+        //     location.reload();
+        // }
+
+    }
+
     xhr.onloadstart = function () {
         // $('.progress').css('display', 'block');
     };
