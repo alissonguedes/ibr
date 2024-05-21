@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class BannerRequest extends FormRequest
+class PastorRequest extends FormRequest
 {
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -20,23 +20,17 @@ class BannerRequest extends FormRequest
 	 *
 	 * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
 	 */
-	public function rules($request = null): array
+	public function rules(): array
 	{
 
-		if (!empty($request)) {
-			$request = $request->all();
-		}
-
 		$rules = [
-			'titulo'    => 'required',
-			'descricao' => 'max:255',
-			'url'       => 'nullable|url',
+			'nome' => ['required'],
 		];
 
-		if (!isset($request['id']) && !isset($this->id)) {
+		if (!isset($this->id)) {
 			$rules['imagem'] = [
 				'required',
-				'mimes:jpg,png',
+				'mimes:jpg,jpeg,png',
 				'dimensions:1920,1080',
 			];
 		}

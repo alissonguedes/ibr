@@ -1,15 +1,18 @@
 <?php
 
 namespace App\Http\Requests\Admin;
+
 use App\Rules\WordsCountRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class SobreRequest extends FormRequest {
+class ApresentacaoRequest extends FormRequest
+{
 	/**
 	 * Determine if the user is authorized to make this request.
 	 */
-	public function authorize(): bool {
+	public function authorize(): bool
+	{
 		return true;
 	}
 
@@ -18,22 +21,23 @@ class SobreRequest extends FormRequest {
 	 *
 	 * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
 	 */
-	public function rules(): array {
+	public function rules(): array
+	{
 
 		$rules = [
 			'titulo'    => [
 				'required',
 				new WordsCountRule(6),
 			],
-			'descricao' => [new WordsCountRule(15)],
-			'texto'     => [new WordsCountRule(50)],
+			'subtitulo' => ['required', new WordsCountRule(15)],
+			'conteudo'  => ['required', new WordsCountRule(50)],
 			'url'       => 'nullable|url',
 		];
 
 		if (!isset($this->id)) {
 			$rules['imagem'] = [
 				'required',
-				'mimes:jpg,png',
+				'mimes:jpg,jpeg,png',
 				'dimensions:1920,1080',
 			];
 		}

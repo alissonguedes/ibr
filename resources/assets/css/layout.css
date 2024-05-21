@@ -18,6 +18,11 @@ body,
 	font-family: 'Montserrat', sans-serif;
 }
 
+p {
+	margin: 0;
+	line-height: 28px;
+}
+
 img,
 a {
 	text-decoration: none;

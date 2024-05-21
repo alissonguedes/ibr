@@ -38,8 +38,8 @@
 
 				<ul class="navbar-nav right">
 					<li>
-						<a class="waves-effect waves-green">
-							<i class="material-symbols-outlined">event</i>
+						<a href="{{ site_url('/') }}" target="_blank" class="waves-effect waves-green">
+							<i class="material-symbols-outlined">web</i>
 						</a>
 					</li>
 					<li>

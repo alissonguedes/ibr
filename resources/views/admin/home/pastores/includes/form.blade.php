@@ -1,21 +1,21 @@
-<x-header-page data-href="{{ route('admin.home.banners.index') }}" placeholder="Pesquisar banners..." title="Adicionar Banner">add</x-header-page>
+<x-header-page data-href="{{ route('admin.home.pastores.index') }}" placeholder="Pesquisar pastores..." title="Adicionar Banner">add</x-header-page>
 
 @php
 	if (request('id')):
 	    $id = $row->id;
-	    $titulo = $row->titulo;
+	    $nome = $row->nome;
 	    $descricao = $row->descricao;
 	    $url = $row->url;
 	    $status = $row->status;
-	    $imagem = route('home.banners.show-image', $id) . '?action=preview';
+	    $imagem = route('home.pastores.show-image', $id) . '?action=preview';
 	endif;
 @endphp
 
-<x-slot:form action="{{ route('admin.home.banners.post') }}" method="post" style="{{ $errors->any() || request('id') ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" autocomplete="off">
+<x-slot:form action="{{ route('admin.home.pastores.post') }}" method="post" style="{{ $errors->any() || request('id') ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" autocomplete="off">
 
 	@csrf
 
-	<input type="hidden" name="tipo" value="banner">
+	<input type="hidden" name="tipo" value="pastor">
 
 	@if (request('id'))
 		<input type="hidden" name="_method" value="put">
@@ -43,41 +43,16 @@
 			<!-- BEGIN título -->
 			<div class="row">
 				<div class="col s12">
-					<div class="input-field amber-text mb-2 @error('titulo') error @enderror">
-						<label id="titulo">Título</label>
-						<x-text-input type="text" name="titulo" id="titulo" :value="old('titulo', $titulo ?? null)" autofocus="autofocus" />
-						@error('titulo')
+					<div class="input-field amber-text mb-2 @error('nome') error @enderror">
+						<label id="nome">Nome</label>
+						<x-text-input type="text" name="nome" id="nome" :value="old('nome', $nome ?? null)" autofocus="autofocus" />
+						@error('nome')
 							<small class="error">{{ $message }}</small>
 						@enderror
 					</div>
 				</div>
 			</div>
 			<!-- END título -->
-
-			<!-- BEGIN descrição -->
-			<div class="row">
-				<div class="col s12">
-					<div class="input-field amber-text mb-2">
-						<label for="descricao">Descrição</label>
-						<x-text-input type="text" name="descricao" id="descricao" :value="old('descricao', $descricao ?? null)" />
-					</div>
-				</div>
-			</div>
-			<!-- END descrição -->
-
-			<!-- BEGIN Link -->
-			<div class="row">
-				<div class="col s12">
-					<div class="input-field amber-text mb-2 @error('url') error @enderror">
-						<label for="url">Link</label>
-						<x-text-input type="url" name="url" id="url" :value="old('url', $url ?? null)" />
-						@error('url')
-							<small class="error">{{ $message }}</small>
-						@enderror
-					</div>
-				</div>
-			</div>
-			<!-- END Link -->
 
 			<!-- BEGIN imagem -->
 			<div class="row">

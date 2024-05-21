@@ -334,7 +334,8 @@ main>.card>section~.card-content {
 	overflow: hidden;
 }
 
-.card>.card-image>.delete {
+.card>.card-image>.delete,
+.card>.card-image>.status {
 	position: absolute;
 	top: 0;
 	height: 100%;
@@ -348,6 +349,26 @@ main>.card>section~.card-content {
 	align-items: center;
 	transform: translateY(100%);
 	transition: 250ms;
+}
+
+
+.card>.card-image>.status~img {
+	opacity: 0.1;
+}
+
+.card>.card-image>.status {
+	opacity: 1;
+	left: auto;
+	right: auto;
+	margin: 20px;
+	align-items: start;
+	transform: translateY(0);
+	background-color: rgba(0, 0, 0, 0);
+	color: var(--light-green);
+}
+
+.card:hover>.card-image>.status {
+	opacity: 0;
 }
 
 .card:hover>.card-image>.delete {
@@ -375,7 +396,7 @@ main>.card>.card-reveal .card-content {
 
 main>.card>section~.card-content,
 main>.card>.card-reveal .card-tabs~.card-content {
-	height: calc(100% - 125px);
+	height: calc(100% - 56px);
 	top: 56px;
 	position: absolute;
 	border-top: 1px solid rgba(160, 160, 160, 0.2);
@@ -541,7 +562,7 @@ small {
 	vertical-align: middle;
 	color: var(--light-green);
 	font-size: 22px;
-	font-weight: 100 !important;
+	/* font-weight: 100 !important; */
 	text-transform: uppercase;
 	max-width: calc(100% - 120px);
 	overflow: hidden;
@@ -812,7 +833,7 @@ nav .sidenav-trigger {
 	line-height: 22px;
 	text-align: center;
 	font-size: 0.75rem;
-	font-weight: bold;
+	/* font-weight: bold; */
 }
 
 .navbar-nav .logo span {
@@ -863,7 +884,7 @@ nav ul a {
 
 .sidenav li a i {
 	font-size: 1.5rem;
-	font-weight: 200 !important;
+	/* font-weight: 200 !important; */
 	font-family: 'Material Symbols Outlined';
 }
 
@@ -1158,6 +1179,14 @@ textarea.materialize-textarea:not([readonly]),
 	color: #fff;
 }
 
+.switch label .lever {
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+	background-color: var(--light-green);
+}
+
 .input-field>label:not(.label-icon) {
 	color: var(--light-green);
 }
@@ -1221,7 +1250,7 @@ textarea.materialize-textarea:not([readonly]),
 
 .profile-card .icon-background .material-symbols-outlined {
 	font-size: 24px;
-	font-weight: 300;
+	/* font-weight: 300; */
 	margin: auto;
 }
 
@@ -1238,7 +1267,7 @@ textarea.materialize-textarea:not([readonly]),
 
 .profile-card .name {
 	font-size: 18px;
-	font-weight: 400;
+	/* font-weight: 400; */
 	max-width: 100%;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -1257,6 +1286,102 @@ textarea.materialize-textarea:not([readonly]),
 	width: 100%;
 }
 
+/** Área de Pastores */
+.avatar {
+	margin: 10px;
+}
+
+.avatar .card-image {
+	width: 180px;
+	height: 180px;
+	position: relative;
+	border: 5px solid var(--light-green);
+	margin: auto;
+}
+
+@media screen and (max-width: 992px) {
+	.avatar {
+		margin: 0;
+	}
+
+	.avatar .card-image {
+		width: 130px;
+		height: 130px;
+	}
+
+	.avatar .card-reveal {
+		padding: 0px;
+		overflow: hidden;
+	}
+}
+
+.avatar .card-image img {
+	position: absolute;
+}
+
+.avatar .btn-group {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	line-height: 200px;
+	z-index: 999;
+	display: flex;
+	place-content: space-around;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.avatar .btn-group {
+	opacity: 0;
+}
+
+.avatar img,
+.avatar .btn-group,
+.avatar .btn-group .btn {
+	transition: all 500ms;
+}
+
+.avatar .btn-group .btn.delete {
+	background-color: var(--red-lighten-1);
+	transform: translateX(-100%);
+}
+
+.avatar .btn-group .btn.edit {
+	background-color: var(--green);
+	transform: translateX(100%);
+}
+
+.avatar .btn-group .btn.delete:hover {
+	background-color: var(--red-darken-1);
+}
+
+.avatar .btn-group .btn.edit:hover {
+	background-color: var(--green-darken-1);
+}
+
+.avatar .card-image:hover .btn-group {
+	opacity: 1;
+}
+
+.avatar .card-image:hover img {
+	opacity: 0.1;
+}
+
+.avatar .card-image:hover .btn {
+	transform: translateX(0%) !important;
+}
+
+.avatar .card-reveal {
+	z-index: 999;
+	transform: translateX(-100%);
+}
+
+.avatar .card-reveal [type="reset"] {
+	border: inherit;
+	border-radius: inherit;
+	color: inherit !important;
+}
+
 @media only screen and (min-width: 1px) and (max-width: 600px) {
 	main>.main-container {
 		height: calc(100vh - 140px);
@@ -1266,13 +1391,6 @@ textarea.materialize-textarea:not([readonly]),
 	.progress {
 		top: 52px;
 	}
-
-	/*
-    nav,
-    #input-search-header {
-        height: 56px;
-        line-height: 56px;
-    } */
 
 	.application-logo,
 	nav {

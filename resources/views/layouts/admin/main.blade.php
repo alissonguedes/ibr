@@ -34,7 +34,7 @@
 					</section>
 				@endif
 
-				<div class="card-content scroller animated fadeIn">
+				<div class="card-content animated fadeIn">
 					@if (isset($body))
 						{{ $body }}
 					@endif
@@ -49,7 +49,7 @@
 							</div>
 						@endif
 
-						<div class="card-content pl-1 pr-1 scroller">
+						<div class="card-content pl-1 pr-1">
 							{{ $form }}
 						</div>
 

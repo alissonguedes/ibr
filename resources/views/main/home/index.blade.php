@@ -4,40 +4,9 @@
 
 	<x-slot:body>
 
-		<!--banners-->
-		<div id="slideshow-container">
-			<div class="mySlides">
-				<img src="{{ asset('assets/img/slides/img1.jpg') }}" alt="Image 1">
-			</div>
+		{!! slides('slideshow-container') !!}
 
-			<div class="mySlides">
-				<img src="{{ asset('assets/img/slides/img2.jpg') }}" alt="Image 2">
-			</div>
-
-			<div class="mySlides">
-				<img src="{{ asset('assets/img/slides/img3.jpg') }}" alt="Image 3">
-			</div>
-
-			<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-			<a class="next" onclick="plusSlides(1)">&#10095;</a>
-		</div>
-
-		<!--base1-->
-		<div class="base_slide"><img src="{{ asset('assets/img/base_slide.png') }}" class="img_cem"></div>
-
-		<div class="apresentacao">
-			<div class="img_ap"><img src="{{ asset('assets/img/pastorwalber.png') }}" class="img_cem"></div>
-			<div class="text_ap">
-				<div class="title_ap">O que acreditamos</div>
-				<div class="sub_ap">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce magna massa.
-				</div>
-				<div class="resumo_ap">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce magna massa,
-					condimentum at eleifend eu, semper a arcu. Phasellus dictum sem et urna malesuada pellentesque.
-					Sed nisi enim, laoreet non justo id, commodo dapibus enim.
-				</div>
-			</div>
-		</div>
+		{!! post('main.home:apresentacao') !!}
 
 		<!--palavra-->
 		<section class="area_palavra">
@@ -116,35 +85,9 @@
 
 		</section>
 
-		<!--corpo pastoral-->
-		<section class="corpo_pastoral">
+		{!! post('main.home:pastores', 'tb_pastor') !!}
 
-			<div class="title_section">CORPO PASTORAL</div>
-			<div class="content">
 
-				<div class="conj_pastor">
-					<div class="img_pr"><img src="{{ asset('assets/img/pastor.jpg') }}" class="img_cem"></div>
-					<div class="nome_pr">Pastor Walber Barbosa</div>
-				</div>
-
-				<div class="conj_pastor">
-					<div class="img_pr"><img src="{{ asset('assets/img/pastor.jpg') }}" class="img_cem"></div>
-					<div class="nome_pr">Pastor Walber Barbosa</div>
-				</div>
-
-				<div class="conj_pastor">
-					<div class="img_pr"><img src="{{ asset('assets/img/pastor.jpg') }}" class="img_cem"></div>
-					<div class="nome_pr">Pastor Walber Barbosa</div>
-				</div>
-
-				<div class="conj_pastor">
-					<div class="img_pr"><img src="{{ asset('assets/img/pastor.jpg') }}" class="img_cem"></div>
-					<div class="nome_pr">Pastor Walber Barbosa</div>
-				</div>
-
-			</div>
-
-		</section>
 
 		<!--eventos-->
 		<section class="eventos">

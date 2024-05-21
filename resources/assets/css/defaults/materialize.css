@@ -1576,6 +1576,10 @@ textarea.materialize-textarea[readonly="readonly"]+label,
 	border-color: var(--red-lighten-1);
 }
 
+.switch {
+	padding-top: 15px;
+}
+
 .progress .indeterminate:after {
 	-webkit-animation: indeterminate-right 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
 	animation: indeterminate-right 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;

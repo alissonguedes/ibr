@@ -8,10 +8,13 @@
 		@if (isset($banners) && $banners->count() > 0)
 			<div class="row">
 				@foreach ($banners as $banner)
-					<div class="col s12 m4 l4">
+					<div class="col s12 m6 l4">
 						<div class="card transparent">
 							<div class="card-image">
-								<img src="{{ route('admin.home.banners.show-image', $banner->id) . '?action=preview' }}" height="150">
+								@if (!$banner->status)
+									<i class="status material-symbols-outlined"> visibility_off </i>
+								@endif
+								<img src="{{ route('home.banners.show-image', $banner->id) . '?action=preview' }}" height="210">
 								<div class="delete activator material-symbols-outlined font-weight-400">delete</div>
 							</div>
 							<div class="card-content"> </div>

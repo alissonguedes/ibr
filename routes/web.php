@@ -1,8 +1,9 @@
 <?php
 
 // Admin Controllers
+use App\Http\Controllers\Admin\ApresentacaoController as Apresentacao;
 use App\Http\Controllers\Admin\BannersController as Banners;
-use App\Http\Controllers\Admin\SobrenosController as Sobrenos;
+use App\Http\Controllers\Admin\PastoresController as Pastores;
 
 // Main Controllers
 use App\Http\Controllers\Main\AgendaController;
@@ -32,6 +33,10 @@ Route::prefix('/')->group(function () {
 
 });
 
+Route::get('/imagem/banner/{file_id}', [Banners::class, 'show'])->name('home.banners.show-image');
+Route::get('/imagem/post/{file_id}', [Apresentacao::class, 'show'])->name('home.apresentacao.show-image');
+Route::get('/imagem/pastor/{file_id}', [Pastores::class, 'show'])->name('home.pastores.show-image');
+
 Route::middleware([
 	'auth',
 	'verified',
@@ -51,29 +56,37 @@ Route::middleware([
 		Route::get('/', [Banners::class, 'index'])->name('admin.home.banners.index');
 		Route::get('/{search}', [Banners::class, 'search'])->name('admin.home.banners.search');
 		Route::get('/id/{id}', [Banners::class, 'create'])->name('admin.home.banners.edit');
-		Route::get('/imagem/{file_id}', [Banners::class, 'show'])->name('admin.home.banners.show-image');
+		// Route::get('/imagem/{file_id}', [Banners::class, 'show'])->name('admin.home.banners.show-image');
 		Route::post('/', [Banners::class, 'store'])->name('admin.home.banners.post');
 		Route::put('/', [Banners::class, 'store'])->name('admin.home.banners.post');
 		Route::delete('/', [Banners::class, 'destroy'])->name('admin.home.banners.delete');
 
 	});
 
-	/** nossa-crenca */
-	Route::prefix('/nossa-crenca')->group(function () {
+	/** Apresentação */
+	Route::prefix('/apresentacao')->group(function () {
 
-		Route::get('/', [Sobrenos::class, 'index'])->name('admin.home.nossa-crenca.index');
-		Route::get('/{search}', [Sobrenos::class, 'search'])->name('admin.home.nossa-crenca.search');
-		Route::get('/id/{id}', [Sobrenos::class, 'create'])->name('admin.home.nossa-crenca.edit');
-		Route::get('/imagem/{file_id}', [Sobrenos::class, 'show'])->name('admin.home.nossa-crenca.show-image');
-		Route::post('/', [Sobrenos::class, 'store'])->name('admin.home.nossa-crenca.post');
-		Route::put('/', [Sobrenos::class, 'store'])->name('admin.home.nossa-crenca.post');
-		Route::delete('/', [Sobrenos::class, 'destroy'])->name('admin.home.nossa-crenca.delete');
+		Route::get('/', [Apresentacao::class, 'index'])->name('admin.home.apresentacao.index');
+		Route::get('/{search}', [Apresentacao::class, 'search'])->name('admin.home.apresentacao.search');
+		Route::get('/id/{id}', [Apresentacao::class, 'create'])->name('admin.home.apresentacao.edit');
+		// Route::get('/imagem/{file_id}', [Apresentacao::class, 'show'])->name('admin.home.apresentacao.show-image');
+		Route::post('/', [Apresentacao::class, 'store'])->name('admin.home.apresentacao.post');
+		Route::put('/', [Apresentacao::class, 'store'])->name('admin.home.apresentacao.post');
+		Route::delete('/', [Apresentacao::class, 'destroy'])->name('admin.home.apresentacao.delete');
 
 	});
 
-	Route::get('/pastores', function () {
-		return view('admin.home.nossa-crenca.index');
-	})->name('admin.home.pastores');
+	Route::prefix('/pastores')->group(function () {
+
+		Route::get('/', [Pastores::class, 'index'])->name('admin.home.pastores.index');
+		Route::get('/{search}', [Pastores::class, 'search'])->name('admin.home.pastores.search');
+		Route::get('/id/{id}', [Pastores::class, 'create'])->name('admin.home.pastores.edit');
+		// Route::get('/imagem/{file_id}', [Pastores::class, 'show'])->name('admin.home.pastores.show-image');
+		Route::post('/', [Pastores::class, 'store'])->name('admin.home.pastores.post');
+		Route::put('/', [Pastores::class, 'store'])->name('admin.home.pastores.post');
+		Route::delete('/', [Pastores::class, 'destroy'])->name('admin.home.pastores.delete');
+
+	});
 
 	Route::middleware('auth')->group(function () {
 		Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -1,22 +1,25 @@
-@if (request('id'))
-	@php
-		$id = $row->id;
-		$titulo = $row->titulo;
-		$descricao = $row->descricao;
-		$url = $row->url;
-		$imagem = route('admin.home.nossa-crenca.show-image', $id) . '?action=preview';
-	@endphp
-@endif
+@php
+	if (isset($post)) {
+	    $id = $post->id;
+	    $titulo = $post->titulo;
+	    $subtitulo = $post->subtitulo;
+	    $conteudo = $post->conteudo;
+	    $file = new App\Models\Admin\FileModel();
+	    $imagem = route('home.apresentacao.show-image', $id) . '?action=preview';
+	}
+@endphp
 
-<form action="{{ route('admin.home.nossa-crenca.post') }}" method="post" class="card" style="display: block; transform: translateY(0%);" autocomplete="off">
+<form action="{{ route('admin.home.apresentacao.post') }}" method="post" class="card animated fadeIn" style="display: block; transform: translateY(0%);" enctype="multipart/form-data" autocomplete="off">
 	@csrf
 
-	@if (request('id'))
+	<input type="hidden" name="tipo" value="post">
+
+	@if (isset($id))
 		<input type="hidden" name="_method" value="put">
 		<input type="hidden" name="id" value="{{ $id }}">
 	@endif
 
-	<div class="card-content padding-2 scroller" style="height: calc(100% - 70px)">
+	<div class="card-content padding-2" style="height: calc(100% - 70px)">
 
 		<div class="col row">
 
@@ -39,10 +42,10 @@
 				<!-- BEGIN descrição -->
 				<div class="row">
 					<div class="col s12">
-						<div class="input-field @error('titulo') error @enderror">
-							<label for="descricao">Descrição</label>
-							<x-text-input type="text" name="descricao" id="descricao" :value="old('descricao', $descricao ?? null)" />
-							@error('descricao')
+						<div class="input-field @error('subtitulo') error @enderror">
+							<label for="subtitulo">Subtítulo</label>
+							<x-text-input type="text" name="subtitulo" id="subtitulo" :value="old('subtitulo', $subtitulo ?? null)" />
+							@error('subtitulo')
 								<small class="error">{{ $message }}</small>
 							@enderror
 						</div>
@@ -53,10 +56,10 @@
 				<!-- BEGIN Texto -->
 				<div class="row">
 					<div class="col s12">
-						<div class="input-field @error('texto') error @enderror">
+						<div class="input-field @error('conteudo') error @enderror">
 							{{-- <label for="texto">Texto</label> --}}
-							<textarea type="text" name="texto" id="texto" class="editor" rows="300">{{ old('texto', $texto ?? null) }}</textarea>
-							@error('texto')
+							<textarea type="text" name="conteudo" id="conteudo" class="editor" rows="300">{{ old('conteudo', $conteudo ?? null) }}</textarea>
+							@error('conteudo')
 								<small class="error">{{ $message }}</small>
 							@enderror
 						</div>
@@ -86,13 +89,13 @@
 				<!-- BEGIN imgShow -->
 				<div class="row">
 					<div class="col s12">
-						<div class="row">
-							<div class="col s12">
-								@if (request('id'))
-									<img src="{{ $imagem ?? asset('assets/img/slides/img2.jpg') }}" class="responsive-img materialboxed" alt="">
-								@endif
+						@if (isset($imagem))
+							<div class="row">
+								<div class="col s12">
+									<img src="{{ $imagem }}" class="responsive-img materialboxed" alt="">
+								</div>
 							</div>
-						</div>
+						@endif
 						<div class="row">
 							<div class="col s12">
 								<small>A imagem deve ter no máximo 1920x1080</small>
@@ -124,7 +127,3 @@
 	</div>
 
 </form>
-
-{{-- <x-slot:scripts_form>
-	<script src="{{ asset('assets/js/clinica/js/pacientes/form.js') }}" defer></script>
-</x-slot:scripts_form> --}}
