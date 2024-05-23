@@ -481,7 +481,6 @@ main .card-panel>.card-header~.card-content {
 }
 
 .card .card-image.circle img {
-
     border-radius: 100%;
     overflow: hidden;
 }
