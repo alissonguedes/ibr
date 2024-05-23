@@ -28,7 +28,7 @@
 			<div class="row">
 				<div class="col s12">
 					@if (request('id'))
-						<img src="{{ $imagem ?? asset('assets/img/slides/img2.jpg') }}" class="responsive-img materialboxed" alt="">
+						<img src="{{ $imagem ?? asset('assets/img/slides/img2.jpg') }}" class="responsive-img materialboxed circle" alt="">
 					@endif
 				</div>
 			</div>

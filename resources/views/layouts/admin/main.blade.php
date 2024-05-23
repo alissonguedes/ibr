@@ -24,13 +24,11 @@
 		@if (isset($main))
 			{{ $main }}
 		@else
-			<div class="card no-padding no-margin">
+			<div class="card card-panel no-padding no-margin">
 
 				@if (isset($header))
-					<section class="animated fadeIn">
-						<header class="z-depth-0 border-bottom">
-							{{ $header }}
-						</header>
+					<section class="card-header animated fadeIn">
+						{{ $header }}
 					</section>
 				@endif
 
@@ -43,21 +41,25 @@
 				@if (isset($form))
 					<form enctype="multipart/form-data" {{ $form->attributes->merge(['class' => 'card-reveal no-padding']) }}>
 
-						@if (isset($form_tabs))
-							<div {{ $form_tabs->attributes->merge(['class' => 'card-tabs']) }}>
-								{{ $form_tabs }}
-							</div>
-						@endif
+						{{-- <div class="card"> --}}
 
-						<div class="card-content pl-1 pr-1">
-							{{ $form }}
-						</div>
+							@if (isset($form_tabs))
+								<div {{ $form_tabs->attributes->merge(['class' => 'card-tabs']) }}>
+									{{ $form_tabs }}
+								</div>
+							@endif
 
-						@if (isset($card_footer))
-							<div {{ $card_footer->attributes->merge(['class' => 'card-action right-align']) }}>
-								{{ $card_footer }}
+							<div class="card-content">
+								{{ $form }}
 							</div>
-						@endif
+
+							@if (isset($card_footer))
+								<div {{ $card_footer->attributes->merge(['class' => 'card-action right-align']) }}>
+									{{ $card_footer }}
+								</div>
+							@endif
+
+						{{-- </div> --}}
 
 						@isset($scripts_form)
 							{{ $scripts_form }}

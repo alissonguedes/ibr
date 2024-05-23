@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\WordsCountRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class BannerRequest extends FormRequest {
+class A_IbrRequest extends FormRequest {
+
 	/**
 	 * Determine if the user is authorized to make this request.
 	 */
@@ -18,22 +20,21 @@ class BannerRequest extends FormRequest {
 	 *
 	 * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
 	 */
-	public function rules($request = null): array {
-
-		if (!empty($request)) {
-			$request = $request->all();
-		}
+	public function rules(): array {
 
 		$rules = [
-			'titulo'    => 'required',
-			'descricao' => 'max:255',
-			'url'       => 'nullable|url',
+			'titulo'   => [
+				'required',
+				// new WordsCountRule(6),
+			],
+			'conteudo' => ['required', new WordsCountRule(1000)],
+			'url'      => 'nullable|url',
 		];
 
-		if (!isset($request['id']) && !isset($this->id)) {
+		if (!isset($this->id)) {
 			$rules['imagem'] = [
-				'required',
-				'mimes:jpg,png',
+				// 'required',
+				'mimes:jpg,jpeg,png',
 				'dimensions:1920,1080',
 			];
 		}

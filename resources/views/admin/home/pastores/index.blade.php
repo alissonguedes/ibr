@@ -9,15 +9,21 @@
 			<div class="row">
 				@foreach ($pastores as $pastor)
 					<div class="col s6 m3 l3">
-						<div class="avatar card transparent z-depth-0">
-							<div class="card-content no-margin no-padding center-align black-text">
-								<div class="card-image circle no-padding">
-									<img src="{{ route('home.pastores.show-image', $pastor->id) . '?action=preview' }}" height="100%" width="100%">
-									<div class="btn-group">
-										<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
-										<x-button class="icon-background btn btn-floating edit material-symbols-outlined font-weight-400" :data-href="route('admin.home.pastores.edit', $pastor->id)"> edit </x-button>
-									</div>
+						<div class="avatar card transparent z-depth-0 no-padding no-margin">
+
+							@if (!$pastor->status)
+								<i class="inactive material-symbols-outlined"> visibility_off </i>
+							@endif
+
+							<div class="card-image no-padding no-margin">
+								<img src="{{ route('home.pastores.show-image', $pastor->id) . '?action=preview' }}" class="circle">
+								<div class="btn-group">
+									<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
+									<x-button class="icon-background btn btn-floating edit material-symbols-outlined font-weight-400" :data-href="route('admin.home.pastores.edit', $pastor->id)"> edit </x-button>
 								</div>
+							</div>
+
+							<div class="card-content no-margin no-padding center-align black-text">
 								<h5 class="white-text">{{ $pastor->nome }}</h5>
 							</div>
 							<div class="card-reveal red darken-4 white-text">

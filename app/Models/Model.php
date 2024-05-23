@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as MainModel;
 
-class Model extends MainModel
-{
+class Model extends MainModel {
+
 	use HasFactory;
 
-	public function getWhere($data = null, $where = null)
-	{
+	public function getWhere($data = null, $where = null) {
 
 		$where = is_array($data) ? $data : [$data => $where];
 
@@ -18,8 +17,7 @@ class Model extends MainModel
 
 	}
 
-	public function getOrWhere(array $data)
-	{
+	public function getOrWhere(array $data) {
 
 		$where = func_get_args();
 

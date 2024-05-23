@@ -5,8 +5,7 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
 
-class PostModel extends Model
-{
+class PostModel extends Model {
 
 	use HasFactory;
 
@@ -25,33 +24,44 @@ class PostModel extends Model
 		'url',
 		'hits',
 		'ordem',
+		'status',
 		'publish_up',
 		'publish_down',
 	];
 
 	protected $columns = ['id', 'tipo', 'autor', 'titulo', 'titulo_slug', 'subtitulo', 'conteudo', 'tags', 'url', 'hits', 'publish_up', 'publish_down', 'status'];
 
-	public function search($search, $tipo = 'post', $both = false)
-	{
+	public function search($search, $both = false, $tipo = 'post') {
 
 		return $this->select($this->columns)->where('tipo', $tipo)
 			->whereAny([
 				'id',
 				'titulo',
+				'subtitulo',
+				'conteudo',
 			], 'like', ($both ? '%' : null) . $search . '%')
 			->get();
 
 	}
 
-	public function getAllPosts()
-	{
+	public function getAllPosts($where = [], $tipo = 'post') {
 
-		return $this->select($this->columns)->all();
+		$get = $this->select($this->columns);
+
+		if (!empty($where)) {
+			$get->where(function ($get) use ($where) {
+				$get->where('titulo_slug', $where);
+				$get->orWhere('id', $where);
+			});
+		}
+
+		$get->where('tipo', $tipo);
+
+		return $get->get();
 
 	}
 
-	public function getPost($data)
-	{
+	public function getPost($data) {
 
 		return $this->getOrWhere(['titulo_slug', $data], ['id', $data])
 			->select($this->columns ?? '*')
@@ -59,8 +69,7 @@ class PostModel extends Model
 
 	}
 
-	public function insert_or_update($request)
-	{
+	public function insert_or_update($request) {
 
 		$columns = [];
 		$data    = request()->all();
@@ -73,7 +82,7 @@ class PostModel extends Model
 		$columns['titulo']    = $data['titulo'];
 
 		if (!isset($data['id'])) {
-			$columns['titulo_slug'] = replace($data['titulo']);
+			$columns['titulo_slug'] = $data['titulo_slug'] ?? replace($data['titulo']);
 		}
 
 		$columns['subtitulo']    = $data['subtitulo'] ?? null;
@@ -98,8 +107,7 @@ class PostModel extends Model
 
 	}
 
-	public static function remove($id, $tipo = 'post')
-	{
+	public static function remove($id, $tipo = 'post') {
 
 		FileModel::remove($id, $tipo);
 		self::where('id', $id)->delete();

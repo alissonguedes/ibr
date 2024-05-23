@@ -1,47 +1,74 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<x-app-layout>
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+	@if (isset($title))
+		<x-slot:title>{{ $title }}</x-slot:title>
+	@endif
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+	{{-- BEGIN Styles --}}
+	<x-slot:styles>
+		@include('layouts.admin.styles')
+	</x-slot:styles>
+	{{-- END Styles --}}
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+	<!-- Session Status -->
+	<x-auth-session-status class="mb-4" :status="session('status')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+	<form action="{{ route('login') }}" method="post">
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+		@csrf
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+		<!-- Email Address -->
+		<div class="input-field">
+			<x-input-label for="email" :value="__('Email')" />
+			<x-text-input type="email" name="email" id="email" :value="old('email')" required autofocus autocomplete="username" />
+			<x-input-error class="mt-2" :messages="$errors->get('email')" />
+		</div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+		<!-- Password -->
+		<div class="input-field">
+			<x-input-label for="password" :value="__('Password')" />
+			<x-text-input type="password" name="password" id="password" required autocomplete="current-password" />
+			<x-input-error class="mt-2" :messages="$errors->get('password')" />
+		</div>
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+		<!-- Remember Me -->
+		<div class="input-field">
+			<x-input-label for="remember_me" class="inline-flex items-center" />
+			<input type="checkbox" name="remember" id="remember_me" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+			<span>{{ __('Remember me') }}</span>
+		</div>
+
+		<div class="input-field">
+			@if (Route::has('password.request'))
+				<a href="{{ route('password.request') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+					{{ __('Forgot your password?') }}
+				</a>
+			@endif
+
+			<x-button type="submit" class="btn">
+				login
+			</x-button>
+		</div>
+	</form>
+
+	@if (session()->has('message'))
+		<x-toast class="green darken-4">{{ session()->get('message') }}</x-toast>
+	@endif
+
+	@if (count($errors) > 0)
+		<x-toast class="red darken-2">Existem erros no formulário!</x-toast>
+	@endif
+
+	{{-- BEGIN Scripts --}}
+	<x-slot:scripts>
+
+		@include('layouts.admin.scripts')
+
+		@if (isset($script))
+			{{ $script }}
+		@endif
+
+	</x-slot:scripts>
+	{{-- END Scripts --}}
+
+</x-app-layout>

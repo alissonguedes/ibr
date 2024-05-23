@@ -27,22 +27,26 @@
 
 				<ul class="navbar-list right">
 					<li>
-						<a href="#" class="waves-effect waves-block waves-green profile-button">
-							<span class="avatar-status avatar-online">
-								<img src="{{ asset('assets/img/avatar/avatar-1.png') }}" alt="">
-								<i></i>
-							</span>
-						</a>
+						<!-- Authentication -->
+						<form action="{{ route('logout') }}" method="post">
+							@csrf
+							<x-nav-link class="waves-effect waves-green profile-button" onclick="event.preventDefault(); this.closest('form').submit();">
+								<i class="material-symbols-outlined">logout</i>
+								{{-- <span class="avatar-status avatar-online">
+									<img src="{{ asset('assets/img/avatar/avatar-1.png') }}" alt="">
+								</span> --}}
+							</x-nav-link>
+						</form>
 					</li>
 				</ul>
 
 				<ul class="navbar-nav right">
 					<li>
-						<a href="{{ site_url('/') }}" target="_blank" class="waves-effect waves-green">
+						<a href="{{ site_url('/') }}" class="waves-effect waves-green" target="_blank">
 							<i class="material-symbols-outlined">web</i>
 						</a>
 					</li>
-					<li>
+					{{-- <li>
 						<a class="waves-effect waves-green">
 							<i class="material-symbols-outlined">mail</i>
 						</a>
@@ -60,16 +64,11 @@
 							</i>
 						</a>
 					</li>
-					{{-- <li class="search">
-						<a id="open-search" class="waves-effect" style="position: relative;">
-							<i class="material-symbols-outlined">search</i>
-						</a>
-					</li> --}}
 					<li>
-						<a class="waves-effect waves-green sidenav-trigger" data-target="slide-out">
+						<a class="waves-effect waves-green sidenav-trigger">
 							<i class="material-symbols-outlined">menu</i>
 						</a>
-					</li>
+					</li> --}}
 				</ul>
 
 			</div>
@@ -123,7 +122,7 @@
 					</x-responsive-nav-link>
 
 					<!-- Authentication -->
-					<form action="{{ route('logout') }}" method="POST">
+					<form action="{{ route('logout') }}" method="post">
 						@csrf
 
 						<x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">

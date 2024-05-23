@@ -10,14 +10,25 @@
 				@foreach ($banners as $banner)
 					<div class="col s12 m6 l4">
 						<div class="card transparent">
+
+							<div class="btn-group">
+								<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
+								<x-button class="icon-background edit" :data-href="route('admin.home.banners.edit', $banner->id)"> edit </x-button>
+							</div>
+
 							<div class="card-image">
 								@if (!$banner->status)
-									<i class="status material-symbols-outlined"> visibility_off </i>
+									<i class="inactive material-symbols-outlined"> visibility_off </i>
 								@endif
 								<img src="{{ route('home.banners.show-image', $banner->id) . '?action=preview' }}" height="210">
-								<div class="delete activator material-symbols-outlined font-weight-400">delete</div>
+								{{-- <div class="delete activator material-symbols-outlined font-weight-400">delete</div> --}}
 							</div>
-							<div class="card-content"> </div>
+							{{-- <div class="card-content"> </div> --}}
+							<div class="card-action">
+								<span class="card-title light-green-text" style="">{{ $banner->titulo }}</span>
+								{{-- <x-button class="gradient-45deg-green-light-green black-text btn-small mr-3"> add </x-button> --}}
+								{{-- <x-button class="icon-background gradient-45deg-green-light-green black-text btn-small right" :data-href="route('admin.home.banners.edit', $banner->id)"> edit </x-button> --}}
+							</div>
 							<div class="card-reveal red darken-4 white-text">
 								<div class="row">
 									<div class="col s12">
@@ -39,11 +50,6 @@
 										</div>
 									</form>
 								</div>
-							</div>
-							<div class="card-action black ">
-								<span class="card-title light-green-text" style="position: absolute; text-overflow: ellipsis; width: 70%; overflow: hidden; white-space: nowrap;">{{ $banner->titulo }}</span>
-								{{-- <x-button class="gradient-45deg-green-light-green black-text btn-small mr-3"> add </x-button> --}}
-								<x-button class="icon-background gradient-45deg-green-light-green black-text btn-small right" :data-href="route('admin.home.banners.edit', $banner->id)"> edit </x-button>
 							</div>
 						</div>
 					</div>

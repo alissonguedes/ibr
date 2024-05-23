@@ -9,17 +9,19 @@
 	}
 @endphp
 
-<form action="{{ route('admin.home.apresentacao.post') }}" method="post" class="card animated fadeIn" style="display: block; transform: translateY(0%);" enctype="multipart/form-data" autocomplete="off">
+<form action="{{ route('admin.home.apresentacao.post') }}" method="post" class="card card-panel animated fadeIn" style="display: block; transform: translateY(0%);" enctype="multipart/form-data" autocomplete="off">
+
 	@csrf
 
 	<input type="hidden" name="tipo" value="post">
+	<input type="hidden" name="titulo_slug" value="apresentacao">
 
 	@if (isset($id))
 		<input type="hidden" name="_method" value="put">
 		<input type="hidden" name="id" value="{{ $id }}">
 	@endif
 
-	<div class="card-content padding-2" style="height: calc(100% - 70px)">
+	<div class="card-content padding-2" style="">
 
 		<div class="col row">
 
