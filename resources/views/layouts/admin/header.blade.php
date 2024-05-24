@@ -46,7 +46,7 @@
 							<i class="material-symbols-outlined">web</i>
 						</a>
 					</li>
-					{{-- <li>
+					<li>
 						<a class="waves-effect waves-green">
 							<i class="material-symbols-outlined">mail</i>
 						</a>
@@ -68,7 +68,7 @@
 						<a class="waves-effect waves-green sidenav-trigger">
 							<i class="material-symbols-outlined">menu</i>
 						</a>
-					</li> --}}
+					</li>
 				</ul>
 
 			</div>

@@ -54,6 +54,10 @@ class BannerModel extends PostModel {
 		})->get();
 	}
 
+	public function getActiveBanners($container = 'slideshow-container') {
+		return $this->getAllBanners($container)->where('status', '1');
+	}
+
 	public function getBanner($data) {
 		return $this->getOrWhere(['id', $data], ['titulo_slug', $data])->where('tipo', 'banner')->first();
 	}
@@ -62,8 +66,8 @@ class BannerModel extends PostModel {
 		return $this->where('tipo', 'banner')->whereNot('id_parent', null)->count();
 	}
 
-	public function search($search, $both = true, $tipo = 'banner') {
-		return parent::search($search, $both, $tipo);
+	public function search($search, $tipo = 'banner', $both = true) {
+		return parent::search($search, $tipo, $both);
 	}
 
 }

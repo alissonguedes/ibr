@@ -62,11 +62,17 @@ class PostModel extends Model {
 	}
 
 	public function getPost($data) {
-
 		return $this->getOrWhere(['titulo_slug', $data], ['id', $data])
 			->select($this->columns ?? '*')
 			->where('tipo', 'post')->first();
+	}
 
+	public function getAllActivePosts($container) {
+		return $this->getAllPosts($container)->where('status', '1');
+	}
+
+	public function getActivePost($container) {
+		return $this->getAllPosts($container)->where('status', '1')->first();
 	}
 
 	public function insert_or_update($request) {

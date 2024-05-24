@@ -5,6 +5,7 @@
 	    $subtitulo = $post->subtitulo;
 	    $conteudo = $post->conteudo;
 	    $file = new App\Models\Admin\FileModel();
+	    $status = $post->status;
 	    $imagem = route('home.apresentacao.show-image', $id) . '?action=preview';
 	}
 @endphp
@@ -106,6 +107,24 @@
 					</div>
 				</div>
 				<!-- END imgShow -->
+
+				<!-- BEGIN status -->
+				<div class="row">
+					<div class="col s12">
+						<div class="input-field">
+							<label for="status" class="">Ativo</label>
+							<div class="switch">
+								<label>
+									Não
+									<input type="checkbox" name="status" id="status" value="1" @checked(old() ? old('status') : (isset($status) ? $status : true))>
+									<span class="lever"></span>
+									Sim
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END status -->
 
 			</div>
 

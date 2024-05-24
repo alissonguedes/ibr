@@ -87,8 +87,6 @@
 
 		{!! post('main.home:pastores', 'tb_pastor') !!}
 
-
-
 		<!--eventos-->
 		<section class="eventos">
 			<div class="title_section cor_verde">EVENTOS IBR</div>

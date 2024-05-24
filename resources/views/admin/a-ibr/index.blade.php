@@ -27,15 +27,17 @@
 									<x-button class="icon-background btn btn-floating edit material-symbols-outlined font-weight-400" :data-href="route('admin.a-ibr.edit', $post->id)"> edit </x-button>
 								</div>
 								<div class="titulo">
-									<h6 class="bold" style="font-size: 24px; margin: 0;">{{ $post->subtitulo }}</h6>
-									<h3 class="bold" style="font-size: 42px; margin: 0;">{{ $post->titulo }}</h3>
+									<h6 class="bold" style="">{{ $post->subtitulo }}</h6>
+									<h4 class="bold no-margin" style="">{{ $post->titulo }}</h4>
 								</div>
 								<div class="flex flex-auto flex-center mt-3">
-									<div class="card-image">
-										<div class="circle">
-											<img src="{{ route('home.a-ibr.show-image', $post->id) . '?action=preview' }}" height="210">
+									@if ($hasFile)
+										<div class="card-image">
+											<div class="circle">
+												<img src="{{ route('home.a-ibr.show-image', $post->id) . '?action=preview' }}" height="210">
+											</div>
 										</div>
-									</div>
+									@endif
 									<span class="">{!! $post->conteudo !!}</span>
 								</div>
 							</div>

@@ -82,7 +82,7 @@
 	--grey-darken-2: #616161 !important;
 	--grey-darken-3: #424242 !important;
 	--grey-darken-4: #212121 !important;
-	--grey-darken-4: #111111 !important;
+	--grey-darken-5: #070606 !important;
 
 	--grey-50: rgb(252, 252, 253) !important;
 	--grey-100: rgb(247, 247, 252) !important;
@@ -3169,7 +3169,7 @@ label>checkbox {
 
 .switch input[type=checkbox][disabled]+.lever {
 	cursor: not-allowed;
-	background-color: rgba(0, 0, 0, .08) ;
+	background-color: rgba(0, 0, 0, .08);
 }
 
 .switch label input[type=checkbox][disabled]+.lever:after,

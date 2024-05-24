@@ -16,7 +16,7 @@
 							@endif
 
 							<div class="card-image">
-								<div class="circle grey-border border-lighten-4 border-10">
+								<div class="circle light-green-border border-lighten-4 border-10">
 									<img src="{{ route('home.pastores.show-image', $pastor->id) . '?action=preview' }}">
 									<div class="btn-group">
 										<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
