@@ -30,6 +30,7 @@
 		<link rel="icon" type="image/png" href="{{ url('/favicon-32x32.png') }}" sizes="32x32">
 		<link rel="icon" type="image/png" href="{{ url('/android-launcherincon-512-512.png') }}" sizes="512x512">
 		<link rel="apple-touch-icon" type="image/png" href="{{ url('/apple-touch-icon.png') }}" sizes="180x180">
+
 		<link rel="stylesheet" href="{{ asset('assets/node_modules/pace-js/pace-theme-default.min.css') }}">
 
 		@if (isset($styles))
@@ -62,6 +63,12 @@
 
 			@if (isset($scripts))
 				{{ $scripts }}
+			@endif
+
+			@if (isset($sidebar))
+				<aside {{ $sidebar->attributes->merge(['class' => 'sidenav-main nav-expanded nav-lock nav-collapsible']) }}>
+					{{ $sidebar }}
+				</aside>
 			@endif
 
 		</div>

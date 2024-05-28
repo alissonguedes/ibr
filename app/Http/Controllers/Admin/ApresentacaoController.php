@@ -17,7 +17,7 @@ class ApresentacaoController extends Controller {
 
 		$data['post'] = $post->getPost('apresentacao');
 
-		return view('admin.home.apresentacao.index', $data);
+		return view('admin.paginas.home.apresentacao.index', $data);
 
 	}
 
@@ -28,7 +28,7 @@ class ApresentacaoController extends Controller {
 
 		$data['banners'] = SobreModel::where('titulo', 'like', $request->search . '%')->get();
 
-		return view('admin.home.apresentacao.index', $data);
+		return view('admin.paginas.home.apresentacao.index', $data);
 
 	}
 
@@ -41,7 +41,7 @@ class ApresentacaoController extends Controller {
 		// $data['row']     = $page->getPost('id', $request->id);
 		// $data['banners'] = SobreModel::all();
 
-		// return view('admin.home.apresentacao.index', $data);
+		// return view('admin.paginas.home.apresentacao.index', $data);
 
 	}
 
@@ -58,7 +58,7 @@ class ApresentacaoController extends Controller {
 			$message = 'Sobre cadastrado com sucesso!';
 		}
 
-		return redirect()->route('admin.home.apresentacao.index')->with(['message' => $message]);
+		return redirect()->route('admin.paginas.home.apresentacao.index')->with(['message' => $message]);
 
 	}
 

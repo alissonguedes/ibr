@@ -1,17 +1,10 @@
 <header>
 
-	{{--
-	<div class="navbar-search-wrapper">
-		<input type="search" id="input-search-header" placeholder="Pesquisar..." autocomplete="off">
-	</div>
-	--}}
-
 	<div class="navbar navbar-fixed">
 
 		<nav class="navbar-main navbar-color navbar-dark z-depth-0">
 
 			<div class="nav-wrapper">
-
 				@if (isset($title))
 					<h1 id="page-title">
 

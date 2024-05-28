@@ -20,6 +20,7 @@ class PostModel extends Model {
 		'titulo_slug',
 		'subtitulo',
 		'conteudo',
+		'data',
 		'tags',
 		'url',
 		'hits',
@@ -29,7 +30,7 @@ class PostModel extends Model {
 		'publish_down',
 	];
 
-	protected $columns = ['id', 'tipo', 'autor', 'titulo', 'titulo_slug', 'subtitulo', 'conteudo', 'tags', 'url', 'hits', 'publish_up', 'publish_down', 'status'];
+	protected $columns = ['id', 'tipo', 'autor', 'titulo', 'titulo_slug', 'subtitulo', 'conteudo', 'data', 'tags', 'url', 'hits', 'publish_up', 'publish_down', 'status'];
 
 	public function search($search, $both = false, $tipo = 'post') {
 
@@ -44,7 +45,7 @@ class PostModel extends Model {
 
 	}
 
-	public function getAllPosts($where = [], $tipo = 'post') {
+	public function getAllPosts($where = null, $tipo = 'post') {
 
 		$get = $this->select($this->columns);
 
@@ -82,17 +83,14 @@ class PostModel extends Model {
 
 		$id_parent = $this->select('id')->where('tipo', $data['tipo'])->where('id_parent', null)->get()->first();
 
-		$columns['id_parent'] = $data['id_parent'] ?? $id_parent->id ?? null;
-		$columns['tipo']      = $data['tipo'] ?? 'F';
-		$columns['autor']     = Auth::id();
-		$columns['titulo']    = $data['titulo'];
-
-		if (!isset($data['id'])) {
-			$columns['titulo_slug'] = $data['titulo_slug'] ?? replace($data['titulo']);
-		}
-
+		$columns['id_parent']    = $data['id_parent'] ?? $id_parent->id ?? null;
+		$columns['tipo']         = $data['tipo'] ?? 'F';
+		$columns['autor']        = Auth::id();
+		$columns['titulo']       = $data['titulo'];
+		$columns['titulo_slug']  = $data['titulo_slug'] ?? replace($data['titulo']);
 		$columns['subtitulo']    = $data['subtitulo'] ?? null;
 		$columns['conteudo']     = $data['conteudo'] ?? null;
+		$columns['data']         = isset($data['data']) ? date('Y-m-d H:i:s', strtotime(str_replace('/', '-', $data['data']))) : null;
 		$columns['ordem']        = $data['ordem'] ?? 0;
 		$columns['url']          = $data['url'] ?? null;
 		$columns['tags']         = $data['tags'] ?? null;

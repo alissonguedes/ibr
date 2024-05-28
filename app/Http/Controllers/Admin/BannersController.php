@@ -16,7 +16,7 @@ class BannersController extends Controller {
 
 		$data['banners'] = $banner->getAllBanners();
 
-		return view('admin.home.banners.index', $data);
+		return view('admin.paginas.home.banners.index', $data);
 
 	}
 
@@ -27,7 +27,7 @@ class BannersController extends Controller {
 
 		$data['banners'] = $banner->search($request->search);
 
-		return view('admin.home.banners.index', $data);
+		return view('admin.paginas.home.banners.index', $data);
 
 	}
 
@@ -40,7 +40,7 @@ class BannersController extends Controller {
 		$data['row']     = $banner->getBanner($request->id);
 		$data['banners'] = $banner->getAllBanners();
 
-		return view('admin.home.banners.index', $data);
+		return view('admin.paginas.home.banners.index', $data);
 
 	}
 
@@ -74,7 +74,7 @@ class BannersController extends Controller {
 
 		}
 
-		return redirect()->route('admin.home.banners.index')->with(['message' => $message]);
+		return redirect()->route('admin.paginas.home.banners.index')->with(['message' => $message]);
 
 	}
 
@@ -98,7 +98,7 @@ class BannersController extends Controller {
 			$message = 'Não foi possível encontrar o registro';
 		}
 
-		return redirect()->route('admin.home.banners.index')->with(['message' => $message]);
+		return redirect()->route('admin.paginas.home.banners.index')->with(['message' => $message]);
 
 	}
 }

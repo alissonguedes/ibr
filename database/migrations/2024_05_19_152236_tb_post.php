@@ -4,13 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
 	/**
 	 * Run the migrations.
 	 */
-	public function up(): void
-	{
+	public function up(): void {
 
 		Schema::create('ibr_site.tb_post', function (Blueprint $table) {
 			// $table->id();
@@ -32,6 +30,7 @@ return new class extends Migration
 			$table->string('titulo_slug');
 			$table->string('subtitulo', 255)->nullable();
 			$table->longText('conteudo')->nullable();
+			$table->dateTime('data')->nullable()->default(null);
 			$table->string('tags')->nullable()->default(null);
 			$table->string('url')->nullable()->default(null);
 			$table->integer('hits')->default(0);
@@ -40,7 +39,7 @@ return new class extends Migration
 			$table->dateTime('publish_down')->nullable()->default(null);
 			$table->dateTime('created_at');
 			$table->dateTime('updated_at')->nullable()->default(null);
-			$table->enum('status', ['0', '1']);
+			$table->enum('status', ['0', '1'])->default('1');
 		});
 
 	}
@@ -48,8 +47,7 @@ return new class extends Migration
 	/**
 	 * Reverse the migrations.
 	 */
-	public function down(): void
-	{
+	public function down(): void {
 		Schema::dropIfExists('ibr_site.tb_post');
 
 	}

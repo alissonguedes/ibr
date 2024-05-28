@@ -17,7 +17,7 @@ class A_IbrController extends Controller {
 
 		$data['posts'] = $post->getAllPosts('a-ibr');
 
-		return view('admin.a-ibr.index', $data);
+		return view('admin.paginas.a-ibr.index', $data);
 
 	}
 
@@ -28,7 +28,7 @@ class A_IbrController extends Controller {
 
 		$data['posts'] = $post->search($request->search, true);
 
-		return view('admin.a-ibr.index', $data);
+		return view('admin.paginas.a-ibr.index', $data);
 
 	}
 
@@ -42,10 +42,10 @@ class A_IbrController extends Controller {
 		$data['posts'] = $post->getAllPosts('a-ibr');
 
 		if (!$data['row']) {
-			return redirect()->route('admin.a-ibr.index');
+			return redirect()->route('admin.paginas.a-ibr.index');
 		}
 
-		return view('admin.a-ibr.index', $data);
+		return view('admin.paginas.a-ibr.index', $data);
 
 	}
 
@@ -62,7 +62,7 @@ class A_IbrController extends Controller {
 			$message = 'Sobre cadastrado com sucesso!';
 		}
 
-		return redirect()->route('admin.a-ibr.index')->with(['message' => $message]);
+		return redirect()->route('admin.paginas.a-ibr.index')->with(['message' => $message]);
 
 	}
 
@@ -86,7 +86,7 @@ class A_IbrController extends Controller {
 			$message = 'Não foi possível encontrar o registro';
 		}
 
-		return redirect()->route('admin.a-ibr.index')->with(['message' => $message]);
+		return redirect()->route('admin.paginas.a-ibr.index')->with(['message' => $message]);
 
 	}
 }

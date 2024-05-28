@@ -16,7 +16,7 @@ class PastoresController extends Controller {
 
 		$data['pastores'] = $pastor->getAllPastores();
 
-		return view('admin.home.pastores.index', $data);
+		return view('admin.paginas.home.pastores.index', $data);
 
 	}
 
@@ -27,7 +27,7 @@ class PastoresController extends Controller {
 
 		$data['pastores'] = $pastor->search($request->search);
 
-		return view('admin.home.pastores.index', $data);
+		return view('admin.paginas.home.pastores.index', $data);
 
 	}
 
@@ -40,7 +40,7 @@ class PastoresController extends Controller {
 		$data['row']      = $pastor->getPastor($request->id);
 		$data['pastores'] = $pastor->getAllPastores();
 
-		return view('admin.home.pastores.index', $data);
+		return view('admin.paginas.home.pastores.index', $data);
 
 	}
 
@@ -61,7 +61,7 @@ class PastoresController extends Controller {
 			$message = 'Houve um erro ao inserir os dados.';
 		}
 
-		return redirect()->route('admin.home.pastores.index')->with(['message' => $message]);
+		return redirect()->route('admin.paginas.ministerios.index')->with(['message' => $message]);
 
 	}
 
@@ -85,7 +85,7 @@ class PastoresController extends Controller {
 			$message = 'Não foi possível encontrar o registro';
 		}
 
-		return redirect()->route('admin.home.pastores.index')->with(['message' => $message]);
+		return redirect()->route('admin.paginas.ministerios.index')->with(['message' => $message]);
 
 	}
 }

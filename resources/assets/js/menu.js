@@ -1,9 +1,8 @@
 'use strict';
 
-
 (function ($) {
 
-	var scroller = new PerfectScrollbar('.main-menu');
+	var scroller = new PerfectScrollbar('#main-menu');
 
 	function Menu(element, options) {
 

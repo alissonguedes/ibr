@@ -2516,6 +2516,11 @@
 	box-shadow: 0 6px 20px 0 rgba(84, 110, 122, .5) !important
 }
 
+.gradient-0deg-grey-grey {
+	background: -webkit-linear-gradient(0deg, #cdcdcd 0%, #ffffff 45%);
+	background: linear-gradient(0deg, #cdcdcd 0%, #ffffff 45%);
+}
+
 .gradient-45deg-indigo-blue.gradient-shadow,
 .gradient-45deg-orange-amber.gradient-shadow {
 	box-shadow: 0 6px 20px 0 rgba(25, 118, 210, .5) !important

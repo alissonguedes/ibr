@@ -183,11 +183,11 @@ $(document).ready(function () {
             }
         }
 
-
     });
 
     // $('.collapsible').Menu();
-    $('#main-menu').Menu();
+    // $('#main-menu').Menu();
+
     $('select').formSelect();
 
     $('.input-field').each(function () {
@@ -207,9 +207,9 @@ $(document).ready(function () {
 
     var sidenav = $('.sidenav').sidenav({
         onCloseStart: () => {
-            var self = $('aside');
-            self.find('ul.submenu').removeClass('in out');
-            self.find('ul:not(.submenu)').removeClass('out').addClass('in');
+            // var self = $('aside');
+            // self.find('ul.submenu').removeClass('in out');
+            // self.find('ul:not(.submenu)').removeClass('out').addClass('in');
         }
         // }).find('li').unbind().bind('click', function (e) {
         //     e.preventDefault();
@@ -301,16 +301,41 @@ $(document).ready(function () {
     $('aside').unbind().bind('mouseleave', function () {
         var self = $(this);
 
-        var timeout = setTimeout(function () {
+        // var timeout = setTimeout(function () {
 
-            self.find('ul.submenu').removeClass('in out');
-            self.find('ul:not(.submenu)').removeClass('out').addClass('in');
+        // self.find('ul.submenu').removeClass('in out');
+        // self.find('ul:not(.submenu)').removeClass('out').addClass('in');
 
-        }, 2000);
+        // self.find('a').parents('ul:not(.out):not(#main-menu)').removeClass('in out')
+        // self.find('a.active').parents('ul').removeClass('out').addClass('in');
 
-        $(this).bind('mouseenter', function () {
-            clearTimeout(timeout);
-        });
+        var ul = self.find('.main-menu ul');
+        // for (var i in ul) {
+
+        // $(ul).each(function () {
+
+
+        //     var isIn = $(this).after().hasClass('in');
+        //     var isOut = $(this).before().hasClass('out');
+
+        //     console.log(isIn);
+
+        //     if (isOut) {
+        //         $(this).removeClass('out').addClass('in');
+        //     } else {
+        //         $(this).removeClass('in');
+        //     }
+
+        // })
+
+        // }
+
+
+        // }, 2000);
+
+        // $(this).bind('mouseenter', function () {
+        //     clearTimeout(timeout);
+        // });
 
     });
 
