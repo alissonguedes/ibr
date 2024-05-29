@@ -5,17 +5,21 @@
 
 	<x-slot:body>
 
-		{{-- <table class="dataTable">
-			<thead>
-				<tr>
-					<th class="center-align">Ícone</th>
-					<th class="center-align">Título</th>
-					<th class="center-align">Status</th>
-				</tr>
-			</thead>
-		</table> --}}
-
-		@include('admin.categorias.includes.listar_categorias')
+		@if (isset($categorias) && $categorias->count() > 0)
+			<div class="row">
+				<div class="col s8">
+					{{-- <div class="dd"> --}}
+					@include('admin.categorias.includes.listar_categorias')
+					{{-- </div> --}}
+				</div>
+			</div>
+		@else
+			<div class="row">
+				<div class="col s12">
+					Nenhum categoria cadastrado.
+				</div>
+			</div>
+		@endif
 
 	</x-slot:body>
 
@@ -28,7 +32,6 @@
 				console.log(list.nestable('serialize'));
 			};
 
-			// activate Nestable for list 1
 			$('.dd').nestable({
 				group: 1
 			}).on('change', updateOutput);

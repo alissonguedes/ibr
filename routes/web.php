@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\A_IbrController as A_Ibr;
 use App\Http\Controllers\Admin\BannersController as Banners;
 use App\Http\Controllers\Admin\CategoriasController as Categorias;
 use App\Http\Controllers\Admin\CultosController as Cultos;
+use App\Http\Controllers\Admin\EventosController as Eventos;
+use App\Http\Controllers\Admin\MinisteriosController as Ministerios;
 use App\Http\Controllers\Admin\PastoresController as Pastores;
 
 // Main Controllers
@@ -39,6 +41,7 @@ Route::prefix('/')->group(function () {
 Route::get('/imagem/banner/{file_id}', [Banners::class, 'show'])->name('home.banners.show-image');
 Route::get('/imagem/post/{file_id}', [Apresentacao::class, 'show'])->name('home.apresentacao.show-image');
 Route::get('/imagem/pastor/{file_id}', [Pastores::class, 'show'])->name('home.pastores.show-image');
+Route::get('/imagem/ministerio/{file_id}', [Ministerios::class, 'show'])->name('home.ministerios.show-image');
 Route::get('/imagem/a-ibr/{file_id}', [A_Ibr::class, 'show'])->name('home.a-ibr.show-image');
 // Route::get('/imagem/categoria/{file_id}', [Categorias::class, 'show'])->name('admin.a-ibr.show-image');
 
@@ -106,26 +109,26 @@ Route::middleware([
 	/** Ministérios */
 	Route::prefix('/ministerios')->group(function () {
 
-		Route::get('/', [Pastores::class, 'index'])->name('admin.paginas.ministerios.index');
-		Route::get('/{search}', [Pastores::class, 'search'])->name('admin.paginas.ministerios.search');
-		Route::get('/id/{id}', [Pastores::class, 'create'])->name('admin.paginas.ministerios.edit');
-		Route::post('/', [Pastores::class, 'store'])->name('admin.paginas.ministerios.post');
-		Route::put('/', [Pastores::class, 'store'])->name('admin.paginas.ministerios.post');
-		Route::delete('/', [Pastores::class, 'destroy'])->name('admin.paginas.ministerios.delete');
+		Route::get('/', [Ministerios::class, 'index'])->name('admin.paginas.ministerios.index');
+		Route::get('/{search}', [Ministerios::class, 'search'])->name('admin.paginas.ministerios.search');
+		Route::get('/id/{id}', [Ministerios::class, 'create'])->name('admin.paginas.ministerios.edit');
+		Route::post('/', [Ministerios::class, 'store'])->name('admin.paginas.ministerios.post');
+		Route::put('/', [Ministerios::class, 'store'])->name('admin.paginas.ministerios.post');
+		Route::delete('/', [Ministerios::class, 'destroy'])->name('admin.paginas.ministerios.delete');
 
 	});
 
-	// /** Pastores */
-	// Route::prefix('/pastores')->group(function () {
+	/** Pastores */
+	Route::prefix('/corpo-pastoral')->group(function () {
 
-	// 	Route::get('/', [Pastores::class, 'index'])->name('admin.paginas.home.pastores.index');
-	// 	Route::get('/{search}', [Pastores::class, 'search'])->name('admin.paginas.home.pastores.search');
-	// 	Route::get('/id/{id}', [Pastores::class, 'create'])->name('admin.paginas.home.pastores.edit');
-	// 	Route::post('/', [Pastores::class, 'store'])->name('admin.paginas.home.pastores.post');
-	// 	Route::put('/', [Pastores::class, 'store'])->name('admin.paginas.home.pastores.post');
-	// 	Route::delete('/', [Pastores::class, 'destroy'])->name('admin.paginas.home.pastores.delete');
+		Route::get('/', [Pastores::class, 'index'])->name('admin.paginas.home.pastores.index');
+		Route::get('/{search}', [Pastores::class, 'search'])->name('admin.paginas.home.pastores.search');
+		Route::get('/id/{id}', [Pastores::class, 'create'])->name('admin.paginas.home.pastores.edit');
+		Route::post('/', [Pastores::class, 'store'])->name('admin.paginas.home.pastores.post');
+		Route::put('/', [Pastores::class, 'store'])->name('admin.paginas.home.pastores.post');
+		Route::delete('/', [Pastores::class, 'destroy'])->name('admin.paginas.home.pastores.delete');
 
-	// });
+	});
 
 	/** Cultos */
 	Route::prefix('/cultos')->group(function () {
@@ -142,12 +145,12 @@ Route::middleware([
 	/** Eventos */
 	Route::prefix('/eventos')->group(function () {
 
-		Route::get('/', [Pastores::class, 'index'])->name('admin.paginas.eventos.index');
-		Route::get('/{search}', [Pastores::class, 'search'])->name('admin.paginas.eventos.search');
-		Route::get('/id/{id}', [Pastores::class, 'create'])->name('admin.paginas.eventos.edit');
-		Route::post('/', [Pastores::class, 'store'])->name('admin.paginas.eventos.post');
-		Route::put('/', [Pastores::class, 'store'])->name('admin.paginas.eventos.post');
-		Route::delete('/', [Pastores::class, 'destroy'])->name('admin.paginas.eventos.delete');
+		Route::get('/', [Eventos::class, 'index'])->name('admin.paginas.eventos.index');
+		Route::get('/{search}', [Eventos::class, 'search'])->name('admin.paginas.eventos.search');
+		Route::get('/id/{id}', [Eventos::class, 'create'])->name('admin.paginas.eventos.edit');
+		Route::post('/', [Eventos::class, 'store'])->name('admin.paginas.eventos.post');
+		Route::put('/', [Eventos::class, 'store'])->name('admin.paginas.eventos.post');
+		Route::delete('/', [Eventos::class, 'destroy'])->name('admin.paginas.eventos.delete');
 
 	});
 

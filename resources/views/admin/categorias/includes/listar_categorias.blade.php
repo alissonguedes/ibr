@@ -1,49 +1,81 @@
-{{-- @if (isset($categorias) && $categorias->count() > 0)
-	<div class="dd">
-		<ol class="dd-list">
-			@foreach ($categorias as $categoria)
-				<li class="dd-item" data-id="1">
-					<div class="dd-handle">{{ $categoria->titulo }}</div>
-
-				</li>
-			@endforeach
-		</ol>
-	</div>
-@else
-	<div class="row">
-		<div class="col s12">
-			Nenhum categoria cadastrado.
-		</div>
-	</div>
-@endif --}}
-
-<div class="dd">
+@foreach ($categorias as $categoria)
 	<ol class="dd-list">
-		<li class="dd-item" data-id="13">
-			<div class="dd-handle"></div>
-			<div class="dd-content">Item 13</div>
-		</li>
-		<li class="dd-item" data-id="14">
-			<div class="dd-handle"></div>
-			<div class="dd-content">Item 14</div>
-		</li>
-		<li class="dd-item" data-id="15">
-			<div class="dd-handle"></div>
-			<div class="dd-content">Item 15</div>
-			<ol class="dd-list">
-				<li class="dd-item" data-id="16">
-					<div class="dd-handle"></div>
-					<div class="dd-content">Item 16</div>
-				</li>
-				<li class="dd-item" data-id="17">
-					<div class="dd-handle"></div>
-					<div class="dd-content">Item 17</div>
-				</li>
-				<li class="dd-item" data-id="18">
-					<div class="dd-handle"></div>
-					<div class="dd-content">Item 18</div>
-				</li>
-			</ol>
+		<li class="dd-item" data-id="{{ $categoria->id }}">
+			{{-- <div class="dd-handle"></div> --}}
+			<div class="dd-content">
+				{{ $categoria->titulo }}
+				<button type="button" class="icon-background edit btn btn-small btn-floating waves-effect right gradient-45deg-green-light-green" data-href="{{ route('admin.categorias.edit', $categoria->id) }}">
+					<i class="material-symbols-outlined">edit</i>
+				</button>
+			</div>
+			@php
+				$categorias = new App\Models\Admin\CategoriaModel();
+				$parent['categorias'] = $categorias
+				    ->select('id', 'titulo')
+				    ->from('tb_categoria')
+				    ->whereNotNull('id_parent')
+				    ->where('id_parent', $categoria->id)
+				    ->get();
+			@endphp
+			@if ($parent['categorias']->count())
+				{{ view('admin.categorias.includes.listar_categorias', $parent) }}
+			@endif
 		</li>
 	</ol>
+@endforeach
+
+{{--
+<div class="dd">
+<ol class="dd-list">
+<li class="dd-item" data-id="13">
+<div class="dd-handle"></div>
+<div class="dd-content">Item 13
+<button type="button" class="btn btn-small btn-floating edit waves-effect right">
+<i class="material-symbols-outlined">edit</i>
+</button>
 </div>
+</li>
+<li class="dd-item" data-id="14">
+<div class="dd-handle"></div>
+<div class="dd-content">Item 14
+<button type="button" class="btn btn-small btn-floating edit waves-effect right">
+<i class="material-symbols-outlined">edit</i>
+</button>
+</div>
+</li>
+<li class="dd-item" data-id="15">
+<div class="dd-handle"></div>
+<div class="dd-content">Item 15
+<button type="button" class="btn btn-small btn-floating edit waves-effect right">
+<i class="material-symbols-outlined">edit</i>
+</button>
+</div>
+<ol class="dd-list">
+<li class="dd-item" data-id="16">
+<div class="dd-handle"></div>
+<div class="dd-content">Item 16
+<button type="button" class="btn btn-small btn-floating edit waves-effect right">
+<i class="material-symbols-outlined">edit</i>
+</button>
+</div>
+</li>
+<li class="dd-item" data-id="17">
+<div class="dd-handle"></div>
+<div class="dd-content">Item 17
+<button type="button" class="btn btn-small btn-floating edit waves-effect right">
+<i class="material-symbols-outlined">edit</i>
+</button>
+</div>
+</li>
+<li class="dd-item" data-id="18">
+<div class="dd-handle"></div>
+<div class="dd-content">Item 18
+<button type="button" class="btn btn-small btn-floating edit waves-effect right">
+<i class="material-symbols-outlined">edit</i>
+</button>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div> --}}

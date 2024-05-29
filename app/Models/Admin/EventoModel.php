@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * A classe extende de PostModel, pois opera na tabela `tb_post`
  */
-class CultoModel extends PostModel
+class EventoModel extends PostModel
 {
 
 	use HasFactory;
 
-	// protected $table = 'tb_banner';
+	// protected $table = 'tb_evento';
 
 	protected $fillable = [
 		'id_parent',
@@ -49,9 +49,9 @@ class CultoModel extends PostModel
 		'status',
 	];
 
-	public function getAllCultos()
+	public function getAllEventos()
 	{
-		$container = 'cultos';
+		$container = 'eventos';
 		return $this->where(['tipo' => 'post'])->whereIn('id_parent', function ($query) use ($container) {
 			$query->select('id')->from('tb_post')->where('titulo_slug', $container);
 		})->get();

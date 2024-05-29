@@ -13,12 +13,12 @@
 	<li><x-nav-link :href="route('admin.paginas.eventos.index')" :active="request()->routeIs('admin.paginas.eventos.index') || request()->routeIs('admin.paginas.eventos.edit')"> <i class="material-symbols-outlined">event</i> Eventos </x-nav-link></li>
 </ul>
 
-<ul id="home-page" class="{{ request()->routeIs('admin.paginas.home.banners.index') || request()->routeIs('admin.paginas.home.banners.edit') || request()->routeIs('admin.paginas.home.apresentacao.index') || request()->routeIs('admin.paginas.ministerios.index') || request()->routeIs('admin.paginas.ministerios.edit') ? 'in' : 'submenu' }} scroller">
+<ul id="home-page" class="{{ request()->routeIs('admin.paginas.home.banners.index') || request()->routeIs('admin.paginas.home.banners.edit') || request()->routeIs('admin.paginas.home.apresentacao.index') || request()->routeIs('admin.paginas.home.pastores.index') || request()->routeIs('admin.paginas.home.pastores.edit') ? 'in' : 'submenu' }} scroller">
 	<li><x-nav-link href="javascript:void(0);" class="menu-close" data-id="#paginas"> Página Inicial </x-nav-link></li>
 	<li>
 		<x-nav-link :href="route('admin.paginas.home.banners.index')" :active="request()->routeIs('admin.paginas.home.banners.index') || request()->routeIs('admin.paginas.home.banners.edit')">
 			<i class="material-symbols-outlined">wallpaper_slideshow</i>
-			Banners
+			banners
 		</x-nav-link>
 	</li>
 	<li>
@@ -28,7 +28,7 @@
 		</x-nav-link>
 	</li>
 	<li>
-		<x-nav-link :href="route('admin.paginas.ministerios.index')" :active="request()->routeIs('admin.paginas.ministerios.index') || request()->routeIs('admin.paginas.ministerios.edit')">
+		<x-nav-link :href="route('admin.paginas.home.pastores.index')" :active="request()->routeIs('admin.paginas.home.pastores.index') || request()->routeIs('admin.paginas.ministerios.edit')">
 			<i class="material-symbols-outlined">group</i>
 			Corpo Pastoral
 		</x-nav-link>

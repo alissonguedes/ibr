@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CultoRequest extends FormRequest
+class MinisterioRequest extends FormRequest
 {
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -24,13 +24,7 @@ class CultoRequest extends FormRequest
 	{
 
 		$rules = [
-			'titulo' => [
-				'required',
-			],
-			'url'    => 'required|url',
-			'data'   => 'required',
-			// 'subtitulo' => ['required'],
-			// 'conteudo'  => ['required'],
+			'titulo' => ['required'],
 		];
 
 		if (!isset($this->id)) {

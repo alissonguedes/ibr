@@ -3,6 +3,7 @@
 @php
 	if (request('id')):
 	    $id = $row->id;
+	    $id_parent = $row->id_parent;
 	    $titulo = $row->titulo;
 	    $titulo_slug = $row->titulo_slug;
 	    $descricao = $row->descricao;
@@ -45,6 +46,37 @@
 					<div class="input-field amber-text mb-2 @error('titulo_slug') error @enderror">
 						<label for="titulo_slug">Rótulo do campo</label>
 						<x-text-input type="text" name="titulo_slug" id="titulo_slug" :value="old('titulo_slug', $titulo_slug ?? null)" />
+						@error('titulo_slug')
+							<small class="error">{{ $message }}</small>
+						@enderror
+					</div>
+				</div>
+			</div>
+			<!-- END título -->
+
+			<!-- BEGIN título -->
+			<div class="row">
+				<div class="col s12">
+					<div class="input-field amber-text mb-2 @error('titulo_slug') error @enderror">
+						<label for="titulo_slug">Categoria</label>
+						@php
+							$cats = new App\Models\Admin\CategoriaModel();
+							if (!isset($id)) {
+							    $cats = $cats->all();
+							} else {
+							    $cats = $cats->where('id', '<>', $id)->get();
+							}
+						@endphp
+
+						<select name="id_parent" id="id_parent">
+							<option value="" selected>Sem categoria</option>
+							@if ($cats->count() > 0)
+								@foreach ($cats as $cat)
+									<option value="{{ $cat->id }}" @selected(isset($id_parent) && $id_parent === $cat->id)>{{ $cat->titulo }}</option>
+								@endforeach
+							@endif
+						</select>
+
 						@error('titulo_slug')
 							<small class="error">{{ $message }}</small>
 						@enderror
