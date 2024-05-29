@@ -7,51 +7,48 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * A classe extende de PostModel, pois opera na tabela `tb_post`
  */
-class CategoriaModel extends PostModel {
+class CategoriaModel extends Model {
 
 	use HasFactory;
 
-	// protected $table = 'tb_categoria';
+	protected $table = 'tb_categoria';
 
 	protected $fillable = [
 		'id_parent',
-		'tipo',
-		'autor',
 		'titulo',
 		'titulo_slug',
-		'subtitulo',
-		'conteudo',
-		'tags',
-		'url',
-		'hits',
-		'ordem',
-		'publish_up',
-		'publish_down',
-		'id_file',
-		'id_chunk',
-		'filedata',
-		'key',
-		'signature',
-		'imagem',
-		'imgname',
-		'imgtype',
-		'imgsize',
-		'autor',
-		'ordem',
-		'tags',
-		'hits',
-		'url',
-		'publicar_ini',
-		'publicar_fim',
-		'created_at',
-		'updated_at',
+		'descricao',
+		'icone',
+		'color',
+		'text_color',
 		'status',
 	];
 
-	public function getAllCategorias($container = 'slideshow-container') {
-		return $this->where(['tipo' => 'categoria'])->where('id_parent', function ($query) use ($container) {
-			$query->select('id')->from('tb_post')->where('titulo_slug', $container);
-		})->get();
+	public function insert_or_update($request) {
+
+		$columns = [];
+		$data    = request()->all();
+
+		$columns['id_parent']   = $data['id_parent'] ?? $id_parent->id ?? null;
+		$columns['titulo']      = $data['titulo'];
+		$columns['titulo_slug'] = $data['titulo_slug'] ?? replace($data['titulo']);
+		$columns['descricao']   = $data['descricao'] ?? null;
+		$columns['icone']       = $data['icone'] ?? null;
+		$columns['color']       = $data['color'] ?? null;
+		$columns['text_color']  = $data['text_color'] ?? null;
+		$columns['status']      = $data['status'] ?? '0';
+		$where                  = !isset($data['id']) ? [
+			'titulo_slug' => $data['titulo_slug'],
+		] : ['id' => $data['id']];
+
+		$this->updateOrCreate($where, $columns);
+
+		return true;
+
+	}
+
+	public function getAllCategorias() {
+		return $this->all();
 	}
 
 	public function getActiveCategorias($container = 'slideshow-container') {
@@ -59,15 +56,23 @@ class CategoriaModel extends PostModel {
 	}
 
 	public function getCategoria($data) {
-		return $this->getOrWhere(['id', $data], ['titulo_slug', $data])->where('tipo', 'categoria')->first();
+		return $this->getOrWhere(['id', $data], ['titulo_slug', $data])->first();
 	}
 
 	public function getTotalCategorias() {
-		return $this->where('tipo', 'categoria')->whereNot('id_parent', null)->count();
+		return $this->count();
 	}
 
 	public function search($search, $tipo = 'categoria', $both = true) {
 		return parent::search($search, $tipo, $both);
+	}
+
+	public static function remove($id) {
+
+		self::where('id', $id)->delete();
+
+		return true;
+
 	}
 
 }

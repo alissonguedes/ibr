@@ -44,7 +44,7 @@
 			<div class="row">
 				<div class="col s12">
 					<div class="input-field amber-text mb-2 @error('nome') error @enderror">
-						<label id="nome">Nome</label>
+						<label for="nome">Nome</label>
 						<x-text-input type="text" name="nome" id="nome" :value="old('nome', $nome ?? null)" autofocus="autofocus" />
 						@error('nome')
 							<small class="error">{{ $message }}</small>

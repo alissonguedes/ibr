@@ -10,18 +10,22 @@ return new class extends Migration {
 	 */
 	public function up(): void {
 
+		Schema::create('ibr_site.tb_categoria', function (Blueprint $table) {
+			$table->id();
+			$table->unsignedBigInteger('id_parent')->nullable()->default(null);
+			$table->string('titulo', 100);
+			$table->string('titulo_slug', 100);
+			$table->string('descricao', 255)->nullable()->default(null);
+			$table->string('icone', 50)->nullable()->default(null);
+			$table->string('color', 50)->nullable()->default('#ffffff');
+			$table->string('text_color', 50)->nullable()->default('#000000');
+			$table->integer('ordem')->default(0);
+			$table->dateTime('created_at');
+			$table->dateTime('updated_at');
+			$table->string('status');
+		});
+
 		Schema::create('ibr_site.tb_post', function (Blueprint $table) {
-			// $table->id();
-			// $table->string('tipo', 100);
-			// $table->bigInteger('autor');
-			// $table->string('titulo', 255);
-			// $table->string('titulo_slug', 255);
-			// $table->integer('ordem')->default(0);
-			// $table->string('url', 255)->nullable()->default(null);
-			// $table->string('tags', 255)->nullable()->default(null);
-			// $table->dateTime('created_at');
-			// $table->dateTime('updated_at');
-			// $table->string('status');
 			$table->id();
 			$table->bigInteger('id_parent')->nullable()->default(null);
 			$table->string('tipo', 100)->default('post')->comment('Determina qual é o tipo de postagem');
@@ -48,6 +52,7 @@ return new class extends Migration {
 	 * Reverse the migrations.
 	 */
 	public function down(): void {
+		Schema::dropIfExists('ibr_site.tb_categoria');
 		Schema::dropIfExists('ibr_site.tb_post');
 
 	}

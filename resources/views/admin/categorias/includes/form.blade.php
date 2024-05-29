@@ -23,47 +23,13 @@
 
 	<div class="col row">
 
-		<div class="col s12 l3">
-			<div class="row">
-				<div class="col s12">
-					@if (request('id'))
-						<img src="{{ $imagem ?? asset('assets/img/slides/img2.jpg') }}" class="responsive-img materialboxed" alt="">
-					@endif
-				</div>
-			</div>
-			<div class="row">
-				<div class="col s12">
-					<small>A imagem deve ter no máximo 1920x1080</small>
-				</div>
-			</div>
-		</div>
-
 		<div class="col s12 l9">
-
-			@if (Auth::check() && Auth::id() === 1)
-				<!-- BEGIN Tipo Post -->
-				<div class="row">
-					<div class="col s12">
-						<div class="input-field amber-text mb-2 @error('titulo') error @enderror">
-							<label id="titulo">Tipo da postagem</label>
-							<input type="text" name="tipo" value="banner">
-							{{-- <x-text-input type="text" name="titulo" id="titulo" :value="old('titulo', $titulo ?? null)" autofocus="autofocus" /> --}}
-							@error('titulo')
-								<small class="error">{{ $message }}</small>
-							@enderror
-						</div>
-					</div>
-				</div>
-				<!-- END Tipo Post -->
-			@else
-				<input type="text" name="tipo" value="banner">
-			@endif
 
 			<!-- BEGIN título -->
 			<div class="row">
 				<div class="col s12">
 					<div class="input-field amber-text mb-2 @error('titulo') error @enderror">
-						<label id="titulo">Título</label>
+						<label for="titulo">Título</label>
 						<x-text-input type="text" name="titulo" id="titulo" :value="old('titulo', $titulo ?? null)" autofocus="autofocus" />
 						@error('titulo')
 							<small class="error">{{ $message }}</small>
@@ -72,23 +38,20 @@
 				</div>
 			</div>
 			<!-- END título -->
-			@if (Auth::check() && Auth::id() === 1)
-				<!-- BEGIN título -->
-				<div class="row">
-					<div class="col s12">
-						<div class="input-field amber-text mb-2 @error('titulo') error @enderror">
-							<label id="titulo">Rótulo do campo</label>
-							<x-text-input type="text" name="titulo_slug" id="titulo_slug" :value="old('titulo_slug', $titulo_slug ?? null)" />
-							@error('titulo')
-								<small class="error">{{ $message }}</small>
-							@enderror
-						</div>
+
+			<!-- BEGIN título -->
+			<div class="row">
+				<div class="col s12">
+					<div class="input-field amber-text mb-2 @error('titulo_slug') error @enderror">
+						<label for="titulo_slug">Rótulo do campo</label>
+						<x-text-input type="text" name="titulo_slug" id="titulo_slug" :value="old('titulo_slug', $titulo_slug ?? null)" />
+						@error('titulo_slug')
+							<small class="error">{{ $message }}</small>
+						@enderror
 					</div>
 				</div>
-				<!-- END título -->
-			@else
-				<input type="hidden" name="titulo_slug" value="{{ $titulo_slug }}">
-			@endif;
+			</div>
+			<!-- END título -->
 
 			<!-- BEGIN descrição -->
 			<div class="row">
@@ -100,39 +63,6 @@
 				</div>
 			</div>
 			<!-- END descrição -->
-
-			<!-- BEGIN Link -->
-			<div class="row">
-				<div class="col s12">
-					<div class="input-field amber-text mb-2 @error('url') error @enderror">
-						<label for="url">Link</label>
-						<x-text-input type="url" name="url" id="url" :value="old('url', $url ?? null)" />
-						@error('url')
-							<small class="error">{{ $message }}</small>
-						@enderror
-					</div>
-				</div>
-			</div>
-			<!-- END Link -->
-
-			<!-- BEGIN imagem -->
-			<div class="row">
-				<div class="col s12">
-					<div class="file-field input-field @error('imagem') error @enderror">
-						<div class="btn">
-							<span>File</span>
-							<x-text-input type="file" name="imagem" />
-						</div>
-						<div class="file-path-wrapper">
-							<x-text-input type="text" class="file-path validate" />
-						</div>
-						@error('imagem')
-							<small class="error">{{ $message }}</small>
-						@enderror
-					</div>
-				</div>
-			</div>
-			<!-- END imagem -->
 
 			<!-- BEGIN status -->
 			<div class="row">

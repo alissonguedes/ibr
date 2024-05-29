@@ -48,31 +48,18 @@ class CategoriasController extends Controller {
 	/**
 	 * Store a newly created resource in storage.
 	 */
-	public function store(Request $request, CategoriaModel $categoria) {
+	public function store(CategoriaRequest $request, CategoriaModel $categoria) {
 
-		$count = $categoria->getTotalCategorias();
+		if ($categoria->insert_or_update($request)) {
 
-		if ($request->_method === 'put' || $count < config('site.categorias_limit')) {
-
-			$requestCategoria = new CategoriaRequest();
-			$request->validate($requestCategoria->rules($request));
-
-			$message = $categoria->insert_or_update($request);
-
-			if ($message) {
-				if ($request->_method === 'put') {
-					$message = 'Categoria atualizado com sucesso!';
-				} else {
-					$message = 'Categoria cadastrado com sucesso!';
-				}
+			if ($request->_method === 'put') {
+				$message = 'Categoria atualizado com sucesso!';
 			} else {
-				$message = 'Houve um erro ao inserir os dados.';
+				$message = 'Categoria cadastrado com sucesso!';
 			}
 
 		} else {
-
-			$message = 'Não é possível adicionar mais categorias. Exclua um ou mais categorias para adicionar novos.';
-
+			$message = 'Houve um erro ao inserir os dados.';
 		}
 
 		return redirect()->route('admin.categorias.index')->with(['message' => $message]);
