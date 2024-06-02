@@ -8,12 +8,14 @@ use App\Models\Admin\FileModel;
 use App\Models\Admin\PostModel;
 use Illuminate\Http\Request;
 
-class ApresentacaoController extends Controller {
+class ApresentacaoController extends Controller
+{
 
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index(PostModel $post) {
+	public function index(PostModel $post)
+	{
 
 		$data['post'] = $post->getPost('apresentacao');
 
@@ -24,7 +26,8 @@ class ApresentacaoController extends Controller {
 	/**
 	 * Search banners
 	 */
-	public function search(Request $request, SobreModel $page) {
+	public function search(Request $request, SobreModel $page)
+	{
 
 		$data['banners'] = SobreModel::where('titulo', 'like', $request->search . '%')->get();
 
@@ -35,7 +38,8 @@ class ApresentacaoController extends Controller {
 	/**
 	 * Show the form for creating a new resource.
 	 */
-	public function create(Request $request, PostModel $page) {
+	public function create(Request $request, PostModel $page)
+	{
 
 		// $data['id']      = $request->id;
 		// $data['row']     = $page->getPost('id', $request->id);
@@ -48,7 +52,8 @@ class ApresentacaoController extends Controller {
 	/**
 	 * Store a newly created resource in storage.
 	 */
-	public function store(ApresentacaoRequest $request, PostModel $page) {
+	public function store(ApresentacaoRequest $request, PostModel $page)
+	{
 
 		$page->insert_or_update($request);
 
@@ -65,7 +70,8 @@ class ApresentacaoController extends Controller {
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(Request $request, FileModel $file, int $file_id) {
+	public function show(Request $request, FileModel $file, int $file_id)
+	{
 
 		return $file->showFile($file_id, 'post');
 
@@ -74,7 +80,8 @@ class ApresentacaoController extends Controller {
 	/**
 	 * Remove the specified resource from storage.
 	 */
-	public function destroy(Request $request, PostModel $page) {
+	public function destroy(Request $request, PostModel $page)
+	{
 
 		return $page->remove($request->id);
 

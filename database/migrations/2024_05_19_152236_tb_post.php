@@ -30,10 +30,11 @@ return new class extends Migration
 		Schema::create('ibr_site.tb_post', function (Blueprint $table) {
 			$table->id();
 			$table->bigInteger('id_parent')->nullable()->default(null);
-			$table->string('tipo', 100)->default('post')->comment('Determina qual é o tipo de postagem');
 			$table->string('autor');
 			$table->string('titulo');
 			$table->string('titulo_slug');
+			$table->string('tipo', 100)->default('post')->comment('Determina qual é o tipo de postagem');
+			$table->string('categoria', 100)->default('post')->comment('Determina qual é a categoria das postagem');
 			$table->string('subtitulo', 255)->nullable();
 			$table->longText('conteudo')->nullable();
 			$table->dateTime('data')->nullable()->default(null);
@@ -47,6 +48,24 @@ return new class extends Migration
 			$table->dateTime('updated_at')->nullable()->default(null);
 			$table->enum('status', ['0', '1'])->default('1');
 		});
+
+		// Schema::create('ibr_site.tb_video', function (Blueprint $table) {
+		// 	$table->id();
+		// 	$table->unsignedBigInteger('id_parent')->nullable()->default(null);
+		// 	$table->string('titulo', 100);
+		// 	$table->string('titulo_slug', 100);
+		// 	$table->string('descricao', 255)->nullable()->default(null);
+		// 	$table->dateTime('data')->nullable()->default(null);
+		// 	$table->string('tags')->nullable()->default(null);
+		// 	$table->string('url')->nullable()->default(null);
+		// 	$table->integer('hits')->default(0);
+		// 	$table->integer('ordem')->default(0);
+		// 	$table->dateTime('publish_up')->nullable()->default(null);
+		// 	$table->dateTime('publish_down')->nullable()->default(null);
+		// 	$table->dateTime('created_at');
+		// 	$table->dateTime('updated_at')->nullable()->default(null);
+		// 	$table->enum('status', ['0', '1'])->default('1');
+		// });
 
 	}
 

@@ -6,86 +6,11 @@
 
 		{!! slides('slideshow-container') !!}
 
-		{!! post('main.home:apresentacao') !!}
+		{!! post('main.home:apresentacao', 1) !!}
 
-		<!--palavra-->
-		<section class="area_palavra">
+		{!! post('main.home:cultos', 3) !!}
 
-			<div class="title_section">ÚLTIMOS CULTOS</div>
-			<div class="content">
-				<!--conj palavra-->
-				<a href="culto_page.php">
-					<div class="conj_palavra">
-						<div class="img_palavra"><img src="{{ asset('assets/img/palavra/001.jpg') }}" class="img_cem"></div>
-						<div class="datapastor">
-							<div class="data">
-								<div class="icon_p"><img src="{{ asset('assets/img/icon_data.jpg') }}" class="img_cem"></div>
-								<div class="text_p">16 de outubro de 2023</div>
-							</div>
-							<div class="pastor">
-								<div class="icon_p"><img src="{{ asset('assets/img/icon_pastor.jpg') }}" class="img_cem"></div>
-								<div class="text_p">Pastor Walber</div>
-							</div>
-						</div>
-						<div class="title_palavra">Disciplina na Igreja - Parte I</div>
-						<div class="resumo_palavra">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-							magna massa...
-						</div>
-					</div>
-				</a>
-
-				<!--conj palavra-->
-				<a href="culto_page.php">
-					<div class="conj_palavra">
-						<div class="img_palavra"><img src="{{ asset('assets/img/palavra/001.jpg') }}" class="img_cem"></div>
-						<div class="datapastor">
-							<div class="data">
-								<div class="icon_p"><img src="{{ asset('assets/img/icon_data.jpg') }}" class="img_cem"></div>
-								<div class="text_p">16 de outubro de 2023</div>
-							</div>
-							<div class="pastor">
-								<div class="icon_p"><img src="{{ asset('assets/img/icon_pastor.jpg') }}" class="img_cem"></div>
-								<div class="text_p">Pastor Walber</div>
-							</div>
-						</div>
-						<div class="title_palavra">Disciplina na Igreja - Parte I</div>
-						<div class="resumo_palavra">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-							magna massa...
-						</div>
-					</div>
-				</a>
-
-				<!--conj palavra-->
-				<a href="culto_page.php">
-					<div class="conj_palavra">
-						<div class="img_palavra"><img src="{{ asset('assets/img/palavra/001.jpg') }}" class="img_cem"></div>
-						<div class="datapastor">
-							<div class="data">
-								<div class="icon_p"><img src="{{ asset('assets/img/icon_data.jpg') }}" class="img_cem"></div>
-								<div class="text_p">16 de outubro de 2023</div>
-							</div>
-							<div class="pastor">
-								<div class="icon_p"><img src="{{ asset('assets/img/icon_pastor.jpg') }}" class="img_cem">
-								</div>
-								<div class="text_p">Pastor Walber</div>
-							</div>
-						</div>
-						<div class="title_palavra">Disciplina na Igreja - Parte I</div>
-						<div class="resumo_palavra">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-							magna massa...
-						</div>
-					</div>
-				</a>
-
-			</div>
-
-			<a href="cultos.php">
-				<div class="bt_ver_mais">ver mais</div>
-			</a>
-
-		</section>
-
-		{!! post('main.home:pastores', 'tb_pastor') !!}
+		{!! post('main.home:pastores', 6, ['table' => 'tb_pastor']) !!}
 
 		<!--eventos-->
 		<section class="eventos">

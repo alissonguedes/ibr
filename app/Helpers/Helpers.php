@@ -9,7 +9,8 @@ use App\Models\Model;
  */
 if (!function_exists('replace')) {
 
-	function replace($string, $find = ' ', $replace = '-', $to_lower = true) {
+	function replace($string, $find = ' ', $replace = '-', $to_lower = true)
+	{
 
 		$args = func_get_args();
 
@@ -101,7 +102,8 @@ if (!function_exists('replace')) {
 
 if (!function_exists('lang')) {
 
-	function lang($return_id = false) {
+	function lang($return_id = false)
+	{
 
 		$sigla = isset($_COOKIE['idioma']) ? $_COOKIE['idioma'] : config('site.language');
 
@@ -126,7 +128,8 @@ if (!function_exists('lang')) {
 
 if (!function_exists('getMenu')) {
 
-	function getMenu($local, $id = null, $path = null) {
+	function getMenu($local, $id = null, $path = null)
+	{
 
 		$model = new Model();
 		$model->setConnection(env('DB_SYSTEM_CONNECTION'));
@@ -335,7 +338,8 @@ if (!function_exists('getMenu')) {
 
 if (!function_exists('make_menu')) {
 
-	function make_menu($local, $path = null, $id = null, $s = null) {
+	function make_menu($local, $path = null, $id = null, $s = null)
+	{
 
 		if (!empty($attributes)) {
 			foreach ($attributes as $ind => $val) {
@@ -359,7 +363,8 @@ if (!function_exists('make_menu')) {
 
 if (!function_exists('base_url')) {
 
-	function base_url() {
+	function base_url()
+	{
 
 		$path     = '/';
 		$base_url = explode('/', request()->getRequestUri());
@@ -385,7 +390,8 @@ if (!function_exists('base_url')) {
 
 if (!function_exists('site_url')) {
 
-	function site_url() {
+	function site_url()
+	{
 
 		return url('/') . '/';
 
@@ -395,16 +401,19 @@ if (!function_exists('site_url')) {
 
 if (!function_exists('post')) {
 
-	function post($section) {
+	function post($section, $limit = 1, $options = [])
+	{
 
 		$view    = explode(':', $section);
 		$section = $view[1];
 		$post    = new App\Models\Admin\PostModel();
+		$posts   = $post->getAllActivePosts($section, $limit, $options);
+		// $post    = $post->getActivePost($section);
 
-		$post = $post->getActivePost($section);
+		// dump($posts, $section, $limit, $options);
 
 		if (!empty($post)) {
-			$data['post'] = $post;
+			$data['post'] = $posts;
 			return view($view[0] . '.' . $section, $data);
 		}
 
@@ -416,7 +425,8 @@ if (!function_exists('post')) {
 
 if (!function_exists('slides')) {
 
-	function slides($section = 'slideshow-container', $status = '1') {
+	function slides($section = 'slideshow-container', $status = '1')
+	{
 
 		$slides  = '';
 		$banner  = new App\Models\Admin\BannerModel();

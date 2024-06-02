@@ -699,6 +699,12 @@ html [type=button] {
 	}
 }
 
+
+.card {
+	position: relative;
+	overflow: hidden;
+}
+
 #card-stats .card-content,
 .chart-revenue,
 .icon-bg-color,

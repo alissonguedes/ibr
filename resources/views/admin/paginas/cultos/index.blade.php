@@ -11,7 +11,7 @@
 					<div class="col s12 m6 l4">
 						<div class="card border-radius-20">
 
-							<div class="card-image">
+							<div class="card-image" style="height: 300px; overflow: hidden;">
 								@if (!$post->status)
 									<i class="inactive material-symbols-outlined"> visibility_off </i>
 								@endif
@@ -19,13 +19,13 @@
 									<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
 									<x-button class="icon-background edit" :data-href="route('admin.paginas.cultos.edit', $post->id)"> edit </x-button>
 								</div>
-								<img src="{{ route('home.apresentacao.show-image', $post->id) . '?action=preview' }}" height="210">
+								<img src="{{ route('home.posts.show-image', $post->id) . '?action=preview' }}">
 							</div>
 
 							<div class="card-content center-align gradient-0deg-grey-grey">
 								<h5 class="card-title bold mb-6 mt-0">{{ $post->titulo }}</h5>
 								<small class="grey-text text-darken-3">26/05/2024</small>
-								<p class="bold black-text mt-6">Pr. Walber</p>
+								<p class="bold black-text mt-6">{{ $post->subtitulo }}</p>
 							</div>
 
 							<div class="card-reveal red darken-4 white-text">

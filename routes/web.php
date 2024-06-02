@@ -1,7 +1,6 @@
 <?php
 
 // Admin Controllers
-use App\Http\Controllers\Admin\ApresentacaoController as Apresentacao;
 use App\Http\Controllers\Admin\A_IbrController as A_Ibr;
 use App\Http\Controllers\Admin\BannersController as Banners;
 use App\Http\Controllers\Admin\CategoriasController as Categorias;
@@ -9,6 +8,7 @@ use App\Http\Controllers\Admin\CultosController as Cultos;
 use App\Http\Controllers\Admin\EventosController as Eventos;
 use App\Http\Controllers\Admin\MinisteriosController as Ministerios;
 use App\Http\Controllers\Admin\PastoresController as Pastores;
+use App\Http\Controllers\Admin\PostsController as Posts;
 
 // Main Controllers
 use App\Http\Controllers\Main\AgendaController;
@@ -39,7 +39,7 @@ Route::prefix('/')->group(function () {
 });
 
 Route::get('/imagem/banner/{file_id}', [Banners::class, 'show'])->name('home.banners.show-image');
-Route::get('/imagem/post/{file_id}', [Apresentacao::class, 'show'])->name('home.apresentacao.show-image');
+Route::get('/imagem/post/{file_id}', [Posts::class, 'show'])->name('home.posts.show-image');
 Route::get('/imagem/pastor/{file_id}', [Pastores::class, 'show'])->name('home.pastores.show-image');
 Route::get('/imagem/ministerio/{file_id}', [Ministerios::class, 'show'])->name('home.ministerios.show-image');
 Route::get('/imagem/a-ibr/{file_id}', [A_Ibr::class, 'show'])->name('home.a-ibr.show-image');

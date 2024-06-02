@@ -1,7 +1,7 @@
 @if (isset($post))
 	<div class="apresentacao">
 		<div class="img_ap">
-			<img src="{{ route('home.apresentacao.show-image', $post->id) }}" class="img_cem" style="background-color: transparent; border-radius: 100%;">
+			<img src="{{ route('home.posts.show-image', $post->id) }}" class="img_cem" style="background-color: transparent; border-radius: 100%;">
 		</div>
 		<div class="text_ap">
 			<div class="title_ap">{{ $post->titulo }}</div>

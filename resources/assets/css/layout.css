@@ -473,12 +473,16 @@ ul {
 }
 
 .text_p {
-	float: left;
-	margin-left: 10px;
+	display: flex;
+	align-items: center;
 	font-family: 'mregular';
 	font-size: 10px;
-	width: 75%;
-	margin-top: 5px;
+	position: relative;
+	overflow: hidden;
+}
+
+.text_p i {
+	margin-right: 5px;
 }
 
 .title_palavra {
@@ -1439,13 +1443,14 @@ footer {
 	}
 
 	.text_p {
-		float: left;
+		/* float: left;
 		text-align: center;
 		margin-left: 10px;
 		font-family: 'mregular';
 		font-size: 10px;
 		width: 75%;
-		margin-top: 5px;
+		margin-top: 5px; */
+		place-content: center;
 	}
 
 	.container_index {
@@ -1804,14 +1809,14 @@ footer {
 		float: left;
 	}
 
-	.text_p {
+	/* .text_p {
 		float: left;
 		margin-left: 10px;
 		font-family: 'mregular';
 		font-size: 10px;
 		width: 75%;
 		margin-top: 5px;
-	}
+	} */
 
 	.title_palavra {
 		font-family: 'mbold';

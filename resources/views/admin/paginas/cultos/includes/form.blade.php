@@ -10,7 +10,7 @@
 	    $data_evento = $row->data_evento;
 	    $url = $row->url;
 	    $status = $row->status;
-	    $imagem = route('home.apresentacao.show-image', $id) . '?action=preview';
+	    $imagem = route('home.posts.show-image', $id) . '?action=preview';
 	endif;
 @endphp
 
@@ -48,7 +48,7 @@
 			<div class="row">
 				<div class="col s12">
 					<div class="input-field mb-2">
-						<label for="subtitulo">Subtítulo</label>
+						<label for="subtitulo">Pastor</label>
 						<x-text-input type="text" name="subtitulo" id="subtitulo" :value="old('subtitulo', $subtitulo ?? null)" />
 					</div>
 				</div>
