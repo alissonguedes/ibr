@@ -1,5 +1,12 @@
 @charset "utf-8";
 
+*,
+*:before,
+*:after {
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
 /**PADRÕES**/
 body {
 	margin: 0;
@@ -841,6 +848,10 @@ footer {
 	margin-bottom: 55px;
 }
 
+.progress {
+	margin: 0;
+	display: none;
+}
 
 /*cultos*/
 .conj_culto {

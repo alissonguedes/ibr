@@ -1,6 +1,7 @@
 <?php
 
 // Admin Controllers
+use App\Http\Controllers\Admin\ApresentacaoController as Apresentacao;
 use App\Http\Controllers\Admin\A_IbrController as A_Ibr;
 use App\Http\Controllers\Admin\BannersController as Banners;
 use App\Http\Controllers\Admin\CategoriasController as Categorias;

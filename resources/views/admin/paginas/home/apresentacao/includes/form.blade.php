@@ -6,7 +6,7 @@
 	    $conteudo = $post->conteudo;
 	    $file = new App\Models\Admin\FileModel();
 	    $status = $post->status;
-	    $imagem = route('home.apresentacao.show-image', $id) . '?action=preview';
+	    $imagem = route('home.posts.show-image', $id) . '?action=preview';
 	}
 @endphp
 

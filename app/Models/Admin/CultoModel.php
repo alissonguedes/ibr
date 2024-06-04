@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * A classe extende de PostModel, pois opera na tabela `tb_post`
  */
-class CultoModel extends PostModel
-{
+class CultoModel extends PostModel {
 
 	use HasFactory;
 
@@ -49,32 +48,27 @@ class CultoModel extends PostModel
 		'status',
 	];
 
-	public function getAllCultos()
-	{
+	public function getAllCultos() {
 		$container = 'cultos';
 		return $this->where(['tipo' => 'post'])->whereIn('id_parent', function ($query) use ($container) {
 			$query->select('id')->from('tb_post')->where('titulo_slug', $container);
 		})->get();
 	}
 
-	public function getActiveBanners($container = 'slideshow-container')
-	{
+	public function getActiveBanners($container = 'slideshow-container') {
 		return $this->getAllBanners($container)->where('status', '1');
 	}
 
-	public function getBanner($data)
-	{
+	public function getBanner($data) {
 		return $this->getOrWhere(['id', $data], ['titulo_slug', $data])->where('tipo', 'banner')->first();
 	}
 
-	public function getTotalBanners()
-	{
+	public function getTotalBanners() {
 		return $this->where('tipo', 'banner')->whereNot('id_parent', null)->count();
 	}
 
-	public function search($search, $tipo = 'banner', $both = true)
-	{
-		return parent::search($search, $tipo, $both);
+	public function search($search, $both = true, $tipo = 'cultos') {
+		return parent::search($search, $both, $tipo);
 	}
 
 }

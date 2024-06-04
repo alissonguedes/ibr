@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BannerRequest;
 use App\Models\Admin\BannerModel;
+use App\Models\Admin\CategoriaModel;
 use App\Models\Admin\FileModel;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,9 @@ class BannersController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index(BannerModel $banner) {
+	public function index(CategoriaModel $categoria, BannerModel $banner) {
 
+		// $data['categorias'] = $categoria->getAllCategorias();
 		$data['banners'] = $banner->getAllBanners();
 
 		return view('admin.paginas.home.banners.index', $data);
@@ -34,11 +36,12 @@ class BannersController extends Controller {
 	/**
 	 * Show the form for creating a new resource.
 	 */
-	public function create(Request $request, BannerModel $banner) {
+	public function create(Request $request, BannerModel $banner, CategoriaModel $categoria) {
 
-		$data['id']      = $request->id;
-		$data['row']     = $banner->getBanner($request->id);
-		$data['banners'] = $banner->getAllBanners();
+		$data['id']         = $request->id;
+		$data['row']        = $banner->getBanner($request->id);
+		$data['banners']    = $banner->getAllBanners();
+		$data['categorias'] = $categoria->getAllCategorias();
 
 		return view('admin.paginas.home.banners.index', $data);
 

@@ -45,8 +45,16 @@
 				<div class="row">
 					<div class="col s12">
 						<div class="input-field amber-text mb-2 @error('titulo') error @enderror">
-							<label id="titulo">Tipo da postagem</label>
-							<input type="text" name="tipo" value="banner">
+							<label id="categoria" class="active">Categoria da postagem</label>
+							<select name="categoria" id="categoria">
+								@if (isset($categorias))
+									<option value="" selected>Informe a categoria</option>
+									@foreach ($categorias as $item)
+									<option value="{{ $item->titulo_slug }}">{{ $item->titulo }}</option>
+									@endforeach
+								@endif
+							</select>
+							{{-- <input type="text" name="tipo" value="banner"> --}}
 							{{-- <x-text-input type="text" name="titulo" id="titulo" :value="old('titulo', $titulo ?? null)" autofocus="autofocus" /> --}}
 							@error('titulo')
 								<small class="error">{{ $message }}</small>
@@ -56,7 +64,7 @@
 				</div>
 				<!-- END Tipo Post -->
 			@else
-				<input type="text" name="tipo" value="banner">
+				<input type="hidden" name="categoria" value="banner">
 			@endif
 
 			<!-- BEGIN título -->
@@ -88,7 +96,7 @@
 				<!-- END título -->
 			@else
 				<input type="hidden" name="titulo_slug" value="{{ $titulo_slug }}">
-			@endif;
+			@endif
 
 			<!-- BEGIN descrição -->
 			<div class="row">

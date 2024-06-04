@@ -853,6 +853,7 @@ main .card-panel>.card-header~.card-content {
 
 .card-image img {
 	width: 100%;
+	height: 100%;
 }
 
 /** Form */
@@ -911,6 +912,11 @@ textarea.materialize-textarea:not([readonly]),
 .dark-theme.fr-box.fr-basic .fr-element {
 	color: #fff;
 	height: 100%;
+}
+
+.dark-theme .dropdown-content {
+	background-color: #111 !important;
+	/* background-color: var(--grey-darken-4); */
 }
 
 /** Nestable */
