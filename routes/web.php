@@ -87,8 +87,6 @@ Route::middleware([
 	Route::prefix('/apresentacao')->group(function () {
 
 		Route::get('/', [Apresentacao::class, 'index'])->name('admin.paginas.home.apresentacao.index');
-		Route::get('/{search}', [Apresentacao::class, 'search'])->name('admin.paginas.home.apresentacao.search');
-		Route::get('/id/{id}', [Apresentacao::class, 'create'])->name('admin.paginas.home.apresentacao.edit');
 		Route::post('/', [Apresentacao::class, 'store'])->name('admin.paginas.home.apresentacao.post');
 		Route::put('/', [Apresentacao::class, 'store'])->name('admin.paginas.home.apresentacao.post');
 		Route::delete('/', [Apresentacao::class, 'destroy'])->name('admin.paginas.home.apresentacao.delete');

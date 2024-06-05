@@ -20,7 +20,7 @@
 									<img src="{{ route('home.pastores.show-image', $pastor->id) . '?action=preview' }}">
 									<div class="btn-group">
 										<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
-										<x-button class="icon-background btn btn-floating edit material-symbols-outlined font-weight-400" :data-href="route('admin.paginas.ministerios.edit', $pastor->id)"> edit </x-button>
+										<x-button class="icon-background btn btn-floating edit material-symbols-outlined font-weight-400" :data-href="route('admin.paginas.home.pastores.edit', $pastor->id)"> edit </x-button>
 									</div>
 								</div>
 							</div>

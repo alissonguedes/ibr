@@ -33,8 +33,8 @@ return new class extends Migration
 			$table->string('autor');
 			$table->string('titulo');
 			$table->string('titulo_slug');
-			$table->string('tipo', 100)->default('post')->comment('Determina qual é o tipo de postagem');
-			$table->string('categoria', 100)->default('post')->comment('Determina qual é a categoria das postagem');
+			$table->string('tipo')->nullable()->comment('Determina qual é o tipo de postagem');
+			$table->string('categoria')->nullable()->comment('Determina qual é a categoria das postagem');
 			$table->string('subtitulo', 255)->nullable();
 			$table->longText('conteudo')->nullable();
 			$table->dateTime('data')->nullable()->default(null);
@@ -48,6 +48,9 @@ return new class extends Migration
 			$table->dateTime('updated_at')->nullable()->default(null);
 			$table->enum('status', ['0', '1'])->default('1');
 		});
+
+		Schema::foreign('tipo')->on('tb_categoria')->references('id');
+		Schema::foreign('categoria')->on('tb_categoria')->references('id');
 
 		// Schema::create('ibr_site.tb_video', function (Blueprint $table) {
 		// 	$table->id();

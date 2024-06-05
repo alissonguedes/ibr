@@ -1,4 +1,4 @@
-<x-header-page data-href="{{ route('admin.paginas.ministerios.index') }}" placeholder="Pesquisar pastores..." title="Adicionar Banner">add</x-header-page>
+<x-header-page data-href="{{ route('admin.paginas.home.pastores.index') }}" placeholder="Pesquisar pastores..." title="Adicionar Banner">add</x-header-page>
 
 @php
 	if (request('id')):
@@ -11,11 +11,12 @@
 	endif;
 @endphp
 
-<x-slot:form action="{{ route('admin.paginas.ministerios.post') }}" method="post" style="{{ $errors->any() || request('id') ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" autocomplete="off">
+<x-slot:form action="{{ route('admin.paginas.home.pastores.post') }}" method="post" style="{{ $errors->any() || request('id') ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" autocomplete="off">
 
 	@csrf
 
-	<input type="hidden" name="tipo" value="pastor">
+	<input type="hidden" name="tipo" value="post">
+	<input type="hidden" name="categoria" value="pastor">
 
 	@if (request('id'))
 		<input type="hidden" name="_method" value="put">

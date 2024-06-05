@@ -43,7 +43,7 @@
 
 	</head>
 
-	<body>
+	<body class="dark-theme">
 
 		<div class="progress">
 			<div class="indeterminate-center"></div>

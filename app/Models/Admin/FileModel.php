@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 // define('CHUNK_SIZE', 500 * 1024);
 define('CHUNK_SIZE', 128 * 500);
 
-class FileModel extends Model {
+class FileModel extends Model
+{
 
 	use HasFactory;
 
@@ -17,7 +18,7 @@ class FileModel extends Model {
 		'id_object',
 		'id_file',
 		'id_chunk',
-		'tipo',
+		'categoria',
 		'filedata',
 		'key',
 		'signature',
@@ -37,9 +38,10 @@ class FileModel extends Model {
 		'status',
 	];
 
-	public function showFile(int $file_id, string $tipo) {
+	public function showFile(int $file_id, string $categoria)
+	{
 
-		$info = $this->getInfoFromFile($file_id, $tipo);
+		$info = $this->getInfoFromFile($file_id, $categoria);
 
 		if (isset($info)) {
 
@@ -96,15 +98,17 @@ class FileModel extends Model {
 
 	}
 
-	public function fileExists(int $id_file, string $tipo) {
+	public function fileExists(int $id_file, string $categoria)
+	{
 
-		$issetFile = $this->getInfoFromFile($id_file, $tipo);
+		$issetFile = $this->getInfoFromFile($id_file, $categoria);
 
 		return isset($issetFile);
 
 	}
 
-	public function getInfoFromFile(int $id_file, string $tipo) {
+	public function getInfoFromFile(int $id_file, string $categoria)
+	{
 
 		return $this->select(
 			'id',
@@ -113,13 +117,14 @@ class FileModel extends Model {
 			'imgtype'
 		)
 			->from('tb_file')
-			->where('tipo', $tipo)
+			->where('categoria', $categoria)
 			->where('id_object', $id_file)
 			->get()
 			->first();
 	}
 
-	public function getFile($id_file) {
+	public function getFile($id_file)
+	{
 
 		return $this->select('filedata')
 			->from('tb_file_chunk')
@@ -129,7 +134,8 @@ class FileModel extends Model {
 
 	}
 
-	public function getWhere($data = null, $where = null) {
+	public function getWhere($data = null, $where = null)
+	{
 
 		$where = is_array($data) ? $data : [$data => $where];
 
@@ -137,7 +143,8 @@ class FileModel extends Model {
 
 	}
 
-	private static function _getKeyAndHash($data = false, $file = false) {
+	private static function _getKeyAndHash($data = false, $file = false)
+	{
 
 		if ($file) {
 			$sha1 = base64_encode(sha1_file($data, true));
@@ -164,7 +171,8 @@ class FileModel extends Model {
 
 	}
 
-	public static function addAttachments($files, $object_id, $inline = false, $lang = false) {
+	public static function addAttachments($files, $object_id, $inline = false, $lang = false)
+	{
 
 		if (empty($files)) {
 			return false;
@@ -186,7 +194,8 @@ class FileModel extends Model {
 
 	}
 
-	private static function insert_or_update($object_id, $file) {
+	private static function insert_or_update($object_id, $file)
+	{
 
 		list($key, $sig) = self::_getKeyAndHash($file['tmp'], true);
 
@@ -197,9 +206,9 @@ class FileModel extends Model {
 		$columns['imgtype']   = $file['type'];
 		$columns['imgsize']   = $file['size'];
 
-		$columns['status'] = '1';
-		$columns['tipo']   = request('tipo') ?? 'P';
-		$where             = ['tipo' => request('tipo'), 'id_object' => $object_id];
+		$columns['status']    = '1';
+		$columns['categoria'] = request('categoria') ?? 'P';
+		$where                = ['categoria' => request('categoria'), 'id_object' => $object_id];
 
 		$id_file = FileModel::updateOrCreate($where, $columns);
 
@@ -209,7 +218,8 @@ class FileModel extends Model {
 
 	}
 
-	private static function write_file_chunk($file_id, $file, $chunk = CHUNK_SIZE) {
+	private static function write_file_chunk($file_id, $file, $chunk = CHUNK_SIZE)
+	{
 
 		self::from('tb_file_chunk')->where('id_file', $file_id)->delete();
 
@@ -238,9 +248,10 @@ class FileModel extends Model {
 
 	}
 
-	public static function remove($id_object, $tipo) {
+	public static function remove($id_object, $categoria)
+	{
 
-		$where   = ['id_object' => $id_object, 'tipo' => $tipo];
+		$where   = ['id_object' => $id_object, 'categoria' => $categoria];
 		$id_file = self::select('id')->where($where)->first();
 
 		if (isset($id_file)) {

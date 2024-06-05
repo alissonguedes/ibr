@@ -15,6 +15,7 @@
 				    ->from('tb_categoria')
 				    ->whereNotNull('id_parent')
 				    ->where('id_parent', $categoria->id)
+				    ->orderBy('titulo', 'asc')
 				    ->get();
 			@endphp
 			@if ($parent['categorias']->count())

@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * A classe extende de PostModel, pois opera na tabela `tb_post`
  */
-class BannerModel extends PostModel {
+class BannerModel extends PostModel
+{
 
 	use HasFactory;
 
@@ -16,6 +17,7 @@ class BannerModel extends PostModel {
 	protected $fillable = [
 		'id_parent',
 		'tipo',
+		'categoria',
 		'autor',
 		'titulo',
 		'titulo_slug',
@@ -48,26 +50,55 @@ class BannerModel extends PostModel {
 		'status',
 	];
 
-	public function getAllBanners($container = 'slideshow-container') {
-		return $this->where(['tipo' => 'banner'])->where('id_parent', function ($query) use ($container) {
+	public function getAllBanners($container = 'slideshow-container')
+	{
+		return $this->where(['categoria' => 'banner'])->where('id_parent', function ($query) use ($container) {
 			$query->select('id')->from('tb_post')->where('titulo_slug', $container);
 		})->get();
+
+		return $this
+			->where('id_parent', function ($query) use ($container) {
+				$query->select('id')
+					->from('tb_post')
+					->where('titulo_slug', $container);
+			})
+			->where('categoria', function ($query) {
+				$query->select('id')
+					->from('tb_categoria as C')
+					->whereColumn('id', 'categoria')
+					->where('C.titulo_slug', 'banner');
+			})->get();
+
 	}
 
-	public function getActiveBanners($container = 'slideshow-container') {
+	public function getActiveBanners($container = 'slideshow-container')
+	{
 		return $this->getAllBanners($container)->where('status', '1');
 	}
 
-	public function getBanner($data) {
-		return $this->getOrWhere(['id', $data], ['titulo_slug', $data])->where('tipo', 'banner')->first();
+	public function getBanner($data)
+	{
+		return $this->getOrWhere(['id', $data], ['titulo_slug', $data])->where('categoria', 'banner')->first();
 	}
 
-	public function getTotalBanners() {
-		return $this->where('tipo', 'banner')->whereNot('id_parent', null)->count();
+	public function getTotalBanners()
+	{
+		return $this->where('categoria', 'banner')->whereNot('id_parent', null)->count();
 	}
 
-	public function search($search, $tipo = 'banner', $both = true) {
-		return parent::search($search, $tipo, $both);
+	public function search($search, $both = true, $categoria = 'banner', $tipo = 'post')
+	{
+
+		return $this->select($this->columns)->where('categoria', $categoria)
+			->whereAny([
+				'id',
+				'titulo',
+				'subtitulo',
+				'conteudo',
+			], 'like', ($both ? '%' : null) . $search . '%')
+			->whereNotNull('id_parent')
+			->get();
+
 	}
 
 }

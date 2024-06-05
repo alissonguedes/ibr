@@ -15,7 +15,7 @@ return new class extends Migration
 		Schema::create('ibr_site.tb_file', function (Blueprint $table) {
 			$table->id();
 			$table->bigInteger('id_object');
-			$table->string('tipo', 50)->default('post')->comment('Determina qual é o tipo de arquivo');
+			$table->string('categoria', 50)->default('post')->comment('Determina qual é a categoria de arquivo');
 			// $table->string('titulo');
 			// $table->string('titulo_slug');
 			// $table->string('descricao')->nullable()->default(null);

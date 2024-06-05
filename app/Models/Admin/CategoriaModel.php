@@ -51,12 +51,12 @@ class CategoriaModel extends Model
 
 	public function getAllCategorias()
 	{
-		return $this->where('id_parent', null)->get();
+		return $this->where('id_parent', null)->orderBy('titulo', 'asc')->get();
 	}
 
 	public function getActiveCategorias($container = 'slideshow-container')
 	{
-		return $this->getAllCategorias($container)->where('status', '1');
+		return $this->getAllCategorias($container)->where('status', '1')->orderBy('titulo', 'asc');
 	}
 
 	public function getCategoria($data)

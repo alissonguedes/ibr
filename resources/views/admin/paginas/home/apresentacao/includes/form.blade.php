@@ -14,8 +14,9 @@
 
 	@csrf
 
+	{{-- <input type="hidden" name="titulo_slug" value="apresentacao"> --}}
+	<input type="hidden" name="categoria" value="apresentacao">
 	<input type="hidden" name="tipo" value="post">
-	<input type="hidden" name="titulo_slug" value="apresentacao">
 
 	@if (isset($id))
 		<input type="hidden" name="_method" value="put">

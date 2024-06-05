@@ -5,7 +5,8 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
 
-class PostModel extends Model {
+class PostModel extends Model
+{
 
 	use HasFactory;
 
@@ -15,6 +16,7 @@ class PostModel extends Model {
 	protected $fillable = [
 		'id_parent',
 		'tipo',
+		'categoria',
 		'autor',
 		'titulo',
 		'titulo_slug',
@@ -32,9 +34,12 @@ class PostModel extends Model {
 
 	protected $columns = ['id', 'tipo', 'autor', 'titulo', 'titulo_slug', 'subtitulo', 'conteudo', 'data', 'tags', 'url', 'hits', 'publish_up', 'publish_down', 'status'];
 
-	public function search($search, $both = false, $tipo = 'post') {
+	public function search($search, $both = false, $categoria = 'post', $tipo = 'post')
+	{
 
-		return $this->select($this->columns)->where('tipo', $tipo)
+		return $this->select($this->columns)
+			->where('tipo', $post)
+			->where('categoria', $categoria)
 			->whereAny([
 				'id',
 				'titulo',
@@ -45,30 +50,34 @@ class PostModel extends Model {
 
 	}
 
-	public function getAllPosts($where = null, $tipo = 'post') {
+	public function getAllPosts($where = null, $tipo = 'post')
+	{
 
 		$get = $this->select($this->columns);
 
 		if (!empty($where)) {
 			$get->where(function ($get) use ($where) {
-				$get->where('titulo_slug', $where);
 				$get->orWhere('id', $where);
+				$get->orWhere('categoria', $where);
+				$get->orWhere('titulo_slug', $where);
 			});
 		}
 
-		$get->where('tipo', $tipo);
+		$get->where('tipo', $categoria);
 
 		return $get->get();
 
 	}
 
-	public function getPost($data) {
-		return $this->getOrWhere(['titulo_slug', $data], ['id', $data])
+	public function getPost($data)
+	{
+		return $this->whereAny(['id', 'categoria', 'titulo_slug'], $data)
 			->select($this->columns ?? '*')
 			->where('tipo', 'post')->first();
 	}
 
-	public function getAllActivePosts($titulo_slug, $limit = 50, $options = []) {
+	public function getAllActivePosts($titulo_slug, $limit = 50, $options = [])
+	{
 
 		if (!isset($options['table'])) {
 			$options['table'] = 'tb_post';
@@ -90,19 +99,22 @@ class PostModel extends Model {
 
 	}
 
-	public function getActivePost($container) {
+	public function getActivePost($container)
+	{
 		return $this->getAllPosts($container)->where('status', '1')->first();
 	}
 
-	public function insert_or_update($request) {
+	public function insert_or_update($request)
+	{
 
 		$columns = [];
 		$data    = request()->all();
 
-		$id_parent = $this->select('id')->where('tipo', $data['tipo'])->where('id_parent', null)->get()->first();
+		$id_parent = $this->select('id')->where('categoria', $data['categoria'])->where('id_parent', null)->get()->first();
 
 		$columns['id_parent']    = $data['id_parent'] ?? $id_parent->id ?? null;
-		$columns['tipo']         = $data['tipo'] ?? 'F';
+		$columns['tipo']         = $data['tipo'] ?? 'post';
+		$columns['categoria']    = $data['categoria'] ?? null;
 		$columns['autor']        = Auth::id();
 		$columns['titulo']       = $data['titulo'];
 		$columns['titulo_slug']  = $data['titulo_slug'] ?? replace($data['titulo']);
@@ -117,7 +129,7 @@ class PostModel extends Model {
 		$columns['status']       = $data['status'] ?? '0';
 		$imagem                  = $request->file('imagem');
 		$where                   = !isset($data['id']) ? [
-			'tipo'        => $data['tipo'],
+			'categoria'   => $data['categoria'],
 			'titulo_slug' => replace($data['titulo']),
 		] : ['id' => $data['id']];
 
@@ -129,9 +141,10 @@ class PostModel extends Model {
 
 	}
 
-	public static function remove($id, $tipo = 'post') {
+	public static function remove($id, $categoria = 'post')
+	{
 
-		FileModel::remove($id, $tipo);
+		FileModel::remove($id, $categoria);
 		self::where('id', $id)->delete();
 
 		return true;

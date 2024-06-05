@@ -2,6 +2,8 @@
 
 @php
 	if (request('id')):
+	    $tipo = $row->tipo;
+	    $categoria = $row->categoria;
 	    $id = $row->id;
 	    $titulo = $row->titulo;
 	    $titulo_slug = $row->titulo_slug;
@@ -21,6 +23,9 @@
 		<input type="hidden" name="id" value="{{ $id }}">
 	@endif
 
+	<input type="hidden" name="categoria" value="banner">
+	<input type="hidden" name="tipo" value="post">
+
 	<div class="col row">
 
 		<div class="col s12 l3">
@@ -39,33 +44,6 @@
 		</div>
 
 		<div class="col s12 l9">
-
-			@if (Auth::check() && Auth::id() === 1)
-				<!-- BEGIN Tipo Post -->
-				<div class="row">
-					<div class="col s12">
-						<div class="input-field amber-text mb-2 @error('titulo') error @enderror">
-							<label id="categoria" class="active">Categoria da postagem</label>
-							<select name="categoria" id="categoria">
-								@if (isset($categorias))
-									<option value="" selected>Informe a categoria</option>
-									@foreach ($categorias as $item)
-									<option value="{{ $item->titulo_slug }}">{{ $item->titulo }}</option>
-									@endforeach
-								@endif
-							</select>
-							{{-- <input type="text" name="tipo" value="banner"> --}}
-							{{-- <x-text-input type="text" name="titulo" id="titulo" :value="old('titulo', $titulo ?? null)" autofocus="autofocus" /> --}}
-							@error('titulo')
-								<small class="error">{{ $message }}</small>
-							@enderror
-						</div>
-					</div>
-				</div>
-				<!-- END Tipo Post -->
-			@else
-				<input type="hidden" name="categoria" value="banner">
-			@endif
 
 			<!-- BEGIN título -->
 			<div class="row">

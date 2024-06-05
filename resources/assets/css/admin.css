@@ -919,6 +919,11 @@ textarea.materialize-textarea:not([readonly]),
 	/* background-color: var(--grey-darken-4); */
 }
 
+.dropdown-content li>a,
+.dropdown-content li>span {
+	color: #ffffff;
+}
+
 /** Nestable */
 
 .dd {
