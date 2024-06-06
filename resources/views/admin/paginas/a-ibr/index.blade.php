@@ -71,6 +71,12 @@
 
 				</div>
 			@endforeach
+		@else
+			<div class="row">
+				<div class="col s12">
+					<p>Nenhum registro encontrado</p>
+				</div>
+			</div>
 
 		@endif
 

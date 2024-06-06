@@ -67,8 +67,18 @@ class CultoModel extends PostModel {
 		return $this->where('tipo', 'banner')->whereNot('id_parent', null)->count();
 	}
 
-	public function search($search, $both = true, $tipo = 'cultos') {
-		return parent::search($search, $both, $tipo);
+	public function search($search, $both = true, $categoria = 'culto', $tipo = 'post') {
+
+		return $this->where('categoria', $categoria)
+			->whereAny([
+				'id',
+				'titulo',
+				'subtitulo',
+				'conteudo',
+			], 'like', ($both ? '%' : null) . $search . '%')
+		// ->whereNotNull('id_parent')
+			->get();
+
 	}
 
 }

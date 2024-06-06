@@ -4,8 +4,7 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class MinisterioModel extends PostModel
-{
+class MinisterioModel extends PostModel {
 
 	use HasFactory;
 
@@ -16,17 +15,15 @@ class MinisterioModel extends PostModel
 	// 	'status',
 	// ];
 
-	public function getAllMinisterios()
-	{
+	public function getAllMinisterios() {
 		return $this->select(
 			$this->columns
 		)
-			->where('tipo', 'ministerio')
+			->where('categoria', 'ministerio')
 			->get();
 	}
 
-	public function getMinisterio($data)
-	{
+	public function getMinisterio($data) {
 		return $this->getOrWhere(['id', $data], ['titulo', $data])
 			->first();
 	}

@@ -15,8 +15,11 @@
 <x-slot:form action="{{ route('admin.paginas.ministerios.post') }}" method="post" style="{{ $errors->any() || request('id') ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" autocomplete="off">
 
 	@csrf
-	<input type="hidden" name="tipo" value="ministerio">
+	{{-- <input type="hidden" name="tipo" value="ministerio"> --}}
 	{{-- <input type="hidden" name="titulo_slug" value="ministerios"> --}}
+
+	<input type="hidden" name="categoria" value="ministerio">
+	<input type="hidden" name="tipo" value="post">
 
 	@if (request('id'))
 		<input type="hidden" name="_method" value="put">
@@ -45,7 +48,7 @@
 			<div class="row">
 				<div class="col s12">
 					<div class="input-field amber-text mb-2 @error('titulo') error @enderror">
-						<label id="titulo">Título</label>
+						<label for="titulo">Título</label>
 						<x-text-input type="text" name="titulo" id="titulo" :value="old('titulo', $titulo ?? null)" autofocus="autofocus" />
 						@error('titulo')
 							<small class="error">{{ $message }}</small>

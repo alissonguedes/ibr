@@ -16,7 +16,7 @@ class CultosController extends Controller {
 	 */
 	public function index(CultoModel $post) {
 
-		$data['posts'] = $post->getAllPosts('cultos');
+		$data['posts'] = $post->getAllPosts('culto');
 
 		return view('admin.paginas.cultos.index', $data);
 
@@ -27,7 +27,7 @@ class CultosController extends Controller {
 	 */
 	public function search(Request $request, PostModel $post) {
 
-		$data['posts'] = $post->search($request->search, true, 'cultos');
+		$data['posts'] = $post->search($request->search);
 
 		return view('admin.paginas.cultos.index', $data);
 
@@ -81,7 +81,7 @@ class CultosController extends Controller {
 	 */
 	public function destroy(Request $request, PostModel $post) {
 
-		if ($post->remove($request->id, 'post')) {
+		if ($post->remove($request->id, 'culto')) {
 			$message = 'Postagem removida com sucesso!';
 		} else {
 			$message = 'Não foi possível encontrar o registro';

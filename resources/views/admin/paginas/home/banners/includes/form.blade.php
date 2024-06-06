@@ -49,7 +49,7 @@
 			<div class="row">
 				<div class="col s12">
 					<div class="input-field amber-text mb-2 @error('titulo') error @enderror">
-						<label id="titulo">Título</label>
+						<label for="titulo">Título</label>
 						<x-text-input type="text" name="titulo" id="titulo" :value="old('titulo', $titulo ?? null)" autofocus="autofocus" />
 						@error('titulo')
 							<small class="error">{{ $message }}</small>
@@ -63,7 +63,7 @@
 				<div class="row">
 					<div class="col s12">
 						<div class="input-field amber-text mb-2 @error('titulo') error @enderror">
-							<label id="titulo">Rótulo do campo</label>
+							<label for="titulo_slug">Rótulo do campo</label>
 							<x-text-input type="text" name="titulo_slug" id="titulo_slug" :value="old('titulo_slug', $titulo_slug ?? null)" />
 							@error('titulo')
 								<small class="error">{{ $message }}</small>

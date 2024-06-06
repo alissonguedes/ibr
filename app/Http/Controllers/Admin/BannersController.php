@@ -9,13 +9,11 @@ use App\Models\Admin\CategoriaModel;
 use App\Models\Admin\FileModel;
 use Illuminate\Http\Request;
 
-class BannersController extends Controller
-{
+class BannersController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index(BannerModel $banner, CategoriaModel $categoria)
-	{
+	public function index(BannerModel $banner, CategoriaModel $categoria) {
 
 		$data['categorias'] = $categoria->getAllCategorias();
 		$data['banners']    = $banner->getAllBanners();
@@ -27,8 +25,7 @@ class BannersController extends Controller
 	/**
 	 * Search banners
 	 */
-	public function search(Request $request, BannerModel $banner)
-	{
+	public function search(Request $request, BannerModel $banner) {
 
 		$data['banners'] = $banner->search($request->search);
 
@@ -39,8 +36,7 @@ class BannersController extends Controller
 	/**
 	 * Show the form for creating a new resource.
 	 */
-	public function create(Request $request, BannerModel $banner, CategoriaModel $categoria)
-	{
+	public function create(Request $request, BannerModel $banner, CategoriaModel $categoria) {
 
 		$data['id']         = $request->id;
 		$data['row']        = $banner->getBanner($request->id);
@@ -54,8 +50,7 @@ class BannersController extends Controller
 	/**
 	 * Store a newly created resource in storage.
 	 */
-	public function store(Request $request, BannerModel $banner)
-	{
+	public function store(Request $request, BannerModel $banner) {
 
 		$count = $banner->getTotalBanners();
 
@@ -89,8 +84,7 @@ class BannersController extends Controller
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(Request $request, FileModel $file, int $file_id)
-	{
+	public function show(Request $request, FileModel $file, int $file_id) {
 
 		return $file->showFile($file_id, 'banner');
 
@@ -99,8 +93,7 @@ class BannersController extends Controller
 	/**
 	 * Remove the specified resource from storage.
 	 */
-	public function destroy(Request $request, BannerModel $banner)
-	{
+	public function destroy(Request $request, BannerModel $banner) {
 
 		if ($banner->remove($request->id, 'banner')) {
 			$message = 'Banner removido com sucesso!';

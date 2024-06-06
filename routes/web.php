@@ -44,7 +44,7 @@ Route::get('/imagem/post/{file_id}', [Posts::class, 'show'])->name('home.posts.s
 Route::get('/imagem/pastor/{file_id}', [Pastores::class, 'show'])->name('home.pastores.show-image');
 Route::get('/imagem/ministerio/{file_id}', [Ministerios::class, 'show'])->name('home.ministerios.show-image');
 Route::get('/imagem/a-ibr/{file_id}', [A_Ibr::class, 'show'])->name('home.a-ibr.show-image');
-// Route::get('/imagem/categoria/{file_id}', [Categorias::class, 'show'])->name('admin.a-ibr.show-image');
+Route::get('/imagem/apresentacao/{file_id}', [Categorias::class, 'show'])->name('home.apresentacao.show-image');
 
 Route::middleware([
 	'auth',

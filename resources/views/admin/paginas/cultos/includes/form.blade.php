@@ -18,8 +18,11 @@
 
 	@csrf
 
+	{{-- <input type="hidden" name="tipo" value="post">
+	<input type="hidden" name="titulo_slug" value="cultos"> --}}
+
+	<input type="hidden" name="categoria" value="culto">
 	<input type="hidden" name="tipo" value="post">
-	<input type="hidden" name="titulo_slug" value="cultos">
 
 	@if (request('id'))
 		<input type="hidden" name="_method" value="put">

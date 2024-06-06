@@ -1,7 +1,7 @@
 <x-admin-layout>
 
 	<x-slot:icon href="{{ request('id') ? route('admin.paginas.ministerios.index') : route('admin.dashboard') }}"> wallpaper_slideshow </x-slot:icon>
-	<x-slot:title> Corpo Pastoral </x-slot:title>
+	<x-slot:title> Ministérios </x-slot:title>
 
 	<x-slot:body>
 

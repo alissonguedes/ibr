@@ -5,8 +5,7 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
 
-class PostModel extends Model
-{
+class PostModel extends Model {
 
 	use HasFactory;
 
@@ -34,11 +33,10 @@ class PostModel extends Model
 
 	protected $columns = ['id', 'tipo', 'autor', 'titulo', 'titulo_slug', 'subtitulo', 'conteudo', 'data', 'tags', 'url', 'hits', 'publish_up', 'publish_down', 'status'];
 
-	public function search($search, $both = false, $categoria = 'post', $tipo = 'post')
-	{
+	public function search($search, $both = false, $categoria = 'post', $tipo = 'post') {
 
 		return $this->select($this->columns)
-			->where('tipo', $post)
+			->where('tipo', $tipo)
 			->where('categoria', $categoria)
 			->whereAny([
 				'id',
@@ -50,8 +48,7 @@ class PostModel extends Model
 
 	}
 
-	public function getAllPosts($where = null, $tipo = 'post')
-	{
+	public function getAllPosts($where = null, $categoria = 'post') {
 
 		$get = $this->select($this->columns);
 
@@ -69,15 +66,13 @@ class PostModel extends Model
 
 	}
 
-	public function getPost($data)
-	{
+	public function getPost($data) {
 		return $this->whereAny(['id', 'categoria', 'titulo_slug'], $data)
 			->select($this->columns ?? '*')
 			->where('tipo', 'post')->first();
 	}
 
-	public function getAllActivePosts($titulo_slug, $limit = 50, $options = [])
-	{
+	public function getAllActivePosts($titulo_slug, $limit = 50, $options = []) {
 
 		if (!isset($options['table'])) {
 			$options['table'] = 'tb_post';
@@ -99,21 +94,43 @@ class PostModel extends Model
 
 	}
 
-	public function getActivePost($container)
-	{
+	public function getActivePost($container) {
 		return $this->getAllPosts($container)->where('status', '1')->first();
 	}
 
-	public function insert_or_update($request)
-	{
+	public function insert_or_update($request) {
 
 		$columns = [];
 		$data    = request()->all();
 
 		$id_parent = $this->select('id')->where('categoria', $data['categoria'])->where('id_parent', null)->get()->first();
 
-		$columns['id_parent']    = $data['id_parent'] ?? $id_parent->id ?? null;
+		$tipo = $this->select('titulo', 'titulo_slug')
+			->whereAny(
+				[
+					'ttulo',
+					'titulo_slug',
+				], '=', $data['tipo']
+			)
+			->get()->first();
+
+		dd($tipo);
+		// dd($tipo);
+		if (!isset($tipo)) {
+			// $this->from('tb_categoria')->insert([
+			// 	'titulo'      => $data['tipo'],
+			// 	'titulo_slug' => replace($data['tipo']),
+			// ]);
+			CategoriaModel::insert([
+				'titulo'      => $data['tipo'],
+				'titulo_slug' => replace($data['tipo']),
+				'created_at'  => date('Y-m-d H:i:s'),
+				'updated_at'  => date('Y-m-d H:i:s'),
+			]);
+		}
+
 		$columns['tipo']         = $data['tipo'] ?? 'post';
+		$columns['id_parent']    = $data['id_parent'] ?? $id_parent->id ?? null;
 		$columns['categoria']    = $data['categoria'] ?? null;
 		$columns['autor']        = Auth::id();
 		$columns['titulo']       = $data['titulo'];
@@ -141,8 +158,7 @@ class PostModel extends Model
 
 	}
 
-	public static function remove($id, $categoria = 'post')
-	{
+	public static function remove($id, $categoria = 'post') {
 
 		FileModel::remove($id, $categoria);
 		self::where('id', $id)->delete();
