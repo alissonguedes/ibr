@@ -34,11 +34,11 @@ class PostModel extends Model
 
 	protected $columns = ['id', 'tipo', 'autor', 'titulo', 'titulo_slug', 'subtitulo', 'conteudo', 'data', 'tags', 'url', 'hits', 'publish_up', 'publish_down', 'status'];
 
-	public function search($search, $both = true, $categoria = 'post', $tipo = 'post')
+	public function search($search, $both = false, $categoria = 'post', $tipo = 'post')
 	{
 
 		return $this->select($this->columns)
-			->where('tipo', $tipo)
+			->where('tipo', $post)
 			->where('categoria', $categoria)
 			->whereAny([
 				'id',
@@ -46,12 +46,11 @@ class PostModel extends Model
 				'subtitulo',
 				'conteudo',
 			], 'like', ($both ? '%' : null) . $search . '%')
-		// ->whereNotNull('id_parent')
 			->get();
 
 	}
 
-	public function getAllPosts($where = null, $categoria = 'post')
+	public function getAllPosts($where = null, $tipo = 'post')
 	{
 
 		$get = $this->select($this->columns);
@@ -77,7 +76,7 @@ class PostModel extends Model
 			->where('tipo', 'post')->first();
 	}
 
-	public function getAllActivePosts($categoria, $limit = 50, $options = [])
+	public function getAllActivePosts($titulo_slug, $limit = 50, $options = [])
 	{
 
 		if (!isset($options['table'])) {
@@ -87,8 +86,7 @@ class PostModel extends Model
 		$allPosts = $this->from($options['table']);
 
 		if ($options['table'] === 'tb_post') {
-			$allPosts->where('tipo', 'post');
-			$allPosts->where('categoria', $categoria);
+			$allPosts->where('titulo_slug', $titulo_slug);
 		}
 
 		$allPosts = $allPosts->where('status', '1')->limit($limit);
@@ -114,27 +112,8 @@ class PostModel extends Model
 
 		$id_parent = $this->select('id')->where('categoria', $data['categoria'])->where('id_parent', null)->get()->first();
 
-		$tipo = $this->select('titulo', 'titulo_slug')
-			->from('tb_categoria')
-			->whereAny(
-				[
-					'titulo',
-					'titulo_slug',
-				], '=', $data['tipo']
-			)
-			->get()->first();
-
-		if (!isset($tipo)) {
-			CategoriaModel::insert([
-				'titulo'      => $data['tipo'],
-				'titulo_slug' => replace($data['tipo']),
-				'created_at'  => date('Y-m-d H:i:s'),
-				'updated_at'  => date('Y-m-d H:i:s'),
-			]);
-		}
-
-		$columns['tipo']         = $data['tipo'] ?? 'post';
 		$columns['id_parent']    = $data['id_parent'] ?? $id_parent->id ?? null;
+		$columns['tipo']         = $data['tipo'] ?? 'post';
 		$columns['categoria']    = $data['categoria'] ?? null;
 		$columns['autor']        = Auth::id();
 		$columns['titulo']       = $data['titulo'];
@@ -154,9 +133,9 @@ class PostModel extends Model
 			'titulo_slug' => replace($data['titulo']),
 		] : ['id' => $data['id']];
 
-		$id_banner = PostModel::updateOrCreate($where, $columns);
+		$post = PostModel::updateOrCreate($where, $columns);
 
-		FileModel::addAttachments($imagem, $id_banner->id);
+		FileModel::addAttachments($imagem, $post->id);
 
 		return true;
 

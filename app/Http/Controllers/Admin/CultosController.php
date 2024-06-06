@@ -9,12 +9,14 @@ use App\Models\Admin\FileModel;
 use App\Models\Admin\PostModel;
 use Illuminate\Http\Request;
 
-class CultosController extends Controller {
+class CultosController extends Controller
+{
 
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index(CultoModel $post) {
+	public function index(CultoModel $post)
+	{
 
 		$data['posts'] = $post->getAllPosts('culto');
 
@@ -25,7 +27,8 @@ class CultosController extends Controller {
 	/**
 	 * Search banners
 	 */
-	public function search(Request $request, PostModel $post) {
+	public function search(Request $request, PostModel $post)
+	{
 
 		$data['posts'] = $post->search($request->search);
 
@@ -36,11 +39,12 @@ class CultosController extends Controller {
 	/**
 	 * Show the form for creating a new resource.
 	 */
-	public function create(Request $request, PostModel $post) {
+	public function create(Request $request, PostModel $post)
+	{
 
 		$data['id']    = $request->id;
 		$data['row']   = $post->getPost($request->id);
-		$data['posts'] = $post->getAllPosts('cultos');
+		$data['posts'] = $post->getAllPosts('culto');
 
 		if (!$data['row']) {
 			return redirect()->route('admin.paginas.cultos.index');
@@ -53,7 +57,8 @@ class CultosController extends Controller {
 	/**
 	 * Store a newly created resource in storage.
 	 */
-	public function store(CultoRequest $request, PostModel $page) {
+	public function store(CultoRequest $request, PostModel $page)
+	{
 
 		$page->insert_or_update($request);
 
@@ -70,16 +75,18 @@ class CultosController extends Controller {
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(Request $request, FileModel $file, int $file_id) {
+	public function show(Request $request, FileModel $file, int $file_id)
+	{
 
-		return $file->showFile($file_id, 'post');
+		return $file->showFile($file_id, 'culto');
 
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 */
-	public function destroy(Request $request, PostModel $post) {
+	public function destroy(Request $request, PostModel $post)
+	{
 
 		if ($post->remove($request->id, 'culto')) {
 			$message = 'Postagem removida com sucesso!';

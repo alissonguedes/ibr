@@ -408,9 +408,6 @@ if (!function_exists('post')) {
 		$section = $view[1];
 		$post    = new App\Models\Admin\PostModel();
 		$posts   = $post->getAllActivePosts($section, $limit, $options);
-		// $post    = $post->getActivePost($section);
-
-		// dump($posts, $section, $limit, $options);
 
 		if (!empty($post)) {
 			$data['post'] = $posts;

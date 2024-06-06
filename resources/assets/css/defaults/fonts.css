@@ -45,6 +45,13 @@
 	src: url('../../fonts/montserrat/mbold.ttf');
 }
 
+@font-face {
+	font-family: 'mblack';
+	font-style: normal;
+	font-weight: 900;
+	src: url('../../fonts/montserrat/mbold.ttf');
+}
+
 .material-icons,
 .material-symbols {
 	font-family: 'Material Symbols';

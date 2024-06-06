@@ -30,10 +30,10 @@
 									<h6 class="bold" style="">{{ $post->subtitulo }}</h6>
 									<h4 class="bold no-margin" style="">{{ $post->titulo }}</h4>
 								</div>
-								<div class="flex flex-auto flex-center mt-3">
+								<div class="flex flex-auto flex-center flex-end mt-3">
 									@if ($hasFile)
-										<div class="card-image">
-											<div class="circle">
+										<div class="card-image right">
+											<div class="circle no-margin">
 												<img src="{{ route('home.a-ibr.show-image', $post->id) . '?action=preview' }}" height="210">
 											</div>
 										</div>

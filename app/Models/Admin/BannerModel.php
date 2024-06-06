@@ -89,15 +89,7 @@ class BannerModel extends PostModel
 	public function search($search, $both = true, $categoria = 'banner', $tipo = 'post')
 	{
 
-		return $this->select($this->columns)->where('categoria', $categoria)
-			->whereAny([
-				'id',
-				'titulo',
-				'subtitulo',
-				'conteudo',
-			], 'like', ($both ? '%' : null) . $search . '%')
-			->whereNotNull('id_parent')
-			->get();
+		return parent::search($search, $both, $categoria, $tipo);
 
 	}
 

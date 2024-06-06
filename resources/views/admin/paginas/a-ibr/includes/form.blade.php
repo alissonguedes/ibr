@@ -18,8 +18,8 @@
 	<input type="hidden" name="tipo" value="post">
 	<input type="hidden" name="titulo_slug" value="a-ibr">
 
-	{{-- <input type="hidden" name="categoria" value="banner">
-	<input type="hidden" name="tipo" value="post"> --}}
+	<input type="hidden" name="categoria" value="post">
+	<input type="hidden" name="tipo" value="post">
 
 	@if (request('id'))
 		<input type="hidden" name="_method" value="put">

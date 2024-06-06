@@ -32,7 +32,7 @@ class PastorModel extends Model
 			->first();
 	}
 
-	public function search($search, $both = true)
+	public function search($search, $both = true, $categoria = 'pastor', $tipo = 'post')
 	{
 		return $this->whereAny([
 			'id',

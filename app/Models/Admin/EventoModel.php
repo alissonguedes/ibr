@@ -72,9 +72,19 @@ class EventoModel extends PostModel
 		return $this->where('tipo', 'banner')->whereNot('id_parent', null)->count();
 	}
 
-	public function search($search, $tipo = 'banner', $both = true)
+	public function search($search, $both = true, $categoria = 'evento', $tipo = 'post')
 	{
-		return parent::search($search, $tipo, $both);
+
+		// return $this->select($this->columns)->where('categoria', $categoria)
+		// 	->whereAny([
+		// 		'id',
+		// 		'titulo',
+		// 		'subtitulo',
+		// 		'conteudo',
+		// 	], 'like', ($both ? '%' : null) . $search . '%')
+		// 	->whereNotNull('id_parent')
+		// 	->get();
+
 	}
 
 }

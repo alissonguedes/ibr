@@ -41,11 +41,10 @@ Route::prefix('/')->group(function () {
 
 Route::get('/imagem/banner/{file_id}', [Banners::class, 'show'])->name('home.banners.show-image');
 Route::get('/imagem/post/{file_id}', [Posts::class, 'show'])->name('home.posts.show-image');
+Route::get('/imagem/apresentacao/{file_id}', [Apresentacao::class, 'show'])->name('home.apresentacao.show-image');
 Route::get('/imagem/pastor/{file_id}', [Pastores::class, 'show'])->name('home.pastores.show-image');
 Route::get('/imagem/ministerio/{file_id}', [Ministerios::class, 'show'])->name('home.ministerios.show-image');
 Route::get('/imagem/a-ibr/{file_id}', [A_Ibr::class, 'show'])->name('home.a-ibr.show-image');
-Route::get('/imagem/apresentacao/{file_id}', [Apresentacao::class, 'show'])->name('home.apresentacao.show-image');
-Route::get('/imagem/cultos/{file_id}', [Cultos::class, 'show'])->name('home.cultos.show-image');
 
 Route::middleware([
 	'auth',

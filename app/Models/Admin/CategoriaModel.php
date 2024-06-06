@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * A classe extende de PostModel, pois opera na tabela `tb_post`
  */
-class CategoriaModel extends Model {
+class CategoriaModel extends Model
+{
 
 	use HasFactory;
 
@@ -26,7 +27,8 @@ class CategoriaModel extends Model {
 		'updated_at',
 	];
 
-	public function insert_or_update($request) {
+	public function insert_or_update($request)
+	{
 
 		$columns = [];
 		$data    = request()->all();
@@ -49,27 +51,37 @@ class CategoriaModel extends Model {
 
 	}
 
-	public function getAllCategorias() {
+	public function getAllCategorias()
+	{
 		return $this->where('id_parent', null)->orderBy('titulo', 'asc')->get();
 	}
 
-	public function getActiveCategorias($container = 'slideshow-container') {
+	public function getActiveCategorias($container = 'slideshow-container')
+	{
 		return $this->getAllCategorias($container)->where('status', '1')->orderBy('titulo', 'asc');
 	}
 
-	public function getCategoria($data) {
+	public function getCategoria($data)
+	{
 		return $this->getOrWhere(['id', $data], ['titulo_slug', $data])->first();
 	}
 
-	public function getTotalCategorias() {
+	public function getTotalCategorias()
+	{
 		return $this->count();
 	}
 
-	public function search($search, $tipo = 'categoria', $both = true) {
-		return parent::search($search, $tipo, $both);
+	// public function search($search, $tipo = 'categoria', $both = true) {
+	// 	return parent::search($search, $tipo, $both);
+	// }
+
+	public function search($search, $both = true, $categoria = 'categoria', $tipo = 'post')
+	{
+		return parent::search($search, $both, $categoria, $tipo);
 	}
 
-	public static function remove($id) {
+	public static function remove($id)
+	{
 
 		self::where('id', $id)->delete();
 

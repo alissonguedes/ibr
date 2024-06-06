@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ApresentacaoRequest;
 use App\Models\Admin\CategoriaModel;
+use App\Models\Admin\FileModel;
 use App\Models\Admin\PostModel;
+use Illuminate\Http\Request;
 
 class ApresentacaoController extends Controller
 {
@@ -20,6 +22,16 @@ class ApresentacaoController extends Controller
 		$data['post']       = $post->getPost('apresentacao');
 
 		return view('admin.paginas.home.apresentacao.index', $data);
+
+	}
+
+	/**
+	 * Display the specified resource.
+	 */
+	public function show(Request $request, FileModel $file, int $file_id)
+	{
+
+		return $file->showFile($file_id, 'apresentacao');
 
 	}
 

@@ -40,7 +40,7 @@
 									<div class="col s6 left-align">
 										<button class="btn card-title white black-text waves-effect" style="font-size: inherit; font-family: inherit;">Não</button>
 									</div>
-									<form action="{{ route('admin.paginas.ministerios.delete') }}" method="post">
+									<form action="{{ route('admin.paginas.home.pastores.delete') }}" method="post">
 										@csrf
 										<input type="hidden" name="_method" value="delete">
 										<input type="hidden" name="id" value="{{ $pastor->id }}">

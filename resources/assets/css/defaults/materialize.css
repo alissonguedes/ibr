@@ -926,6 +926,9 @@ ul.list-type-bullet {
 	align-items: center;
 }
 
+.flex-end {
+	place-content: end;
+}
 
 .flex-start {
 	place-content: start;
