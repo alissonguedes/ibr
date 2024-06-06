@@ -156,6 +156,10 @@ ul {
 	font-family: "mblack";
 }
 
+.bold {
+	font-family: 'Montserrat Black' !important;
+}
+
 /**CORES**/
 .cor_verde {
 	color: #c3c907;

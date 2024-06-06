@@ -24,10 +24,10 @@
 	font-weight: 100 900;
 	src: url('../../fonts/material-icons/material-icons-sharp.woff2') format('woff2');
 	font-variation-settings:
-		'FILL' 1,
-		'wght' 100,
-		'GRAD' 0,
-		'opsz' 24
+		'FILL'1,
+		'wght'100,
+		'GRAD'0,
+		'opsz'24
 }
 
 /* fallback */
@@ -46,10 +46,10 @@
 }
 
 @font-face {
-	font-family: 'mblack';
+	font-family: 'Montserrat Black';
 	font-style: normal;
 	font-weight: 900;
-	src: url('../../fonts/montserrat/mbold.ttf');
+	src: url('../../fonts/montserrat/mblack.ttf');
 }
 
 .material-icons,
