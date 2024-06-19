@@ -31,11 +31,12 @@ Route::prefix('/')->group(function () {
 
 	Route::get('/', [HomeController::class, 'index'])->name('site.home.index');
 	Route::get('/a-ibr', [SobreController::class, 'index'])->name('site.home.a-ibr');
-	Route::get('/ministerios', [MinisteriosController::class, 'index'])->name('site.home.ministerios');
-	Route::get('/cultos', [CultosController::class, 'index'])->name('site.home.cultos');
-	Route::get('/eventos', [EventosController::class, 'index'])->name('site.home.eventos');
-	Route::get('/agenda', [AgendaController::class, 'index'])->name('site.home.agenda');
-	Route::get('/seja-membro', [HomeController::class, 'index'])->name('site.home.seja-membro');
+	Route::get('/ministerios', [MinisteriosController::class, 'index'])->name('site.ministerios');
+	Route::get('/ministerios/{ministerio}', [MinisteriosController::class, 'show'])->name('site.ministerios.details');
+	Route::get('/cultos', [CultosController::class, 'index'])->name('site.cultos');
+	Route::get('/eventos', [EventosController::class, 'index'])->name('site.eventos');
+	Route::get('/agenda', [AgendaController::class, 'index'])->name('site.agenda');
+	Route::get('/seja-membro', [HomeController::class, 'index'])->name('site.seja-membro');
 
 });
 

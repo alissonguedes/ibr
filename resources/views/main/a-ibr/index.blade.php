@@ -22,7 +22,7 @@
 						<div class="conj_bloco">
 							@if ($hasFile)
 								<div class="@if ($i % 2 != 0) img_bloco_dir @else img_bloco_esq @endif">
-									<img src="{{ route('home.a-ibr.show-image', $post->id) . '?action=preview' }}" height="210">
+									<img src="{{ route('home.a-ibr.show-image', $post->id) . '?action=preview' }}" class="img_cem">
 								</div>
 							@endif
 							<div class="@if ($i % 2 != 0) text_bloco_dir @else text_bloco_esq @endif">
