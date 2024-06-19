@@ -52,9 +52,11 @@ class CultoModel extends PostModel
 	public function getAllCultos()
 	{
 		$container = 'cultos';
-		return $this->where(['tipo' => 'post'])->whereIn('id_parent', function ($query) use ($container) {
-			$query->select('id')->from('tb_post')->where('titulo_slug', $container);
-		})->get();
+		dd($container);
+		// return $this->where(['tipo' => 'post'])->whereIn('id_parent', function ($query) use ($container) {
+		// 	$query->select('id')->from('tb_post')->where('titulo_slug', $container);
+		// })->get();
+		// return $this->get();
 	}
 
 	// public function getActiveBanners($container = 'slideshow-container')

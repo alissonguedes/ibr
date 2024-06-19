@@ -12,12 +12,11 @@
 		padding: 10px;
 		width: 55px;
 		top: 0;
-		margin-top: -10px;
-		margin-left: 60px;
 	}
 
 	.application-logo .logo2 {
 		margin-left: 20px;
+		margin-top: 10px;
 		float: left;
 	}
 </style>

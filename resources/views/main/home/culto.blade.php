@@ -1,11 +1,11 @@
-<!--palavra-->
-<section id="ultimos_cultos" class="area_palavra">
+@if (isset($post) && $post->count() > 0)
 
-	<div class="title_section">ÚLTIMOS CULTOS</div>
+	<!--palavra-->
+	<section id="ultimos_cultos" class="area_palavra">
 
-	<div class="content">
+		<div class="title_section">ÚLTIMOS CULTOS</div>
 
-		@if (isset($post))
+		<div class="content">
 
 			<div class="row">
 				@foreach ($post as $culto)
@@ -20,8 +20,8 @@
 					<div class="col s4">
 						<div class="card border-radius-20">
 							<div class="card-image" style="height: 300px; overflow: hidden;">
-								<img src="{{ route('home.posts.show-image', $culto->id) }}" class="responsive-img">
-								<div class="card-title" style="background-color: rgba(0, 0, 0, 0.3); width: 100%; ">
+								<img src="{{ route('home.cultos.show-image', $culto->id) }}" class="responsive-img">
+								<div class="card-title" style="background-color: rgba(0, 0, 0, 0.3);">
 									<a href="#" class="white-text"> {{ $culto->titulo }} </a>
 								</div>
 							</div>
@@ -49,12 +49,11 @@
 				@endforeach
 			</div>
 
-		@endif
+		</div>
 
-	</div>
+		<a href="cultos.php">
+			<div class="bt_ver_mais">Ver mais</div>
+		</a>
 
-	<a href="cultos.php">
-		<div class="bt_ver_mais">ver mais</div>
-	</a>
-
-</section>
+	</section>
+@endif

@@ -8,12 +8,14 @@ use App\Models\Admin\FileModel;
 use App\Models\Admin\PostModel;
 use Illuminate\Http\Request;
 
-class A_IbrController extends Controller {
+class A_IbrController extends Controller
+{
 
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index(PostModel $post) {
+	public function index(PostModel $post)
+	{
 
 		$data['posts'] = $post->getAllPosts('a-ibr');
 
@@ -24,7 +26,8 @@ class A_IbrController extends Controller {
 	/**
 	 * Search banners
 	 */
-	public function search(Request $request, PostModel $post) {
+	public function search(Request $request, PostModel $post)
+	{
 
 		$data['posts'] = $post->search($request->search, true);
 
@@ -35,7 +38,8 @@ class A_IbrController extends Controller {
 	/**
 	 * Show the form for creating a new resource.
 	 */
-	public function create(Request $request, PostModel $post) {
+	public function create(Request $request, PostModel $post)
+	{
 
 		$data['id']    = $request->id;
 		$data['row']   = $post->getPost($request->id);
@@ -52,7 +56,8 @@ class A_IbrController extends Controller {
 	/**
 	 * Store a newly created resource in storage.
 	 */
-	public function store(A_IbrRequest $request, PostModel $page) {
+	public function store(A_IbrRequest $request, PostModel $page)
+	{
 
 		$page->insert_or_update($request);
 
@@ -69,7 +74,8 @@ class A_IbrController extends Controller {
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(Request $request, FileModel $file, int $file_id) {
+	public function show(Request $request, FileModel $file, int $file_id)
+	{
 
 		return $file->showFile($file_id, 'post');
 
@@ -78,7 +84,8 @@ class A_IbrController extends Controller {
 	/**
 	 * Remove the specified resource from storage.
 	 */
-	public function destroy(Request $request, PostModel $post) {
+	public function destroy(Request $request, PostModel $post)
+	{
 
 		if ($post->remove($request->id, 'post')) {
 			$message = 'Postagem removida com sucesso!';

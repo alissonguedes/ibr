@@ -8,9 +8,9 @@
 
 		{!! post('main.home:apresentacao', 1) !!}
 
-		{!! post('main.home:cultos', 3) !!}
+		{!! post('main.home:culto', 3) !!}
 
-		{!! post('main.home:pastores', 6, ['table' => 'tb_pastor']) !!}
+		{!! post('main.home:pastor', 6, ['table' => 'tb_pastor']) !!}
 
 		<!--eventos-->
 		<section class="eventos">

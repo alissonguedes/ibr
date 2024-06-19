@@ -401,20 +401,29 @@ if (!function_exists('site_url')) {
 
 if (!function_exists('post')) {
 
-	function post($section, $limit = 1, $options = [])
+	function post($categoria, $limit = 1, $options = [])
 	{
 
-		$view    = explode(':', $section);
-		$section = $view[1];
-		$post    = new App\Models\Admin\PostModel();
-		$posts   = $post->getAllActivePosts($section, $limit, $options);
+		$view      = explode(':', $categoria);
+		$categoria = $view[1];
+
+		// $model = 'App\\Models\\Admin\\' . ucfirst(strtolower($categoria)) . 'Model';
+
+		// if (class_exists($model)) {
+		// 	$post = new $model();
+		// 	dump($model);
+		// } else {
+		$post  = new App\Models\Admin\PostModel();
+		$posts = $post->getAllActivePosts($categoria, $limit, $options);
+		// 	dump($posts);
+		// }
 
 		if (!empty($post)) {
 			$data['post'] = $posts;
-			return view($view[0] . '.' . $section, $data);
+			return view($view[0] . '.' . $categoria, $data);
 		}
 
-		return view($view[0] . '.' . $section);
+		return view($view[0] . '.' . $categoria);
 
 	}
 

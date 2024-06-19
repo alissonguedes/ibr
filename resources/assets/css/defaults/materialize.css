@@ -754,6 +754,10 @@ html [type=button] {
 	box-shadow: none !important
 }
 
+.no-border {
+	border: none !important;
+}
+
 .no-margin {
 	margin: 0 !important
 }

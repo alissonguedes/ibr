@@ -46,14 +46,15 @@
 					</li>
 					<li class="logo animated infinite slow hide-on-large-only">
 						<a href="{{ route('admin.dashboard') }}">
-							<span></span>
+							{{-- <span></span> --}}
+							<img src="{{ asset('assets/img/logo1.png') }}" alt="" width="35px">
 						</a>
 					</li>
 					<li>
 						<a href="#" class="waves-effect waves-green notification-button">
-							<i class="material-symbols-outlined">
+							<i class="material-symbols-outlined sonar">
 								notifications
-								<small class="notification-badge">+99</small>
+								{{-- <small class="notification-badge">+99</small> --}}
 							</i>
 						</a>
 					</li>
