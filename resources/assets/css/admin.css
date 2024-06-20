@@ -1206,6 +1206,17 @@ textarea.materialize-textarea:not([readonly]),
 	color: var(--light-green);
 }
 
+[type="reset"] {
+	border: 1px solid var(--light-green);
+	color: var(--light-green);
+	border-radius: 30px;
+}
+
+[type="submit"] {
+	background-color: var(--light-green) !important;
+	border-radius: 30px;
+}
+
 /** Editor */
 .fr-wrapper {
 	overflow: auto;
