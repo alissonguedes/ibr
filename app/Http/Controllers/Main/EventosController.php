@@ -3,56 +3,42 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
-use App\Models\Main\HomeModel;
+use App\Models\Admin\EventoModel;
+use App\Models\Admin\PostModel;
 use Illuminate\Http\Request;
 
-class EventosController extends Controller {
+class EventosController extends Controller
+{
+
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index() {
-		return view('main.eventos.index');
-	}
+	public function index(PostModel $post)
+	{
 
-	/**
-	 * Show the form for creating a new resource.
-	 */
-	public function create() {
-		//
-	}
+		$data['posts'] = $post->getAllPosts('evento');
 
-	/**
-	 * Store a newly created resource in storage.
-	 */
-	public function store(Request $request) {
-		//
+		return view('main.eventos.index', $data);
+
 	}
 
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(HomeModel $home) {
-		//
-	}
+	public function show(Request $request, EventoModel $postModel, string $evento)
+	{
 
-	/**
-	 * Show the form for editing the specified resource.
-	 */
-	public function edit(HomeModel $home) {
-		//
-	}
+		$data['id']      = $request->id;
+		$data['post']    = $postModel->getEvento($evento);
+		$data['eventos'] = $postModel->where('categoria', 'evento')
+			->where('titulo_slug', '<>', $evento)
+			->get();
 
-	/**
-	 * Update the specified resource in storage.
-	 */
-	public function update(Request $request, HomeModel $home) {
-		//
-	}
+		if (!isset($data['post'])) {
+			return redirect()->route('site.eventos');
+		}
 
-	/**
-	 * Remove the specified resource from storage.
-	 */
-	public function destroy(HomeModel $home) {
-		//
+		return view('main.eventos.details', $data);
+
 	}
 }

@@ -450,3 +450,20 @@ if (!function_exists('slides')) {
 	}
 
 }
+
+if (!function_exists('show_date')) {
+
+	function show_date($date, $format = 'd/m/Y')
+	{
+
+		$meses = [1 => 'Janeiro', 2 => 'Fevereiro', 3 => 'Março', 4 => 'Abril', 5 => 'Maio', 6 => 'Junho', 7 => 'Julho', 8 => 'Agosto', 9 => 'Setembro', 10 => 'Outubro', 11 => 'Novembro', 12 => 'Dezembro'];
+		$date  = strtotime($date);
+		$dia   = date('d', $date);
+		$mes   = $meses[date('n', $date - 1)];
+		$ano   = date('Y', $date);
+
+		return $dia . ' de ' . $mes . ' de ' . $ano;
+
+	}
+
+}

@@ -6,15 +6,15 @@
 	<div class="lk">A IBR</div>
 </x-nav-link>
 
-<x-nav-link :href="route('site.ministerios')" class="waves-cyan" :active="request()->routeIs('site.ministerios')">
+<x-nav-link :href="route('site.ministerios')" class="waves-cyan" :active="request()->routeIs('site.ministerios')|| request()->routeIs('site.ministerios.details')">
 	<div class="lk">Ministérios</div>
 </x-nav-link>
 
-<x-nav-link :href="route('site.cultos')" class="waves-cyan" :active="request()->routeIs('site.cultos')">
+<x-nav-link :href="route('site.cultos')" class="waves-cyan" :active="request()->routeIs('site.cultos') || request()->routeIs('site.cultos.details')">
 	<div class="lk">Cultos</div>
 </x-nav-link>
 
-<x-nav-link :href="route('site.eventos')" class="waves-cyan" :active="request()->routeIs('site.eventos')">
+<x-nav-link :href="route('site.eventos')" class="waves-cyan" :active="request()->routeIs('site.eventos') || request()->routeIs('site.eventos.details')">
 	<div class="lk">Eventos</div>
 </x-nav-link>
 

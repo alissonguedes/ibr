@@ -14,7 +14,7 @@
 	endif;
 @endphp
 
-<x-slot:form action="{{ route('admin.paginas.cultos.post') }}" method="post" style="{{ $errors->any() || request('id') ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" autocomplete="off">
+<x-slot:form action="{{ route('admin.paginas.cultos.post') }}" method="post" style="{{ $errors->any() || request('id') ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" autocomplete="off" novalidate>
 
 	@csrf
 
@@ -86,7 +86,7 @@
 			</div>
 			<!-- END Link -->
 
-			<!-- BEGIN imagem -->
+			{{-- <!-- BEGIN imagem -->
 			<div class="row">
 				<div class="col s12">
 					<div class="file-field input-field @error('imagem') error @enderror">
@@ -103,9 +103,9 @@
 					</div>
 				</div>
 			</div>
-			<!-- END imagem -->
+			<!-- END imagem --> --}}
 
-			<!-- BEGIN ImageView -->
+			{{-- <!-- BEGIN ImageView -->
 			<div class="row">
 				<div class="col s12">
 					<div class="row">
@@ -122,7 +122,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- END ImageView -->
+			<!-- END ImageView --> --}}
 
 			<!-- BEGIN descrição -->
 			<div class="row">

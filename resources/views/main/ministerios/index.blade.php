@@ -9,11 +9,6 @@
 			@if (isset($posts) && $posts->count() > 0)
 
 				@foreach ($posts as $i => $post)
-					@php
-						$file = new App\Models\Admin\FileModel();
-						$hasFile = $file->fileExists($post->id, 'post');
-					@endphp
-
 					<a href="{{ route('site.ministerios.details', $post->titulo_slug) }}">
 						<div class="conj_ministerios">
 							<div class="img_min">

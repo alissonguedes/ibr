@@ -34,6 +34,7 @@ Route::prefix('/')->group(function () {
 	Route::get('/ministerios', [MinisteriosController::class, 'index'])->name('site.ministerios');
 	Route::get('/ministerios/{ministerio}', [MinisteriosController::class, 'show'])->name('site.ministerios.details');
 	Route::get('/cultos', [CultosController::class, 'index'])->name('site.cultos');
+	Route::get('/cultos/{culto}', [CultosController::class, 'show'])->name('site.cultos.details');
 	Route::get('/eventos', [EventosController::class, 'index'])->name('site.eventos');
 	Route::get('/agenda', [AgendaController::class, 'index'])->name('site.agenda');
 	Route::get('/seja-membro', [HomeController::class, 'index'])->name('site.seja-membro');

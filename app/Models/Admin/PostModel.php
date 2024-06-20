@@ -127,7 +127,7 @@ class PostModel extends Model
 		if (!isset($tipo)) {
 			CategoriaModel::insert([
 				'titulo'      => $data['tipo'],
-				'titulo_slug' => replace($data['tipo']),
+				'titulo_slug' => replace($data['tipo'], '-'),
 				'created_at'  => date('Y-m-d H:i:s'),
 				'updated_at'  => date('Y-m-d H:i:s'),
 			]);
@@ -138,7 +138,7 @@ class PostModel extends Model
 		$columns['categoria']    = $data['categoria'] ?? null;
 		$columns['autor']        = Auth::id();
 		$columns['titulo']       = $data['titulo'];
-		$columns['titulo_slug']  = $data['titulo_slug'] ?? replace($data['titulo']);
+		$columns['titulo_slug']  = $data['titulo_slug'] ?? replace($data['titulo'], '-');
 		$columns['subtitulo']    = $data['subtitulo'] ?? null;
 		$columns['conteudo']     = $data['conteudo'] ?? null;
 		$columns['data']         = isset($data['data']) ? date('Y-m-d H:i:s', strtotime(str_replace('/', '-', $data['data']))) : null;

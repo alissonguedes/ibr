@@ -3,56 +3,42 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
-use App\Models\Main\HomeModel;
+use App\Models\Admin\CultoModel;
+use App\Models\Admin\PostModel;
 use Illuminate\Http\Request;
 
-class CultosController extends Controller {
+class CultosController extends Controller
+{
+
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index() {
-		return view('main.cultos.index');
-	}
+	public function index(PostModel $post)
+	{
 
-	/**
-	 * Show the form for creating a new resource.
-	 */
-	public function create() {
-		//
-	}
+		$data['posts'] = $post->getAllPosts('culto');
 
-	/**
-	 * Store a newly created resource in storage.
-	 */
-	public function store(Request $request) {
-		//
+		return view('main.cultos.index', $data);
+
 	}
 
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(HomeModel $home) {
-		//
-	}
+	public function show(Request $request, CultoModel $postModel, string $culto)
+	{
 
-	/**
-	 * Show the form for editing the specified resource.
-	 */
-	public function edit(HomeModel $home) {
-		//
-	}
+		$data['id']     = $request->id;
+		$data['post']   = $postModel->getCulto($culto);
+		$data['cultos'] = $postModel->where('categoria', 'culto')
+			->where('titulo_slug', '<>', $culto)
+			->get();
 
-	/**
-	 * Update the specified resource in storage.
-	 */
-	public function update(Request $request, HomeModel $home) {
-		//
-	}
+		if (!isset($data['post'])) {
+			return redirect()->route('site.cultos');
+		}
 
-	/**
-	 * Remove the specified resource from storage.
-	 */
-	public function destroy(HomeModel $home) {
-		//
+		return view('main.cultos.details', $data);
+
 	}
 }

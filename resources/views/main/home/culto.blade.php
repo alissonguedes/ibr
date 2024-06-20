@@ -30,7 +30,8 @@
 									<div class="col s6 left-align">
 										<small class="text_p">
 											<i class="material-symbols-outlined">update</i>
-											{{ $dia }} de {{ $mes }} de {{ $ano }}
+											{{-- {{ $dia }} de {{ $mes }} de {{ $ano }} --}}
+											{{ show_date($data) }}
 										</small>
 									</div>
 									<div class="col s6 right-align">

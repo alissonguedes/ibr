@@ -18,7 +18,7 @@ class EventosController extends Controller
 	public function index(EventoModel $post)
 	{
 
-		$data['posts'] = $post->getAllPosts('eventos');
+		$data['posts'] = $post->getAllEventos('eventos');
 
 		return view('admin.paginas.eventos.index', $data);
 
@@ -39,7 +39,7 @@ class EventosController extends Controller
 	/**
 	 * Show the form for creating a new resource.
 	 */
-	public function create(Request $request, PostModel $post)
+	public function create(Request $request, EventoModel $post)
 	{
 
 		$data['id']    = $request->id;
@@ -57,7 +57,7 @@ class EventosController extends Controller
 	/**
 	 * Store a newly created resource in storage.
 	 */
-	public function store(EventoRequest $request, PostModel $page)
+	public function store(EventoRequest $request, EventoModel $page)
 	{
 
 		$page->insert_or_update($request);

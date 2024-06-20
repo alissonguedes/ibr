@@ -59,20 +59,11 @@ class CultoModel extends PostModel
 		// return $this->get();
 	}
 
-	// public function getActiveBanners($container = 'slideshow-container')
-	// {
-	// 	return $this->getAllBanners($container)->where('status', '1');
-	// }
-
-	// public function getBanner($data)
-	// {
-	// 	return $this->getOrWhere(['id', $data], ['titulo_slug', $data])->where('tipo', 'banner')->first();
-	// }
-
-	// public function getTotalBanners()
-	// {
-	// 	return $this->where('tipo', 'banner')->whereNot('id_parent', null)->count();
-	// }
+	public function getCulto($data)
+	{
+		return $this->getOrWhere(['titulo_slug', $data])
+			->first();
+	}
 
 	public function search($search, $both = true, $categoria = 'culto', $tipo = 'post')
 	{

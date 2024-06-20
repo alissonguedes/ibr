@@ -27,19 +27,19 @@ class CultoRequest extends FormRequest
 			'titulo' => [
 				'required',
 			],
-			'url'    => 'required|url',
+			'url'    => 'required',
 			'data'   => 'required',
 			// 'subtitulo' => ['required'],
 			// 'conteudo'  => ['required'],
 		];
 
-		if (!isset($this->id)) {
-			$rules['imagem'] = [
-				'required',
-				'mimes:jpg,jpeg,png',
-				'dimensions:1920,1080',
-			];
-		}
+		// if (!isset($this->id)) {
+		// 	$rules['imagem'] = [
+		// 		'required',
+		// 		'mimes:jpg,jpeg,png',
+		// 		'dimensions:1920,1080',
+		// 	];
+		// }
 
 		return $rules;
 

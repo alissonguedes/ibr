@@ -2,19 +2,19 @@
 
 <head>
   <title>IBR - Culto</title>
-  <?php include "head.php"; ?>
+  <?php include "head.php";?>
 </head>
 
 <body>
 
   <!--carregando-->
-  <?php include "loading.php"; ?>
+  <?php include "loading.php";?>
 
   <!--início do corpo-->
   <div class="corpo" id="corpo">
 
   <!--menu-->
-  <?php include "topo.php"; ?>
+  <?php include "topo.php";?>
 
   <!--título da página-->
   <div class="title_page">CULTOS</div>
@@ -121,4 +121,4 @@
   </div>
 
 <!--footer-->
-<?php include "footer.php"; ?>
+<?php include "footer.php";?>
