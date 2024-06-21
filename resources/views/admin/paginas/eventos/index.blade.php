@@ -3,76 +3,51 @@
 	<x-slot:icon href="{{ request('id') ? route('admin.paginas.eventos.index') : route('admin.dashboard') }}"> wallpaper_slideshow </x-slot:icon>
 	<x-slot:title> Eventos </x-slot:title>
 
-	<x-slot:body>
-
-		@if (isset($posts) && $posts->count() > 0)
-			<div class="row">
-				@foreach ($posts as $post)
-					<div class="col s12 m6 l4">
-						<div class="card border-radius-20">
-
-							<div class="card-image">
-								@if (!$post->status)
-									<i class="inactive material-symbols-outlined"> visibility_off </i>
-								@endif
-								<div class="btn-group">
-									<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
-									<x-button class="icon-background edit" :data-href="route('admin.paginas.eventos.edit', $post->id)"> edit </x-button>
-								</div>
-								<img src="{{ route('home.apresentacao.show-image', $post->id) . '?action=preview' }}" height="210">
-							</div>
-
-							<div class="card-content center-align gradient-0deg-grey-grey">
-								<h5 class="card-title bold mb-6 mt-0">{{ $post->titulo }}</h5>
-								<small class="grey-text text-darken-3">26/05/2024</small>
-								<p class="bold black-text mt-6">Pr. Walber</p>
-							</div>
-
-							<div class="card-reveal red darken-4 white-text">
-								<div class="row">
-									<div class="col s12">
-										Tem certeza que deseja remover este evento?
-									</div>
-								</div>
-								<br>
-								<br>
-								<div class="row">
-									<div class="col s6 left-align">
-										<button class="btn card-title white black-text waves-effect" style="font-size: inherit; font-family: inherit;">Não</button>
-									</div>
-									<form action="{{ route('admin.paginas.eventos.delete') }}" method="post">
-										@csrf
-										<input type="hidden" name="_method" value="delete">
-										<input type="hidden" name="id" value="{{ $post->id }}">
-										<div class="col s6 right-align">
-											<button class="btn red waves-effect">Sim</button>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				@endforeach
+	<x-slot:main>
+		<div class="card-panel">
+			<div class="card-content pt-1 pb-1 pl-0 pr-0" style="height: calc(100% - 0px);">
+				<div id="calendar"></div>
 			</div>
-		@else
-			<div class="row">
-				<div class="col s12">
-					Nenhum evento cadastrado.
-				</div>
-			</div>
-		@endif
-
-	</x-slot:body>
+		</div>
+	</x-slot:main>
 
 	@include('admin.paginas.eventos.includes.form')
 
 	<x-slot:script>
-		{{-- <script>
-			$('.materialboxed').materialbox();
-		</script> --}}
-		<x-modal id="form_plano_saude">
-			Teasdfste
-		</x-modal>
+
+		<script src="{{ asset('assets/node_modules/fullcalendar/index.global.min.js') }}"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				var calendarEl = document.getElementById('calendar');
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					initialView: 'dayGridMonth',
+					timeZone: 'America/Sao_Paulo',
+					locale: 'pt-br',
+					headerToolbar: false,
+
+					dayMaxEvents: true,
+					height: '100%',
+					contentHeight: '100%',
+					fixedWeekCount: true,
+					expandRows: true,
+					lazyFetching: true,
+					nowIndicator: true,
+
+					moreLinkContent: function(l) {
+						return 'Mais ' + l.num;
+					},
+
+					dateClick: (a) => {
+						console.log(a)
+					}
+
+				});
+
+				calendar.render();
+
+			});
+		</script>
+
 	</x-slot:script>
 
 </x-admin-layout>
