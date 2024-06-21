@@ -15,12 +15,17 @@ class EventosController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index(EventoModel $post)
+	public function index(Request $request, EventoModel $post)
 	{
 
-		$data['posts'] = $post->getAllEventos('eventos');
+		$data['eventos'] = $post->getAllEventos();
 
-		return view('admin.paginas.eventos.index', $data);
+		// Pesquisar agendamentos
+		if ($request->ajaxCalendar) {
+			return response(view('admin.paginas.eventos.json', $data), 200);
+		} else {
+			return view('admin.paginas.eventos.index', $data);
+		}
 
 	}
 

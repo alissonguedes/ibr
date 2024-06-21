@@ -32,11 +32,11 @@
 					</section>
 				@endif
 
-				<div class="card-content animated fadeIn">
-					@if (isset($body))
+				@if (isset($body))
+					<div {{ $body->attributes->merge(['class' => 'card-content animated fadeIn']) }}>
 						{{ $body }}
-					@endif
-				</div>
+					</div>
+				@endif
 
 				@if (isset($form))
 					<form enctype="multipart/form-data" {{ $form->attributes->merge(['class' => 'card-reveal no-padding']) }}>

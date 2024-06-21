@@ -3,13 +3,9 @@
 	<x-slot:icon href="{{ request('id') ? route('admin.paginas.eventos.index') : route('admin.dashboard') }}"> wallpaper_slideshow </x-slot:icon>
 	<x-slot:title> Eventos </x-slot:title>
 
-	<x-slot:main>
-		<div class="card-panel">
-			<div class="card-content pt-1 pb-1 pl-0 pr-0" style="height: calc(100% - 0px);">
-				<div id="calendar"></div>
-			</div>
-		</div>
-	</x-slot:main>
+	<x-slot:body class="no-padding" style="height: calc(100% - 56px); top: auto; bottom: auto;">
+		<div id="calendar"></div>
+	</x-slot:body>
 
 	@include('admin.paginas.eventos.includes.form')
 
@@ -17,7 +13,9 @@
 
 		<script src="{{ asset('assets/node_modules/fullcalendar/index.global.min.js') }}"></script>
 		<script>
-			document.addEventListener('DOMContentLoaded', function() {
+			// document.addEventListener('DOMContentLoaded', function() {
+			$(function() {
+
 				var calendarEl = document.getElementById('calendar');
 				var calendar = new FullCalendar.Calendar(calendarEl, {
 					initialView: 'dayGridMonth',
@@ -39,7 +37,18 @@
 
 					dateClick: (a) => {
 						console.log(a)
-					}
+					},
+
+					events: {
+						url: BASE_URL + 'eventos',
+						method: 'get',
+						extraParams: {
+							ajaxCalendar: true
+						},
+						success: (response) => {
+							// progress('out');
+						}
+					},
 
 				});
 
