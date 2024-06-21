@@ -3,11 +3,24 @@
 @php
 	if (request('id')):
 	    $id = $row->id;
-	    $titulo = $row->titulo;
+	    $titulo = $row->evento;
 	    $subtitulo = $row->subtitulo;
 	    $conteudo = $row->conteudo;
-	    $data = date('d/m/Y', strtotime($row->data));
-	    $data_evento = $row->data_evento;
+
+	    $data_ini = date('d/m/Y', strtotime($row->data_ini));
+	    $data_fim = date('d/m/Y', strtotime($row->data_fim));
+	    $data_evento = $data_ini . ' - ' . $data_fim;
+
+	    $data_inscricao_ini = date('d/m/Y', strtotime($row->data_inscricao_ini));
+	    $data_inscricao_fim = date('d/m/Y', strtotime($row->data_inscricao_fim));
+	    $data_inscricao = $data_inscricao_ini . ' - ' . $data_inscricao_fim;
+
+	    $local = $row->local_evento;
+		$endereco = $row->endereco;
+	    $video = $row->video;
+		$url = $row->url;
+
+	    $inscricao_encerrada = $row->inscricao_encerrada;
 	    $url = $row->url;
 	    $status = $row->status;
 	    $imagem = route('home.apresentacao.show-image', $id) . '?action=preview';
@@ -20,7 +33,7 @@
 
 	{{-- <input type="hidden" name="titulo_slug" value="apresentacao"> --}}
 	<input type="hidden" name="categoria" value="evento">
-	<input type="hidden" name="tipo" value="post">
+	<input type="hidden" name="tipo" value="E">
 
 	@if (request('id'))
 		<input type="hidden" name="_method" value="put">
@@ -31,11 +44,20 @@
 
 		<div class="col s12">
 
+			<div class="row">
+				<div class="col s12">
+					<h5 class="form-title">
+						<i class="material-symbols-outlined left">event</i>
+						Informações do evento
+					</h5>
+				</div>
+			</div>
+
 			<!-- BEGIN título -->
 			<div class="row">
 				<div class="col s12">
 					<div class="input-field mb-2 @error('titulo') error @enderror">
-						<label id="titulo">Título</label>
+						<label id="titulo">Título do evento</label>
 						<x-text-input type="text" name="titulo" id="titulo" :value="old('titulo', $titulo ?? null)" autofocus="autofocus" />
 						@error('titulo')
 							<small class="error">{{ $message }}</small>
@@ -45,23 +67,12 @@
 			</div>
 			<!-- END título -->
 
-			<!-- BEGIN descrição -->
-			<div class="row">
-				<div class="col s12">
-					<div class="input-field mb-2">
-						<label for="subtitulo">Subtítulo</label>
-						<x-text-input type="text" name="subtitulo" id="subtitulo" :value="old('subtitulo', $subtitulo ?? null)" />
-					</div>
-				</div>
-			</div>
-			<!-- END descrição -->
-
 			<!-- BEGIN Data -->
 			<div class="row">
-				<div class="col s12">
+				<div class="col s6">
 					<div class="input-field mb-2 @error('data') error @enderror">
 						<label for="data">Data do evento</label>
-						<x-text-input type="text" name="data" id="data" :value="old('data', $data ?? null)" />
+						<x-text-input type="text" name="data" id="data" class="datepicker" :value="old('data', $data_evento ?? null)" />
 						@error('data')
 							<small class="error">{{ $message }}</small>
 						@enderror
@@ -70,11 +81,115 @@
 			</div>
 			<!-- END Data -->
 
+			<!-- BEGIN descrição -->
+			<div class="row">
+				<div class="col s12">
+					<div class="input-field mb-2">
+						{{-- <label for="conteudo">Conteúdo</label> --}}
+						<textarea type="text" name="conteudo" id="conteudo" class="editor">{{ old('conteudo', $conteudo ?? null) }}</textarea>
+					</div>
+				</div>
+			</div>
+			<!-- END descrição -->
+
+			<div class="divider mt-3 mb-3 grey darken-4"></div>
+
+			<div class="row">
+				<div class="col s12">
+					<h5 class="form-title">
+						<i class="material-symbols-outlined left">event</i>
+						Inscrições
+					</h5>
+				</div>
+			</div>
+
+			<!-- BEGIN Data -->
+			<div class="row">
+				<div class="col s6">
+					<div class="input-field mb-2 @error('data_inscricao') error @enderror">
+						<label for="data">Início e fim das inscrições</label>
+						<x-text-input type="text" name="data_inscricao" id="data_inscricao" class="datepicker" :value="old('data_inscricao', $data_inscricao ?? null)" />
+						@error('data_inscricao')
+							<small class="error">{{ $message }}</small>
+						@enderror
+					</div>
+				</div>
+			</div>
+			<!-- END Data -->
+
+			<!-- BEGIN inscrições encerradas -->
+			<div class="row">
+				<div class="col s12">
+					<div class="input-field">
+						<label for="inscricao_encerrada" class="">Inscrições encerradas</label>
+						<div class="switch">
+							<label>
+								Não
+								<input type="checkbox" name="inscricao_encerrada" id="inscricao_encerrada" value="1" @checked(old() ? old('inscricao_encerrada') : (isset($inscricao_encerrada) ? $inscricao_encerrada : false))>
+								<span class="lever"></span>
+								Sim
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END inscrições encerradas -->
+
+			<div class="divider mt-3 mb-3 grey darken-4"></div>
+
+			<div class="row">
+				<div class="col s12">
+					<h5 class="form-title">
+						<i class="material-symbols-outlined left">location_on</i>
+						Localização
+					</h5>
+				</div>
+			</div>
+
+			<!-- BEGIN local -->
+			<div class="row">
+				<div class="col s12">
+					<div class="input-field mb-2 @error('local') error @enderror">
+						<label for="local">Local do evento</label>
+						<x-text-input type="text" name="local" id="local" :value="old('local', $local ?? null)" />
+						@error('local')
+							<small class="error">{{ $message }}</small>
+						@enderror
+					</div>
+				</div>
+			</div>
+			<!-- END local -->
+
+			<!-- BEGIN local -->
+			<div class="row">
+				<div class="col s12">
+					<div class="input-field mb-2 @error('endereco') error @enderror">
+						<label for="local">Endereço</label>
+						<x-text-input type="text" name="endereco" id="endereco" :value="old('endereco', $endereco ?? null)" />
+						@error('endereco')
+							<small class="error">{{ $message }}</small>
+						@enderror
+					</div>
+				</div>
+			</div>
+			<!-- END local -->
+
+			<div class="divider mt-3 mb-3 grey darken-4"></div>
+
+			<div class="row">
+				<div class="col s12">
+					<h5 class="form-title">
+						<i class="material-symbols-outlined left">media_link</i>
+						Mídias
+					</h5>
+				</div>
+			</div>
+
 			<!-- BEGIN Link -->
 			<div class="row">
 				<div class="col s12">
 					<div class="input-field mb-2 @error('url') error @enderror">
-						<label for="url">Link</label>
+						<label for="url">Vídeo do evento</label>
 						<x-text-input type="url" name="url" id="url" :value="old('url', $url ?? null)" />
 						@error('url')
 							<small class="error">{{ $message }}</small>
@@ -122,16 +237,7 @@
 			</div>
 			<!-- END ImageView -->
 
-			<!-- BEGIN descrição -->
-			<div class="row">
-				<div class="col s12">
-					<div class="input-field mb-2">
-						{{-- <label for="conteudo">Conteúdo</label> --}}
-						<textarea type="text" name="conteudo" id="conteudo" class="editor">{{ old('conteudo', $conteudo ?? null) }}</textarea>
-					</div>
-				</div>
-			</div>
-			<!-- END descrição -->
+			<div class="divider mt-3 mb-3 grey darken-4"></div>
 
 			<!-- BEGIN status -->
 			<div class="row">
@@ -171,6 +277,6 @@
 
 </x-slot:form>
 
-{{-- <x-slot:scripts_form>
-	<script src="{{ asset('assets/js/clinica/js/pacientes/form.js') }}" defer></script>
-</x-slot:scripts_form> --}}
+{{-- <x-slot:scripts_form> --}}
+{{-- <script src="{{ asset('assets/js/clinica/js/pacientes/form.js') }}" defer></script> --}}
+{{-- </x-slot:scripts_form> --}}

@@ -25,7 +25,7 @@
 
 	@include('admin.categorias.includes.form')
 
-	<x-slot:script>
+	@pushOnce('scripts')
 		<script>
 			var updateOutput = function(e) {
 				var list = e.length ? e : $(e.target);
@@ -36,6 +36,6 @@
 				group: 1
 			}).on('change', updateOutput);
 		</script>
-	</x-slot:script>
+	@endPushOnce
 
 </x-admin-layout>

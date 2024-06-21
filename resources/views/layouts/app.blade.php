@@ -53,17 +53,6 @@
 
 			{{ $slot }}
 
-			<script>
-				var BASE_URL = "{{ base_url() }}";
-				var BASE_PATH = "{{ asset('/') }}";
-				var SITE_URL = "{{ site_url() }}";
-				var SITE_KEY = "{{ env('INVISIBLE_RECAPTCHA_SITEKEY') }}";
-			</script>
-
-			@if (isset($scripts))
-				{{ $scripts }}
-			@endif
-
 			@if (isset($sidebar))
 				<aside {{ $sidebar->attributes->merge(['class' => 'sidenav-main nav-expanded nav-lock nav-collapsible']) }}>
 					{{ $sidebar }}

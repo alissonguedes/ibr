@@ -9,16 +9,14 @@ use App\Models\Admin\FileModel;
 use App\Models\Admin\PostModel;
 use Illuminate\Http\Request;
 
-class EventosController extends Controller
-{
+class EventosController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index(Request $request, EventoModel $post)
-	{
+	public function index(Request $request, EventoModel $post) {
 
-		$data['eventos'] = $post->getAllEventos();
+		$data['posts'] = $post->getAllEventos();
 
 		// Pesquisar agendamentos
 		if ($request->ajaxCalendar) {
@@ -32,8 +30,7 @@ class EventosController extends Controller
 	/**
 	 * Search banners
 	 */
-	public function search(Request $request, PostModel $post)
-	{
+	public function search(Request $request, PostModel $post) {
 
 		$data['posts'] = $post->search($request->search, true, 'eventos');
 
@@ -44,12 +41,11 @@ class EventosController extends Controller
 	/**
 	 * Show the form for creating a new resource.
 	 */
-	public function create(Request $request, EventoModel $post)
-	{
+	public function create(Request $request, EventoModel $post) {
 
 		$data['id']    = $request->id;
-		$data['row']   = $post->getPost($request->id);
-		$data['posts'] = $post->getAllPosts('eventos');
+		$data['row']   = $post->getEvento($request->id);
+		$data['posts'] = $post->getAllEventos();
 
 		if (!$data['row']) {
 			return redirect()->route('admin.paginas.eventos.index');
@@ -62,8 +58,7 @@ class EventosController extends Controller
 	/**
 	 * Store a newly created resource in storage.
 	 */
-	public function store(EventoRequest $request, EventoModel $page)
-	{
+	public function store(EventoRequest $request, EventoModel $page) {
 
 		$page->insert_or_update($request);
 
@@ -80,18 +75,16 @@ class EventosController extends Controller
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(Request $request, FileModel $file, int $file_id)
-	{
+	public function show(Request $request, FileModel $file, int $file_id) {
 
-		return $file->showFile($file_id, 'post');
+		return $file->showFile($file_id, 'evento');
 
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 */
-	public function destroy(Request $request, PostModel $post)
-	{
+	public function destroy(Request $request, EventoModel $post) {
 
 		if ($post->remove($request->id, 'post')) {
 			$message = 'Postagem removida com sucesso!';

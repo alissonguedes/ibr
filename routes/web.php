@@ -36,6 +36,7 @@ Route::prefix('/')->group(function () {
 	Route::get('/cultos', [CultosController::class, 'index'])->name('site.cultos');
 	Route::get('/cultos/{culto}', [CultosController::class, 'show'])->name('site.cultos.details');
 	Route::get('/eventos', [EventosController::class, 'index'])->name('site.eventos');
+	Route::get('/eventos/{evento}', [EventosController::class, 'show'])->name('site.eventos.details');
 	Route::get('/agenda', [AgendaController::class, 'index'])->name('site.agenda');
 	Route::get('/seja-membro', [HomeController::class, 'index'])->name('site.seja-membro');
 
@@ -48,6 +49,7 @@ Route::get('/imagem/ministerio/{file_id}', [Ministerios::class, 'show'])->name('
 Route::get('/imagem/a-ibr/{file_id}', [A_Ibr::class, 'show'])->name('home.a-ibr.show-image');
 Route::get('/imagem/apresentacao/{file_id}', [Apresentacao::class, 'show'])->name('home.apresentacao.show-image');
 Route::get('/imagem/cultos/{file_id}', [Cultos::class, 'show'])->name('home.cultos.show-image');
+Route::get('/imagem/evento/{file_id}', [Eventos::class, 'show'])->name('home.eventos.show-image');
 
 Route::middleware([
 	'auth',

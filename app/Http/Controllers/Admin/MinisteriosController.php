@@ -8,15 +8,13 @@ use App\Models\Admin\FileModel;
 use App\Models\Admin\MinisterioModel;
 use Illuminate\Http\Request;
 
-class MinisteriosController extends Controller
-{
+class MinisteriosController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index(MinisterioModel $ministerio)
-	{
+	public function index(MinisterioModel $ministerio) {
 
-		$data['posts'] = $ministerio->getAllMinisterios();
+		$data['posts'] = $ministerio->getAllMinisterios('ministerio');
 
 		return view('admin.paginas.ministerios.index', $data);
 
@@ -25,8 +23,7 @@ class MinisteriosController extends Controller
 	/**
 	 * Search ministerios
 	 */
-	public function search(Request $request, MinisterioModel $ministerio)
-	{
+	public function search(Request $request, MinisterioModel $ministerio) {
 
 		$data['ministerios'] = $ministerio->search($request->search);
 
@@ -37,11 +34,10 @@ class MinisteriosController extends Controller
 	/**
 	 * Show the form for creating a new resource.
 	 */
-	public function create(Request $request, MinisterioModel $ministerio)
-	{
+	public function create(Request $request, MinisterioModel $ministerio) {
 
 		$data['id']          = $request->id;
-		$data['row']         = $ministerio->getMinisterio($request->id);
+		$data['row']         = $ministerio->getPost($request->id);
 		$data['ministerios'] = $ministerio->getAllMinisterios();
 
 		return view('admin.paginas.ministerios.index', $data);
@@ -51,8 +47,7 @@ class MinisteriosController extends Controller
 	/**
 	 * Store a newly created resource in storage.
 	 */
-	public function store(MinisterioRequest $request, MinisterioModel $ministerio)
-	{
+	public function store(MinisterioRequest $request, MinisterioModel $ministerio) {
 
 		$message = $ministerio->insert_or_update($request);
 
@@ -73,8 +68,7 @@ class MinisteriosController extends Controller
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(Request $request, FileModel $file, int $file_id)
-	{
+	public function show(Request $request, FileModel $file, int $file_id) {
 
 		return $file->showFile($file_id, 'ministerio');
 
@@ -83,8 +77,7 @@ class MinisteriosController extends Controller
 	/**
 	 * Remove the specified resource from storage.
 	 */
-	public function destroy(Request $request, MinisterioModel $ministerio)
-	{
+	public function destroy(Request $request, MinisterioModel $ministerio) {
 
 		if ($ministerio->remove($request->id, 'ministerio')) {
 			$message = 'Ministerio removido com sucesso!';

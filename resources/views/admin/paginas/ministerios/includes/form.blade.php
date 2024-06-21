@@ -1,7 +1,7 @@
 <x-header-page data-href="{{ route('admin.paginas.ministerios.index') }}" placeholder="Pesquisar postagem..." title="Adicionar Postagem">add</x-header-page>
 
 @php
-	if (request('id')):
+	if (request('id') && !empty($row)):
 	    $id = $row->id;
 	    $titulo = $row->titulo;
 	    $subtitulo = $row->subtitulo;
@@ -15,8 +15,6 @@
 <x-slot:form action="{{ route('admin.paginas.ministerios.post') }}" method="post" style="{{ $errors->any() || request('id') ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" autocomplete="off">
 
 	@csrf
-	{{-- <input type="hidden" name="tipo" value="ministerio"> --}}
-	{{-- <input type="hidden" name="titulo_slug" value="ministerios"> --}}
 
 	<input type="hidden" name="categoria" value="ministerio">
 	<input type="hidden" name="tipo" value="post">

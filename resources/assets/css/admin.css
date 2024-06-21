@@ -1206,6 +1206,32 @@ textarea.materialize-textarea:not([readonly]),
 	color: var(--light-green);
 }
 
+.input-field.error label,
+.tabs.error .tab a,
+.input-field .error {
+	color: var(--red-accent-4) !important;
+}
+
+.input-field.error input:not([type]):not([readonly]),
+.input-field.error input[type=text]:not(.browser-default):not([readonly]),
+.input-field.error input[type=password]:not(.browser-default):not([readonly]),
+.input-field.error input[type=email]:not(.browser-default):not([readonly]),
+.input-field.error input[type=url]:not(.browser-default):not([readonly]),
+.input-field.error input[type=time]:not(.browser-default):not([readonly]),
+.input-field.error input[type=date]:not(.browser-default):not([readonly]),
+.input-field.error input[type=datetime]:not(.browser-default):not([readonly]),
+.input-field.error input[type=datetime-local]:not(.browser-default):not([readonly]),
+.input-field.error input[type=tel]:not(.browser-default):not([readonly]),
+.input-field.error input[type=number]:not(.browser-default):not([readonly]),
+.input-field.error input[type=search]:not(.browser-default):not([readonly]),
+.input-field.error textarea.materialize-textarea:not([readonly]),
+.input-field.error .select-wrapper:not(.browser-default) input.select-dropdown,
+.input-field.error .select-wrapper:not(.browser-default) input.select-dropdown.ql-container:not([readonly]),
+.input-field.error .chips:not([readonly]),
+.input-field.error .input-field:not(.browser-default) .ql-container:not([readonly]) {
+	background-image: linear-gradient(var(--red-accent-4), var(--red-accent-4)), linear-gradient(var(--red-accent-4), var(--red-accent-4))
+}
+
 [type="reset"] {
 	border: 1px solid var(--light-green);
 	color: var(--light-green);
@@ -1215,6 +1241,84 @@ textarea.materialize-textarea:not([readonly]),
 [type="submit"] {
 	background-color: var(--light-green) !important;
 	border-radius: 30px;
+}
+
+.form-title {
+	font-family: 'Montserrat Black';
+	font-size: 20px;
+	font-weight: 900;
+	line-height: 20px;
+	color: var(--grey-lighten-1);
+	margin-bottom: 30px;
+}
+
+.form-title .material-symbols-outlined {
+	line-height: inherit;
+	font-size: 42px;
+}
+
+@media (min-width: 564px) {
+	.daterangepicker {
+		width: 50% !important;
+	}
+}
+
+.daterangepicker .drp-calendar {
+	display: none;
+	max-width: 50%;
+	min-width: 50%;
+}
+
+.daterangepicker td.off,
+.daterangepicker td.off.in-range,
+.daterangepicker td.off.start-date,
+.daterangepicker td.off.end-date {
+	background-color: transparent !important;
+	border-color: transparent !important;
+	color: #999 !important;
+	cursor: default !important;
+}
+
+.daterangepicker td.in-range {
+	background-color: var(--light-green) !important;
+	border-color: transparent;
+	color: #000 !important;
+	border-radius: 0;
+}
+
+.daterangepicker td.available:hover,
+.daterangepicker th.available:hover {
+	background-color: var(--light-green) !important;
+	border-color: transparent;
+	color: #000 !important;
+}
+
+.daterangepicker td.active,
+.daterangepicker td.active:hover {
+	background-color: var(--light-green) !important;
+	color: #000 !important;
+}
+
+.daterangepicker .calendar-table th,
+.daterangepicker .calendar-table td {
+	width: 20px !important;
+	height: 20px !important;
+	line-height: 1px !important;
+}
+
+.daterangepicker .calendar-table .next span,
+.daterangepicker .calendar-table .prev span {
+	border-color: #ffffff !important;
+}
+
+.daterangepicker .drp-buttons .btn {
+	background-color: var(--light-green);
+	color: #000;
+	padding: 0 8px !important;
+}
+
+.daterangepicker .drp-buttons .cancelBtn {
+	background-color: #fff;
 }
 
 /** Editor */

@@ -92,15 +92,16 @@
 	{{-- END Footer --}}
 
 	{{-- BEGIN Scripts --}}
-	<x-slot:scripts>
+	@include('layouts.admin.scripts')
+	{{-- END Scripts --}}
 
+	{{-- BEGIN Scripts --}}
+	{{-- <x-slot:scripts>
 		@include('layouts.admin.scripts')
-
 		@if (isset($script))
 			{{ $script }}
 		@endif
-
-	</x-slot:scripts>
+	</x-slot:scripts> --}}
 	{{-- END Scripts --}}
 
 </x-app-layout>

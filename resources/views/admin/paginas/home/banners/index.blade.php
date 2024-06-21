@@ -70,13 +70,4 @@
 
 	@include('admin.paginas.home.banners.includes.form')
 
-	<x-slot:script>
-		{{-- <script>
-			$('.materialboxed').materialbox();
-		</script> --}}
-		<x-modal id="form_plano_saude">
-			Teasdfste
-		</x-modal>
-	</x-slot:script>
-
 </x-admin-layout>
