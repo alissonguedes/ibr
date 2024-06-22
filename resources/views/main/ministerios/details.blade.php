@@ -4,7 +4,7 @@
 
 		<div class="title_page">MINISTÉRIOS</div>
 
-		<div class="content_int">
+		<div class="content_int mt-3">
 
 			<div class="bloco">
 				<div class="title_bloco_esquerdo">
@@ -16,7 +16,7 @@
 						<img src="{{ route('home.ministerios.show-image', $post->id) . '?action=preview' }}" class="img_cem">
 					</div>
 					<div class="text_bloco_esq">
-						{!! $post->conteudo !!}
+						{!! $post->descricao !!}
 					</div>
 				</div>
 			</div>
@@ -35,10 +35,10 @@
 							<a href="{{ route('site.ministerios.details', $ministerio->titulo_slug) }}">
 								<div class="conj_ministerios">
 									<div class="img_min">
-										<img src="img/ministerios/connect.jpg" class="img_cem">
+										<img src="{{ route('home.ministerios.show-image', $ministerio->id) . '?action=preview' }}" class="img_cem">
 									</div>
-									<div class="nome_ministerio cor_preta">CONNECT</div>
-									<div class="ref_ministerio cor_cinza">Ministério de comunicação</div>
+									<div class="nome_ministerio cor_preta">{{ $ministerio->titulo }}</div>
+									<div class="ref_ministerio cor_cinza">{{ $ministerio->subtitulo }}</div>
 								</div>
 							</a>
 						@endforeach

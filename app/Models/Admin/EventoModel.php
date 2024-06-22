@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 /**
  * A classe extende de PostModel, pois opera na tabela `tb_post`
  */
-class EventoModel extends Model {
+class EventoModel extends Model
+{
 
 	use HasFactory;
 
@@ -65,7 +66,8 @@ class EventoModel extends Model {
 		'status',
 	];
 
-	public function getAllEventos() {
+	public function getAllEventos()
+	{
 		return $this->all();
 		// $container = 'eventos';
 		// return $this->where(['tipo' => 'post'])->whereIn('id_parent', function ($query) use ($container) {
@@ -73,12 +75,20 @@ class EventoModel extends Model {
 		// })->get();
 	}
 
-	public function getEvento($id) {
+	public function getEvento($id)
+	{
 
 		return $this->where('id', $id)->get()->first();
+
 	}
 
-	public function search($search, $both = true, $categoria = 'evento', $tipo = 'post') {
+	public function getEventoByTitulo($titulo)
+	{
+		return $this->where('evento_slug', $titulo)->get()->first();
+	}
+
+	public function search($search, $both = true, $categoria = 'evento', $tipo = 'post')
+	{
 
 		// return $this->select($this->columns)->where('categoria', $categoria)
 		// 	->whereAny([
@@ -92,7 +102,8 @@ class EventoModel extends Model {
 
 	}
 
-	public function insert_or_update($request) {
+	public function insert_or_update($request)
+	{
 
 		$columns = [];
 		$data    = request()->all();
@@ -159,7 +170,8 @@ class EventoModel extends Model {
 
 	}
 
-	public static function remove($id, $categoria = 'post') {
+	public static function remove($id, $categoria = 'post')
+	{
 
 		FileModel::remove($id, $categoria);
 		self::where('id', $id)->delete();

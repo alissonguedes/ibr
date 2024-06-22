@@ -22,10 +22,26 @@
 								<img src="{{ route('home.eventos.show-image', $post->id) . '?action=preview' }}" height="210">
 							</div>
 
-							<div class="card-content center-align gradient-0deg-grey-grey">
-								<h5 class="card-title bold mb-6 mt-0">{{ $post->evento }}</h5>
-								<small class="grey-text text-darken-3">{{ show_date($post->data_ini) }}</small>
-								<p class="bold black-text mt-6">{{ $post->subtitulo }}</p>
+							<div class="card-stacked gradient-0deg-grey-grey">
+
+								<div class="card-content center-align transparent">
+									<h5 class="card-title bold mb-6 mt-0">{{ $post->evento }}</h5>
+									<small class="grey-text text-darken-3">{{ show_date($post->data_ini) }}</small>
+									<p class="bold black-text mt-6">{{ $post->subtitulo }}</p>
+									<br>
+								</div>
+
+								<div class="card-action transparent">
+									<a href="{{ route('admin.paginas.eventos.inscritos', $post->id) }}" class="grey-text text-darken-4">
+										<i class="material-symbols-outlined left">group</i>
+										@php
+											$inscricao = new App\Models\Admin\InscricaoModel();
+											$total_inscritos = $inscricao->getInscritos($post->id)->count();
+										@endphp
+										{{ $total_inscritos }} Inscritos
+									</a>
+								</div>
+
 							</div>
 
 							<div class="card-reveal red darken-4 white-text">

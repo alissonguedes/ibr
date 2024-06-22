@@ -1,6 +1,7 @@
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 {{-- <script src="{{ asset('assets/js/rolagem.js') }}" type="text/javascript"></script> --}}
+<script src="{{ asset('assets/node_modules/materialize-css/dist/js/materialize.min.js') }}"></script>
 
 <!--box-->
 <script>
@@ -15,6 +16,8 @@
 			$(this).parents('.topo').find('a').removeClass('active');
 			$(this).addClass('active');
 		});
+
+		$('select').formSelect();
 	});
 </script>
 

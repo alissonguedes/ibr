@@ -22,16 +22,8 @@
 	@include('layouts.site.footer')
 	{{-- END Footer --}}
 
-	{{-- BEGIN Scripts  --}}
-	<x-slot:scripts>
-
-		@include('layouts.site.scripts')
-
-		@if (isset($script))
-			{{ $script }}
-		@endif
-
-	</x-slot:scripts>
-	{{-- END Scripts --}}
+	{{-- BEGIN scripts --}}
+	@include('layouts.site.scripts')
+	{{-- END scripts --}}
 
 </x-app-layout>

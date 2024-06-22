@@ -5,7 +5,7 @@
 	    $id = $row->id;
 	    $titulo = $row->evento;
 	    $subtitulo = $row->subtitulo;
-	    $conteudo = $row->conteudo;
+	    $descricao = $row->descricao;
 
 	    $data_ini = date('d/m/Y', strtotime($row->data_ini));
 	    $data_fim = date('d/m/Y', strtotime($row->data_fim));
@@ -16,9 +16,9 @@
 	    $data_inscricao = $data_inscricao_ini . ' - ' . $data_inscricao_fim;
 
 	    $local = $row->local_evento;
-		$endereco = $row->endereco;
+	    $endereco = $row->endereco;
 	    $video = $row->video;
-		$url = $row->url;
+	    $url = $row->url;
 
 	    $inscricao_encerrada = $row->inscricao_encerrada;
 	    $url = $row->url;
@@ -85,8 +85,8 @@
 			<div class="row">
 				<div class="col s12">
 					<div class="input-field mb-2">
-						{{-- <label for="conteudo">Conteúdo</label> --}}
-						<textarea type="text" name="conteudo" id="conteudo" class="editor">{{ old('conteudo', $conteudo ?? null) }}</textarea>
+						{{-- <label for="descricao">Conteúdo</label> --}}
+						<textarea type="text" name="descricao" id="descricao" class="editor">{{ old('descricao', $descricao ?? null) }}</textarea>
 					</div>
 				</div>
 			</div>

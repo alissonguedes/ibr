@@ -6,7 +6,7 @@
 
 		<div class="content_int">
 
-			<div class="video_ministerio">
+			<div class="video_ministerio mt-3">
 				{!! $post->url !!}
 			</div>
 

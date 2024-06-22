@@ -16,6 +16,7 @@ use App\Http\Controllers\Main\AgendaController;
 use App\Http\Controllers\Main\CultosController;
 use App\Http\Controllers\Main\EventosController;
 use App\Http\Controllers\Main\HomeController;
+use App\Http\Controllers\Main\InscricoesController;
 use App\Http\Controllers\Main\MinisteriosController;
 use App\Http\Controllers\Main\SobreController;
 use App\Http\Controllers\ProfileController;
@@ -37,8 +38,21 @@ Route::prefix('/')->group(function () {
 	Route::get('/cultos/{culto}', [CultosController::class, 'show'])->name('site.cultos.details');
 	Route::get('/eventos', [EventosController::class, 'index'])->name('site.eventos');
 	Route::get('/eventos/{evento}', [EventosController::class, 'show'])->name('site.eventos.details');
+	Route::get('/eventos/inscricao/{evento}', [InscricoesController::class, 'index'])->name('site.eventos.inscricoes');
+	Route::post('/eventos/inscricao/{evento}', [InscricoesController::class, 'store'])->name('site.eventos.post');
 	Route::get('/agenda', [AgendaController::class, 'index'])->name('site.agenda');
 	Route::get('/seja-membro', [HomeController::class, 'index'])->name('site.seja-membro');
+
+	Route::prefix('/uf')->group(function () {
+
+		Route::get('/', function () {})->name('estados');
+		Route::get('/{id?}/cidades', function () {
+			$data = DB::table('tb_cidade')->where('id_estado', request('id'))
+				->get();
+			return response()->json($data);
+		})->name('estados.get.cidades');
+
+	});
 
 });
 
@@ -152,6 +166,7 @@ Route::middleware([
 		Route::get('/', [Eventos::class, 'index'])->name('admin.paginas.eventos.index');
 		Route::get('/{search}', [Eventos::class, 'search'])->name('admin.paginas.eventos.search');
 		Route::get('/id/{id}', [Eventos::class, 'create'])->name('admin.paginas.eventos.edit');
+		Route::get('/id/{id}/inscritos', [Eventos::class, 'inscritos'])->name('admin.paginas.eventos.inscritos');
 		Route::post('/', [Eventos::class, 'store'])->name('admin.paginas.eventos.post');
 		Route::put('/', [Eventos::class, 'store'])->name('admin.paginas.eventos.post');
 		Route::delete('/', [Eventos::class, 'destroy'])->name('admin.paginas.eventos.delete');
