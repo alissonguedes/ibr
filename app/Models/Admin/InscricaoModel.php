@@ -5,16 +5,14 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
 
-class InscricaoModel extends Model
-{
+class InscricaoModel extends Model {
 	use HasFactory;
 
 	protected $table = 'tb_inscricao';
 
 	protected $fillable = ['id_evento', 'id_inscrito', 'codigo_inscricao', 'status'];
 
-	public static function getInscritos($id_evento)
-	{
+	public static function getInscritos($id_evento) {
 		$get = self::select(
 			'id',
 			'id_evento',
@@ -27,7 +25,9 @@ class InscricaoModel extends Model
 			DB::raw('(SELECT REGEXP_REPLACE(rg, "[^\\x20-\\x7E]", "") AS rg FROM tb_inscrito WHERE id = id_inscrito) AS rg'),
 			DB::raw('(SELECT REGEXP_REPLACE(telefone, "[^\\x20-\\x7E]", "") AS telefone FROM tb_inscrito WHERE id = id_inscrito) AS telefone'),
 			DB::raw('(SELECT REGEXP_REPLACE(email, "[^\\x20-\\x7E]", "") AS email FROM tb_inscrito WHERE id = id_inscrito) AS email'),
-			DB::raw('(DATE_FORMAT(created_at, "%d/%m/%Y %H:%i:%s")) AS data_inscricao')
+			DB::raw('(DATE_FORMAT(created_at, "%d/%m/%Y %H:%i:%s")) AS data_inscricao'),
+			'status',
+			DB::raw('(SELECT COUNT(id) FROM tb_inscricao_pagamento WHERE id_inscricao = id) AS pago')
 		)
 			->where('id_evento', $id_evento)->get();
 

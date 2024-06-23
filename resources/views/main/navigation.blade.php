@@ -2,27 +2,27 @@
 	<div class="lk">HOME</div>
 </x-nav-link>
 
-<x-nav-link :href="route('site.home.a-ibr')" class="waves-cyan" :active="request()->routeIs('site.home.a-ibr')">
+<x-nav-link class="waves-cyan" :href="route('site.home.a-ibr')" :active="request()->routeIs('site.home.a-ibr')">
 	<div class="lk">A IBR</div>
 </x-nav-link>
 
-<x-nav-link :href="route('site.ministerios')" class="waves-cyan" :active="request()->routeIs('site.ministerios')|| request()->routeIs('site.ministerios.details')">
+<x-nav-link class="waves-cyan" :href="route('site.ministerios')" :active="request()->routeIs('site.ministerios') || request()->routeIs('site.ministerios.details')">
 	<div class="lk">Ministérios</div>
 </x-nav-link>
 
-<x-nav-link :href="route('site.cultos')" class="waves-cyan" :active="request()->routeIs('site.cultos') || request()->routeIs('site.cultos.details')">
+<x-nav-link class="waves-cyan" :href="route('site.cultos')" :active="request()->routeIs('site.cultos') || request()->routeIs('site.cultos.details')">
 	<div class="lk">Cultos</div>
 </x-nav-link>
 
-<x-nav-link :href="route('site.eventos')" class="waves-cyan" :active="request()->routeIs('site.eventos') || request()->routeIs('site.eventos.details')">
+<x-nav-link class="waves-cyan" :href="route('site.eventos')" :active="request()->routeIs('site.eventos') || request()->routeIs('site.eventos.details')">
 	<div class="lk">Eventos</div>
 </x-nav-link>
 
-<x-nav-link :href="route('site.agenda')" class="waves-cyan" :active="request()->routeIs('site.agenda')">
+<x-nav-link class="waves-cyan" :href="route('site.agenda')" :active="request()->routeIs('site.agenda')">
 	<div class="lk">Agenda</div>
 </x-nav-link>
 
-<x-nav-link :href="route('site.seja-membro')" class="waves-cyan" :active="request()->routeIs('site.seja-membro')">
+<x-nav-link class="waves-cyan" :href="route('site.seja-membro')" :active="request()->routeIs('site.seja-membro')">
 	<div class="lk_bt">SEJA MEMBRO</div>
 </x-nav-link>
 
