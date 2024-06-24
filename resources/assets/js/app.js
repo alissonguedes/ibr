@@ -1,10 +1,10 @@
 'use strict';
 
-$(document).ready(function () {
+$(document).ready(function() {
 
 	var scroller = $('.scroller');
 
-	$('[data-href],[href]').unbind().bind('click', function (e) {
+	$('[data-href],[href]').unbind().bind('click', function(e) {
 
 		e.preventDefault();
 
@@ -37,13 +37,13 @@ $(document).ready(function () {
 
 	});
 
-	$(scroller).each(function () {
+	$(scroller).each(function() {
 
 		var scroll = new PerfectScrollbar(this, {
 			theme: "dark",
 		});
 
-		$(window).bind('resize', function () {
+		$(window).bind('resize', function() {
 			scroll.update();
 		});
 
@@ -82,19 +82,19 @@ $(document).ready(function () {
 		});
 	}
 
-	setTimeout(function () {
-		$('.calendar-time').find('select').each(function () {
+	setTimeout(function() {
+		$('.calendar-time').find('select').each(function() {
 			$(this).addClass('browser-default');
 		})
 	}, 1000);
 
-	tabs.find('a').unbind().bind('click', function () {
-		setTimeout(function () {
+	tabs.find('a').unbind().bind('click', function() {
+		setTimeout(function() {
 			t.tabs('updateTabIndicator');
 		}, 100)
 	});
 
-	$('.tabs .tab a').each(function (index, element) {
+	$('.tabs .tab a').each(function(index, element) {
 
 		var id = $(this).attr('href');
 
@@ -115,7 +115,7 @@ $(document).ready(function () {
 
 	$('select:not(.browser-default)').formSelect();
 
-	$('.input-field').each(function () {
+	$('.input-field').each(function() {
 
 		var field = $(this).find('input,textarea,select');
 
@@ -142,11 +142,11 @@ $(document).ready(function () {
 
 	sidenav.sidenav('close');
 
-	$('.btn-menu').unbind().bind('click', function () {
+	$('.btn-menu').unbind().bind('click', function() {
 		$('body').toggleClass('nav-collapsed');
 	});
 
-	$('button[type="reset"]').unbind().bind('click', function () {
+	$('button[type="reset"]').unbind().bind('click', function() {
 
 		var action = $(this).parents('form').attr('action');
 
@@ -158,7 +158,7 @@ $(document).ready(function () {
 
 	});
 
-	$('#card-button,.icon-background').unbind().bind('click', function () {
+	$('#card-button,.icon-background').unbind().bind('click', function() {
 		var url = $(this).data('href');
 		$('form.card-reveal').show();
 		if (typeof url !== 'undefined') {
@@ -206,69 +206,69 @@ $(document).ready(function () {
 
 	// });
 
-	$('aside').find('ul').each(function () {
-		var a = $(this).find('li').find('a[href="javascript:void(0);"]');
-		a.unbind().bind('click', function (e) {
-			var self = $(this).parents('ul');
-			var idMenu = $(this).data('id');
-			e.preventDefault();
-			if ($(this).hasClass('menu-close')) {
-				self.parents('aside').find('ul.in').removeClass('in');
-				self.parents('aside').find(idMenu).removeClass('in out').addClass('in');
-			} else {
-				self.removeClass('in').addClass('out');
-				self.parents('aside').find(idMenu).addClass('in');
-			}
-		});
-	});
+	// $('aside').find('ul').each(function() {
+	// 	var a = $(this).find('li').find('a[href="javascript:void(0);"]');
+	// 	a.unbind().bind('click', function(e) {
+	// 		var self = $(this).parents('ul');
+	// 		var idMenu = $(this).data('id');
+	// 		e.preventDefault();
+	// 		if ($(this).hasClass('menu-close')) {
+	// 			self.parents('aside').find('ul.in').removeClass('in');
+	// 			self.parents('aside').find(idMenu).removeClass('in out').addClass('in');
+	// 		} else {
+	// 			self.removeClass('in').addClass('out');
+	// 			self.parents('aside').find(idMenu).addClass('in');
+	// 		}
+	// 	});
+	// });
 
-	$('aside').unbind().bind('mouseleave', function () {
-		var self = $(this);
+	// $('aside').unbind().bind('mouseleave', function() {
+	// 	var self = $(this);
 
-		// var timeout = setTimeout(function () {
+	// 	// var timeout = setTimeout(function () {
 
-		// self.find('ul.submenu').removeClass('in out');
-		// self.find('ul:not(.submenu)').removeClass('out').addClass('in');
+	// 	// self.find('ul.submenu').removeClass('in out');
+	// 	// self.find('ul:not(.submenu)').removeClass('out').addClass('in');
 
-		// self.find('a').parents('ul:not(.out):not(#main-menu)').removeClass('in out')
-		// self.find('a.active').parents('ul').removeClass('out').addClass('in');
+	// 	// self.find('a').parents('ul:not(.out):not(#main-menu)').removeClass('in out')
+	// 	// self.find('a.active').parents('ul').removeClass('out').addClass('in');
 
-		var ul = self.find('.main-menu ul');
-		// for (var i in ul) {
+	// 	var ul = self.find('.main-menu ul');
+	// 	// for (var i in ul) {
 
-		// $(ul).each(function () {
-
-
-		//     var isIn = $(this).after().hasClass('in');
-		//     var isOut = $(this).before().hasClass('out');
-
-		//     console.log(isIn);
-
-		//     if (isOut) {
-		//         $(this).removeClass('out').addClass('in');
-		//     } else {
-		//         $(this).removeClass('in');
-		//     }
-
-		// })
-
-		// }
+	// 	// $(ul).each(function () {
 
 
-		// }, 2000);
+	// 	//     var isIn = $(this).after().hasClass('in');
+	// 	//     var isOut = $(this).before().hasClass('out');
 
-		// $(this).bind('mouseenter', function () {
-		//     clearTimeout(timeout);
-		// });
+	// 	//     console.log(isIn);
 
-	});
+	// 	//     if (isOut) {
+	// 	//         $(this).removeClass('out').addClass('in');
+	// 	//     } else {
+	// 	//         $(this).removeClass('in');
+	// 	//     }
 
-	$('.card>.card-reveal').unbind().bind('mouseleave', function () {
+	// 	// })
+
+	// 	// }
+
+
+	// 	// }, 2000);
+
+	// 	// $(this).bind('mouseenter', function () {
+	// 	//     clearTimeout(timeout);
+	// 	// });
+
+	// });
+
+	$('.card>.card-reveal').unbind().bind('mouseleave', function() {
 		$(this).find('.card-title').click();
 	});
 
-	$('.input-field.error').find('input,textarea,select').each(function () {
-		$(this).bind('keyup', function () {
+	$('.input-field.error').find('input,textarea,select').each(function() {
+		$(this).bind('keyup', function() {
 			if ($(this).val().length > 0)
 				$(this).parents('.input-field.error').removeClass('error').find('.error').hide();
 			else
@@ -276,7 +276,7 @@ $(document).ready(function () {
 		});
 	});
 
-	$('.editor').each(function () {
+	$('.editor').each(function() {
 		// var height = $(this).attr('rows') || $(this).parent().parent().height();
 		var height = 300;
 		var placeholder = ($(this).attr('placeholder') || 'Escreva aqui') + '...';

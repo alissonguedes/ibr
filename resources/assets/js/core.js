@@ -2,7 +2,7 @@ window.onload = () => {
 
 	if (typeof redirect === 'function') {
 
-		window.addEventListener('popstate', function () {
+		window.addEventListener('popstate', function() {
 
 			var href = window.location.href;
 			var javascript = /^[J|j]ava[s|S]cript|^\#/;
@@ -18,6 +18,43 @@ window.onload = () => {
 
 	}
 
+
+	new Mmenu("#mmenu", {
+		"offCanvas": {
+			"position": "left-front"
+		},
+		"setSelected": {
+			'current': 'detect',
+			// "hover": true,
+			// "parent": true
+		},
+		sidebar: {
+			collapsed: {
+				use: true
+			},
+			expanded: {
+				use: true
+			}
+		},
+		// "navbars": [{
+		// 	"position": "top",
+		// 	"content": [
+		// 		"breadcrumbs",
+		// 		"close"
+		// 	]
+		// }],
+		// "theme": "black",
+		// "navbars": [{
+		// 	"position": "bottom",
+		// 	"content": [
+		// 		"<a class='fa fa-envelope' href='#/'></a>",
+		// 		"<a class='fa fa-twitter' href='#/'></a>",
+		// 		"<a class='fa fa-facebook' href='#/'></a>"
+		// 	]
+		// }]
+	});
+
+
 }
 
 function redirect(url, method = 'get') {
@@ -26,13 +63,13 @@ function redirect(url, method = 'get') {
 
 	xhr.open(method, url);
 
-	xhr.onreadystatechange = function () { }
+	xhr.onreadystatechange = function() {}
 
-	xhr.onloadstart = function () { };
+	xhr.onloadstart = function() {};
 
-	xhr.onprogress = function (event) { }
+	xhr.onprogress = function(event) {}
 
-	xhr.onloadend = function (e) {
+	xhr.onloadend = function(e) {
 
 		if (xhr.readyState === 4) {
 
@@ -62,9 +99,9 @@ function delay(func, wait, immediate) {
 
 	var timeout;
 
-	return function (args) {
+	return function(args) {
 		const context = this;
-		const later = function () {
+		const later = function() {
 			timeout = null;
 			if (!immediate) func.apply(context, args);
 		};
@@ -85,9 +122,9 @@ var Url = {
 
 }
 
-$('#open-search').bind('click', function () {
+$('#open-search').bind('click', function() {
 	$('#input-search-header').show().focus()
-		.bind('blur', function () {
+		.bind('blur', function() {
 			if ($(this).val().length === 0) {
 				$('#input-search-header').hide();
 				$(this).parents('li.search').find('#open-search').show();
@@ -97,11 +134,11 @@ $('#open-search').bind('click', function () {
 	$(this).parents().find('li:not(.search)').addClass('disabled')
 });
 
-$('#input-search-header').bind('keyup', function () {
+$('#input-search-header').bind('keyup', function() {
 
 	$('.progress').show();
 
-}).bind('keyup', delay(function () {
+}).bind('keyup', delay(function() {
 
 	var url = window.location.href;
 	var search = $(this).val();

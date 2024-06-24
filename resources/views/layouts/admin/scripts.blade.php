@@ -11,6 +11,7 @@
 <script src="{{ asset('assets/node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js') }}"></script>
 
 <script src="{{ asset('assets/node_modules/html2canvas/dist/html2canvas.js') }}"></script>
+<script src="{{ asset('assets/node_modules/mmenu-js/dist/mmenu.js') }}"></script>
 
 @stack('scripts')
 

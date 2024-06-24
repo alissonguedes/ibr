@@ -5,6 +5,9 @@
 		<nav class="navbar-main navbar-color navbar-dark z-depth-0">
 
 			<div class="nav-wrapper">
+
+				@include('admin.logo')
+
 				@if (isset($title))
 					<h1 id="page-title">
 
@@ -59,9 +62,15 @@
 						</a>
 					</li>
 					<li>
-						<a class="waves-effect waves-green sidenav-trigger">
+						<a href="#mmenu">
 							<i class="material-symbols-outlined">menu</i>
 						</a>
+						{{-- <button type="button" class="btn-floating waves-effect z-depth-0 sidenav-trigger" data-target="sidebar-menu">
+							<i class="material-symbols-outlined">menu</i>
+						</button> --}}
+						{{-- <a class="waves-effect waves-green sidenav-trigger" data-target="slide-out">
+							<i class="material-symbols-outlined">menu</i>
+						</a> --}}
 					</li>
 				</ul>
 

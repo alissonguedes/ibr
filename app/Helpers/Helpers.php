@@ -353,8 +353,6 @@ if (!function_exists('make_menu')) {
 
 		$menus = [];
 
-		// dump($items);
-
 		return view('navigation', ['id_menu' => $id ?? 0, 'menus' => $items]);
 
 	}

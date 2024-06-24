@@ -1,4 +1,4 @@
-<footer class="footer footer-fixed center-align white-text hide-on-small-only">
+<footer class="footer footer-fixed center-align white-text hide-on-med-and-down">
 
 	<div class="logo-footer"></div>
 

@@ -8,7 +8,7 @@
 		<div class="card-panel">
 
 			<div class="card-header bold uppercase">
-				{{ $row->evento }}
+				<span class="title bold">{{ $row->evento }}</span>
 				<span class="right bold"><span class="bold light-green-text">{{ $posts->count() }}</span> Inscritos</span>
 			</div>
 
@@ -19,10 +19,10 @@
 						<thead>
 							<tr>
 								<th class="center-align bold">Nome</th>
-								<th class="center-align bold">CPF</th>
-								<th class="center-align bold">RG</th>
-								<th class="center-align bold">E-Mail</th>
-								<th class="center-align bold">Telefone</th>
+								<th class="center-align bold hide-on-med-and-down">CPF</th>
+								<th class="center-align bold hide-on-med-and-down">RG</th>
+								<th class="center-align bold hide-on-med-and-down">E-Mail</th>
+								<th class="center-align bold hide-on-med-and-down">Telefone</th>
 								<th class="center-align bold">Pago</th>
 								<th class="center-align bold">Status</th>
 							</tr>
@@ -31,10 +31,11 @@
 							@foreach ($posts as $post)
 								<tr>
 									<td class="left-align">{{ $post->inscrito }}</td>
-									<td class="right-align">{{ $post->cpf }}</td>
-									<td class="right-align">{{ $post->rg }}</td>
-									<td class="center-align">{{ $post->email }}</td>
-									<td class="center-align">{{ $post->telefone }}</td>
+									<td class="right-align hide-on-med-and-down">{{ $post->cpf }}</td>
+									<td class="right-align hide-on-med-and-down">{{ $post->rg }}</td>
+									<td class="center-align hide-on-med-and-down">{{ $post->email }}</td>
+									<td class="center-align hide-on-med-and-down">{{ $post->telefone }}</td>
+
 									@php
 
 										$pago = '';
