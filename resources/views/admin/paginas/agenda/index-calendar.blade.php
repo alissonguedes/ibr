@@ -43,6 +43,10 @@
 							</div>
 						</div>
 						<div class="padding-2" style="overflow: auto; max-height: calc(100% - 110px); position: relative;">
+							@php
+								$fator = 60; // a cada 15 minutos;
+								$sub = 1; // subtrair 1 minuto (evitar minutos quebrados)
+							@endphp
 							@for ($h = 0; $h < 24; $h++)
 								@for ($m = 0; $m < 60; $m++)
 									<table id="programacao" class="table display mb-1">
@@ -64,6 +68,9 @@
 											@endfor
 										</tbody>
 									</table>
+									@php
+										$m = $m + $fator - $sub;
+									@endphp
 								@endfor
 							@endfor
 						</div>
