@@ -37,7 +37,7 @@
 									$date = strtotime($ano . '-' . $mes . '-' . $dia);
 								@endphp
 								@if (!is_null($dia))
-									<small class="uppercase">{{ $dias_semana[date('N', $date)] }}</small>
+									<small class="uppercase">{{ $dias_semana[date('w', $date)] }}</small>
 									<span>{{ date('d', $date) }}</span>
 								@endif
 							</div>
