@@ -36,6 +36,7 @@
 				<li><x-nav-link :href="route('admin.paginas.ministerios.index')" :active="request()->routeIs('admin.paginas.ministerios.index') || request()->routeIs('admin.paginas.ministerios.edit')"> <i class="material-symbols-outlined">groups</i> Ministérios</x-nav-link></li>
 				<li><x-nav-link :href="route('admin.paginas.cultos.index')" :active="request()->routeIs('admin.paginas.cultos.index') || request()->routeIs('admin.paginas.cultos.edit')"> <i class="material-symbols-outlined">diversity_3</i> Cultos </x-nav-link> </li>
 				<li><x-nav-link :href="route('admin.paginas.eventos.index')" :active="request()->routeIs('admin.paginas.eventos.index') || request()->routeIs('admin.paginas.eventos.edit') || request()->routeIs('admin.paginas.eventos.inscritos')"> <i class="material-symbols-outlined">event</i> Eventos </x-nav-link></li>
+				<li><x-nav-link :href="route('admin.paginas.agenda.index')" :active="request()->routeIs('admin.paginas.agenda.index') || request()->routeIs('admin.paginas.agenda.edit') || request()->routeIs('admin.paginas.agenda.inscritos')"> <i class="material-symbols-outlined">contacts</i> Agenda </x-nav-link></li>
 			</ul>
 		</li>
 	</ul>

@@ -78,7 +78,7 @@
 }
 
 .fc table th a {
-	color: var(--light-green) !important;
+	color: var(--light-green);
 	cursor: inherit;
 }
 
@@ -110,7 +110,6 @@
 .fc-theme-standard .fc-scrollgrid {
 	border: none;
 }
-
 
 .fc table tbody tr td>.fc-daygrid-day-frame:hover {
 	cursor: pointer;
@@ -284,7 +283,7 @@
 	width: 100%;
 	border-radius: 50%;
 	cursor: pointer;
-	color: var(--grey-darken-3);
+	color: var(--grey-darken-1);
 	border-radius: 20px;
 	text-align: center;
 	font-size: 12px;

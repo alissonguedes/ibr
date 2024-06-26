@@ -263,7 +263,7 @@ $(document).ready(function() {
 
 	// });
 
-	$('.card>.card-reveal').unbind().bind('mouseleave', function() {
+	$('.card:not(.agenda)>.card-reveal').unbind().bind('mouseleave', function() {
 		$(this).find('.card-title').click();
 	});
 
