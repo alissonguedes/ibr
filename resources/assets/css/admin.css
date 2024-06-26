@@ -643,12 +643,6 @@ footer .logo-footer {
 	/* border-right: 1px solid var(--grey-darken-3) */
 }
 
-@media screen and (min-width: 992px) {
-	.mm-menu {
-		/* transform: none; */
-	}
-}
-
 #mm-1 .mm-navbar {
 	display: none;
 }
