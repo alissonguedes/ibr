@@ -262,21 +262,6 @@
 				</div>
 			</div>
 
-			<div class="card-footer">
-				<div class="row">
-					<div class="col s12 right-align">
-						<button type="reset" class="btn waves-effect">
-							<i class="material-symbols-outlined left">cancel</i>
-							<span>Cancelar</span>
-						</button>
-						<button type="submit" class="btn waves-effect">
-							<i class="material-symbols-outlined left">save</i>
-							<span>Salvar</span>
-						</button>
-					</div>
-				</div>
-			</div>
-
 		</div>
 
 		<div class="card-action right-align">

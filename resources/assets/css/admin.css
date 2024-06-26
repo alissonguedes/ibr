@@ -638,10 +638,15 @@ footer .logo-footer {
 	top: 65px;
 	height: calc(100% - 65px);
 	left: 0;
-	z-index: 9999999999;
-	transform: none;
 	transition: 300ms;
 	width: 300px !important;
+	/* border-right: 1px solid var(--grey-darken-3) */
+}
+
+@media screen and (min-width: 992px) {
+	.mm-menu {
+		/* transform: none; */
+	}
 }
 
 #mm-1 .mm-navbar {

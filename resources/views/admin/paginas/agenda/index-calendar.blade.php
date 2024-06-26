@@ -145,6 +145,13 @@
 				color: #fff;
 				border-radius: 4px;
 			}
+
+			.fc .fc-more-link,
+			.fc .fc-event {
+				color: var(--light-green);
+				font-family: 'Montserrat Bold';
+				font-size: 10px;
+			}
 		</style>
 	</x-slot:main>
 
