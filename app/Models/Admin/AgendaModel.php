@@ -4,6 +4,7 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /**
  * A classe extende de PostModel, pois opera na tabela `tb_post`
@@ -66,8 +67,23 @@ class AgendaModel extends EventoModel
 		'status',
 	];
 
-	public function getAll()
+	public function getAll($date = null)
 	{
+		if (!is_null($date)) {
+
+			$date = date('Y-m-d', strtotime($date));
+
+			$query = $this->select('*')
+				->where(DB::raw('DATE_FORMAT(data_ini, "%Y-%m-%d")'), '<=', $date)
+				->where(DB::raw('DATE_FORMAT(data_fim, "%Y-%m-%d")'), '>=', $date)
+				->orderBy('dia_inteiro', 'desc')
+				->orderBy(DB::raw('DATE_FORMAT(data_ini, "%H:%i:%s")'), 'asc')
+				->get();
+
+			return $query;
+
+		}
+
 		return $this->all();
 		// $container = 'eventos';
 		// return $this->where(['tipo' => 'post'])->whereIn('id_parent', function ($query) use ($container) {

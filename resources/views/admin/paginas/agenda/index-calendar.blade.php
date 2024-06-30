@@ -42,37 +42,118 @@
 								@endif
 							</div>
 						</div>
+
 						<div class="padding-2" style="overflow: auto; max-height: calc(100% - 110px); position: relative;">
-							@php
-								$fator = 60; // a cada 15 minutos;
-								$sub = 1; // subtrair 1 minuto (evitar minutos quebrados)
-							@endphp
-							@for ($h = 0; $h < 24; $h++)
-								@for ($m = 0; $m < 60; $m++)
-									<table id="programacao" class="table display mb-1">
-										<thead>
-											<tr>
-												<th class="hora">
-													{{ ($h < 10 ? '0' : null) . $h }}:{{ ($m < 10 ? '0' : null) . $m }} AM
-													· Total agendados {{ $m }}
-												</th>
-											</tr>
-										</thead>
-										<tbody>
-											@for ($i = 0; $i < 2; $i++)
-												<tr>
-													<td>
-														Alisson Guedes · Dr. Raul ─ Cardiologista
-													</td>
-												</tr>
-											@endfor
-										</tbody>
-									</table>
+							@if (isset($eventos_dia) && $eventos_dia->count() > 0)
+								@php
+									$categoriaModel = new App\Models\Admin\AgendaModel();
+									$horarios = [];
+									$fator = 0; // a cada 15 minutos;
+									$sub = 1; // subtrair 1 minuto (evitar minutos quebrados)
+								@endphp
+								@foreach ($eventos_dia as $evento)
 									@php
-										$m = $m + $fator - $sub;
+
+										$hora_ini = date('H:i', strtotime($evento->data_ini));
+
 									@endphp
-								@endfor
-							@endfor
+
+									@php
+										$hora_ini = date('H:i', strtotime($evento->data_ini));
+										$hora_fim = date('H:i', strtotime($evento->data_fim));
+
+										$time = explode(':', $hora_ini);
+										$h = $time[0];
+										$m = $time[1];
+
+										$icon_event = $categoriaModel
+										    ->select('titulo AS categoria', 'icon')
+										    ->from('tb_evento_categoria')
+										    ->where('id', $evento->id_categoria)
+										    ->get()
+										    ->first();
+
+										$e = [
+										    'categoria' => $icon_event->categoria,
+										    'categoria_icon' => $icon_event->icon,
+										    'titulo' => $evento->evento,
+										    'hora_ini' => $hora_ini,
+										    'hora_fim' => $hora_fim,
+										    'tipo' => $evento->tipo === 'E' ? 'Evento' : ($evento->tipo === 'A' ? 'Agendamento' : ''),
+										    'dia_inteiro' => $evento->dia_inteiro,
+										];
+
+										if ($evento->dia_inteiro === '1'):
+										    $horarios['all_day'][] = $e;
+										else:
+										    $horarios[$h][$fator][] = $e;
+										endif;
+
+										$fator = $m <= ($m + 15) % 60 ? $fator + 15 : ($m + 15) % 60;
+
+										echo $m . ' - ' . $fator . '<br>';
+									@endphp
+								@endforeach
+
+								<pre>
+									@php
+										print_r($horarios);
+									@endphp
+								</pre>
+								{{-- @if (!empty($horarios))
+									@foreach ($horarios as $ind => $horario)
+										<table class="table display mb-1">
+											<thead>
+												<tr>
+													<th class="hora">{{ $ind === 'all_day' ? 'O Dia Todo' : $ind }}</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach ($horario as $hora)
+													<tr>
+														<td>
+															<div class="flex flex-center">
+																<span class="ml-1">{{ $hora['hora_ini'] }}</span>
+																<i class="material-symbols-outlined light-green-text pointer ml-1 mr-1" data-tooltip="{{ $hora['categoria'] }}">{{ $hora['categoria_icon'] }}</i>
+																<span class="light-green-text">{{ $hora['titulo'] }}</span>
+															</div>
+														</td>
+													</tr>
+												@endforeach
+											</tbody>
+										</table>
+									@endforeach
+								@endif --}}
+
+								{{-- @for ($h = 0; $h < 24; $h++)
+									@for ($m = 0; $m < 60; $m++)
+										<table id="programacao" class="table display mb-1">
+											<thead>
+												<tr>
+													<th class="hora">
+														{{ ($h < 10 ? '0' : null) . $h }}:{{ ($m < 10 ? '0' : null) . $m }} AM
+														· Total agendados {{ $m }}
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												@for ($i = 0; $i < 2; $i++)
+													<tr>
+														<td>
+															Alisson Guedes · Dr. Raul ─ Cardiologista
+														</td>
+													</tr>
+												@endfor
+											</tbody>
+										</table>
+										@php
+											$m = $m + $fator - $sub;
+										@endphp
+									@endfor
+								@endfor --}}
+							@else
+								Sem agendamentos nesta data.
+							@endif
 						</div>
 					</div>
 				</div>

@@ -28,6 +28,7 @@ class EventoModel extends Model
 		'endereco',
 		'data_ini',
 		'data_fim',
+		'dia_inteiro',
 		'data_inscricao_ini',
 		'data_inscricao_fim',
 		'inscricao_encerrada',
@@ -139,6 +140,7 @@ class EventoModel extends Model
 		$data_fim                = date('Y-m-d 23:59:59', strtotime(replace($data_evento[1], '/', '-')));
 		$columns['data_ini']     = $data_ini;
 		$columns['data_fim']     = $data_fim;
+		$columns['dia_inteiro']  = $data['dia_inteiro'] ?? '0';
 		$columns['local_evento'] = $data['local'] ?? null;
 		$columns['endereco']     = $data['endereco'] ?? null;
 		$columns['image']        = $data['image'] ?? null;

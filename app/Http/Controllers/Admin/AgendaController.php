@@ -84,7 +84,9 @@ class AgendaController extends Controller
 	public function show(Request $request, AgendaModel $post, int $year, int $month, int $day)
 	{
 
-		$data['eventos'] = $post->getAll();
+		$date                = $year . '-' . $month . '-' . $day;
+		$data['eventos']     = $post->getAll();
+		$data['eventos_dia'] = $post->getAll($date);
 
 		if ($request->ajaxCalendar) {
 

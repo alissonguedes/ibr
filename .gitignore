@@ -17,3 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+public/assets
+public/site.webmanifest
+public/webmainfest
+resources/assets/node_modules
