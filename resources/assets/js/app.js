@@ -276,22 +276,33 @@ $(document).ready(function() {
 		});
 	});
 
-	$('.editor').each(function() {
-		// var height = $(this).attr('rows') || $(this).parent().parent().height();
-		var height = 300;
-		var placeholder = ($(this).attr('placeholder') || 'Escreva aqui') + '...';
-		new FroalaEditor(this, {
-			theme: 'dark',
-			language: 'pt_br',
-			height: height,
-			placeholderText: placeholder,
-			key: '1C%kZV[IX)_SL}UJHAEFZMUJOYGYQE[\\ZJ]RAe)+%$==',
-			toolbarSticky: false,
-			attribution: false,
-			toolbarBottom: false,
-			wordCounterCount: true,
-			charCounterCount: true,
+	if (typeof FroalaEditor !== 'undefined') {
+		$('.editor').each(function() {
+			// var height = $(this).attr('rows') || $(this).parent().parent().height();
+			var height = 300;
+			var placeholder = ($(this).attr('placeholder') || 'Escreva aqui') + '...';
+			new FroalaEditor(this, {
+				theme: 'dark',
+				language: 'pt_br',
+				height: height,
+				placeholderText: placeholder,
+				key: '1C%kZV[IX)_SL}UJHAEFZMUJOYGYQE[\\ZJ]RAe)+%$==',
+				toolbarSticky: false,
+				attribution: false,
+				toolbarBottom: false,
+				wordCounterCount: true,
+				charCounterCount: true,
+			});
 		});
+	}
+
+	/** Página de agenda */
+	$('#details .card-title').unbind().bind('click', function() {
+		Url.update(BASE_URL + 'agenda');
 	});
+
+	$('#details .card-title .date').unbind().bind('click', function() {
+		$('#details .card-title').click();
+	})
 
 });

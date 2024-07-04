@@ -25,7 +25,7 @@
 					<div class="card-content no-padding">
 						<div id="calendar"></div>
 					</div>
-					<div id="datails" class="card-reveal grey-text no-padding" style="{{ $errors->any() || (request('year') && request('month') && request('day')) ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" autocomplete="off" novalidate>
+					<div id="details" class="card-reveal grey-text no-padding" style="{{ $errors->any() || (request('year') && request('month') && request('day')) ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" autocomplete="off" novalidate>
 						<div class="card-title grey-text text-darken-4 pl-2 pr-2 pt-2 pb-0">
 							<i class="material-symbols-outlined right white-text">close</i>
 							<div class="date z-depth-2" style="background: var(--gradient-45deg-green-light-green);">
@@ -48,8 +48,6 @@
 								@php
 									$categoriaModel = new App\Models\Admin\AgendaModel();
 									$horarios = [];
-									$fator = 0; // a cada 15 minutos;
-									$sub = 1; // subtrair 1 minuto (evitar minutos quebrados)
 								@endphp
 								@foreach ($eventos_dia as $evento)
 									@php
@@ -74,9 +72,13 @@
 										    ->first();
 
 										$e = [
+										    'id' => $evento->id,
 										    'categoria' => $icon_event->categoria,
 										    'categoria_icon' => $icon_event->icon,
 										    'titulo' => $evento->evento,
+										    'ano' => date('Y', strtotime($evento->data_ini)),
+										    'mes' => date('m', strtotime($evento->data_ini)),
+										    'dia' => date('d', strtotime($evento->data_ini)),
 										    'hora_ini' => $hora_ini,
 										    'hora_fim' => $hora_fim,
 										    'tipo' => $evento->tipo === 'E' ? 'Evento' : ($evento->tipo === 'A' ? 'Agendamento' : ''),
@@ -86,71 +88,36 @@
 										if ($evento->dia_inteiro === '1'):
 										    $horarios['all_day'][] = $e;
 										else:
-										    $horarios[$h][$fator][] = $e;
+										    $horarios[$h][] = $e;
 										endif;
 
-										$fator = $m <= ($m + 15) % 60 ? $fator + 15 : ($m + 15) % 60;
-
-										echo $m . ' - ' . $fator . '<br>';
 									@endphp
 								@endforeach
 
-								<pre>
-									@php
-										print_r($horarios);
-									@endphp
-								</pre>
-								{{-- @if (!empty($horarios))
+								@if (!empty($horarios))
 									@foreach ($horarios as $ind => $horario)
 										<table class="table display mb-1">
 											<thead>
 												<tr>
-													<th class="hora">{{ $ind === 'all_day' ? 'O Dia Todo' : $ind }}</th>
+													<th class="hora">Horário: {{ $ind === 'all_day' ? 'O Dia Todo' : $ind . 'h00' }}</th>
 												</tr>
 											</thead>
 											<tbody>
 												@foreach ($horario as $hora)
 													<tr>
 														<td>
-															<div class="flex flex-center">
-																<span class="ml-1">{{ $hora['hora_ini'] }}</span>
-																<i class="material-symbols-outlined light-green-text pointer ml-1 mr-1" data-tooltip="{{ $hora['categoria'] }}">{{ $hora['categoria_icon'] }}</i>
+															<a href="{{ route('admin.paginas.agenda.date.edit', ['year' => request('year'), 'month' => request('month'), 'day' => request('day'), 'id' => $hora['id']]) }}" class="flex flex-center">
+																<span class="ml-1 grey-text text-darken-2">{{ $hora['hora_ini'] }}</span>
+																<i class="material-symbols-outlined lightgreen-text pointer ml-1 mr-1" data-tooltip="{{ $hora['categoria'] }}">{{ $hora['categoria_icon'] }}</i>
 																<span class="light-green-text">{{ $hora['titulo'] }}</span>
-															</div>
+															</a>
 														</td>
 													</tr>
 												@endforeach
 											</tbody>
 										</table>
 									@endforeach
-								@endif --}}
-
-								{{-- @for ($h = 0; $h < 24; $h++)
-									@for ($m = 0; $m < 60; $m++)
-										<table id="programacao" class="table display mb-1">
-											<thead>
-												<tr>
-													<th class="hora">
-														{{ ($h < 10 ? '0' : null) . $h }}:{{ ($m < 10 ? '0' : null) . $m }} AM
-														· Total agendados {{ $m }}
-													</th>
-												</tr>
-											</thead>
-											<tbody>
-												@for ($i = 0; $i < 2; $i++)
-													<tr>
-														<td>
-															Alisson Guedes · Dr. Raul ─ Cardiologista
-														</td>
-													</tr>
-												@endfor
-											</tbody>
-										</table>
-										@php
-											$m = $m + $fator - $sub;
-										@endphp
-									@endfor
-								@endfor --}}
+								@endif
 							@else
 								Sem agendamentos nesta data.
 							@endif
@@ -237,6 +204,8 @@
 	</x-slot:main>
 
 	@pushOnce('scripts')
+		<script src="{{ asset('assets/node_modules/froala-editor/js/froala_editor.pkgd.min.js') }}"></script>
+		<script src="{{ asset('assets/node_modules/froala-editor/js/languages/pt_br.js') }}"></script>
 		<script src="{{ asset('assets/node_modules/fullcalendar/index.global.min.js') }}"></script>
 
 		<script>
@@ -309,9 +278,9 @@
 							url: url,
 							method: 'get',
 							success: (response) => {
-								var form = $(response).find('#datails.card-reveal');
-								$('#datails.card-reveal').html(form.html());
-								$('#datails.card-reveal').css({
+								var form = $(response).find('#details.card-reveal');
+								$('#details.card-reveal').html(form.html());
+								$('#details.card-reveal').css({
 									'display': 'block',
 									'transform': 'translateY(-100%)',
 								});
