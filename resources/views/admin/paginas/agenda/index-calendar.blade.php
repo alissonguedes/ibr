@@ -203,10 +203,24 @@
 		</style>
 	</x-slot:main>
 
+	@pushOnce('plugins_css')
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+	@endPushOnce
+
 	@pushOnce('scripts')
+		<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 		<script src="{{ asset('assets/node_modules/froala-editor/js/froala_editor.pkgd.min.js') }}"></script>
 		<script src="{{ asset('assets/node_modules/froala-editor/js/languages/pt_br.js') }}"></script>
 		<script src="{{ asset('assets/node_modules/fullcalendar/index.global.min.js') }}"></script>
+
+		{{-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+		<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+		<script src="{{ asset('assets/node_modules/froala-editor/js/froala_editor.pkgd.min.js') }}"></script>
+		<script src="{{ asset('assets/node_modules/froala-editor/js/languages/pt_br.js') }}"></script>
+		--}}
 
 		<script>
 			$(function() {
@@ -312,6 +326,19 @@
 
 			});
 		</script>
+
+		<style>
+			.daterangepicker {
+				z-index: 9999999999 !important;
+				/* position: relative; */
+				background-color: var(--grey-darken-5) !important;
+			}
+
+			.daterangepicker .calendar-table {
+				background-color: inherit !important;
+				border: 1px solid var(--grey-darken-5) !important;
+			}
+		</style>
 	@endPushOnce
 
 </x-admin-layout>

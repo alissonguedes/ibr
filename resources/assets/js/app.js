@@ -238,7 +238,6 @@ $(document).ready(function() {
 
 	// 	// $(ul).each(function () {
 
-
 	// 	//     var isIn = $(this).after().hasClass('in');
 	// 	//     var isOut = $(this).before().hasClass('out');
 
@@ -253,7 +252,6 @@ $(document).ready(function() {
 	// 	// })
 
 	// 	// }
-
 
 	// 	// }, 2000);
 

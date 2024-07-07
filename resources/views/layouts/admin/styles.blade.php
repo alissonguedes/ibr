@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="{{ asset('assets/node_modules/froala-editor/css/froala_editor.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/node_modules/froala-editor/css/themes/dark.min.css') }}" />
 
+@stack('plugins_css')
+
 <link rel="stylesheet" href="{{ asset('assets/css/defaults/fonts.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/defaults/defaults.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/defaults/materialize.css') }}">

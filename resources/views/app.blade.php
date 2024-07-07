@@ -53,9 +53,9 @@
 
 			{{ $slot }}
 
-			@if (isset($scripts))
+			{{-- @if (isset($scripts))
 				{{ $scripts }}
-			@endif
+			@endif --}}
 
 		</div>
 		{{-- END #Page --}}

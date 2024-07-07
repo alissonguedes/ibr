@@ -34,8 +34,8 @@
 			@csrf
 
 			{{-- <input type="hidden" name="titulo_slug" value="apresentacao"> --}}
-			<input type="hidden" name="categoria" value="evento">
-			<input type="hidden" name="tipo" value="E">
+			<input type="hidden" name="categoria" value="agenda">
+			<input type="hidden" name="tipo" value="A">
 
 			@if (request('id'))
 				<input type="hidden" name="_method" value="put">
