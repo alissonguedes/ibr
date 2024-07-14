@@ -17,7 +17,7 @@
 						<x-text-input type="search" id="input-search-header" :data-url="route('admin.paginas.a-ibr.index')" placeholder="Pesquisar eventos" autocomplete="off" />
 					</div>
 				</div>
-				<div class="column-center" style="width: calc(100% - 120px);">
+				<div class="column-center" style="width: calc(100% - 130px);">
 
 					<div class="">
 						<button type="button" id="calendar-btn-back" class="btn btn-floating btn-flat waves-effect waves-teal transparent material-symbols-outlined white-text no-margin" data-tooltip="Adicionar Evento">
@@ -85,6 +85,9 @@
 					display: flex;
 					align-items: center;
 					place-content: space-between;
+				}
+				.card-header.open .column-center {
+					display: none;
 				}
 			</style>
 			<div class="card-content no-padding">

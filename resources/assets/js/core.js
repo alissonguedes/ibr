@@ -128,10 +128,12 @@ $('#open-search').bind('click', function () {
 			if ($(this).val().length === 0) {
 				$('#input-search-header').hide();
 				$(this).parents('li.search').find('#open-search').show();
-				$(this).parents().find('li:not(.search)').removeClass('disabled')
+				$(this).parents().find('li:not(.search)').removeClass('disabled');
+				$(this).parents('.card-header').removeClass('open');
 			}
 		});
-	$(this).parents().find('li:not(.search)').addClass('disabled')
+	$(this).parents().find('li:not(.search)').addClass('disabled');
+	$(this).parents('.card-header').addClass('open');
 });
 
 $('#input-search-header').bind('keyup', function () {
