@@ -86,6 +86,7 @@
 					align-items: center;
 					place-content: space-between;
 				}
+
 				.card-header.open .column-center {
 					display: none;
 				}

@@ -25,7 +25,7 @@
 	endif;
 @endphp
 
-<form action="{{ route('admin.paginas.agenda.post') }}" method="post" class="card-reveal no-padding" style="{{ $errors->any() || request('id') ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" autocomplete="off">
+<form action="{{ route('admin.paginas.agenda.post') }}" method="post" class="card-reveal no-padding" style="{{ $errors->any() || request('id') ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" enctype="multipart/form-data" autocomplete="off">
 
 	<div class="card card-panel no-border no-margin no-padding">
 
