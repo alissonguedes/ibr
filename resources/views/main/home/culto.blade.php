@@ -10,11 +10,12 @@
 			<div class="row">
 				@foreach ($post as $culto)
 					@php
-						$meses = [1 => 'Janeiro', 2 => 'Fevereiro', 3 => 'Março', 4 => 'Abril', 5 => 'Maio', 6 => 'Junho', 7 => 'Julho', 8 => 'Agosto', 9 => 'Setembro', 10 => 'Outubro', 11 => 'Novembro', 12 => 'Dezembro'];
-						$data = strtotime($culto->data);
-						$dia = date('d', $data);
-						$mes = $meses[date('n', $data - 1)];
-						$ano = date('Y', $data);
+						// $meses = [1 => 'Janeiro', 2 => 'Fevereiro', 3 => 'Março', 4 => 'Abril', 5 => 'Maio', 6 => 'Junho', 7 => 'Julho', 8 => 'Agosto', 9 => 'Setembro', 10 => 'Outubro', 11 => 'Novembro', 12 => 'Dezembro'];
+						// $data = strtotime($culto->data);
+						// $dia = date('d', $data);
+						// $mes = $meses[date('n', $data - 1)];
+						// $ano = date('Y', $data);
+						// echo $culto->data;
 					@endphp
 
 					<div class="col s4">
@@ -30,8 +31,7 @@
 									<div class="col s6 left-align">
 										<small class="text_p">
 											<i class="material-symbols-outlined">update</i>
-											{{-- {{ $dia }} de {{ $mes }} de {{ $ano }} --}}
-											{{ show_date($data) }}
+											{{ show_date($culto->data) }}
 										</small>
 									</div>
 									<div class="col s6 right-align">
@@ -43,7 +43,7 @@
 								</div>
 							</div>
 							<div class="card-action pl-1 pr-1 right-align">
-								<a href="tete" class="light-green-text">Assistir</a><br>
+								<a href="{{ route('site.cultos.details', $culto->titulo_slug) }}" class="light-green-text">Assistir</a><br>
 							</div>
 						</div>
 					</div>

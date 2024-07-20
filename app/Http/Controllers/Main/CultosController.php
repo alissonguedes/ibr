@@ -16,7 +16,7 @@ class CultosController extends Controller
 	public function index(PostModel $post)
 	{
 
-		$data['posts'] = $post->getAllPosts('culto');
+		$data['posts'] = $post->getAllActivePosts('culto');
 
 		return view('main.cultos.index', $data);
 

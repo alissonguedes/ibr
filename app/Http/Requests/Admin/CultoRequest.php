@@ -33,13 +33,13 @@ class CultoRequest extends FormRequest
 			// 'conteudo'  => ['required'],
 		];
 
-		// if (!isset($this->id)) {
-		// 	$rules['imagem'] = [
-		// 		'required',
-		// 		'mimes:jpg,jpeg,png',
-		// 		'dimensions:1920,1080',
-		// 	];
-		// }
+		if (!isset($this->id)) {
+			$rules['imagem'] = [
+				'required',
+				'mimes:jpg,jpeg,png',
+				'dimensions:1920,1080',
+			];
+		}
 
 		return $rules;
 

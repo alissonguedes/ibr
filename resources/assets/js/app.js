@@ -82,6 +82,13 @@ $(document).ready(function() {
 		});
 	}
 
+	if ($('.datepicker').length) {
+		$('.datepicker').datepicker({
+			format: 'dd/mm/yyyy',
+			autoClose: true,
+		});
+	}
+
 	setTimeout(function() {
 		$('.calendar-time').find('select').each(function() {
 			$(this).addClass('browser-default');

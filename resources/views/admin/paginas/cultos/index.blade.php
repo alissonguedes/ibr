@@ -19,13 +19,7 @@
 									<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
 									<x-button class="icon-background edit" :data-href="route('admin.paginas.cultos.edit', $post->id)"> edit </x-button>
 								</div>
-								{!! $post->url !!}
-								<style>
-									iframe {
-										width: 100% !important;
-									}
-								</style>
-								{{-- <img src="{{ route('home.cultos.show-image', $post->id) . '?action=preview' }}"> --}}
+								<img src="{{ route('home.cultos.show-image', $post->id) . '?action=preview' }}">
 							</div>
 
 							<div class="card-content center-align gradient-0deg-grey-grey">

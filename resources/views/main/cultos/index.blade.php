@@ -19,7 +19,7 @@
 								<div class="card border-radius-20 z-depth-3">
 									<div class="card-image" style="height: 300px; overflow: hidden;">
 										<div class="mascara" style="position: absolute; background: transparent; top: 0; left: 0; right: 0; bottom: 0; z-index: 9;"></div>
-										{!! $post->url !!}
+										<img src="{{ route('home.cultos.show-image', $post->id) . '?action=preview' }}">
 									</div>
 									<div class="card-content center-align gradient-0deg-grey-grey">
 										<h5 class="card-title mb-6 mt-0">{{ $post->titulo }}</h5>

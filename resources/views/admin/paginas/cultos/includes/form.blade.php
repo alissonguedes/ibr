@@ -63,7 +63,7 @@
 				<div class="col s12">
 					<div class="input-field mb-2 @error('data') error @enderror">
 						<label for="data">Data do culto</label>
-						<x-text-input type="text" name="data" id="data" :value="old('data', $data ?? null)" />
+						<x-text-input type="text" name="data" id="data" class="datepicker" :value="old('data', $data ?? null)" />
 						@error('data')
 							<small class="error">{{ $message }}</small>
 						@enderror
@@ -86,7 +86,7 @@
 			</div>
 			<!-- END Link -->
 
-			{{-- <!-- BEGIN imagem -->
+			<!-- BEGIN imagem -->
 			<div class="row">
 				<div class="col s12">
 					<div class="file-field input-field @error('imagem') error @enderror">
@@ -103,7 +103,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- END imagem --> --}}
+			<!-- END imagem -->
 
 			{{-- <!-- BEGIN ImageView -->
 			<div class="row">
@@ -170,6 +170,16 @@
 			</div>
 		</div>
 	</x-slot:card_footer>
+
+	<style>
+		.datepicker-date-display {
+			background-color: var(--grey-darken-4);
+		}
+
+		.datepicker-calendar-container {
+			background-color: var(--grey-darken-5);
+		}
+	</style>
 
 </x-slot:form>
 
