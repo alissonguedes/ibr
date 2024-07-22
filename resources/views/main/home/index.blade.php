@@ -12,49 +12,7 @@
 
 		{!! post('main.home:pastor', 6, ['table' => 'tb_pastor']) !!}
 
-		<!--eventos-->
-		<section class="eventos">
-			<div class="title_section cor_verde">EVENTOS IBR</div>
-
-			<div class="content">
-
-				<!--conj palavra-->
-				<a href="evento_page.php">
-					<div class="conj_palavra">
-						<div class="img_palavra"><img src="{{ asset('assets/img/eventos/001.jpg') }}" class="img_cem"></div>
-						<div class="title_palavra">Acamp-X<br>Incendiários</div>
-						<div class="resumo_palavra">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-							magna massa...</div>
-					</div>
-				</a>
-
-				<!--conj palavra-->
-				<a href="evento_page.php">
-					<div class="conj_palavra">
-						<div class="img_palavra"><img src="{{ asset('assets/img/eventos/001.jpg') }}" class="img_cem"></div>
-						<div class="title_palavra">Acamp-X<br>Incendiários</div>
-						<div class="resumo_palavra">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-							magna massa...</div>
-					</div>
-				</a>
-
-				<!--conj palavra-->
-				<a href="evento_page.php">
-					<div class="conj_palavra">
-						<div class="img_palavra"><img src="{{ asset('assets/img/eventos/001.jpg') }}" class="img_cem"></div>
-						<div class="title_palavra">Acamp-X<br>Incendiários</div>
-						<div class="resumo_palavra">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-							magna massa...</div>
-					</div>
-				</a>
-
-			</div>
-
-			<a href="eventos.php">
-				<div class="bt_ver_mais2">ver todos os eventos</div>
-			</a>
-
-		</section>
+		{!! post('main.home:evento', 3) !!}
 
 		<!--nosso templo-->
 		<section class="nossotemplo">

@@ -4,11 +4,14 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
 /**
- * A classe extende de PostModel, pois opera na tabela `tb_post`
+ * A classe extende de PostModel, pois opera na tabela `tb_evento`
  */
-class EventoModel extends Model {
+class EventoModel extends Model
+{
 
 	use HasFactory;
 
@@ -66,25 +69,29 @@ class EventoModel extends Model {
 		'status',
 	];
 
-	public function getAllEventos() {
+	public function getAllEventos()
+	{
 		return $this->where('tipo', 'E')->get();
 		// $container = 'eventos';
 		// return $this->where(['tipo' => 'post'])->whereIn('id_parent', function ($query) use ($container) {
-		// 	$query->select('id')->from('tb_post')->where('titulo_slug', $container);
+		// 	$query->select('id')->from('tb_evento')->where('titulo_slug', $container);
 		// })->get();
 	}
 
-	public function getEvento($id) {
+	public function getEvento($id)
+	{
 
 		return $this->where('id', $id)->get()->first();
 
 	}
 
-	public function getEventoByTitulo($titulo) {
+	public function getEventoByTitulo($titulo)
+	{
 		return $this->where('evento_slug', $titulo)->get()->first();
 	}
 
-	public function search($search, $both = true, $categoria = 'evento', $tipo = 'post') {
+	public function search($search, $both = true, $categoria = 'evento', $tipo = 'post')
+	{
 
 		// return $this->select($this->columns)->where('categoria', $categoria)
 		// 	->whereAny([
@@ -98,7 +105,51 @@ class EventoModel extends Model {
 
 	}
 
-	public function insert_or_update($request) {
+	public function getAllActivePosts($categoria, $limit = 50, $options = [])
+	{
+
+		$options['next'] = null;
+		$next            = $options['next'];
+
+		$hoje = date('Y-m-d H:i:s');
+
+		$get = self::select(
+			'id',
+			'id_categoria',
+			DB::raw('(SELECT titulo FROM tb_evento_categoria WHERE id = id_categoria) as categoria'),
+			DB::raw('(SELECT descricao_slug FROM tb_evento_categoria WHERE id = id_categoria) as descricao_slug'),
+			'evento',
+			'evento_slug',
+			'descricao',
+			'local',
+			'endereco',
+			DB::raw('DATE_FORMAT(data_ini,"%d/%m/%Y %H:%i:%s") as data_ini'),
+			DB::raw('DATE_FORMAT(data_fim,"%d/%m/%Y %H:%i:%s") as data_fim'),
+			DB::raw('DATE_FORMAT(data_inscricao_ini,"%d/%m/%Y %H:%i:%s") as data_inscricao_ini'),
+			DB::raw('DATE_FORMAT(data_inscricao_fim,"%d/%m/%Y %H:%i:%s") as data_inscricao_fim'),
+			'observacao'
+		);
+
+		if (explode('/', Route::getCurrentRoute()->uri())[0] != 'admin') {
+			// $get->where([
+			// ['data_inscricao_ini', '<=', $hoje],
+			// ['data_inscricao_fim', '>=', $hoje],
+			// ]);
+			$get->where('data_ini', '>=', $hoje);
+		}
+
+		if ($next === 'next') {
+			$get->where('data_ini', '>=', $hoje);
+		} else if ($next === 'prev') {
+			$get->where('data_ini', '<=', $hoje);
+		}
+
+		return $get->get();
+
+	}
+
+	public function insert_or_update($request)
+	{
 
 		$columns = [];
 		$data    = request()->all();
@@ -166,7 +217,8 @@ class EventoModel extends Model {
 
 	}
 
-	public static function remove($id, $categoria = 'post') {
+	public static function remove($id, $categoria = 'post')
+	{
 
 		FileModel::remove($id, $categoria);
 		self::where('id', $id)->delete();

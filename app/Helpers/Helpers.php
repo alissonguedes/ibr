@@ -402,19 +402,22 @@ if (!function_exists('post')) {
 	function post($categoria, $limit = 1, $options = [])
 	{
 
+		$posts     = [];
 		$view      = explode(':', $categoria);
 		$categoria = $view[1];
+		$model     = 'App\\Models\\Admin\\' . ucfirst(strtolower($categoria)) . 'Model';
 
-		// $model = 'App\\Models\\Admin\\' . ucfirst(strtolower($categoria)) . 'Model';
+		if (class_exists($model)) {
 
-		// if (class_exists($model)) {
-		// 	$post = new $model();
-		// 	dump($model);
-		// } else {
-		$post  = new App\Models\Admin\PostModel();
+			$post = new $model();
+
+		} else {
+
+			$post = new App\Models\Admin\PostModel();
+
+		}
+
 		$posts = $post->getAllActivePosts($categoria, $limit, $options);
-		// 	dump($posts);
-		// }
 
 		if (!empty($post)) {
 			$data['post'] = $posts;
@@ -422,6 +425,22 @@ if (!function_exists('post')) {
 		}
 
 		return view($view[0] . '.' . $categoria);
+
+	}
+
+}
+
+if (!function_exists('pastores')) {
+
+	function pastores($section = null, $status = '1')
+	{
+
+		$pastores = '';
+
+		$pastor   = new App\Models\Admin\PastorModel();
+		$pastores = $pastor->getActivePastores($section);
+
+		dd($pastores);
 
 	}
 

@@ -42,6 +42,30 @@ class PastorModel extends Model
 
 	}
 
+	public function getAllActivePosts($categoria, $limit = 50, $options = [])
+	{
+
+		if (!isset($options['table'])) {
+			$options['table'] = 'tb_post';
+		}
+
+		$allPosts = $this->from($options['table']);
+
+		if ($options['table'] === 'tb_post') {
+			$allPosts->where('tipo', 'post');
+			$allPosts->where('categoria', $categoria);
+		}
+
+		$allPosts = $allPosts->where('status', '1')->limit($limit);
+
+		if ($limit > 1) {
+			return $allPosts->get();
+		}
+
+		return $allPosts->first();
+
+	}
+
 	public function insert_or_update($request)
 	{
 

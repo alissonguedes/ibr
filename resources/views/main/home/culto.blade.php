@@ -9,21 +9,12 @@
 
 			<div class="row">
 				@foreach ($post as $culto)
-					@php
-						// $meses = [1 => 'Janeiro', 2 => 'Fevereiro', 3 => 'Março', 4 => 'Abril', 5 => 'Maio', 6 => 'Junho', 7 => 'Julho', 8 => 'Agosto', 9 => 'Setembro', 10 => 'Outubro', 11 => 'Novembro', 12 => 'Dezembro'];
-						// $data = strtotime($culto->data);
-						// $dia = date('d', $data);
-						// $mes = $meses[date('n', $data - 1)];
-						// $ano = date('Y', $data);
-						// echo $culto->data;
-					@endphp
-
 					<div class="col s4">
 						<div class="card border-radius-20">
 							<div class="card-image" style="height: 300px; overflow: hidden;">
 								<img src="{{ route('home.cultos.show-image', $culto->id) }}" class="responsive-img">
 								<div class="card-title" style="background-color: rgba(0, 0, 0, 0.3);">
-									<a href="#" class="white-text"> {{ $culto->titulo }} </a>
+									{{ $culto->titulo }}
 								</div>
 							</div>
 							<div class="card-content">
@@ -52,7 +43,7 @@
 
 		</div>
 
-		<a href="cultos.php">
+		<a href="{{ route('site.cultos') }}">
 			<div class="bt_ver_mais">Ver mais</div>
 		</a>
 
