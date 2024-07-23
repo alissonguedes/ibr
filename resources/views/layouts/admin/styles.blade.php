@@ -5,6 +5,7 @@
 
 <link rel="stylesheet" href="{{ asset('assets/node_modules/froala-editor/css/froala_editor.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/node_modules/froala-editor/css/themes/dark.min.css') }}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 @stack('plugins_css')
 

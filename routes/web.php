@@ -178,11 +178,11 @@ Route::middleware([
 	Route::prefix('/agenda')->group(function () {
 
 		Route::get('/', [Agenda::class, 'index'])->name('admin.paginas.agenda.index');
-		Route::get('/{year}/{month}/{day}', [Agenda::class, 'show'])->name('admin.paginas.agenda.date');
-		Route::get('/{search}', [Agenda::class, 'search'])->name('admin.paginas.agenda.search');
 		Route::get('/id/{id}', [Agenda::class, 'create'])->name('admin.paginas.agenda.edit');
-		Route::get('/{year}/{month}/{day}/id/{id}', [Agenda::class, 'create'])->name('admin.paginas.agenda.date.edit');
 		Route::get('/id/{id}/inscritos', [Agenda::class, 'inscritos'])->name('admin.paginas.agenda.inscritos');
+		// Route::get('/{search}', [Agenda::class, 'search'])->name('admin.paginas.agenda.search');
+		Route::get('/{year?}/{month?}/{day?}', [Agenda::class, 'show'])->name('admin.paginas.agenda.date');
+		Route::get('/{year}/{month}/{day}/id/{id}', [Agenda::class, 'create'])->name('admin.paginas.agenda.date.edit');
 		Route::post('/', [Agenda::class, 'store'])->name('admin.paginas.agenda.post');
 		Route::put('/', [Agenda::class, 'store'])->name('admin.paginas.agenda.post');
 		Route::delete('/', [Agenda::class, 'destroy'])->name('admin.paginas.agenda.delete');
