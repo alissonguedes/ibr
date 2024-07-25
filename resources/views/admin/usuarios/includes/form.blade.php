@@ -4,18 +4,20 @@
 	if (request('id')):
 	    $id = $row->id;
 	    $id_parent = $row->id_parent;
+	    $usernivel = $row->nivel;
 	    $name = $row->name;
 	    $email = $row->email;
 	    $descricao = $row->descricao;
 	    $url = $row->url;
 	    $status = $row->status;
-	    // $imagem = route('admin.usuarios.show-image', $id) . '?action=preview';
+	    $imagem = route('home.usuarios.show-image', $id) . '?action=preview';
 	endif;
 @endphp
 
 <x-slot:form action="{{ route('admin.usuarios.post') }}" method="post" style="{{ $errors->any() || request('id') ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" autocomplete="off">
 
 	@csrf
+	<input type="hidden" name="categoria" value="usuario">
 
 	@if (request('id'))
 		<input type="hidden" name="_method" value="put">
@@ -31,7 +33,7 @@
 				<div class="col s12">
 					<div class="input-field amber-text mb-2 @error('nome') error @enderror">
 						<label for="nome">Nome</label>
-						<input type="text" name="name" id="name" :value="old('name', $name ?? null)" autofocus="autofocus" />
+						<x-text-input type="text" name="name" id="name" :value="old('name', $name ?? null)" autofocus="autofocus" />
 						@error('nome')
 							<small class="error">{{ $message }}</small>
 						@enderror
@@ -45,7 +47,7 @@
 				<div class="col s12">
 					<div class="input-field amber-text mb-2 @error('email') error @enderror">
 						<label for="email">E-mail</label>
-						<input type="email" name="email" id="email" :value="old('email', $email ?? null)">
+						<x-text-input type="email" name="email" id="email" :value="old('email', $email ?? null)" />
 						@error('email')
 							<small class="error">{{ $message }}</small>
 						@enderror
@@ -54,58 +56,47 @@
 			</div>
 			<!-- END Email -->
 
-			<!-- Password -->
-			<div class="mt-4">
-				<x-input-label for="password" :value="__('Password')" />
-				<x-text-input type="password" name="password" id="password" class="block mt-1 w-full" required autocomplete="new-password" />
-				<x-input-error class="mt-2" :messages="$errors->get('password')" />
-			</div>
-
-			<!-- Confirm Password -->
-			<div class="mt-4">
-				<x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-				<x-text-input type="password" name="password_confirmation" id="password_confirmation" class="block mt-1 w-full" required autocomplete="new-password" />
-				<x-input-error class="mt-2" :messages="$errors->get('password_confirmation')" />
-			</div>
-
-			<!-- BEGIN título -->
+			<!-- BEGIN Password -->
 			<div class="row">
 				<div class="col s12">
-					<div class="input-field amber-text mb-2 @error('titulo_slug') error @enderror">
-						<label for="titulo_slug">Rótulo do campo</label>
-						<x-text-input type="text" name="titulo_slug" id="titulo_slug" :value="old('titulo_slug', $titulo_slug ?? null)" />
-						@error('titulo_slug')
+					<div class="input-field amber-text mb-2 @error('password') error @enderror">
+						<label for="password">Senha</label>
+						<x-text-input type="password" name="password" id="password" />
+						@error('password')
 							<small class="error">{{ $message }}</small>
 						@enderror
 					</div>
 				</div>
 			</div>
-			<!-- END título -->
+			<!-- END Password -->
+
+			<!-- BEGIN Confirm Password -->
+			<div class="row">
+				<div class="col s12">
+					<div class="input-field amber-text mb-2 @error('password_confirmation') error @enderror">
+						<x-input-label for="password_confirmation" :value="__('Confirmar senha')" />
+						<x-text-input type="password" name="password_confirmation" id="password_confirmation" />
+						@error('password_confirmation')
+							<small class="error">{{ $message }}</small>
+						@enderror
+					</div>
+				</div>
+			</div>
+			<!-- END Password -->
 
 			<!-- BEGIN título -->
 			<div class="row">
 				<div class="col s12">
-					<div class="input-field amber-text mb-2 @error('titulo_slug') error @enderror">
-						<label for="titulo_slug">Categoria</label>
-						@php
-							$cats = new App\Models\Admin\CategoriaModel();
-							if (!isset($id)) {
-							    $cats = $cats->all();
-							} else {
-							    $cats = $cats->where('id', '<>', $id)->get();
-							}
-						@endphp
+					<div class="input-field amber-text mb-2 @error('nivel') error @enderror">
+						<label for="nivel">Nível de acesso</label>
 
-						<select name="id_parent" id="id_parent">
-							<option value="" selected>Sem categoria</option>
-							@if ($cats->count() > 0)
-								@foreach ($cats as $cat)
-									<option value="{{ $cat->id }}" @selected(isset($id_parent) && $id_parent === $cat->id)>{{ $cat->titulo }}</option>
-								@endforeach
-							@endif
+						<select name="nivel" id="nivel" class="white-text">
+							<option value="" disabled selected>Informe o nível de acesso</option>
+							@foreach ($niveis as $n => $i)
+								<option value="{{ $n }}" @selected(old('nivel' ?? $n == $usernivel))>{{ $i }}</option>
+							@endforeach
 						</select>
-
-						@error('titulo_slug')
+						@error('nivel')
 							<small class="error">{{ $message }}</small>
 						@enderror
 					</div>
@@ -113,16 +104,24 @@
 			</div>
 			<!-- END título -->
 
-			<!-- BEGIN descrição -->
+			<!-- BEGIN imagem -->
 			<div class="row">
 				<div class="col s12">
-					<div class="input-field amber-text mb-2">
-						<label for="descricao">Descrição</label>
-						<x-text-input type="text" name="descricao" id="descricao" :value="old('descricao', $descricao ?? null)" />
+					<div class="file-field input-field @error('imagem') error @enderror">
+						<div class="btn">
+							<span>File</span>
+							<x-text-input type="file" name="imagem" />
+						</div>
+						<div class="file-path-wrapper">
+							<x-text-input type="text" class="file-path validate" />
+						</div>
+						@error('imagem')
+							<small class="error">{{ $message }}</small>
+						@enderror
 					</div>
 				</div>
 			</div>
-			<!-- END descrição -->
+			<!-- END imagem -->
 
 			<!-- BEGIN status -->
 			<div class="row">

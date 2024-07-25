@@ -28,21 +28,21 @@
 					<img src="{{ asset('assets/img/admin/logo_admin.png') }}" class="img_cem">
 				</div>
 
-				<form action="{{ route('login') }}" method="post" class="bloco_form">
+				<form action="{{ route('login') }}" method="post" class="bloco_form" autocomplete="off">
 
 					@csrf
 
 					<!-- Email Address -->
 					<div class="input-field">
-						<x-input-label for="email" :value="__('Email')" />
-						<x-text-input type="email" name="email" id="email" :value="old('email')" required autofocus autocomplete="username" />
+						{{-- <x-input-label for="email" class="active":value="__('Usuário')" /> --}}
+						<x-text-input type="email" name="email" id="email" class="black-text" :value="old('email')" required autofocus placeholder="Usuário" />
 						<x-input-error class="mt-2" :messages="$errors->get('email')" />
 					</div>
 
 					<!-- Password -->
 					<div class="input-field">
-						<x-input-label for="password" :value="__('Password')" />
-						<x-text-input type="password" name="password" id="password" required autocomplete="current-password" />
+						{{-- <x-input-label for="password" class="active" :value="__('Senha')" /> --}}
+						<x-text-input type="password" name="password" id="password" class="black-text" required placeholder="Senha" />
 						<x-input-error class="mt-2" :messages="$errors->get('password')" />
 					</div>
 

@@ -5,6 +5,15 @@
 
 	<x-slot:body>
 
+		@php
+			$niveis = [
+			    'root' => 'Super Administrador',
+			    'admin' => 'Administrador',
+			    'pastor' => 'Pastor',
+			    'financeiro' => 'Financeiro',
+			];
+		@endphp
+
 		@if (isset($usuarios) && $usuarios->count() > 0)
 			<div class="row">
 				<div class="col s8">
@@ -14,7 +23,7 @@
 		@else
 			<div class="row">
 				<div class="col s12">
-					Nenhum categoria cadastrado.
+					Nenhum usuário cadastrado.
 				</div>
 			</div>
 		@endif

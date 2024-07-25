@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\DB;
 /**
  * A classe extende de PostModel, pois opera na tabela `tb_post`
  */
-class AgendaModel extends EventoModel {
+class AgendaModel extends EventoModel
+{
 
 	use HasFactory;
 
@@ -66,7 +67,8 @@ class AgendaModel extends EventoModel {
 		'status',
 	];
 
-	public function getAll($date = null) {
+	public function getAll($date = null)
+	{
 		if (!is_null($date)) {
 
 			$date = date('Y-m-d', strtotime($date));
@@ -89,7 +91,8 @@ class AgendaModel extends EventoModel {
 		// })->get();
 	}
 
-	public function getAllEvents() {
+	public function getAllEvents()
+	{
 
 		$hoje = date('Y-m-d H:i:s');
 
@@ -100,17 +103,20 @@ class AgendaModel extends EventoModel {
 
 	}
 
-	public function getEvento($id) {
+	public function getEvento($id)
+	{
 
 		return $this->where('id', $id)->get()->first();
 
 	}
 
-	public function getEventoByTitulo($titulo) {
+	public function getEventoByTitulo($titulo)
+	{
 		return $this->where('evento_slug', $titulo)->get()->first();
 	}
 
-	public function search($search, $both = true, $categoria = 'evento', $tipo = 'post') {
+	public function search($search, $both = true, $categoria = 'evento', $tipo = 'post')
+	{
 
 		// return $this->select($this->columns)->where('categoria', $categoria)
 		// 	->whereAny([
@@ -124,7 +130,8 @@ class AgendaModel extends EventoModel {
 
 	}
 
-	public function insert_or_update($request) {
+	public function insert_or_update($request)
+	{
 
 		$columns = [];
 		$data    = request()->all();
@@ -191,7 +198,8 @@ class AgendaModel extends EventoModel {
 
 	}
 
-	public static function remove($id, $categoria = 'post') {
+	public static function remove($id, $categoria = 'post')
+	{
 
 		FileModel::remove($id, $categoria);
 		self::where('id', $id)->delete();

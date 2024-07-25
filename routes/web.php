@@ -62,7 +62,7 @@ Route::prefix('/')->group(function () {
 Route::get('/imagem/banner/{file_id}', [Banners::class, 'show'])->name('home.banners.show-image');
 Route::get('/imagem/post/{file_id}', [Posts::class, 'show'])->name('home.posts.show-image');
 Route::get('/imagem/pastor/{file_id}', [Pastores::class, 'show'])->name('home.pastores.show-image');
-Route::get('/imagem/usuarios/{file_id}', [Usuarios::class, 'show'])->name('home.usuarios.show-image');
+Route::get('/imagem/usuarios/{file_id}', [RegisteredUserController::class, 'show'])->name('home.usuarios.show-image');
 Route::get('/imagem/ministerio/{file_id}', [Ministerios::class, 'show'])->name('home.ministerios.show-image');
 Route::get('/imagem/a-ibr/{file_id}', [A_Ibr::class, 'show'])->name('home.a-ibr.show-image');
 Route::get('/imagem/apresentacao/{file_id}', [Apresentacao::class, 'show'])->name('home.apresentacao.show-image');
@@ -96,16 +96,21 @@ Route::middleware([
 	});
 
 	/** Usuários */
-
 	Route::prefix('/usuarios')->group(function () {
 
 		Route::get('/', [RegisteredUserController::class, 'index'])->name('admin.usuarios.index');
-		Route::get('/{id}', [RegisteredUserController::class, 'index'])->name('admin.usuarios.edit');
+		Route::get('/id/{id}', [RegisteredUserController::class, 'index'])->name('admin.usuarios.edit');
 		Route::post('/', [RegisteredUserController::class, 'store']);
 		Route::post('/', [RegisteredUserController::class, 'store'])->name('admin.usuarios.post');
-		Route::put('/', [RegisteredUserController::class, 'edit'])->name('admin.usuarios.edit');
+		Route::put('/', [RegisteredUserController::class, 'store'])->name('admin.usuarios.post');
 		Route::delete('/', [RegisteredUserController::class, 'destroy'])->name('admin.usuarios.delete');
 
+	});
+
+	Route::middleware('auth')->group(function () {
+		Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+		Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+		Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 	});
 
 	/** banners */

@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable {
+class User extends Authenticatable
+{
 	use HasFactory, Notifiable;
 
 	protected $table = 'tb_usuario';
@@ -18,9 +19,11 @@ class User extends Authenticatable {
 	 * @var array<int, string>
 	 */
 	protected $fillable = [
+		'nivel',
 		'name',
 		'email',
 		'password',
+		'status',
 	];
 
 	/**
@@ -38,14 +41,16 @@ class User extends Authenticatable {
 	 *
 	 * @return array<string, string>
 	 */
-	protected function casts(): array {
+	protected function casts(): array
+	{
 		return [
 			'email_verified_at' => 'datetime',
 			'password'          => 'hashed',
 		];
 	}
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->connection = env('DB_SITE_CONNECTION');
 	}
 
