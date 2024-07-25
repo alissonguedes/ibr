@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Route;
 /**
  * A classe extende de PostModel, pois opera na tabela `tb_evento`
  */
-class EventoModel extends Model
-{
+class EventoModel extends Model {
 
 	use HasFactory;
 
@@ -69,8 +68,7 @@ class EventoModel extends Model
 		'status',
 	];
 
-	public function getAllEventos()
-	{
+	public function getAllEventos() {
 		return $this->where('tipo', 'E')->get();
 		// $container = 'eventos';
 		// return $this->where(['tipo' => 'post'])->whereIn('id_parent', function ($query) use ($container) {
@@ -78,20 +76,17 @@ class EventoModel extends Model
 		// })->get();
 	}
 
-	public function getEvento($id)
-	{
+	public function getEvento($id) {
 
 		return $this->where('id', $id)->get()->first();
 
 	}
 
-	public function getEventoByTitulo($titulo)
-	{
+	public function getEventoByTitulo($titulo) {
 		return $this->where('evento_slug', $titulo)->get()->first();
 	}
 
-	public function search($search, $both = true, $categoria = 'evento', $tipo = 'post')
-	{
+	public function search($search, $both = true, $categoria = 'evento', $tipo = 'post') {
 
 		// return $this->select($this->columns)->where('categoria', $categoria)
 		// 	->whereAny([
@@ -105,8 +100,7 @@ class EventoModel extends Model
 
 	}
 
-	public function getAllActivePosts($categoria, $limit = 50, $options = [])
-	{
+	public function getAllActivePosts($categoria, $limit = 50, $options = []) {
 
 		$options['next'] = null;
 		$next            = $options['next'];
@@ -121,12 +115,13 @@ class EventoModel extends Model
 			'evento',
 			'evento_slug',
 			'descricao',
-			'local',
+			'local_evento',
 			'endereco',
-			DB::raw('DATE_FORMAT(data_ini,"%d/%m/%Y %H:%i:%s") as data_ini'),
-			DB::raw('DATE_FORMAT(data_fim,"%d/%m/%Y %H:%i:%s") as data_fim'),
-			DB::raw('DATE_FORMAT(data_inscricao_ini,"%d/%m/%Y %H:%i:%s") as data_inscricao_ini'),
-			DB::raw('DATE_FORMAT(data_inscricao_fim,"%d/%m/%Y %H:%i:%s") as data_inscricao_fim'),
+			'data_ini AS data_evento',
+			DB::raw('DATE_FORMAT(data_ini,"%d/%m/%Y %H:%i") as data_ini'),
+			DB::raw('DATE_FORMAT(data_fim,"%d/%m/%Y %H:%i") as data_fim'),
+			DB::raw('DATE_FORMAT(data_inscricao_ini,"%d/%m/%Y %H:%i") as data_inscricao_ini'),
+			DB::raw('DATE_FORMAT(data_inscricao_fim,"%d/%m/%Y %H:%i") as data_inscricao_fim'),
 			'observacao'
 		);
 
@@ -138,6 +133,9 @@ class EventoModel extends Model
 			$get->where('data_ini', '>=', $hoje);
 		}
 
+		$get->where('tipo', 'E');
+		$get->where('status', '1')->limit($limit);
+
 		if ($next === 'next') {
 			$get->where('data_ini', '>=', $hoje);
 		} else if ($next === 'prev') {
@@ -148,8 +146,7 @@ class EventoModel extends Model
 
 	}
 
-	public function insert_or_update($request)
-	{
+	public function insert_or_update($request) {
 
 		$columns = [];
 		$data    = request()->all();
@@ -217,8 +214,7 @@ class EventoModel extends Model
 
 	}
 
-	public static function remove($id, $categoria = 'post')
-	{
+	public static function remove($id, $categoria = 'post') {
 
 		FileModel::remove($id, $categoria);
 		self::where('id', $id)->delete();

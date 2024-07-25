@@ -6,25 +6,19 @@
 
 		<div class="content_int">
 
-			<style>
-				iframe {
-					width: 100% !important;
-				}
-			</style>
 			@if (isset($posts) && $posts->count() > 0)
-				<div class="row">
+				<div class="masonry row">
 					@foreach ($posts as $i => $post)
 						<div class="col s12 m6 l4">
 							<a href="{{ route('site.eventos.details', $post->evento_slug) }}">
 								<div class="card border-radius-20 z-depth-3">
-									<div class="card-image" style="height: 300px; overflow: hidden;">
+									<div class="card-image">
 										<div class="mascara" style="position: absolute; background: transparent; top: 0; left: 0; right: 0; bottom: 0; z-index: 9;"></div>
-										{{-- {!! $post->url !!} --}}
-										<img src="{{ route('home.eventos.show-image', $post->id) . '?action=preview' }}" height="210">
+										<img src="{{ route('home.eventos.show-image', $post->id) . '?action=preview' }}">
 									</div>
 									<div class="card-content center-align gradient-0deg-grey-grey">
 										<h5 class="card-title mb-6 mt-0">{{ $post->evento }}</h5>
-										<small class="grey-text text-darken-3">{{ show_date($post->data_ini) }}</small>
+										<small class="grey-text text-darken-3">{{ show_date($post->data_evento) }}</small>
 										<p class="bold black-text mt-6">{{ $post->subtitulo }}</p>
 									</div>
 								</div>

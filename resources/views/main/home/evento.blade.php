@@ -5,36 +5,18 @@
 
 		<div class="content">
 
-			@dump($post)
-			<!--conj palavra-->
-			<a href="evento_page.php">
-				<div class="conj_palavra">
-					<div class="img_palavra"><img src="{{ asset('assets/img/eventos/001.jpg') }}" class="img_cem"></div>
-					<div class="title_palavra">Acamp-X<br>Incendiários</div>
-					<div class="resumo_palavra">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-						magna massa...</div>
-				</div>
-			</a>
-
-			<!--conj palavra-->
-			<a href="evento_page.php">
-				<div class="conj_palavra">
-					<div class="img_palavra"><img src="{{ asset('assets/img/eventos/001.jpg') }}" class="img_cem"></div>
-					<div class="title_palavra">Acamp-X<br>Incendiários</div>
-					<div class="resumo_palavra">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-						magna massa...</div>
-				</div>
-			</a>
-
-			<!--conj palavra-->
-			<a href="evento_page.php">
-				<div class="conj_palavra">
-					<div class="img_palavra"><img src="{{ asset('assets/img/eventos/001.jpg') }}" class="img_cem"></div>
-					<div class="title_palavra">Acamp-X<br>Incendiários</div>
-					<div class="resumo_palavra">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-						magna massa...</div>
-				</div>
-			</a>
+			@foreach ($post as $p)
+				<!--conj palavra-->
+				<a href="{{ route('site.eventos.details', $p->evento_slug) }}">
+					<div class="conj_palavra">
+						<div class="img_palavra"><img src="{{ route('home.eventos.show-image', $p->id) }}" class="img_cem"></div>
+						<div class="title_palavra" style="height: 60px;" title="{{ $p->evento }}">{{ $p->evento }}</div>
+						<div class="resumo_palavra">
+							{{ $p->local_evento }}
+						</div>
+					</div>
+				</a>
+			@endforeach
 
 		</div>
 

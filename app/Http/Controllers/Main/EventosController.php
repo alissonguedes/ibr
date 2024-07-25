@@ -7,16 +7,14 @@ use App\Http\Requests\InscricoesRequest;
 use App\Models\Admin\EventoModel;
 use Illuminate\Http\Request;
 
-class EventosController extends Controller
-{
+class EventosController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index(EventoModel $post)
-	{
+	public function index(EventoModel $post) {
 
-		$data['posts'] = $post->getAllEventos('evento');
+		$data['posts'] = $post->getAllActivePosts('evento');
 
 		return view('main.eventos.index', $data);
 
@@ -25,8 +23,7 @@ class EventosController extends Controller
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(Request $request, EventoModel $postModel, string $evento)
-	{
+	public function show(Request $request, EventoModel $postModel, string $evento) {
 
 		$data['id']   = $request->id;
 		$data['post'] = $postModel->getEventoByTitulo($evento);
@@ -39,13 +36,11 @@ class EventosController extends Controller
 
 	}
 
-	public function create(Request $request, EventoModel $postModel, string $evento)
-	{
+	public function create(Request $request, EventoModel $postModel, string $evento) {
 
 	}
 
-	public function store(InscricoesRequest $request, EventoModel $eventoModel)
-	{
+	public function store(InscricoesRequest $request, EventoModel $eventoModel) {
 
 		echo '==> ';
 

@@ -16,3 +16,5 @@
 <link rel="stylesheet" href="{{ asset('assets/css/defaults/colors.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/defaults/animate.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
+
+@stack('styles')

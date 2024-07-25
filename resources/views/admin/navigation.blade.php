@@ -3,6 +3,7 @@
 	<ul>
 		<li><x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')"> <i class="material-symbols-outlined">dashboard</i> {{ __('Dashboard') }}</x-nav-link></li>
 		<li><x-nav-link :href="route('admin.categorias.index')" :active="request()->routeIs('admin.categorias.index')"> <i class="material-symbols-outlined">category</i> {{ __('Categorias') }}</x-nav-link></li>
+		<li><x-nav-link :href="route('admin.usuarios.index')" :active="request()->routeIs('admin.usuarios.index')"> <i class="material-symbols-outlined">group</i> {{ __('Usuários') }}</x-nav-link></li>
 		<li>
 			<x-nav-link href="javascript:void(0);" class="submenu-open" data-id="#paginas"> <i class="material-symbols-outlined">home</i> Páginas </x-nav-link>
 			<ul id="paginas" class="{{ request()->routeIs('admin.paginas.a-ibr.index') || request()->routeIs('admin.paginas.ministerios.index') || request()->routeIs('admin.paginas.cultos.index') || request()->routeIs('admin.paginas.cultos.edit') || request()->routeIs('admin.paginas.eventos.index') || request()->routeIs('admin.paginas.eventos.edit') || request()->routeIs('admin.paginas.eventos.inscritos') ? 'in' : 'submenu' }} scroller">
@@ -27,6 +28,12 @@
 							<x-nav-link :href="route('admin.paginas.home.pastores.index')" :active="request()->routeIs('admin.paginas.home.pastores.index') || request()->routeIs('admin.paginas.ministerios.edit')">
 								<i class="material-symbols-outlined">group</i>
 								Corpo Pastoral
+							</x-nav-link>
+						</li>
+						<li>
+							<x-nav-link :href="route('admin.paginas.home.propositos.index')" :active="request()->routeIs('admin.paginas.home.propositos.index') || request()->routeIs('admin.paginas.home.propositos.edit')">
+								<i class="material-symbols-outlined">volunteer_activism</i>
+								Propósitos
 							</x-nav-link>
 						</li>
 					</ul>

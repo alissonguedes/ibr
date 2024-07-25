@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\EventosController as Eventos;
 use App\Http\Controllers\Admin\MinisteriosController as Ministerios;
 use App\Http\Controllers\Admin\PastoresController as Pastores;
 use App\Http\Controllers\Admin\PostsController as Posts;
+use App\Http\Controllers\Admin\PropositosController as Propositos;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 // Main Controllers
 use App\Http\Controllers\Main\AgendaController;
@@ -60,9 +62,11 @@ Route::prefix('/')->group(function () {
 Route::get('/imagem/banner/{file_id}', [Banners::class, 'show'])->name('home.banners.show-image');
 Route::get('/imagem/post/{file_id}', [Posts::class, 'show'])->name('home.posts.show-image');
 Route::get('/imagem/pastor/{file_id}', [Pastores::class, 'show'])->name('home.pastores.show-image');
+Route::get('/imagem/usuarios/{file_id}', [Usuarios::class, 'show'])->name('home.usuarios.show-image');
 Route::get('/imagem/ministerio/{file_id}', [Ministerios::class, 'show'])->name('home.ministerios.show-image');
 Route::get('/imagem/a-ibr/{file_id}', [A_Ibr::class, 'show'])->name('home.a-ibr.show-image');
 Route::get('/imagem/apresentacao/{file_id}', [Apresentacao::class, 'show'])->name('home.apresentacao.show-image');
+Route::get('/imagem/propositos/{file_id}', [Propositos::class, 'show'])->name('home.propositos.show-image');
 Route::get('/imagem/cultos/{file_id}', [Cultos::class, 'show'])->name('home.cultos.show-image');
 Route::get('/imagem/evento/{file_id}', [Eventos::class, 'show'])->name('home.eventos.show-image');
 
@@ -88,6 +92,19 @@ Route::middleware([
 		Route::post('/', [Categorias::class, 'store'])->name('admin.categorias.post');
 		Route::put('/', [Categorias::class, 'store'])->name('admin.categorias.post');
 		Route::delete('/', [Categorias::class, 'destroy'])->name('admin.categorias.delete');
+
+	});
+
+	/** Usuários */
+
+	Route::prefix('/usuarios')->group(function () {
+
+		Route::get('/', [RegisteredUserController::class, 'index'])->name('admin.usuarios.index');
+		Route::get('/{id}', [RegisteredUserController::class, 'index'])->name('admin.usuarios.edit');
+		Route::post('/', [RegisteredUserController::class, 'store']);
+		Route::post('/', [RegisteredUserController::class, 'store'])->name('admin.usuarios.post');
+		Route::put('/', [RegisteredUserController::class, 'edit'])->name('admin.usuarios.edit');
+		Route::delete('/', [RegisteredUserController::class, 'destroy'])->name('admin.usuarios.delete');
 
 	});
 
@@ -186,6 +203,16 @@ Route::middleware([
 		Route::post('/', [Agenda::class, 'store'])->name('admin.paginas.agenda.post');
 		Route::put('/', [Agenda::class, 'store'])->name('admin.paginas.agenda.post');
 		Route::delete('/', [Agenda::class, 'destroy'])->name('admin.paginas.agenda.delete');
+
+	});
+
+	/** Propósitos */
+	Route::prefix('/propositos')->group(function () {
+
+		Route::get('/', [Propositos::class, 'index'])->name('admin.paginas.home.propositos.index');
+		Route::post('/', [Propositos::class, 'store'])->name('admin.paginas.home.propositos.post');
+		Route::put('/', [Propositos::class, 'store'])->name('admin.paginas.home.propositos.post');
+		Route::delete('/', [Propositos::class, 'destroy'])->name('admin.paginas.home.propositos.delete');
 
 	});
 

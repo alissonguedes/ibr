@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\AgendaModel;
 use App\Models\Main\HomeModel;
 use Illuminate\Http\Request;
 
 class AgendaController extends Controller {
+
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index() {
-		return view('main.agenda.index');
+	public function index(Request $request, AgendaModel $agenda) {
+
+		$data['agenda'] = $agenda->getAllEvents();
+		return view('main.agenda.index', $data);
 	}
 
 	/**
@@ -55,4 +59,5 @@ class AgendaController extends Controller {
 	public function destroy(HomeModel $home) {
 		//
 	}
+
 }

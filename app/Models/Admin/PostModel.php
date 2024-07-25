@@ -5,8 +5,7 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
 
-class PostModel extends Model
-{
+class PostModel extends Model {
 
 	use HasFactory;
 
@@ -25,6 +24,7 @@ class PostModel extends Model
 		'data',
 		'tags',
 		'url',
+		'texto_url',
 		'hits',
 		'ordem',
 		'status',
@@ -32,10 +32,9 @@ class PostModel extends Model
 		'publish_down',
 	];
 
-	protected $columns = ['id', 'tipo', 'autor', 'titulo', 'titulo_slug', 'subtitulo', 'conteudo', 'data', 'tags', 'url', 'hits', 'publish_up', 'publish_down', 'status'];
+	protected $columns = ['id', 'tipo', 'autor', 'titulo', 'titulo_slug', 'subtitulo', 'conteudo', 'data', 'tags', 'url', 'texto_url', 'hits', 'publish_up', 'publish_down', 'status'];
 
-	public function search($search, $both = true, $categoria = 'post', $tipo = 'post')
-	{
+	public function search($search, $both = true, $categoria = 'post', $tipo = 'post') {
 
 		return $this->select($this->columns)
 			->where('tipo', $tipo)
@@ -51,8 +50,7 @@ class PostModel extends Model
 
 	}
 
-	public function getAllPosts($where = null, $categoria = 'post')
-	{
+	public function getAllPosts($where = null, $categoria = 'post') {
 
 		$get = $this->select($this->columns);
 
@@ -70,15 +68,13 @@ class PostModel extends Model
 
 	}
 
-	public function getPost($data)
-	{
+	public function getPost($data) {
 		return $this->whereAny(['id', 'categoria', 'titulo_slug'], $data)
 			->select($this->columns ?? '*')
 			->where('tipo', 'post')->first();
 	}
 
-	public function getAllActivePosts($categoria, $limit = 50, $options = [])
-	{
+	public function getAllActivePosts($categoria, $limit = 50, $options = []) {
 
 		if (!isset($options['table'])) {
 			$options['table'] = 'tb_post';
@@ -101,13 +97,11 @@ class PostModel extends Model
 
 	}
 
-	public function getActivePost($container)
-	{
+	public function getActivePost($container) {
 		return $this->getAllPosts($container)->where('status', '1')->first();
 	}
 
-	public function insert_or_update($request)
-	{
+	public function insert_or_update($request) {
 
 		$columns = [];
 		$data    = request()->all();
@@ -144,6 +138,7 @@ class PostModel extends Model
 		$columns['data']         = isset($data['data']) ? date('Y-m-d H:i:s', strtotime(str_replace('/', '-', $data['data']))) : null;
 		$columns['ordem']        = $data['ordem'] ?? 0;
 		$columns['url']          = $data['url'] ?? null;
+		$columns['texto_url']    = $data['texto_url'] ?? null;
 		$columns['tags']         = $data['tags'] ?? null;
 		$columns['publish_up']   = $data['publish_up'] ?? null;
 		$columns['publish_down'] = $data['publish_down'] ?? null;
@@ -162,8 +157,7 @@ class PostModel extends Model
 
 	}
 
-	public static function remove($id, $categoria = 'post')
-	{
+	public static function remove($id, $categoria = 'post') {
 
 		FileModel::remove($id, $categoria);
 		self::where('id', $id)->delete();

@@ -11,3 +11,11 @@
 <link rel="stylesheet" href="{{ asset('assets/css/defaults/colors.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/layout.css') }}">
 <link rel="shortcut icon" href="favicon.png">
+
+<style>
+	.row .col {
+		padding: 0 1.5rem;
+        margin-bottom: 1.5rem;
+	}
+
+</style>

@@ -5,8 +5,7 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
 
-class PastorModel extends Model
-{
+class PastorModel extends Model {
 
 	use HasFactory;
 
@@ -19,21 +18,18 @@ class PastorModel extends Model
 
 	protected $columns = ['id', 'nome', 'status'];
 
-	public function getAllPastores()
-	{
+	public function getAllPastores() {
 		return $this->select(
 			'id', 'nome', DB::raw('IF(status = "1", "Ativo", "Inativo") AS status')
 		)->get();
 	}
 
-	public function getPastor($data)
-	{
+	public function getPastor($data) {
 		return $this->getOrWhere(['id', $data], ['nome', $data])
 			->first();
 	}
 
-	public function search($search, $both = true, $categoria = 'pastor', $tipo = 'post')
-	{
+	public function search($search, $both = true, $categoria = 'pastor', $tipo = 'post') {
 		return $this->whereAny([
 			'id',
 			'nome',
@@ -42,21 +38,9 @@ class PastorModel extends Model
 
 	}
 
-	public function getAllActivePosts($categoria, $limit = 50, $options = [])
-	{
+	public function getAllActivePosts($categoria = 'pastor', $limit = 50, $options = []) {
 
-		if (!isset($options['table'])) {
-			$options['table'] = 'tb_post';
-		}
-
-		$allPosts = $this->from($options['table']);
-
-		if ($options['table'] === 'tb_post') {
-			$allPosts->where('tipo', 'post');
-			$allPosts->where('categoria', $categoria);
-		}
-
-		$allPosts = $allPosts->where('status', '1')->limit($limit);
+		$allPosts = $this->where('status', '1')->limit($limit);
 
 		if ($limit > 1) {
 			return $allPosts->get();
@@ -66,8 +50,7 @@ class PastorModel extends Model
 
 	}
 
-	public function insert_or_update($request)
-	{
+	public function insert_or_update($request) {
 
 		$columns           = [];
 		$data              = request()->all();
@@ -85,8 +68,7 @@ class PastorModel extends Model
 
 	}
 
-	public static function remove($id)
-	{
+	public static function remove($id) {
 
 		FileModel::remove($id, 'pastor');
 

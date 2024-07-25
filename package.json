@@ -18,6 +18,7 @@
         "fullcalendar": "^6.1.14",
         "html2canvas": "^1.4.1",
         "jquery": "^3.7.1",
+        "masonry-layout": "^4.2.2",
         "materialize-css": "^1.0.0-rc.2",
         "mburger-webcomponent": "^3.1.4",
         "nestable": "^0.2.0",

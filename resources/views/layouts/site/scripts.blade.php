@@ -2,10 +2,18 @@
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 {{-- <script src="{{ asset('assets/js/rolagem.js') }}" type="text/javascript"></script> --}}
 <script src="{{ asset('assets/node_modules/materialize-css/dist/js/materialize.min.js') }}"></script>
+<script src="{{ asset('assets/node_modules/masonry-layout/dist/masonry.pkgd.min.js') }}"></script>
+
+@stack('scripts')
 
 <!--box-->
 <script>
 	$(function() {
+
+		$('.masonry.row').masonry({
+			'itemSelector': '.col'
+		});
+
 		$("#bt_mob, #bt_quemsomos, #bt_seguros, #bt_orcamento, #bt_oferta, #bt_local, #bt_x").click(function(
 			e) {
 			el = $(this).data('element');

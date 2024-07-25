@@ -9,6 +9,7 @@
 <script src="{{ asset('assets/node_modules/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/node_modules/materialize-css/dist/js/materialize.min.js') }}"></script>
 <script src="{{ asset('assets/node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ asset('assets/node_modules/masonry-layout/dist/masonry.pkgd.min.js') }}"></script>
 
 <script src="{{ asset('assets/node_modules/html2canvas/dist/html2canvas.js') }}"></script>
 <script src="{{ asset('assets/node_modules/mmenu-js/dist/mmenu.js') }}"></script>

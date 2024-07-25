@@ -72,7 +72,7 @@
 				<div class="col s6">
 					<div class="input-field mb-2 @error('data') error @enderror">
 						<label for="data">Data do evento</label>
-						<x-text-input type="text" name="data" id="data" class="datepicker" :value="old('data', $data_evento ?? null)" />
+						<x-text-input type="text" name="data" id="data" class="daterange" :value="old('data', $data_evento ?? null)" />
 						@error('data')
 							<small class="error">{{ $message }}</small>
 						@enderror
@@ -108,7 +108,7 @@
 				<div class="col s6">
 					<div class="input-field mb-2 @error('data_inscricao') error @enderror">
 						<label for="data">Início e fim das inscrições</label>
-						<x-text-input type="text" name="data_inscricao" id="data_inscricao" class="datepicker" :value="old('data_inscricao', $data_inscricao ?? null)" />
+						<x-text-input type="text" name="data_inscricao" id="data_inscricao" class="daterange" :value="old('data_inscricao', $data_inscricao ?? null)" />
 						@error('data_inscricao')
 							<small class="error">{{ $message }}</small>
 						@enderror
