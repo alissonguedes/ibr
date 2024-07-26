@@ -13,7 +13,7 @@ class PastoresController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index(PastorModel $pastor)
+	public function index(Request $request, PastorModel $pastor)
 	{
 
 		$data['pastores'] = $pastor->getAllPastores();

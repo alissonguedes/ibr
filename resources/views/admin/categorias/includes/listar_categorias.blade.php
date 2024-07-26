@@ -4,9 +4,18 @@
 			{{-- <div class="dd-handle"></div> --}}
 			<div class="dd-content">
 				{{ $categoria->titulo }}
-				<button type="button" class="icon-background edit btn btn-small btn-floating waves-effect right gradient-45deg-green-light-green" data-href="{{ route('admin.categorias.edit', $categoria->id) }}">
-					<i class="material-symbols-outlined">edit</i>
-				</button>
+
+				@can('update', App\Models\Admin\CategoriaModel::class)
+					<button type="button" class="icon-background edit btn btn-small btn-floating waves-effect right gradient-45deg-green-light-green" data-href="{{ route('admin.categorias.edit', $categoria->id) }}">
+						<i class="material-symbols-outlined">edit</i>
+					</button>
+				@endcan
+
+				{{-- <form action="{{ route('admin.categorias.delete') }}" method="post">
+					@csrf
+					<input type="hidden" name="_method" value="delete">
+					<button type="submit">Remover</button>
+				</form> --}}
 			</div>
 			@php
 				$categorias = new App\Models\Admin\CategoriaModel();

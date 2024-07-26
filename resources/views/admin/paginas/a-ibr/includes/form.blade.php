@@ -1,4 +1,8 @@
-<x-header-page data-href="{{ route('admin.paginas.a-ibr.index') }}" placeholder="Pesquisar postagem..." title="Adicionar Postagem">add</x-header-page>
+<x-header-page data-href="{{ route('admin.paginas.a-ibr.index') }}" placeholder="Pesquisar postagem..." title="Adicionar Postagem">
+	@can('create', App\Models\Admin\PostModel::class)
+		<x-slot:add_button>add</x-slot:add_button>
+	@endcan
+</x-header-page>
 
 @php
 	if (request('id')):

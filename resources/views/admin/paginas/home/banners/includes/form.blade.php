@@ -1,4 +1,10 @@
-<x-header-page data-href="{{ route('admin.paginas.home.banners.index') }}" placeholder="Pesquisar banners..." title="Adicionar Banner">add</x-header-page>
+<x-header-page placeholder="Pesquisar banners...">
+
+	@can('create', App\Models\Admin\BannerModel::class)
+		<x-slot:add_button data-href="{{ route('admin.paginas.home.banners.index') }}" title="Adicionar Banner">add</x-slot:add_button>
+	@endcan
+
+</x-header-page>
 
 @php
 	if (request('id')):
@@ -58,8 +64,9 @@
 				</div>
 			</div>
 			<!-- END título -->
-			@if (Auth::check() && Auth::id() === 1)
-				<!-- BEGIN título -->
+
+			<!-- BEGIN título -->
+			@can('edit_rotulo', App\Models\Admin\BannerModel::class)
 				<div class="row">
 					<div class="col s12">
 						<div class="input-field amber-text mb-2 @error('titulo') error @enderror">
@@ -71,10 +78,12 @@
 						</div>
 					</div>
 				</div>
-				<!-- END título -->
 			@else
-				<input type="hidden" name="titulo_slug" value="{{ $titulo_slug }}">
-			@endif
+				{{-- <label for="titulo_slug" class="grey-text text-darken-2">Rótulo do campo</label> --}}
+				{{-- <div class="input-label disabled grey-text text-lighten-1" style="color: var(--grey-darken-1) !important">{{ $titulo_slug ?? null }}</div> --}}
+				<input type="hidden" name="titulo_slug" value="{{ $titulo_slug ?? null }}">
+			@endcan
+			<!-- END título -->
 
 			<!-- BEGIN descrição -->
 			<div class="row">

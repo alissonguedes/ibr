@@ -11,10 +11,16 @@
 					<div class="col s12 m6 l4">
 						<div class="card transparent">
 
-							<div class="btn-group">
-								<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
-								<x-button class="icon-background edit" :data-href="route('admin.paginas.home.banners.edit', $banner->id)"> edit </x-button>
-							</div>
+							@canany(['update', 'delete'], App\Models\Admin\BannerModel::class)
+								<div class="btn-group">
+									@can('delete', App\Models\Admin\BannerModel::class)
+										<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
+									@endcan
+									@can('update', App\Models\Admin\BannerModel::class)
+										<x-button class="icon-background edit" :data-href="route('admin.paginas.home.banners.edit', $banner->id)"> edit </x-button>
+									@endcan
+								</div>
+							@endcan
 
 							<div class="card-image">
 								@if (!$banner->status)
@@ -32,28 +38,31 @@
 								{{-- <x-button class="icon-background gradient-45deg-green-light-green black-text btn-small right" :data-href="route('admin.paginas.home.banners.edit', $banner->id)"> edit </x-button> --}}
 							</div>
 
-							<div class="card-reveal red darken-4 white-text">
-								<div class="row">
-									<div class="col s12">
-										Tem certeza que deseja remover este banner?
-									</div>
-								</div>
-								<br>
-								<br>
-								<div class="row">
-									<div class="col s6 left-align">
-										<button class="btn card-title white black-text waves-effect" style="font-size: inherit; font-family: inherit;">Não</button>
-									</div>
-									<form action="{{ route('admin.paginas.home.banners.delete') }}" method="post">
-										@csrf
-										<input type="hidden" name="_method" value="delete">
-										<input type="hidden" name="id" value="{{ $banner->id }}">
-										<div class="col s6 right-align">
-											<button class="btn red waves-effect">Sim</button>
+							@can('delete', App\Models\Admin\BannerModel::class)
+								<div class="card-reveal red darken-4 white-text">
+									<div class="row">
+										<div class="col s12">
+											Tem certeza que deseja remover este banner?
 										</div>
-									</form>
+									</div>
+									<br>
+									<br>
+									<div class="row">
+										<div class="col s6 left-align">
+											<button class="btn card-title white black-text waves-effect" style="font-size: inherit; font-family: inherit;">Não</button>
+										</div>
+										<form action="{{ route('admin.paginas.home.banners.delete') }}" method="post">
+											@csrf
+											<input type="hidden" name="_method" value="delete">
+											<input type="hidden" name="id" value="{{ $banner->id }}">
+											<div class="col s6 right-align">
+												<button class="btn red waves-effect">Sim</button>
+											</div>
+										</form>
+									</div>
 								</div>
-							</div>
+							@endcan
+
 						</div>
 					</div>
 				@endforeach

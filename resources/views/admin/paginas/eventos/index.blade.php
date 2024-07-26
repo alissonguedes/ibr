@@ -15,10 +15,16 @@
 								@if (!$post->status)
 									<i class="inactive material-symbols-outlined"> visibility_off </i>
 								@endif
-								<div class="btn-group">
-									<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
-									<x-button class="icon-background edit" :data-href="route('admin.paginas.eventos.edit', $post->id)"> edit </x-button>
-								</div>
+								@canany(['update', 'delete'], App\Models\Admin\EventoModel::class)
+									<div class="btn-group">
+										@can('delete', App\Models\Admin\EventoModel::class)
+											<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
+										@endcan
+										@can('update', App\Models\Admin\EventoModel::class)
+											<x-button class="icon-background edit" :data-href="route('admin.paginas.eventos.edit', $post->id)"> edit </x-button>
+										@endcan
+									</div>
+								@endcan
 								<img src="{{ route('home.eventos.show-image', $post->id) . '?action=preview' }}" height="210">
 							</div>
 
@@ -43,29 +49,30 @@
 								</div>
 
 							</div>
-
-							<div class="card-reveal red darken-4 white-text">
-								<div class="row">
-									<div class="col s12">
-										Tem certeza que deseja remover este evento?
-									</div>
-								</div>
-								<br>
-								<br>
-								<div class="row">
-									<div class="col s6 left-align">
-										<button class="btn card-title white black-text waves-effect" style="font-size: inherit; font-family: inherit;">Não</button>
-									</div>
-									<form action="{{ route('admin.paginas.eventos.delete') }}" method="post">
-										@csrf
-										<input type="hidden" name="_method" value="delete">
-										<input type="hidden" name="id" value="{{ $post->id }}">
-										<div class="col s6 right-align">
-											<button class="btn red waves-effect">Sim</button>
+							@can('delete', App\Models\Admin\EventoModel::class)
+								<div class="card-reveal red darken-4 white-text">
+									<div class="row">
+										<div class="col s12">
+											Tem certeza que deseja remover este evento?
 										</div>
-									</form>
+									</div>
+									<br>
+									<br>
+									<div class="row">
+										<div class="col s6 left-align">
+											<button class="btn card-title white black-text waves-effect" style="font-size: inherit; font-family: inherit;">Não</button>
+										</div>
+										<form action="{{ route('admin.paginas.eventos.delete') }}" method="post">
+											@csrf
+											<input type="hidden" name="_method" value="delete">
+											<input type="hidden" name="id" value="{{ $post->id }}">
+											<div class="col s6 right-align">
+												<button class="btn red waves-effect">Sim</button>
+											</div>
+										</form>
+									</div>
 								</div>
-							</div>
+							@endcan
 						</div>
 					</div>
 				@endforeach

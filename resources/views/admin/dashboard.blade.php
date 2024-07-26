@@ -4,6 +4,7 @@
 	<x-slot:title> Dashboard </x-slot:title>
 
 	<x-slot:main>
+		{{-- @dump(Auth::user()) --}}
 	</x-slot:main>
 
 	<x-slot:script>

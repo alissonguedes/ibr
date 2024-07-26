@@ -22,10 +22,18 @@
 								<i class="inactive material-symbols-outlined"> visibility_off </i>
 							@endif
 							<div class="card-content black-text">
-								<div class="btn-group">
-									<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
-									<x-button class="icon-background btn btn-floating edit material-symbols-outlined font-weight-400" :data-href="route('admin.paginas.a-ibr.edit', $post->id)"> edit </x-button>
-								</div>
+
+								@canany(['update', 'delete'], App\Models\Admin\PostModel::class)
+									<div class="btn-group">
+										@can('delete', App\Models\Admin\PostModel::class)
+											<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
+										@endcan
+										@can('update', App\Models\Admin\PostModel::class)
+											<x-button class="icon-background btn btn-floating edit material-symbols-outlined font-weight-400" :data-href="route('admin.paginas.a-ibr.edit', $post->id)"> edit </x-button>
+										@endcan
+									</div>
+								@endcan
+
 								<div class="titulo">
 									<h6 class="bold" style="">{{ $post->subtitulo }}</h6>
 									<h4 class="bold no-margin" style="">{{ $post->titulo }}</h4>

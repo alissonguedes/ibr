@@ -72,9 +72,11 @@
 					</div>
 				</div>
 				<div class="column-right">
-					<x-button type="button" id="card-button" class="btn btn-floating waves-effect" data-href="{{ route('admin.paginas.agenda.index') }}" data-tooltip="Adicionar Evento">
-						add
-					</x-button>
+					@can('create', App\Models\Admin\AgendaModel::class)
+						<x-button type="button" id="card-button" class="btn btn-floating waves-effect" data-href="{{ route('admin.paginas.agenda.index') }}" data-tooltip="Adicionar Evento">
+							add
+						</x-button>
+					@endcan
 				</div>
 
 			</section>

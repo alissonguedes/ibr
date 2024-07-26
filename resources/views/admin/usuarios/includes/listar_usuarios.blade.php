@@ -17,8 +17,11 @@
 			</div>
 
 			<div class="card-content no-margin no-padding center-align black-text">
-				<h5 class="white-text">{{ $usuario->name }}<br>
-				<small class="light-green-text">{{ $niveis[$usuario->nivel] }}</small></h5>
+				<h5 class="white-text">
+					{{ $usuario->name }}
+					<br>
+					<small class="light-green-text">{{ $niveis[$usuario->nivel] }}</small>
+				</h5>
 			</div>
 
 			<div class="card-reveal red darken-4 white-text">

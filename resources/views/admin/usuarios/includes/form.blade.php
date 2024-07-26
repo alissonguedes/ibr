@@ -1,4 +1,8 @@
-<x-header-page data-href="{{ route('admin.usuarios.index') }}" placeholder="Pesquisar usuários..." title="Adicionar Banner">add</x-header-page>
+<x-header-page data-href="{{ route('admin.usuarios.index') }}" placeholder="Pesquisar usuários..." title="Adicionar Banner">
+	@can('create', App\Models\Admin\User::class)
+		<x-slot:add_button>add</x-slot:add_button>
+	@endcan
+</x-header-page>
 
 @php
 	if (request('id')):

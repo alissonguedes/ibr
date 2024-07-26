@@ -71,13 +71,9 @@ class CategoriaModel extends Model
 		return $this->count();
 	}
 
-	// public function search($search, $tipo = 'categoria', $both = true) {
-	// 	return parent::search($search, $tipo, $both);
-	// }
-
 	public function search($search, $both = true, $categoria = 'categoria', $tipo = 'post')
 	{
-		return parent::search($search, $both, $categoria, $tipo);
+		return $this->where('titulo', 'like', '%' . $search . '%')->get();
 	}
 
 	public static function remove($id)

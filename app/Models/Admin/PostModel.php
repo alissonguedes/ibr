@@ -5,7 +5,8 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
 
-class PostModel extends Model {
+class PostModel extends Model
+{
 
 	use HasFactory;
 
@@ -34,7 +35,8 @@ class PostModel extends Model {
 
 	protected $columns = ['id', 'tipo', 'autor', 'titulo', 'titulo_slug', 'subtitulo', 'conteudo', 'data', 'tags', 'url', 'texto_url', 'hits', 'publish_up', 'publish_down', 'status'];
 
-	public function search($search, $both = true, $categoria = 'post', $tipo = 'post') {
+	public function search($search, $both = true, $categoria = 'post', $tipo = 'post')
+	{
 
 		return $this->select($this->columns)
 			->where('tipo', $tipo)
@@ -50,7 +52,8 @@ class PostModel extends Model {
 
 	}
 
-	public function getAllPosts($where = null, $categoria = 'post') {
+	public function getAllPosts($where = null, $categoria = 'post')
+	{
 
 		$get = $this->select($this->columns);
 
@@ -68,13 +71,33 @@ class PostModel extends Model {
 
 	}
 
-	public function getPost($data) {
+	public function getPost($data)
+	{
 		return $this->whereAny(['id', 'categoria', 'titulo_slug'], $data)
 			->select($this->columns ?? '*')
 			->where('tipo', 'post')->first();
 	}
 
-	public function getAllActivePosts($categoria, $limit = 50, $options = []) {
+	public function getPermissao($categoria)
+	{
+
+		return $this->select('permissao')
+			->from('tb_usuario_permissao as P')
+			->join('tb_categoria as C', 'C.id', 'P.id_categoria')
+			->join('tb_usuario AS U', 'U.id', 'P.id_usuario')
+			->where('P.id_categoria', function ($query) use ($categoria) {
+				$query->select('id')->from('tb_categoria')
+					->whereColumn('P.id_categoria', 'C.id')
+					->where('titulo_slug', $categoria);
+			})
+			->where('U.id', Auth::user()->nivel)
+			->whereColumn('U.id', 'P.id_usuario')
+			->get();
+
+	}
+
+	public function getAllActivePosts($categoria, $limit = 50, $options = [])
+	{
 
 		if (!isset($options['table'])) {
 			$options['table'] = 'tb_post';
@@ -97,11 +120,13 @@ class PostModel extends Model {
 
 	}
 
-	public function getActivePost($container) {
+	public function getActivePost($container)
+	{
 		return $this->getAllPosts($container)->where('status', '1')->first();
 	}
 
-	public function insert_or_update($request) {
+	public function insert_or_update($request)
+	{
 
 		$columns = [];
 		$data    = request()->all();
@@ -157,7 +182,8 @@ class PostModel extends Model {
 
 	}
 
-	public static function remove($id, $categoria = 'post') {
+	public static function remove($id, $categoria = 'post')
+	{
 
 		FileModel::remove($id, $categoria);
 		self::where('id', $id)->delete();

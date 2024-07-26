@@ -2,19 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+// use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PropositoRequest;
 use App\Models\Admin\CategoriaModel;
 use App\Models\Admin\FileModel;
 use App\Models\Admin\PostModel;
 use Illuminate\Http\Request;
 
-class PropositosController extends Controller {
+// use Illuminate\Support\Facades\Gate;
+
+class PropositosController extends PostsController
+{
+
+	protected $categoria = 'proposito';
 
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index(PostModel $post, CategoriaModel $categoria) {
+	public function index(Request $request, PostModel $post, CategoriaModel $categoria)
+	{
 
 		$data['categorias'] = $categoria->getAllCategorias();
 		$data['post']       = $post->getPost('proposito');
@@ -26,7 +32,8 @@ class PropositosController extends Controller {
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(Request $request, FileModel $file, int $file_id) {
+	public function show(Request $request, FileModel $file, int $file_id)
+	{
 
 		return $file->showFile($file_id, 'proposito');
 
@@ -35,7 +42,8 @@ class PropositosController extends Controller {
 	/**
 	 * Store a newly created resource in storage.
 	 */
-	public function store(PropositoRequest $request, PostModel $page) {
+	public function store(PropositoRequest $request, PostModel $page)
+	{
 
 		$page->insert_or_update($request);
 

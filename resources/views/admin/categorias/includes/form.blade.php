@@ -1,4 +1,8 @@
-<x-header-page data-href="{{ route('admin.categorias.index') }}" placeholder="Pesquisar banners..." title="Adicionar Banner">add</x-header-page>
+<x-header-page data-href="{{ route('admin.categorias.index') }}" placeholder="Pesquisar categoria..." title="Adicionar Categoria">
+	@can('create', App\Models\Admin\CategoriaModel::class)
+		<x-slot:add_button>add</x-slot:add_button>
+	@endcan
+</x-header-page>
 
 @php
 	if (request('id')):

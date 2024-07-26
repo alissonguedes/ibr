@@ -1,10 +1,10 @@
 'use strict';
 
-$(document).ready(function () {
+$(document).ready(function() {
 
 	var scroller = $('.scroller');
 
-	$('[data-href],[href]').unbind().bind('click', function (e) {
+	$('[data-href],[href]').unbind().bind('click', function(e) {
 
 		e.preventDefault();
 
@@ -37,13 +37,13 @@ $(document).ready(function () {
 
 	});
 
-	$(scroller).each(function () {
+	$(scroller).each(function() {
 
 		var scroll = new PerfectScrollbar(this, {
 			theme: "dark",
 		});
 
-		$(window).bind('resize', function () {
+		$(window).bind('resize', function() {
 			scroll.update();
 		});
 
@@ -89,19 +89,19 @@ $(document).ready(function () {
 		});
 	}
 
-	setTimeout(function () {
-		$('.calendar-time').find('select').each(function () {
+	setTimeout(function() {
+		$('.calendar-time').find('select').each(function() {
 			$(this).addClass('browser-default');
 		})
 	}, 1000);
 
-	tabs.find('a').unbind().bind('click', function () {
-		setTimeout(function () {
+	tabs.find('a').unbind().bind('click', function() {
+		setTimeout(function() {
 			t.tabs('updateTabIndicator');
 		}, 100)
 	});
 
-	$('.tabs .tab a').each(function (index, element) {
+	$('.tabs .tab a').each(function(index, element) {
 
 		var id = $(this).attr('href');
 
@@ -122,7 +122,7 @@ $(document).ready(function () {
 
 	$('select:not(.browser-default)').formSelect();
 
-	$('.input-field').each(function () {
+	$('.input-field').each(function() {
 
 		var field = $(this).find('input,textarea,select');
 
@@ -149,11 +149,11 @@ $(document).ready(function () {
 
 	sidenav.sidenav('close');
 
-	$('.btn-menu').unbind().bind('click', function () {
+	$('.btn-menu').unbind().bind('click', function() {
 		$('body').toggleClass('nav-collapsed');
 	});
 
-	$('button[type="reset"]').unbind().bind('click', function () {
+	$('button[type="reset"]').unbind().bind('click', function() {
 
 		var action = $(this).parents('form').attr('action');
 
@@ -165,21 +165,24 @@ $(document).ready(function () {
 
 	});
 
-	$('#card-button,.icon-background').unbind().bind('click', function () {
+	$('#card-button,.icon-background').unbind().bind('click', function() {
 		var url = $(this).data('href');
 		$('form.card-reveal').show();
 		if (typeof url !== 'undefined') {
-			Url.update(url);
 			$.ajax({
 				url: url,
 				method: 'get',
 				success: (response) => {
 					var form = $(response).find('form.card-reveal');
+					Url.update(url);
 					$('form.card-reveal').html(form.html());
 					$('form.card-reveal').css({
 						'transform': 'translateY(-100%)',
 					});
 					$.getScript(BASE_PATH + 'assets/js/app.js');
+				},
+				error: (response) => {
+					alert(response.status + ': ' + response.responseJSON.message);
 				}
 			});
 		}
@@ -268,12 +271,12 @@ $(document).ready(function () {
 
 	// });
 
-	$('.card:not(.agenda)>.card-reveal').unbind().bind('mouseleave', function () {
+	$('.card:not(.agenda)>.card-reveal').unbind().bind('mouseleave', function() {
 		$(this).find('.card-title').click();
 	});
 
-	$('.input-field.error').find('input,textarea,select').each(function () {
-		$(this).bind('keyup', function () {
+	$('.input-field.error').find('input,textarea,select').each(function() {
+		$(this).bind('keyup', function() {
 			if ($(this).val().length > 0)
 				$(this).parents('.input-field.error').removeClass('error').find('.error').hide();
 			else
@@ -282,7 +285,7 @@ $(document).ready(function () {
 	});
 
 	if (typeof FroalaEditor !== 'undefined') {
-		$('.editor').each(function () {
+		$('.editor').each(function() {
 			// var height = $(this).attr('rows') || $(this).parent().parent().height();
 			var height = 300;
 			var placeholder = ($(this).attr('placeholder') || 'Escreva aqui') + '...';
@@ -302,11 +305,11 @@ $(document).ready(function () {
 	}
 
 	/** Página de agenda */
-	$('#details .card-title').unbind().bind('click', function () {
+	$('#details .card-title').unbind().bind('click', function() {
 		Url.update(BASE_URL + 'agenda');
 	});
 
-	$('#details .card-title .date').unbind().bind('click', function () {
+	$('#details .card-title .date').unbind().bind('click', function() {
 		$('#details .card-title').click();
 	});
 
