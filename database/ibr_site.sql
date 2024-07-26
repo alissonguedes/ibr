@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 25/07/2024 às 20:51
+-- Tempo de geração: 26/07/2024 às 14:46
 -- Versão do servidor: 10.6.18-MariaDB-0ubuntu0.22.04.1
 -- Versão do PHP: 8.2.21
 
@@ -286,6 +286,18 @@ CREATE TABLE `tb_usuario` (
   `status` enum('0','1') NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_usuario_permissao`
+--
+
+CREATE TABLE `tb_usuario_permissao` (
+  `id_categoria` bigint(11) UNSIGNED NOT NULL,
+  `id_usuario` bigint(11) UNSIGNED NOT NULL,
+  `permissao` enum('list','create','update','delete') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Índices para tabelas despejadas
 --
@@ -388,6 +400,13 @@ ALTER TABLE `tb_usuario`
   ADD UNIQUE KEY `ibr_site_tb_usuario_email_unique` (`email`);
 
 --
+-- Índices de tabela `tb_usuario_permissao`
+--
+ALTER TABLE `tb_usuario_permissao`
+  ADD UNIQUE KEY `premissao_UNIQUE` (`id_categoria`,`id_usuario`,`permissao`),
+  ADD KEY `fk_tb_usuario_permissao_id_usuario` (`id_usuario`);
+
+--
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
@@ -484,6 +503,13 @@ ALTER TABLE `tb_usuario`
 --
 ALTER TABLE `tb_estado`
   ADD CONSTRAINT `tb_estado_id_pais_foreign` FOREIGN KEY (`id_pais`) REFERENCES `tb_pais` (`id`);
+
+--
+-- Restrições para tabelas `tb_usuario_permissao`
+--
+ALTER TABLE `tb_usuario_permissao`
+  ADD CONSTRAINT `fk_tb_usuario_permissao_id_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `tb_categoria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tb_usuario_permissao_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
