@@ -24,7 +24,7 @@ class EventoModelPolicy {
 	}
 
 	public function viewInscritos(User $user) {
-		return $user->nivel === 'financeiro';
+		return $user->nivel === 'root' || $user->nivel === 'admin' || $user->nivel === 'pastor' || $user->nivel === 'financeiro';
 	}
 
 	/**
