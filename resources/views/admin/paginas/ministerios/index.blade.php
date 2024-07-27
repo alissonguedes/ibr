@@ -15,10 +15,18 @@
 								@if (!$post->status)
 									<i class="inactive material-symbols-outlined"> visibility_off </i>
 								@endif
-								<div class="btn-group">
-									<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
-									<x-button class="icon-background edit" :data-href="route('admin.paginas.ministerios.edit', $post->id)"> edit </x-button>
-								</div>
+
+								@canany(['update', 'delete'], App\Models\Admin\MinisterioModel::class)
+									<div class="btn-group">
+										@can('delete', App\Models\Admin\MinisterioModel::class)
+											<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
+										@endcan
+										@can('update', App\Models\Admin\MinisterioModel::class)
+											<x-button class="icon-background edit" :data-href="route('admin.paginas.ministerios.edit', $post->id)"> edit </x-button>
+										@endcan
+									</div>
+								@endcan
+
 								<img src="{{ route('home.ministerios.show-image', $post->id) . '?action=preview' }}" height="210">
 							</div>
 

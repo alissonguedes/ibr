@@ -1,4 +1,8 @@
-<x-header-page data-href="{{ route('admin.paginas.cultos.index') }}" placeholder="Pesquisar cultos..." title="Adicionar Culto">add</x-header-page>
+<x-header-page data-href="{{ route('admin.paginas.cultos.index') }}" placeholder="Pesquisar cultos..." title="Adicionar Culto">
+	@can('create', App\Models\Admin\CultoModel::class)
+		<x-slot:add_button>add</x-slot:add_button>
+	@endcan
+</x-header-page>
 
 @php
 	if (request('id')):

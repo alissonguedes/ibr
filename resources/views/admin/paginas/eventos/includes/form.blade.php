@@ -4,7 +4,7 @@
 	@endcan
 </x-header-page>
 
-@can('create', App\Models\Admin\EventoModel::class)
+@canany(['create', 'update'], App\Models\Admin\EventoModel::class)
 
 	@php
 		if (request('id')):
