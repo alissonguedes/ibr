@@ -47,18 +47,18 @@
 					</div>
 
 					<!-- Remember Me -->
-					<div class="input-field">
+					{{-- <div class="input-field">
 						<x-input-label for="remember_me" class="inline-flex items-center" />
 						<input type="checkbox" name="remember" id="remember_me" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
 						<span>{{ __('Remember me') }}</span>
-					</div>
+					</div> --}}
 
 					<div class="input-field">
-						@if (Route::has('password.request'))
+						{{-- @if (Route::has('password.request'))
 							<a href="{{ route('password.request') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 								{{ __('Recuperar senha') }}
 							</a>
-						@endif
+						@endif --}}
 						<button type="submit" class="btn">
 							login
 						</button>
