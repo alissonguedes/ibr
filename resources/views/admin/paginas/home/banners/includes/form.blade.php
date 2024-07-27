@@ -1,7 +1,7 @@
-<x-header-page placeholder="Pesquisar banners...">
+<x-header-page data-href="{{ route('admin.paginas.home.banners.index') }}" placeholder="Pesquisar banners..." title="Adicionar Banner">
 
 	@can('create', App\Models\Admin\BannerModel::class)
-		<x-slot:add_button data-href="{{ route('admin.paginas.home.banners.index') }}" title="Adicionar Banner">add</x-slot:add_button>
+		<x-slot:add_button>add</x-slot:add_button>
 	@endcan
 
 </x-header-page>
