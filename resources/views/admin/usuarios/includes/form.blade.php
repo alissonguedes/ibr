@@ -97,6 +97,9 @@
 						<select name="nivel" id="nivel" class="white-text">
 							<option value="" disabled selected>Informe o nível de acesso</option>
 							@foreach ($niveis as $n => $i)
+								@if (Auth::user()->nivel !== 'root' && $n === 'root')
+									@continue
+								@endif
 								<option value="{{ $n }}" @selected(old('nivel' ?? $n == $usernivel))>{{ $i }}</option>
 							@endforeach
 						</select>
