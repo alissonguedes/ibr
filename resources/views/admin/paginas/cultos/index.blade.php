@@ -8,7 +8,7 @@
 		@if (isset($posts) && $posts->count() > 0)
 			<div class="masonry row">
 				@foreach ($posts as $post)
-					<div class="col s12 m6 l4">
+					<div class="masonry-item col s12 m6 l4">
 						<div class="card border-radius-20">
 							<div class="card-image" style="height: 300px; overflow: hidden;">
 								@if (!$post->status)

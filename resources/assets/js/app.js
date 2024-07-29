@@ -313,8 +313,8 @@ $(document).ready(function() {
 		$('#details .card-title').click();
 	});
 
-	$('.masonry.row').masonry({
-		'itemSelector': '.col'
+	$('.masonry').masonry({
+		'itemSelector': '.masonry-item'
 	});
 
 });

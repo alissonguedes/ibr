@@ -6,9 +6,9 @@
 	<x-slot:body>
 
 		@if (isset($posts) && $posts->count() > 0)
-			<div class="row">
+			<div class="masonry row">
 				@foreach ($posts as $post)
-					<div class="col s12 m6 l3 xl4">
+					<div class="masonry-item col s12 m6 l3 xl4">
 						<div class="card border-radius-20">
 
 							<div class="card-image">

@@ -1,6 +1,8 @@
-@can('create', App\Models\Admin\PastorModel::class)
-	<x-header-page data-href="{{ route('admin.paginas.home.pastores.index') }}" placeholder="Pesquisar pastores..." title="Adicionar Banner">add</x-header-page>
-@endcan
+<x-header-page data-href="{{ route('admin.paginas.home.pastores.index') }}" placeholder="Pesquisar pastores..." title="Adicionar Pastor">
+	@can('create', App\Models\Admin\PastorModel::class)
+		<x-slot:add_button>add</x-slot:add_button>
+	@endcan
+</x-header-page>
 
 @php
 	if (request('id')):
