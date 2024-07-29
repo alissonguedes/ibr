@@ -2371,6 +2371,14 @@
 	color: var(--grey-darken-4)
 }
 
+.grey.darken-5 {
+	background-color: var(--grey-darken-5) !important;
+}
+
+.grey-text.text-darken-5 {
+	color: var(--grey-darken-5) !important;
+}
+
 .black {
 	background-color: #000 !important
 }
