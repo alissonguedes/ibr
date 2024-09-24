@@ -101,7 +101,7 @@
 								@if (request('id'))
 									@php
 										$agenda_model = new App\Models\Admin\AgendaModel();
-										$agenda_dados = $agenda_model->select('id', 'titulo', 'tipo', 'observacao', 'duracao', 'data_hora', 'tempo_min_agendamento', 'tempo_max_agendamento', 'intervalo', 'max_agendamento', 'repetir', 'status')->from('tb_agenda')->where('id', request('id'))->get()->first();
+										$agenda_dados = $agenda_model->select('id', 'titulo', 'tipo', 'observacao', 'duracao', 'data', 'horarios', 'tempo_min_agendamento', 'tempo_max_agendamento', 'intervalo', 'max_agendamento', 'repetir', 'status')->from('tb_agenda')->where('id', request('id'))->get()->first();
 									@endphp
 								@endif
 
@@ -114,7 +114,7 @@
 								@foreach ($dias_semana as $key => $day)
 									@php
 										if (isset($agenda_dados)) {
-										    $horarios = json_decode($agenda_dados->data_hora, true);
+										    $horarios = json_decode($agenda_dados->horarios, true);
 										}
 									@endphp
 									<div class="row">

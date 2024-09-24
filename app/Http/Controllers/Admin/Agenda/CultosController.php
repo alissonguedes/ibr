@@ -17,7 +17,7 @@ class CultosController extends Controller
 	public function index(Request $request, AgendaModel $post, InscricaoModel $inscricao)
 	{
 
-		$data['posts'] = $post->where('tipo', 'culto')->orderBy('data_hora', 'ASC')->get();
+		$data['posts'] = $post->where('tipo', 'culto')->orderBy('data', 'ASC')->get();
 		$data['row']   = $post->getEvento($request->id);
 
 		// Pesquisar agendamentos
@@ -59,7 +59,7 @@ class CultosController extends Controller
 		$data                          = $request->all();
 		$dias_semana                   = ['domingo' => 0, 'segunda' => 1, 'terca' => 2, 'quarta' => 3, 'quinta' => 4, 'sexta' => 5, 'sabado' => 6];
 		$horarios                      = $data['horario'];
-		$data['data_hora']             = [];
+		$data['data']                  = null; // date('Y-m-d', strtotime(str_replace('/', '-', $data['data'])));
 		$data['tempo_max_agendamento'] = $request->tempo_max_agendamento ?? null;
 		$data['tempo_min_agendamento'] = $request->tempo_min_agendamento ?? null;
 		$data['intervalo']             = $request->intervalo ?? null;
@@ -88,7 +88,7 @@ class CultosController extends Controller
 
 				}
 
-				$data['data_hora'] = json_encode($data_hora);
+				$data['horarios'] = json_encode($data_hora);
 
 			}
 

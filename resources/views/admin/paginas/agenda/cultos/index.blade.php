@@ -29,7 +29,7 @@
 
 									@php
 										$horarios = [];
-										$data_hora = json_decode($post->data_hora, true);
+										$data_hora = json_decode($post->horarios, true);
 									@endphp
 
 									@if (isset($data_hora) && count($data_hora) > 0)

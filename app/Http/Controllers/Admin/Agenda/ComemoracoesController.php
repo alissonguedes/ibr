@@ -17,7 +17,7 @@ class ComemoracoesController extends Controller
 	public function index(Request $request, AgendaModel $post, InscricaoModel $inscricao)
 	{
 
-		$data['posts'] = $post->where('tipo', 'comemoracao')->orderBy('data_hora', 'ASC')->get();
+		$data['posts'] = $post->where('tipo', 'comemoracao')->orderBy('data', 'ASC')->get();
 		$data['row']   = $post->getEvento($request->id);
 
 		// Pesquisar agendamentos
@@ -132,7 +132,7 @@ class ComemoracoesController extends Controller
 			$message = 'Não foi possível encontrar o registro';
 		}
 
-		return redirect()->route('admin.paginas.agenda.cultos.index')->with(['message' => $message]);
+		return redirect()->route('admin.paginas.agenda.comemoracoes.index')->with(['message' => $message]);
 
 	}
 

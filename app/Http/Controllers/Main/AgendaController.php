@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\AgendaModel;
 use App\Models\Main\HomeModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AgendaController extends Controller
 {
@@ -13,11 +14,14 @@ class AgendaController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index(Request $request, AgendaModel $agenda)
+	public function index(Request $request, AgendaModel $agenda, $ano = null, $mes = null)
 	{
 
-		$data['agenda'] = $agenda->where('tipo', '<>', 'culto')->orderBy('data_hora', 'ASC')->get();
+		$ano_mes        = !is_null($ano) && !is_null($mes) ? $mes : date('m');
+		$data['agenda'] = $agenda->where(DB::raw('DATE_FORMAT(data, "%m")'), 'like', '%' . $ano_mes . '%')->where('tipo', '<>', 'culto')->orderBy('data_hora', 'ASC')->get();
+
 		return view('main.agenda.index', $data);
+
 	}
 
 	/**

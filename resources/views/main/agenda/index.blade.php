@@ -8,6 +8,8 @@
 		<!--CONTEÚDO-->
 		<div class="content_int">
 
+			<h4>Festividades</h4>
+
 			@if (isset($agenda) && $agenda->count() > 0)
 				@php
 					$dias_semana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
@@ -15,39 +17,65 @@
 				@endphp
 
 				@foreach ($agenda as $a)
-					@php
-						$data_hora = json_decode($a->data_hora, true);
-					@endphp
-					@if (is_array($data_hora))
-						@foreach ($data_hora as $dia => $hora)
-							<div class="conj_calendario">
-								<div class="ico_calendar"><img src="{{ asset('assets/img/icon_calendar.png') }}" class="img_cem"></div>
-								<div class="cont_calendar">
-									@if (preg_match('/^(\d){4}\-(\d){2}\-(\d){2}$/', $dia))
-										@php
-											$hora_ini = date('H\hi', strtotime($hora['inicio']));
-											$hora_fim = date('H\hi', strtotime($hora['fim']));
-										@endphp
-										<div class="data_h_calendar">{{ show_date($dia) }} · {{ date('H\hi', strtotime($hora_ini)) }}</div>
-									@else
-										@foreach ($hora as $h)
-											<div class="data_h_calendar">{{ $dias_semana[$dia] }} · {{ date('H\hi', strtotime($h['inicio'])) }} às {{ date('H\hi', strtotime($h['fim'])) }}</div>
+					<div class="conj_calendario">
+						<div class="ico_calendar">
+							<img src="{{ asset('assets/img/icon_calendar.png') }}" class="img_cem">
+						</div>
+						<div class="cont_calendar">
+							<div class="data_h_calendar">
+								@php
+									$data_hora = json_decode($a->data_hora, true);
+								@endphp
+								@if (preg_match('/^(\d){4}\-(\d){2}\-(\d){2}$/', $a->data_hora))
+									{{ show_date($a->data_hora, false) }}
+								@else
+									@if (is_array($data_hora))
+										@foreach ($data_hora as $dia => $hora)
+											@if (preg_match('/^(\d){4}\-(\d){2}\-(\d){2}$/', $dia))
+												@php
+													$hora_ini = date('H\hi', strtotime($hora['inicio']));
+													$hora_fim = date('H\hi', strtotime($hora['fim']));
+												@endphp
+												{{ show_date($dia) }} · {{ date('H\hi', strtotime($hora_ini)) }}
+											@else
+												@foreach ($hora as $h)
+													{{ $dias_semana[$dia] }} · {{ date('H\hi', strtotime($h['inicio'])) }} às {{ date('H\hi', strtotime($h['fim'])) }}
+												@endforeach
+											@endif
 										@endforeach
 									@endif
-									<div class="name_calendar">{{ $a->titulo }}</div>
-									<small>
-										{{-- <i class="material-symbols-outlined">{{ $a->tipo_icon }}</i> --}}
-										{{ $tipos[$a->tipo] }}
-									</small>
-								</div>
+								@endif
 							</div>
-						@endforeach
-					@endif
+							<div class="name_calendar">{{ $a->titulo }}</div>
+							<small class="mt-10">
+								{{-- <i class="material-symbols-outlined">{{ $a->tipo_icon }}</i> --}}
+								{{ $tipos[$a->tipo] }}
+							</small>
+						</div>
+
+					</div>
 				@endforeach
 			@else
 				<p>Nenhuma data disponível.</p>
 			@endif
 
+		</div>
+
+		@php
+			$data = request('ano') && request('mes') ? request('ano') . '-' . request('mes') . '-01' : 'now';
+			$next_date = date('Y/m', strtotime($data . '+1 month'));
+			$prev_date = date('Y/m', strtotime($data . '-1 month'));
+		@endphp
+
+		<div class="row">
+			<div class="col s12 center-align">
+				<a href="{{ route('site.agenda', $prev_date) }}" class="btn btn-floating light-green mr-10">
+					<i class="material-symbols-outlined">arrow_back</i>
+				</a>
+				<a href="{{ route('site.agenda', $next_date) }}" class="btn btn-floating light-green ml-10">
+					<i class="material-symbols-outlined">arrow_forward</i>
+				</a>
+			</div>
 		</div>
 
 	</x-slot:body>

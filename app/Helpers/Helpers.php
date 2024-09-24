@@ -9,7 +9,8 @@ use App\Models\Model;
  */
 if (!function_exists('replace')) {
 
-	function replace($string, $find = ' ', $replace = '-', $to_lower = true) {
+	function replace($string, $find = ' ', $replace = '-', $to_lower = true)
+	{
 
 		$args = func_get_args();
 
@@ -101,7 +102,8 @@ if (!function_exists('replace')) {
 
 if (!function_exists('lang')) {
 
-	function lang($return_id = false) {
+	function lang($return_id = false)
+	{
 
 		$sigla = isset($_COOKIE['idioma']) ? $_COOKIE['idioma'] : config('site.language');
 
@@ -126,7 +128,8 @@ if (!function_exists('lang')) {
 
 if (!function_exists('getMenu')) {
 
-	function getMenu($local, $id = null, $path = null) {
+	function getMenu($local, $id = null, $path = null)
+	{
 
 		$model = new Model();
 		$model->setConnection(env('DB_SYSTEM_CONNECTION'));
@@ -335,7 +338,8 @@ if (!function_exists('getMenu')) {
 
 if (!function_exists('make_menu')) {
 
-	function make_menu($local, $path = null, $id = null, $s = null) {
+	function make_menu($local, $path = null, $id = null, $s = null)
+	{
 
 		if (!empty($attributes)) {
 			foreach ($attributes as $ind => $val) {
@@ -357,7 +361,8 @@ if (!function_exists('make_menu')) {
 
 if (!function_exists('base_url')) {
 
-	function base_url() {
+	function base_url()
+	{
 
 		$path     = '/';
 		$base_url = explode('/', request()->getRequestUri());
@@ -383,7 +388,8 @@ if (!function_exists('base_url')) {
 
 if (!function_exists('site_url')) {
 
-	function site_url() {
+	function site_url()
+	{
 
 		return url('/') . '/';
 
@@ -393,7 +399,8 @@ if (!function_exists('site_url')) {
 
 if (!function_exists('post')) {
 
-	function post($categoria, $limit = 1, $options = []) {
+	function post($categoria, $limit = 1, $options = [])
+	{
 
 		$posts     = [];
 		$view      = explode(':', $categoria);
@@ -425,7 +432,8 @@ if (!function_exists('post')) {
 
 if (!function_exists('pastores')) {
 
-	function pastores($section = null, $status = '1') {
+	function pastores($section = null, $status = '1')
+	{
 
 		$pastores = '';
 
@@ -440,7 +448,8 @@ if (!function_exists('pastores')) {
 
 if (!function_exists('slides')) {
 
-	function slides($section = 'slideshow-container', $status = '1') {
+	function slides($section = 'slideshow-container', $status = '1')
+	{
 
 		$slides  = '';
 		$banner  = new App\Models\Admin\BannerModel();
@@ -461,7 +470,8 @@ if (!function_exists('slides')) {
 
 if (!function_exists('show_date')) {
 
-	function show_date($date, $format = 'd/m/Y') {
+	function show_date($date, $show_year = true, $show_month = true, $show_day = true, $format = 'd/m/Y')
+	{
 
 		$meses = [1 => 'Janeiro', 2 => 'Fevereiro', 3 => 'Março', 4 => 'Abril', 5 => 'Maio', 6 => 'Junho', 7 => 'Julho', 8 => 'Agosto', 9 => 'Setembro', 10 => 'Outubro', 11 => 'Novembro', 12 => 'Dezembro'];
 		$date  = strtotime($date);
@@ -469,7 +479,7 @@ if (!function_exists('show_date')) {
 		$mes   = $meses[date('n', $date - 1)];
 		$ano   = date('Y', $date);
 
-		return $dia . ' de ' . $mes . ' de ' . $ano;
+		return $dia . ' de ' . $mes . ($show_year ? ' de ' . $ano : null);
 
 	}
 

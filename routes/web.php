@@ -47,7 +47,7 @@ Route::prefix('/')->group(function () {
 	Route::get('/eventos/{evento}', [EventosController::class, 'show'])->name('site.eventos.details');
 	Route::get('/eventos/inscricao/{evento}', [InscricoesController::class, 'index'])->name('site.eventos.inscricoes');
 	Route::post('/eventos/inscricao/{evento}', [InscricoesController::class, 'store'])->name('site.eventos.post');
-	Route::get('/agenda', [AgendaController::class, 'index'])->name('site.agenda');
+	Route::get('/agenda/{ano?}/{mes?}', [AgendaController::class, 'index'])->name('site.agenda');
 	Route::get('/seja-membro', [HomeController::class, 'index'])->name('site.seja-membro');
 
 	Route::prefix('/uf')->group(function () {

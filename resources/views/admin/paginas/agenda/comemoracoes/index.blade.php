@@ -1,7 +1,7 @@
 <x-admin-layout>
 
 	<x-slot:icon> edit_calendar </x-slot:icon>
-	<x-slot:title> Agenda · Cultos </x-slot:title>
+	<x-slot:title> Agenda · Comemorações </x-slot:title>
 
 	<x-slot:body>
 
@@ -29,14 +29,14 @@
 
 									@php
 										$horarios = [];
-										$data_hora = json_decode($post->data_hora, true);
-										$d = implode('', array_keys($data_hora));
+										$horario = json_decode($post->horarios, true);
+										$d = implode('', array_keys($horario));
 										$data = date('d/m/Y', strtotime($d));
-										$hora_ini = date('H\hi', strtotime($data_hora[$d]['inicio']));
-										$hora_fim = date('H\hi', strtotime($data_hora[$d]['fim']));
+										$hora_ini = date('H\hi', strtotime($horario	[$d]['inicio']));
+										$hora_fim = date('H\hi', strtotime($horario	[$d]['fim']));
 									@endphp
 
-									{{ show_date($d) }}
+									{{ show_date($post->data) }}
 									<br>
 									das {{ $hora_ini }} às {{ $hora_fim }}
 								</div>

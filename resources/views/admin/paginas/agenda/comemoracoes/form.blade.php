@@ -15,8 +15,8 @@
 	    $d = implode('', array_keys($data_hora));
 	    $data_evento = date('d/m/Y', strtotime($d));
 
-	    $hora_ini = date('H:i', strtotime($data_hora[$d]['inicio']));
-	    $hora_fim = date('H:i', strtotime($data_hora[$d]['fim']));
+	    $hora_inicial = date('H:i', strtotime($data_hora[$d]['inicio']));
+	    $hora_final = date('H:i', strtotime($data_hora[$d]['fim']));
 	    $status = $row->status;
 	    // $imagem = route('home.apresentacao.show-image', $id) . '?action=preview';
 	endif;
@@ -78,9 +78,9 @@
 						<label class="active">horario</label>
 						<div class="time-range">
 							<div class="input-field m-0 mb-1">
-								<input type="text" name="hora_inicio" class="autocomplete timer" :value="old('hora_inicio', $hora_ini ?? null)" placeholder="hh:mm" autocomplete="off">
+								<input type="text" name="hora_inicio" class="autocomplete timer" value="{{ old('hora_inicio', $hora_inicial ?? null) }}" placeholder="hh:mm" autocomplete="off">
 								-
-								<input type="text" name="hora_fim" class="autocomplete timer" :value="old('hora_fim', $hora_fim ?? null)" placeholder="hh:mm" autocomplete="off">
+								<input type="text" name="hora_fim" class="autocomplete timer" value="{{ old('hora_fim', $hora_final ?? null) }}" placeholder="hh:mm" autocomplete="off">
 							</div>
 						</div>
 						@error('horario')
