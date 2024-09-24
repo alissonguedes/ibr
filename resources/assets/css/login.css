@@ -1,0 +1,328 @@
+/**PADRÕES**/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "mregular", sans-serif;
+    color: #1a1a1a;
+    font-size: 14px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background: #000;
+}
+
+img,
+a {
+    text-decoration: none;
+    border: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.img_cem {
+    width: 100%;
+}
+
+/**CARREGANDO**/
+.corpo {
+    display: none;
+}
+
+.carregando {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation-name: load;
+    animation-duration: 5s;
+    animation-iteration-count: 1;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes load {
+    0% {
+        opacity: 0%;
+    }
+
+    15% {
+        opacity: 100%;
+    }
+
+    75% {
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 0%;
+    }
+}
+
+/* Standard syntax */
+@keyframes load {
+    0% {
+        opacity: 0%;
+    }
+
+    15% {
+        opacity: 100%;
+    }
+
+    75% {
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 0%;
+    }
+}
+
+.logo_carregando {
+    width: 50%;
+    overflow: hidden;
+}
+
+/**FONTES**/
+@font-face {
+    font-family: "coluna";
+    src: url("../fonts/coluna.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "mregular";
+    src: url("../fonts/mregular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "mmedio";
+    src: url("../fonts/mmedio.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "mbold";
+    src: url("../fonts/mbold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "mblack";
+    src: url("../fonts/mblack.ttf") format("truetype");
+}
+
+
+.font_title {
+    font-family: "coluna";
+}
+
+.font_regular {
+    font-family: "mregular";
+}
+
+.font_medio {
+    font-family: "mmedio";
+}
+
+.font_bold {
+    font-family: "mbold";
+}
+
+.font_black {
+    font-family: "mblack";
+}
+
+/**CORES**/
+.cor_verde {
+    color: #c3c907;
+}
+
+.cor_cinza {
+    color: #1a1a1a;
+}
+
+.cor_branca {
+    color: #fff;
+}
+
+.cor_preta {
+    color: #000;
+}
+
+/*BGS*/
+.bg_verde {
+    background: #c3c907;
+}
+
+.bg_cinza {
+    background: #1a1a1a;
+}
+
+.bg_branco {
+    background: #fff;
+}
+
+.bg_preto {
+    background: #000;
+}
+
+/**TAMANHOS**/
+.tamanho_tt1 {
+    font-size: 35px;
+}
+
+.tamanho_tt2 {
+    font-size: 55px;
+}
+
+.tamanho_tt3 {
+    font-size: 35px;
+}
+
+.bloco_central {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 100px;
+    overflow: hidden;
+}
+
+.bloco_branco {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.img_bloco {
+    float: left;
+    width: 55%;
+    overflow: hidden;
+}
+
+.area_form {
+    width: 35%;
+    float: right;
+    margin-right: 80px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.logo_empresa {
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 70px;
+}
+
+.box_login {
+    background: #e6e6e6;
+    border: solid 1px #e6e6e6;
+    border-radius: 15px;
+    padding: 18px 18px;
+    width: 90%;
+    margin-bottom: 20px;
+    font-family: "mmedio";
+    font-size: 18px;
+    color: #666;
+}
+
+.esqueci {
+    text-align: center;
+    margin: 0 auto;
+    color: #8DCA42;
+    font-family: "mmedio";
+    margin-bottom: 20px;
+}
+
+.bt_login {
+    background: #8DCA42;
+    border: solid 1px #8DCA42;
+    border-radius: 15px;
+    padding: 18px 18px;
+    width: 90%;
+    margin-bottom: 20px;
+    font-family: "mblack";
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 1400px) {
+
+    .bloco_central {
+        width: 70%;
+        margin: 0 auto;
+        margin-top: 100px;
+        overflow: hidden;
+    }
+
+    .bloco_branco {
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .img_bloco {
+        position: absolute;
+        width: 40%;
+        margin-top: -690px;
+        display: none;
+    }
+
+    .area_form {
+        overflow: hidden;
+        width: 80%;
+        float: none;
+
+        margin-right: 0px;
+        margin: 0 auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .logo_empresa {
+        width: 50%;
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+
+    .box_login {
+        background: #e6e6e6;
+        border: solid 1px #e6e6e6;
+        border-radius: 15px;
+        padding: 18px 18px;
+        width: 100%;
+        margin-bottom: 20px;
+        font-family: "mmedio";
+        font-size: 18px;
+        color: #666;
+    }
+
+    .esqueci {
+        text-align: center;
+        margin: 0 auto;
+        color: #8DCA42;
+        font-family: "mmedio";
+        margin-bottom: 20px;
+    }
+
+    .bt_login {
+        background: #8DCA42;
+        border: solid 1px #8DCA42;
+        border-radius: 15px;
+        padding: 18px 18px;
+        width: 100%;
+        margin-bottom: 20px;
+        font-family: "mblack";
+        font-size: 22px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+}
