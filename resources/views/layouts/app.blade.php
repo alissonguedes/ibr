@@ -18,7 +18,7 @@
 		<meta name="keywords" content="{{ config('site.site_keywords') }}">
 		<meta name="author" content="{{ config('site.site_author') }}">
 		<meta name="robots" content="{{ config('site.site_robots') }}">
-		<meta name="theme-color" content="{{ config('site.site_theme-color', '#ff0000') }}">
+		<meta name="theme-color" content="{{ config('site.site_theme-color', 'var(--light-green)') }}">
 		<meta rel="manifest" name="manifest.json">
 
 		<meta property="og:title" content="{{ config('site.site_title') }}">
