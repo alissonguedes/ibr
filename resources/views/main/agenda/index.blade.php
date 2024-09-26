@@ -63,22 +63,24 @@
 
 		</div>
 
-		@php
-			$data = request('ano') && request('mes') ? request('ano') . '-' . request('mes') . '-01' : 'now';
-			$next_date = date('Y/m', strtotime($data . '+1 month'));
-			$prev_date = date('Y/m', strtotime($data . '-1 month'));
-		@endphp
+		@if (isset($agenda) && $agenda->count() > 0)
+			@php
+				$data = request('ano') && request('mes') ? request('ano') . '-' . request('mes') . '-01' : 'now';
+				$next_date = date('Y/m', strtotime($data . '+1 month'));
+				$prev_date = date('Y/m', strtotime($data . '-1 month'));
+			@endphp
 
-		<div class="row">
-			<div class="col s12 center-align">
-				<a href="{{ route('site.agenda', $prev_date) }}" class="btn btn-floating light-green mr-10">
-					<i class="material-symbols-outlined">arrow_back</i>
-				</a>
-				<a href="{{ route('site.agenda', $next_date) }}" class="btn btn-floating light-green ml-10">
-					<i class="material-symbols-outlined">arrow_forward</i>
-				</a>
+			<div class="row">
+				<div class="col s12 center-align">
+					<a href="{{ route('site.agenda', $prev_date) }}" class="btn btn-floating light-green mr-10">
+						<i class="material-symbols-outlined">arrow_back</i>
+					</a>
+					<a href="{{ route('site.agenda', $next_date) }}" class="btn btn-floating light-green ml-10">
+						<i class="material-symbols-outlined">arrow_forward</i>
+					</a>
+				</div>
 			</div>
-		</div>
+		@endif
 
 	</x-slot:body>
 
