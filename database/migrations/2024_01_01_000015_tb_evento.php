@@ -13,7 +13,7 @@ return new class extends Migration
 	public function up(): void
 	{
 
-		Schema::create('ibrwalber_site.tb_evento_categoria', function (Blueprint $table) {
+		Schema::create('ibr_site.tb_evento_categoria', function (Blueprint $table) {
 
 			$table->id();
 			$table->string('titulo');
@@ -24,7 +24,7 @@ return new class extends Migration
 
 		});
 
-		Schema::create('ibrwalber_site.tb_evento', function (Blueprint $table) {
+		Schema::create('ibr_site.tb_evento', function (Blueprint $table) {
 
 			$table->id();
 			$table->unsignedBigInteger('id_categoria');
@@ -55,7 +55,7 @@ return new class extends Migration
 
 		});
 
-		Schema::create('ibrwalber_site.tb_inscrito', function (Blueprint $table) {
+		Schema::create('ibr_site.tb_inscrito', function (Blueprint $table) {
 
 			$table->id();
 			$table->unsignedBigInteger('id_uf');
@@ -73,7 +73,7 @@ return new class extends Migration
 
 		});
 
-		Schema::create('ibrwalber_site.tb_inscricao', function (Blueprint $table) {
+		Schema::create('ibr_site.tb_inscricao', function (Blueprint $table) {
 
 			$table->id();
 			$table->unsignedBigInteger('id_evento');
@@ -88,7 +88,7 @@ return new class extends Migration
 
 		});
 
-		Schema::create('ibrwalber_site.tb_inscricao_pagamento', function (Blueprint $table) {
+		Schema::create('ibr_site.tb_inscricao_pagamento', function (Blueprint $table) {
 
 			$table->id();
 			$table->unsignedBigInteger('id_inscricao');
@@ -106,11 +106,11 @@ return new class extends Migration
 	public function down(): void
 	{
 
-		Schema::dropIfExists('ibrwalber_site.tb_evento_categoria');
-		Schema::dropIfExists('ibrwalber_site.tb_evento');
-		Schema::dropIfExists('ibrwalber_site.tb_inscrito');
-		Schema::dropIfExists('ibrwalber_site.tb_inscricao');
-		Schema::dropIfExists('ibrwalber_site.tb_inscricao_pagamento');
+		Schema::dropIfExists('ibr_site.tb_evento_categoria');
+		Schema::dropIfExists('ibr_site.tb_evento');
+		Schema::dropIfExists('ibr_site.tb_inscrito');
+		Schema::dropIfExists('ibr_site.tb_inscricao');
+		Schema::dropIfExists('ibr_site.tb_inscricao_pagamento');
 
 	}
 

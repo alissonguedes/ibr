@@ -35,30 +35,46 @@
 		<img src="{{ asset('assets/img/abah.png') }}" class="img_cem">
 	</div>
 	<div class="cont_aba">
+		@props(['dias_semana' => ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado']])
+		@php
+			$agenda_cultos = new App\Models\Admin\AgendaModel();
+			$cultos = $agenda_cultos->where('tipo', 'culto')->get();
+		@endphp
 
-		<div class="conj_h">
-			<div class="dia_semana">Segunda-feira</div>
-			<div class="horario">19h30</div>
-			<div class="conteudo_h">Culto de Oração</div>
-		</div>
-
-		<div class="conj_h">
-			<div class="dia_semana">Quarta-feira</div>
-			<div class="horario">19h30</div>
-			<div class="conteudo_h">Culto de Oração</div>
-		</div>
-
-		<div class="conj_h">
-			<div class="dia_semana">Sábado</div>
-			<div class="horario">19h30</div>
-			<div class="conteudo_h">Culto de Oração</div>
-		</div>
-
-		<div class="conj_h">
-			<div class="dia_semana">Domingo</div>
-			<div class="horario">19h30</div>
-			<div class="conteudo_h">Culto de Oração</div>
-		</div>
+		@if (isset($cultos) && $cultos->count() > 0)
+			@php
+				$dias = [];
+				$horarios = [];
+			@endphp
+			@foreach ($cultos as $culto)
+				@php
+					$horarios = json_decode($culto->horarios, true);
+				@endphp
+				@foreach ($horarios as $dia => $hora)
+					@foreach ($hora as $h)
+						@php
+							$dias[$dia][] = [
+							    'titulo' => $culto->titulo,
+							    'inicio' => date('H\hi', strtotime($h['inicio'])),
+							    'fim' => date('H\hi', strtotime($h['fim'])),
+							];
+						@endphp
+					@endforeach
+				@endforeach
+			@endforeach
+			@php
+				ksort($dias);
+			@endphp
+			@foreach ($dias as $dia => $hora)
+				<div class="conj_h">
+					<div class="dia_semana">{{ $dias_semana[$dia] }}</div>
+					@foreach ($hora as $h)
+						<div class="horario">{{ $h['inicio'] }}</div>
+						<div class="conteudo_h">{{ $h['titulo'] }}</div>
+					@endforeach
+				</div>
+			@endforeach
+		@endif
 
 	</div>
 </div>

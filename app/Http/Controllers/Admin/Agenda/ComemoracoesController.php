@@ -61,7 +61,6 @@ class ComemoracoesController extends Controller
 		$hora_inicio                   = $data['hora_inicio'];
 		$hora_fim                      = $data['hora_fim'];
 		$date                          = date('Y-m-d', strtotime(str_replace('/', '-', $data['data'])));
-		$data['data_hora']             = null;
 		$data['tempo_max_agendamento'] = $request->tempo_max_agendamento ?? null;
 		$data['tempo_min_agendamento'] = $request->tempo_min_agendamento ?? null;
 		$data['intervalo']             = $request->intervalo ?? null;
@@ -78,7 +77,7 @@ class ComemoracoesController extends Controller
 			$timerange['inicio'] = $inicio;
 			$timerange['fim']    = $fim;
 			$data_hora           = [$date => $timerange];
-			$data['data_hora']   = json_encode($data_hora);
+			$data['horarios']    = json_encode($data_hora);
 
 		}
 

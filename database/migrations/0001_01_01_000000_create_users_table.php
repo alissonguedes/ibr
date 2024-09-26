@@ -12,7 +12,7 @@ return new class extends Migration
 	public function up(): void
 	{
 
-		Schema::create('ibrwalber_site.tb_usuario', function (Blueprint $table) {
+		Schema::create('ibr_site.tb_usuario', function (Blueprint $table) {
 			$table->id();
 			$table->string('name');
 			$table->string('email')->unique();
@@ -22,13 +22,13 @@ return new class extends Migration
 			$table->timestamps();
 		});
 
-		Schema::create('ibrwalber_laravel.password_reset_tokens', function (Blueprint $table) {
+		Schema::create('ibr_laravel.password_reset_tokens', function (Blueprint $table) {
 			$table->string('email')->primary();
 			$table->string('token');
 			$table->timestamp('created_at')->nullable();
 		});
 
-		Schema::create('ibrwalber_laravel.sessions', function (Blueprint $table) {
+		Schema::create('ibr_laravel.sessions', function (Blueprint $table) {
 			$table->string('id')->primary();
 			$table->foreignId('user_id')->nullable()->index();
 			$table->string('ip_address', 45)->nullable();
@@ -43,8 +43,8 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('ibrwalber_site.tb_usuario');
-		Schema::dropIfExists('ibrwalber_laravel.password_reset_tokens');
-		Schema::dropIfExists('ibrwalber_laravel.sessions');
+		Schema::dropIfExists('ibr_site.tb_usuario');
+		Schema::dropIfExists('ibr_laravel.password_reset_tokens');
+		Schema::dropIfExists('ibr_laravel.sessions');
 	}
 };

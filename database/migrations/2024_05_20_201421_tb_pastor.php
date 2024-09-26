@@ -11,7 +11,7 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::create('ibrwalber_site.tb_pastor', function (Blueprint $table) {
+		Schema::create('ibr_site.tb_pastor', function (Blueprint $table) {
 			$table->id();
 			$table->string('nome');
 			$table->dateTime('created_at');
@@ -25,6 +25,6 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('ibrwalber_site.tb_pastor');
+		Schema::dropIfExists('ibr_site.tb_pastor');
 	}
 };

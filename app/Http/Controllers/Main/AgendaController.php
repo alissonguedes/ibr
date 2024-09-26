@@ -18,7 +18,7 @@ class AgendaController extends Controller
 	{
 
 		$ano_mes        = !is_null($ano) && !is_null($mes) ? $mes : date('m');
-		$data['agenda'] = $agenda->where(DB::raw('DATE_FORMAT(data, "%m")'), 'like', '%' . $ano_mes . '%')->where('tipo', '<>', 'culto')->orderBy('data_hora', 'ASC')->get();
+		$data['agenda'] = $agenda->where(DB::raw('DATE_FORMAT(data, "%m")'), 'like', '%' . $ano_mes . '%')->where('tipo', '<>', 'culto')->orderBy('data', 'ASC')->get();
 
 		return view('main.agenda.index', $data);
 

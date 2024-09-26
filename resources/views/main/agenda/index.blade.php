@@ -8,7 +8,7 @@
 		<!--CONTEÚDO-->
 		<div class="content_int">
 
-			<h4>Festividades</h4>
+			<h4>Comemorações & Festividades</h4>
 
 			@if (isset($agenda) && $agenda->count() > 0)
 				@php
@@ -24,10 +24,12 @@
 						<div class="cont_calendar">
 							<div class="data_h_calendar">
 								@php
-									$data_hora = json_decode($a->data_hora, true);
+									$data_hora = json_decode($a->horarios, true);
 								@endphp
-								@if (preg_match('/^(\d){4}\-(\d){2}\-(\d){2}$/', $a->data_hora))
-									{{ show_date($a->data_hora, false) }}
+								@if (!$data_hora)
+									{{ show_date($a->data) }}
+								@elseif (preg_match('/^(\d){4}\-(\d){2}\-(\d){2}$/', $a->horarios))
+									{{ show_date($a->horarios, false) }}
 								@else
 									@if (is_array($data_hora))
 										@foreach ($data_hora as $dia => $hora)

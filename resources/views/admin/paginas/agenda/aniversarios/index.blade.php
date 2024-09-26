@@ -1,7 +1,7 @@
 <x-admin-layout>
 
-	<x-slot:icon> edit_calendar </x-slot:icon>
-	<x-slot:title> Agenda · Comemorações </x-slot:title>
+	<x-slot:icon> cake </x-slot:icon>
+	<x-slot:title> Aniversariantes </x-slot:title>
 
 	<x-slot:body>
 
@@ -20,6 +20,13 @@
 							<div class="btn-group">
 								<x-button class="btn activator btn-floating delete material-symbols-outlined font-weight-400">delete</x-button>
 								<x-button class="icon-background edit" :data-href="route('admin.paginas.agenda.aniversarios.edit', $post->id)"> edit </x-button>
+							</div>
+
+							<div class="card-image">
+								@php
+									$sort_img = rand(0, 2);
+								@endphp
+								<img src="{{ asset('assets/img/cards/aniversario-' . $sort_img . '.jpg') }}" alt="">
 							</div>
 
 							<div class="card-stacked gradient-0deg-grey-grey">

@@ -11,14 +11,14 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::create('ibrwalber_site.tb_pais', function (Blueprint $table) {
+		Schema::create('ibr_site.tb_pais', function (Blueprint $table) {
 			$table->id();
 			$table->string('codigo', 2);
 			$table->string('pais', 50);
 			$table->enum('status', ['0', '1'])->default('1');
 		});
 
-		Schema::create('ibrwalber_site.tb_estado', function (Blueprint $table) {
+		Schema::create('ibr_site.tb_estado', function (Blueprint $table) {
 			$table->id();
 			$table->unsignedBigInteger('id_pais');
 			$table->string('estado', 50);
@@ -29,7 +29,7 @@ return new class extends Migration
 
 		});
 
-		Schema::create('ibrwalber_site.tb_cidade', function (Blueprint $table) {
+		Schema::create('ibr_site.tb_cidade', function (Blueprint $table) {
 			$table->id();
 			$table->unsignedBigInteger('id_pais');
 			$table->unsignedBigInteger('id_estado');
@@ -50,8 +50,8 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('ibrwalber_site.tb_pais');
-		Schema::dropIfExists('ibrwalber_site.tb_estado');
-		Schema::dropIfExists('ibrwalber_site.tb_cidade');
+		Schema::dropIfExists('ibr_site.tb_pais');
+		Schema::dropIfExists('ibr_site.tb_estado');
+		Schema::dropIfExists('ibr_site.tb_cidade');
 	}
 };

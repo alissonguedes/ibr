@@ -12,7 +12,7 @@ return new class extends Migration
 	public function up(): void
 	{
 
-		Schema::create('ibrwalber_site.tb_categoria', function (Blueprint $table) {
+		Schema::create('ibr_site.tb_categoria', function (Blueprint $table) {
 			$table->id();
 			$table->unsignedBigInteger('id_parent')->nullable()->default(null);
 			$table->string('titulo', 100);
@@ -28,7 +28,7 @@ return new class extends Migration
 
 		});
 
-		Schema::create('ibrwalber_site.tb_post', function (Blueprint $table) {
+		Schema::create('ibr_site.tb_post', function (Blueprint $table) {
 			$table->id();
 			$table->bigInteger('id_parent')->nullable()->default(null);
 			$table->string('autor');
@@ -54,7 +54,7 @@ return new class extends Migration
 
 		});
 
-		// Schema::create('ibrwalber_site.tb_video', function (Blueprint $table) {
+		// Schema::create('ibr_site.tb_video', function (Blueprint $table) {
 		// 	$table->id();
 		// 	$table->unsignedBigInteger('id_parent')->nullable()->default(null);
 		// 	$table->string('titulo', 100);
@@ -79,8 +79,8 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('ibrwalber_site.tb_categoria');
-		Schema::dropIfExists('ibrwalber_site.tb_post');
+		Schema::dropIfExists('ibr_site.tb_categoria');
+		Schema::dropIfExists('ibr_site.tb_post');
 
 	}
 };

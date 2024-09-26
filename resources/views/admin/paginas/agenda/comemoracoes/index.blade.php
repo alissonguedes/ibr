@@ -22,6 +22,13 @@
 								<x-button class="icon-background edit" :data-href="route('admin.paginas.agenda.comemoracoes.edit', $post->id)"> edit </x-button>
 							</div>
 
+							<div class="card-image">
+								@php
+									$sort_img = rand(0, 3);
+								@endphp
+								<img src="{{ asset('assets/img/cards/comemoracao-' . $sort_img . '.jpg') }}" alt="">
+							</div>
+
 							<div class="card-stacked gradient-0deg-grey-grey">
 
 								<div class="card-content center-align transparent grey-text">
@@ -32,8 +39,8 @@
 										$horario = json_decode($post->horarios, true);
 										$d = implode('', array_keys($horario));
 										$data = date('d/m/Y', strtotime($d));
-										$hora_ini = date('H\hi', strtotime($horario	[$d]['inicio']));
-										$hora_fim = date('H\hi', strtotime($horario	[$d]['fim']));
+										$hora_ini = date('H\hi', strtotime($horario[$d]['inicio']));
+										$hora_fim = date('H\hi', strtotime($horario[$d]['fim']));
 									@endphp
 
 									{{ show_date($post->data) }}

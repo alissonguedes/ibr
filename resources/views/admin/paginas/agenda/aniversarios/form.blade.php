@@ -11,7 +11,7 @@
 	    $subtitulo = $row->subtitulo;
 	    $descricao = $row->descricao;
 
-	    $data_hora = $row->data_hora;
+	    $data_hora = $row->data;
 	    $data_evento = date('d/m/Y', strtotime($data_hora));
 
 		$status = $row->status;

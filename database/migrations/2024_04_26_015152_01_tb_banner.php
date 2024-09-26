@@ -12,7 +12,7 @@ return new class extends Migration
 	public function up(): void
 	{
 
-		Schema::create('ibrwalber_site.tb_file', function (Blueprint $table) {
+		Schema::create('ibr_site.tb_file', function (Blueprint $table) {
 			$table->id();
 			$table->bigInteger('id_object');
 			$table->string('categoria', 50)->default('post')->comment('Determina qual é a categoria de arquivo');
@@ -36,7 +36,7 @@ return new class extends Migration
 			$table->enum('status', ['0', '1']);
 		});
 
-		Schema::create('ibrwalber_site.tb_file_chunk', function (Blueprint $table) {
+		Schema::create('ibr_site.tb_file_chunk', function (Blueprint $table) {
 			$table->id();
 			$table->bigInteger('id_file');
 			$table->integer('id_chunk');
@@ -50,7 +50,7 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('ibrwalber_site.tb_file');
-		Schema::dropIfExists('ibrwalber_site.tb_file_chunk');
+		Schema::dropIfExists('ibr_site.tb_file');
+		Schema::dropIfExists('ibr_site.tb_file_chunk');
 	}
 };

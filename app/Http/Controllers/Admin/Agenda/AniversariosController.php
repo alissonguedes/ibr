@@ -58,13 +58,13 @@ class AniversariosController extends Controller
 
 		$data                          = $request->all();
 		$dias_semana                   = ['domingo' => 0, 'segunda' => 1, 'terca' => 2, 'quarta' => 3, 'quinta' => 4, 'sexta' => 5, 'sabado' => 6];
-		$data['data_hora']             = date('Y-m-d', strtotime(str_replace('/', '-', $data['data'])));
+		$data['data']                  = date('Y-m-d', strtotime(str_replace('/', '-', $data['data'])));
 		$data['tempo_max_agendamento'] = $request->tempo_max_agendamento ?? null;
 		$data['tempo_min_agendamento'] = $request->tempo_min_agendamento ?? null;
 		$data['intervalo']             = $request->intervalo ?? null;
 		$data['max_agendamento']       = $request->max_agendamento ?? null;
 
-		unset($data['_token'], $data['_method'], $data['data'], $data['hora_inicio'], $data['hora_fim'], $data['categoria'], $data['medico'], $data['clinica']);
+		unset($data['_token'], $data['_method'], $data['hora_inicio'], $data['hora_fim'], $data['categoria'], $data['medico'], $data['clinica']);
 
 		switch ($request->_method) {
 			default:

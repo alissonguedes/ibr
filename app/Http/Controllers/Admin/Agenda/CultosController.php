@@ -17,7 +17,7 @@ class CultosController extends Controller
 	public function index(Request $request, AgendaModel $post, InscricaoModel $inscricao)
 	{
 
-		$data['posts'] = $post->where('tipo', 'culto')->orderBy('data', 'ASC')->get();
+		$data['posts'] = $post->where('tipo', 'culto')->orderBy('horarios', 'ASC')->get();
 		$data['row']   = $post->getEvento($request->id);
 
 		// Pesquisar agendamentos

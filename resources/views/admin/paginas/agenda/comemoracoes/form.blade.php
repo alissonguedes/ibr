@@ -11,7 +11,7 @@
 	    $subtitulo = $row->subtitulo;
 	    $descricao = $row->descricao;
 
-	    $data_hora = json_decode($row->data_hora, true);
+	    $data_hora = json_decode($row->horarios, true);
 	    $d = implode('', array_keys($data_hora));
 	    $data_evento = date('d/m/Y', strtotime($d));
 

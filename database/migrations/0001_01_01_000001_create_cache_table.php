@@ -11,13 +11,13 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::create('ibrwalber_laravel.cache', function (Blueprint $table) {
+		Schema::create('ibr_laravel.cache', function (Blueprint $table) {
 			$table->string('key')->primary();
 			$table->mediumText('value');
 			$table->integer('expiration');
 		});
 
-		Schema::create('ibrwalber_laravel.cache_locks', function (Blueprint $table) {
+		Schema::create('ibr_laravel.cache_locks', function (Blueprint $table) {
 			$table->string('key')->primary();
 			$table->string('owner');
 			$table->integer('expiration');
@@ -29,7 +29,7 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('ibrwalber_laravel.cache');
-		Schema::dropIfExists('ibrwalber_laravel.cache_locks');
+		Schema::dropIfExists('ibr_laravel.cache');
+		Schema::dropIfExists('ibr_laravel.cache_locks');
 	}
 };
