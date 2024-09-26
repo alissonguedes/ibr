@@ -66,7 +66,7 @@ class EventosController extends Controller
 	public function store(EventoRequest $request, EventoModel $page)
 	{
 
-		$page->insert_or_update($request);
+		$id = $page->insert_or_update($request);
 
 		if ($request->_method === 'put') {
 			$message = 'Evento atualizado com sucesso!';
@@ -74,7 +74,7 @@ class EventosController extends Controller
 			$message = 'Evento cadastrado com sucesso!';
 		}
 
-		return redirect()->route('admin.paginas.eventos.index')->with(['message' => $message]);
+		return redirect()->route('admin.paginas.eventos.edit', $id . '#formulario-inscricao')->with(['message' => $message]);
 
 	}
 

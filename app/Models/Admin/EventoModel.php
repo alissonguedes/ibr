@@ -213,11 +213,11 @@ class EventoModel extends Model
 			'evento_slug'  => $columns['evento_slug'],
 		] : ['id' => $data['id']];
 
-		$id_banner = EventoModel::updateOrCreate($where, $columns);
+		$id_evento = EventoModel::updateOrCreate($where, $columns);
 
-		FileModel::addAttachments($imagem, $id_banner->id);
+		FileModel::addAttachments($imagem, $id_evento->id);
 
-		return true;
+		return $id_evento->id;
 
 	}
 

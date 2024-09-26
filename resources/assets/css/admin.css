@@ -1135,12 +1135,12 @@ main .card-panel>.card-header~.card-content {
 }
 
 .card-tabs {
-	border-bottom: 1px solid var(--grey-lighten-2);
+	border-bottom: 1px solid var(--grey-darken-2);
 }
 
 .card-tabs .tabs {
-	height: auto;
-	max-height: 70px;
+	height: 56px;
+	max-height: 56px;
 }
 
 .card-tabs .tabs .tab {
@@ -1155,8 +1155,10 @@ main .card-panel>.card-header~.card-content {
 
 .tabs .tab a {
 	font-size: 13px;
-	font-weight: 500;
-	color: var(--teal-lighten-1);
+	font-weight: 700 !important;
+	font-family: 'Montserrat Bold';
+	/* color: var(--teal-lighten-1); */
+	color: var(--light-green) !important;
 }
 
 .tabs .tab a:focus,
@@ -1172,7 +1174,7 @@ main .card-panel>.card-header~.card-content {
 }
 
 .tabs .indicator {
-	background-color: var(--teal-lighten-1);
+	background-color: var(--light-green);
 }
 
 .card-panel form.card-reveal>.card {

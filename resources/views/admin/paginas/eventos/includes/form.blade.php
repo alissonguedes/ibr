@@ -33,6 +33,15 @@
 		endif;
 	@endphp
 
+	@if (request('id'))
+		<x-slot:form_tabs>
+			<ul class="tabs transparent">
+				<li class="tab"><a href="#dados-evento">Dados do Evento</a></li>
+				<li class="tab"><a href="#formulario-inscricao">Formulário de Inscrição</a></li>
+			</ul>
+		</x-slot:form_tabs>
+	@endif
+
 	<x-slot:form action="{{ route('admin.paginas.eventos.post') }}" method="post" style="{{ $errors->any() || request('id') ? 'display: block; transform: translateY(-100%);' : 'display: none; transform: translateY(0%);' }}" autocomplete="off">
 
 		@csrf
@@ -46,7 +55,7 @@
 			<input type="hidden" name="id" value="{{ $id }}">
 		@endif
 
-		<div class="col row">
+		<div id="dados-evento" class="col row">
 
 			<div class="col s12">
 
@@ -264,6 +273,29 @@
 				<!-- END status -->
 
 			</div>
+		</div>
+
+		<div id="formulario-inscricao" class="col row">
+
+			<div class="col s12">
+
+				<div class="row">
+					<div class="col s12">
+						<h5 class="form-title">
+							<i class="material-symbols-outlined left">dynamic_form</i>
+							Formulário de Inscrição
+						</h5>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col s12">
+
+					</div>
+				</div>
+
+			</div>
+
 		</div>
 
 		<x-slot:card_footer>
