@@ -275,6 +275,20 @@
 			</div>
 		</div>
 
+		<script>
+			$(function() {
+				var titulo_evento = $('[name="titulo"]').val();
+				var form_titulo = $('#formulario-inscricao .card-title').find('[name="form-titulo"]');
+
+				form_titulo.val(titulo_evento);
+
+				$('[name="titulo"]').bind('keyup paste undo', delay(
+					function() {
+						$('#formulario-inscricao .card-title [name="form-titulo"]').val($(this).val() || 'Formulário Sem Título');
+					}, 500
+				))
+			})
+		</script>
 		<div id="formulario-inscricao" class="col row">
 
 			<div class="col s12">
@@ -283,16 +297,58 @@
 					<div class="col s12">
 						<h5 class="form-title">
 							<i class="material-symbols-outlined left">dynamic_form</i>
-							Formulário de Inscrição
+							Formulário de Inscriçãoasdf
 						</h5>
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col s12">
-
+				<section class="row">
+					<div class="col s12 l8 offset-l2">
+						<div class="section-count">
+							Seção 1 de 1
+						</div>
+						<div class="card grey darken-5 white-text">
+							<div class="card-content">
+								<div class="card-title">
+									<input type="text" name="form-titulo" value="Formulário Sem título" style="font-size: inherit;">
+								</div>
+								<div class="row">
+									<div class="col s12">
+										<div class="input-field">
+											<textarea name="form-descricao" id="form-descricao" class="materialize-textarea editor" data-buttons="bold, italic,clearFormatting, insertLink" placeholder="Descrição do Formulário (opcional)"></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
+				</section>
+
+				<style>
+					section .section-count {
+						position: relative;
+						top: 15px;
+						z-index: 99999999;
+						/* width: 140px; */
+						text-align: center;
+						font-family: 'Montserrat Bold';
+						color: #000;
+						background: var(--light-green);
+						padding: 6px 20px;
+						border-top-left-radius: 6px;
+						border-top-right-radius: 6px;
+					}
+
+					section .card {
+						border-left: 6px solid var(--light-green);
+						border-radius: 5px;
+					}
+
+					section:first-child .card {
+						border-left: 6px solid var(--light-green);
+						border-radius: 0 !important;
+					}
+				</style>
 
 			</div>
 
