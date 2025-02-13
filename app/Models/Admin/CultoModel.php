@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -7,8 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * A classe extende de PostModel, pois opera na tabela `tb_post`
  */
-class CultoModel extends PostModel
-{
+class CultoModel extends PostModel {
 
 	use HasFactory;
 
@@ -49,8 +47,7 @@ class CultoModel extends PostModel
 		'status',
 	];
 
-	public function getAllCultos()
-	{
+	public function getAllCultos() {
 		$container = 'cultos';
 		dd($container);
 		// return $this->where(['tipo' => 'post'])->whereIn('id_parent', function ($query) use ($container) {
@@ -59,16 +56,14 @@ class CultoModel extends PostModel
 		// return $this->get();
 	}
 
-	public function getCulto($data)
-	{
+	public function getCulto($data) {
 		return $this->getOrWhere(['titulo_slug', $data])
 			->first();
 	}
 
-	public function getAllActivePosts($categoria, $limit = 50, $options = [])
-	{
+	public function getAllActivePosts($categoria, $limit = 50, $options = []) {
 
-		if (!isset($options['table'])) {
+		if (! isset($options['table'])) {
 			$options['table'] = 'tb_post';
 		}
 
@@ -89,8 +84,7 @@ class CultoModel extends PostModel
 
 	}
 
-	public function search($search, $both = true, $categoria = 'culto', $tipo = 'post')
-	{
+	public function search($search, $both = true, $categoria = 'culto', $tipo = 'post') {
 		return parent::search($search, $both, $categoria, $tipo);
 	}
 

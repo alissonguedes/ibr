@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
@@ -7,14 +6,12 @@ use App\Models\Admin\CultoModel;
 use App\Models\Admin\PostModel;
 use Illuminate\Http\Request;
 
-class CultosController extends Controller
-{
+class CultosController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index(PostModel $post)
-	{
+	public function index(PostModel $post) {
 
 		$data['posts'] = $post->getAllActivePosts('culto');
 
@@ -25,8 +22,7 @@ class CultosController extends Controller
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(Request $request, CultoModel $postModel, string $culto)
-	{
+	public function show(Request $request, CultoModel $postModel, string $culto) {
 
 		$data['id']     = $request->id;
 		$data['post']   = $postModel->getCulto($culto);
@@ -34,7 +30,7 @@ class CultosController extends Controller
 			->where('titulo_slug', '<>', $culto)
 			->get();
 
-		if (!isset($data['post'])) {
+		if (! isset($data['post'])) {
 			return redirect()->route('site.cultos');
 		}
 

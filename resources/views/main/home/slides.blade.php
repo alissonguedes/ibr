@@ -2,9 +2,15 @@
 <div id="slideshow-container">
 
 	@foreach ($banners as $banner)
+		@if (isset($banner->url))
+			<a href="#">
+		@endif
 		<div class="mySlides">
 			<img src="{{ route('home.banners.show-image', $banner->id) }}" alt="">
 		</div>
+		@if ($banner->url)
+			</a>
+		@endif
 	@endforeach
 
 	<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
