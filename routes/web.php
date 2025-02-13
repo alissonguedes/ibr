@@ -1,7 +1,8 @@
 <?php
 
-// Admin Controllers
 use App\Http\Controllers\Admin\AgendaController as Agenda;
+
+// Admin Controllers
 use App\Http\Controllers\Admin\Agenda\AniversariosController as AgendaAniversarios;
 use App\Http\Controllers\Admin\Agenda\ComemoracoesController as AgendaComemoracoes;
 use App\Http\Controllers\Admin\Agenda\CultosController as AgendaCultos;
@@ -11,11 +12,13 @@ use App\Http\Controllers\Admin\BannersController as Banners;
 use App\Http\Controllers\Admin\CategoriasController as Categorias;
 use App\Http\Controllers\Admin\CultosController as Cultos;
 use App\Http\Controllers\Admin\EventosController as Eventos;
+use App\Http\Controllers\Admin\InscricaoController;
 use App\Http\Controllers\Admin\MinisteriosController as Ministerios;
 use App\Http\Controllers\Admin\PastoresController as Pastores;
 use App\Http\Controllers\Admin\PostsController as Posts;
 use App\Http\Controllers\Admin\PropositosController as Propositos;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\BoletoController;
 use App\Http\Controllers\Main\AgendaController;
 
 // Main Controllers
@@ -27,13 +30,19 @@ use App\Http\Controllers\Main\MinisteriosController;
 use App\Http\Controllers\Main\SobreController;
 use App\Http\Controllers\ProfileController;
 
+// use Crmdesenvolvimentos\PixSicredi\Api as PixSicredi;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Route;
+
 // Admin Requests
 
 // Admin Models
 
 // Illuminate
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Route;
+
+// use SicrediAPI\Client as PixSicredi;
+// use SicrediAPI\Domain\Boleto\Beneficiary;
+// use SicrediAPI\Domain\Boleto\Payee;
 
 Route::prefix('/')->group(function () {
 
@@ -47,6 +56,8 @@ Route::prefix('/')->group(function () {
 	Route::get('/eventos/{evento}', [EventosController::class, 'show'])->name('site.eventos.details');
 	Route::get('/eventos/inscricao/{evento}', [InscricoesController::class, 'index'])->name('site.eventos.inscricoes');
 	Route::post('/eventos/inscricao/{evento}', [InscricoesController::class, 'store'])->name('site.eventos.post');
+	Route::post('/eventos/inscricao/boleto', [BoletoController::class, 'gerarBoleto'])->name('site.eventos.boleto');
+	Route::get('/eventos/inscricao/boleto/{boleto}', [BoletoController::class, 'show'])->name('site.eventos.boleto.show');
 	Route::get('/agenda/{ano?}/{mes?}', [AgendaController::class, 'index'])->name('site.agenda');
 	Route::get('/seja-membro', [HomeController::class, 'index'])->name('site.seja-membro');
 
@@ -74,6 +85,7 @@ Route::get('/imagem/propositos/{file_id}', [Propositos::class, 'show'])->name('h
 Route::get('/imagem/cultos/{file_id}', [Cultos::class, 'show'])->name('home.cultos.show-image');
 Route::get('/imagem/evento/{file_id}', [Eventos::class, 'show'])->name('home.eventos.show-image');
 Route::get('/imagem/agenda/{file_id}', [Eventos::class, 'show'])->name('home.agenda.show-image');
+Route::get('/imagem/barcode/{file_id}', [BoletoController::class, 'barCode'])->name('home.boleto.show-barcode');
 
 Route::middleware([
 	'auth',
@@ -85,7 +97,54 @@ Route::middleware([
 	})->name('dashboard');
 
 	Route::get('/dashboard', function () {
+
+		// $sicredi = new PixSicredi(
+		// 	config('sicredi.api_key'),
+		// 	config('sicredi.cooperative'),
+		// 	config('sicredi.post_number'),
+		// 	config('sicredi.beneficiary'),
+		// 	new \GuzzleHttp\Client(),
+		// 	config('sicredi.environment')
+		// );
+
+		// $sicredi->authenticate(
+		// 	config('sicredi.username'),
+		// 	config('sicredi.password')
+		// );
+
+		// $boletoClient = $sicredi->boleto();
+
+		// $boleto = new \SicrediAPI\Domain\Boleto\Boleto(
+		// 	(new Beneficiary(
+		// 		'Jose da Silva',
+		// 		'86049253099',
+		// 		'person'
+		// 	)),
+		// 	(new Payee(
+		// 		'Maria de Lurdes',
+		// 		'50581718054',
+		// 		'person'
+		// 	)),
+		// 	100.00,
+		// 	'DM',
+		// 	12345,
+		// 	'RECIBO',
+		// 	'999999',
+		// 	new DateTime('2025-12-31'),
+		// );
+
+		// $b = $boletoClient->create($boleto);
+
+		// dd($b);
+		// $qrcode = new SimpleSoftwareIO\QrCode\Facades\QrCode();
+		// $qr = QrCode::generate($b->getPaymentInformation()->getQrCode());
+
+		// return view('admin.dashboard')->with('qrcode', $qr);
+
 		return view('admin.dashboard');
+
+		// return view('admin.dashboard');
+
 	})->name('admin.dashboard');
 
 	/** Categorias */
@@ -201,6 +260,10 @@ Route::middleware([
 		Route::delete('/', [Eventos::class, 'destroy'])->name('admin.paginas.eventos.delete')->can('delete', App\Models\Admin\EventoModel::class);
 
 		Route::get('/id/{id}/inscritos', [Eventos::class, 'inscritos'])->name('admin.paginas.eventos.inscritos')->can('viewInscritos', App\Models\Admin\EventoModel::class);
+
+		Route::prefix('/id/{id}/inscricao/{inscricao}')->group(function () {
+			Route::get('/', [InscricaoController::class, 'index'])->name('admin.paginas.eventos.inscricao');
+		});
 
 	});
 

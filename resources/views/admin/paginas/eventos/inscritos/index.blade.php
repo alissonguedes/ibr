@@ -23,8 +23,9 @@
 								<th class="center-align bold hide-on-med-and-down">RG</th>
 								<th class="center-align bold hide-on-med-and-down">E-Mail</th>
 								<th class="center-align bold hide-on-med-and-down">Telefone</th>
-								<th class="center-align bold">Pago</th>
+								{{-- <th class="center-align bold">Pago</th> --}}
 								<th class="center-align bold">Status</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -57,17 +58,20 @@
 										        break;
 										}
 
-										if ($post->pago > 0) {
-										    $pago = '<span class="btn-floating btn-flat transparent status_inscricao green-text" data-tooltip="Pago"><i class="material-symbols-outlined">check_circle</i></span>';
-										} else {
-										    $pago = '<span class="btn-floating btn-flat transparent status_inscricao red-text text-accent-2" data-tooltip="Não pago"><i class="material-symbols-outlined">cancel</i></span>';
-										}
+										// if ($post->pago > 0) {
+										//     $pago = '<span class="btn-floating btn-flat transparent status_inscricao green-text" data-tooltip="Pago"><i class="material-symbols-outlined">check_circle</i></span>';
+										// } else {
+										//     $pago = '<span class="btn-floating btn-flat transparent status_inscricao red-text text-accent-2" data-tooltip="Não pago"><i class="material-symbols-outlined">cancel</i></span>';
+										// }
+
+										$acao = '<button type="button" class="btn btn-floating btn-flat transparent white-text" data-href="' . route('admin.paginas.eventos.inscricao', [request('id'), $post->id]) . '" data-tooltip="Ver Inscrição"><i class="material-symbols-outlined">visibility</i></button>';
 
 									@endphp
 
-									<td class="center-align">{!! $pago !!}</td>
+									{{-- <td class="center-align">{!! $pago !!}</td> --}}
 									<td class="center-align">{!! $status !!}</td>
-
+									<td class="center-align">{!! $acao !!}</td>
+									{{-- event_busy --}}
 								</tr>
 							@endforeach
 						</tbody>

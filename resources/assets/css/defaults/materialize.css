@@ -1464,7 +1464,8 @@ input[type=datetime-local]:not(.browser-default),
 input[type=tel]:not(.browser-default),
 input[type=number]:not(.browser-default),
 input[type=search]:not(.browser-default),
-textarea.materialize-textarea {
+textarea.materialize-textarea,
+.input-label span {
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -1473,11 +1474,19 @@ label {
 }
 
 .input-label {
-	margin-top: 15px;
+	margin-top: 15px !important;
 	height: 3rem;
-	line-height: 3rem;
+	line-height: 2rem;
+	padding-top: 10px;
 	color: inherit;
 	cursor: text;
+	margin-bottom: 1rem !important;
+}
+
+.input-label span {
+	display: block;
+	line-height: inherit;
+	font-size: 16px;
 }
 
 .input-field>label {
@@ -1606,7 +1615,7 @@ textarea.materialize-textarea:disabled,
 .select2-container--default.select2-container--disabled .select2-selection--multiple,
 .select2-container--default.select2-container--disabled .select2-selection--single,
 .select2-container--default.select2-container--disabled.select2-container--focus .select2-selection--multiple {
-	color: rgba(0, 0, 0, 0.5) !important;
+	color: rgba(255, 255, 255, 0.8) !important;
 	cursor: not-allowed;
 	border-bottom: none;
 	background-color: rgba(0, 0, 0, 0) !important;

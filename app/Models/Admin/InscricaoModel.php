@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,7 +26,7 @@ class InscricaoModel extends Model {
 			DB::raw('(SELECT REGEXP_REPLACE(email, "[^\\x20-\\x7E]", "") AS email FROM tb_inscrito WHERE id = id_inscrito) AS email'),
 			DB::raw('(DATE_FORMAT(created_at, "%d/%m/%Y %H:%i:%s")) AS data_inscricao'),
 			'status',
-			DB::raw('(SELECT COUNT(id) FROM tb_inscricao_pagamento WHERE id_inscricao = id) AS pago')
+			DB::raw('(SELECT COUNT(id) FROM tb_inscricao_boleto WHERE id_inscricao = id) AS pago')
 		)
 			->where('id_evento', $id_evento)->get();
 

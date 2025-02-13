@@ -9,6 +9,11 @@
 	"license": "MIT",
 	"require": {
 		"php": "^8.2",
+		"ageekdev/laravel-barcode": "^1.2",
+		"brunopansani/sicredi-api": "^0.0.2",
+		"crmdesenvolvimentos/pix-sicredi": "^1.0",
+		"eduardokum/laravel-boleto": "^0.11.1",
+		"eduardokum/laravel-mail-auto-embed": "dev-master",
 		"guzzlehttp/guzzle": "^7.2",
 		"josiasmontag/laravel-recaptchav3": "^1.0",
 		"laravel/framework": "^11.0",

@@ -1,15 +1,13 @@
 <?php
-
 namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class InscritoModel extends Model
-{
+class InscritoModel extends Model {
 	use HasFactory;
 
 	protected $table    = 'tb_inscrito';
-	protected $fillable = ['id_uf', 'id_cidade', 'nome', 'cpf', 'email', 'telefone', 'created_at', 'updated_at'];
+	protected $fillable = ['id_uf', 'id_cidade', 'nome', 'cpf', 'rg', 'email', 'telefone', 'created_at', 'updated_at'];
 	protected $datamap  = [
 		// 'id_igreja'      => 'denominacao_id',
 		// 'denominacao_id' => 'id_igreja',
@@ -18,14 +16,13 @@ class InscritoModel extends Model
 		'cidade' => 'id_cidade',
 	];
 
-	public function fields(string $key)
-	{
+	public function fields(string $key) {
 
 		if (empty($this->datamap)) {
 			return $key;
 		}
 
-		if (!empty($this->datamap[$key])) {
+		if (! empty($this->datamap[$key])) {
 			return $this->datamap[$key];
 		}
 
@@ -33,8 +30,7 @@ class InscritoModel extends Model
 
 	}
 
-	public function map($field)
-	{
+	public function map($field) {
 
 		$data = [];
 

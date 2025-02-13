@@ -70,6 +70,8 @@
 											</div>
 										</div>
 									</div>
+
+									<a href="{{ route('site.eventos.boleto', ['boleto' => session('boleto')]) }}">Baixar Boleto</a>
 								@endif
 
 								<form action="{{ route('site.eventos.post', $post->evento_slug) }}" method="post" enctype="multipart/form-data">
@@ -79,35 +81,35 @@
 
 									<div class="input-field @isset($errors['nome']) error @endisset"">
 										<div class="material-symbols-outlined prefix">person</div>
-										<x-text-input name="nome" id="nome" value="{{ old('nome') }}" placeholder="Nome" />
+										<x-text-input name="nome" id="nome" value="{{ old('nome') ?? 'ALISSON GUEDES PEREIRA' }}" placeholder="Nome" />
 										@isset($errors['nome'])
 											<div class="error">{{ $errors['nome'][0] }}</div>
 										@endisset
 									</div>
 									<div class="input-field @isset($errors['cpf']) error @endisset"">
 										<div class="material-symbols-outlined prefix">id_card</div>
-										<x-text-input name="cpf" id="cpf" value="{{ old('cpf') }}" placeholder="CPF" />
+										<x-text-input name="cpf" id="cpf" value="{{ old('cpf') ?? '06942292451' }}" placeholder="CPF" />
 										@isset($errors['cpf'])
 											<div class="error">{{ $errors['cpf'][0] }}</div>
 										@endisset
 									</div>
 									<div class="input-field @isset($errors['rg']) error @endisset"">
 										<div class="material-symbols-outlined prefix">id_card</div>
-										<x-text-input name="rg" id="rg" value="{{ old('rg') }}" placeholder="RG" />
+										<x-text-input name="rg" id="rg" value="{{ old('rg') ?? '3177241' }}" placeholder="RG" />
 										@isset($errors['rg'])
 											<div class="error">{{ $errors['rg'][0] }}</div>
 										@endisset
 									</div>
 									<div class="input-field @isset($errors['email']) error @endisset"">
 										<div class="material-symbols-outlined prefix">alternate_email</div>
-										<x-text-input name="email" id="email" value="{{ old('email') }}" placeholder="E-Mail" />
+										<x-text-input name="email" id="email" value="{{ old('email') ?? 'alissonguedes87@gmail.com' }}" placeholder="E-Mail" />
 										@isset($errors['email'])
 											<div class="error">{{ $errors['email'][0] }}</div>
 										@endisset
 									</div>
 									<div class="input-field @isset($errors['telefone']) error @endisset"">
 										<div class="material-symbols-outlined prefix">phone</div>
-										<x-text-input name="telefone" id="telefone" value="{{ old('telefone') }}" placeholder="Telefone" />
+										<x-text-input name="telefone" id="telefone" value="{{ old('telefone') ?? '83988112444' }}" placeholder="Telefone" />
 										@isset($errors['telefone'])
 											<div class="error">{{ $errors['telefone'][0] }}</div>
 										@endisset
@@ -118,7 +120,7 @@
 											<option selected disabled>Informe seu estado</option>
 											@if (isset($estados))
 												@foreach ($estados as $uf)
-													<option value="{{ $uf->id }}" @selected(old('uf') == $uf->id ?? $uf->estado == 'Paraiba')>{{ $uf->estado }}</option>
+													<option value="{{ $uf->id }}" @selected(old('uf') == $uf->id || $uf->id == '2552')>{{ $uf->estado }}</option>
 												@endforeach
 											@endif
 										</select>
@@ -132,7 +134,7 @@
 											<option selected disabled>Informe sua cidade</option>
 											@if (isset($cidades))
 												@foreach ($cidades as $cidade)
-													<option value="{{ $cidade->id }}" @selected(old('cidade') == $cidade->id ?? $cidade->cidade == 'Joao Pessoa')>{{ $cidade->cidade }}</option>
+													<option value="{{ $cidade->id }}" @selected(old('cidade') == $cidade->id || $cidade->id == '57556')>{{ $cidade->cidade }}</option>
 												@endforeach
 											@endif
 										</select>

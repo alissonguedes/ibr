@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Http\Controllers\Main;
 
+use App\Http\Controllers\BoletoController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InscricoesRequest;
 use App\Models\Admin\EventoModel;
@@ -11,11 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
-class InscricoesController extends Controller
-{
+class InscricoesController extends Controller {
 
-	public function index(Request $request, EventoModel $eventoModel, string $evento)
-	{
+	public function index(Request $request, EventoModel $eventoModel, string $evento) {
 
 		$data['id']   = $request->id;
 		$data['post'] = $eventoModel->getEventoByTitulo($evento);
@@ -35,7 +33,7 @@ class InscricoesController extends Controller
 				->where('estado', 'Paraiba');
 		})->get();
 
-		if (!isset($data['post'])) {
+		if (! isset($data['post'])) {
 			return redirect()->route('site.eventos');
 		}
 
@@ -85,16 +83,14 @@ class InscricoesController extends Controller
 	/**
 	 * Show the form for creating a new resource.
 	 */
-	public function create()
-	{
+	public function create() {
 		//
 	}
 
 	/**
 	 * Store a newly created resource in storage.
 	 */
-	public function store(InscricoesRequest $request)
-	{
+	public function store(InscricoesRequest $request, BoletoController $boleto) {
 
 		$cpf         = replace($request->cpf);
 		$rg          = replace($request->rg);
@@ -119,52 +115,67 @@ class InscricoesController extends Controller
 		if (isset($db_inscrito)) {
 			$inscrito_data['cpf'] = $db_inscrito->cpf;
 			InscritoModel::where('id', $db_inscrito->id)->update($inscrito_data);
-			$id_inscrito = $db_inscrito->id;
+			$inscritoModel = $db_inscrito;
 		} else {
-			$id_inscrito = InscritoModel::insertGetId($inscrito_data);
+			$inscritoModel = InscritoModel::create($inscrito_data);
 		}
 
-		$inscricao_inscrito = InscricaoModel::where(['id_inscrito' => $id_inscrito, 'id_evento' => $request->evento])->first();
+		$inscricao_inscrito = InscricaoModel::where(['id_inscrito' => $inscritoModel->id, 'id_evento' => $request->evento])->first();
 
-		$where_inscricao = ['id_evento' => $request->evento, 'id_inscrito' => $id_inscrito];
+		$where_inscricao = ['id_evento' => $request->evento, 'id_inscrito' => $inscritoModel->id];
 		$data_inscricao  = [
 			'id_evento'   => $request->evento,
-			'id_inscrito' => $id_inscrito,
+			'id_inscrito' => $inscritoModel->id,
 		];
 
 		$inscricaoExists = InscricaoModel::where($where_inscricao)->first();
 
-		if (!$inscricaoExists) {
+		if (! $inscricaoExists) {
 			$data_inscricao['codigo_inscricao'] = uniqid(rand(111111, 999999));
 		}
 
-		InscricaoModel::updateOrCreate($where_inscricao, $data_inscricao);
+		$inscricaoModel = InscricaoModel::updateOrCreate($where_inscricao, $data_inscricao);
 
 		$eventoModel = EventoModel::where('id', $request->evento)->first();
 
+		$boleto = $boleto->gerarBoleto($inscricaoModel, $eventoModel, $inscritoModel);
+
+		return $boleto;
+		// return redirect()->route('site.eventos.boleto')->withInput(['boleto' => $boleto]);
+
 		if (isset($inscricao_inscrito)) {
-
-			return redirect()->route('site.eventos.inscricoes', $eventoModel->evento_slug)->with(['message' => 'Sua inscrição foi atualizada.']);
-
+			// return redirect()->route('site.eventos.inscricoes', ['evento' => $eventoModel->evento_slug, 'boleto' => $inscricaoModel])->with(['message' => 'Sua inscrição foi atualizada.']);
 		}
 
-		return redirect()->route('site.eventos.inscricoes', $eventoModel->evento_slug)->with(['message' => 'Inscrição enviada com sucesso!']);
+		// return redirect()->route('site.eventos.inscricoes', ['evento'=> $eventoModel->evento_slug, 'boleto' => $inscricaoModel])->with(['message' => 'Inscrição enviada com sucesso!']);
+
+		// return ['boleto' => $inscricaoModel];
 
 	}
+
+	// public function create_boleto() {
+	// (new Beneficiary(
+	// 	'Jose da Silva',
+	// 	'86049253099',
+	// 	'person'
+	// ))(new Payee(
+	// 	'Maria de Lurdes',
+	// 	'50581718054',
+	// 	'person'
+	// ))
+	// }
 
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(InscricoesModel $inscricoesModel)
-	{
+	public function show(InscricoesModel $inscricoesModel) {
 		//
 	}
 
 	/**
 	 * Show the form for editing the specified resource.
 	 */
-	public function edit(Request $request, InscricaoModel $inscricao)
-	{
+	public function edit(Request $request, InscricaoModel $inscricao) {
 
 		$data   = [];
 		$cpf    = $request->cpf;
@@ -190,16 +201,14 @@ class InscricoesController extends Controller
 	/**
 	 * Update the specified resource in storage.
 	 */
-	public function update(Request $request, InscricoesModel $inscricoesModel)
-	{
+	public function update(Request $request, InscricoesModel $inscricoesModel) {
 		//
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 */
-	public function destroy(InscricoesModel $inscricoesModel)
-	{
+	public function destroy(InscricoesModel $inscricoesModel) {
 		//
 	}
 }
