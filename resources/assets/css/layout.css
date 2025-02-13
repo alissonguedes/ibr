@@ -840,7 +840,7 @@ footer {
 
 .img_min {
 	overflow: hidden;
-	margin-bottom: 20px;
+	/* margin-bottom: 20px; */
 }
 
 .nome_ministerio {
