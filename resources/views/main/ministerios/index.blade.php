@@ -10,7 +10,7 @@
 				@foreach ($posts as $i => $post)
 					<a href="@if (!isset($post->url)) {{ route('site.ministerios.details', $post->titulo_slug) }} @else {{ $post->url }} @endif" @if (isset($post->url)) target="_blank" @endif>
 						<div class="conj_ministerios">
-							<div class="img_min" style="background: none;">
+							<div class="img_min" style="background: none !important;">
 								<img src="{{ route('home.ministerios.show-image', $post->id) . '?action=preview' }}" class="img_cem" >
 							</div>
 							{{-- <div class="nome_ministerio cor_preta">{{ $post->titulo }}</div> --}}
