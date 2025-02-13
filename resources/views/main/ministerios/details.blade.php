@@ -34,11 +34,11 @@
 						@foreach ($ministerios as $ministerio)
 							<a href="{{ route('site.ministerios.details', $ministerio->titulo_slug) }}">
 								<div class="conj_ministerios">
-									<div class="img_min">
+									<div class="img_min" style="background: none !important;">
 										<img src="{{ route('home.ministerios.show-image', $ministerio->id) . '?action=preview' }}" class="img_cem">
 									</div>
-									<div class="nome_ministerio cor_preta">{{ $ministerio->titulo }}</div>
-									<div class="ref_ministerio cor_cinza">{{ $ministerio->subtitulo }}</div>
+									{{-- <div class="nome_ministerio cor_preta">{{ $ministerio->titulo }}</div> --}}
+									{{-- <div class="ref_ministerio cor_cinza">{{ $ministerio->subtitulo }}</div> --}}
 								</div>
 							</a>
 						@endforeach
