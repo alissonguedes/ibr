@@ -3,7 +3,7 @@
 
 	@foreach ($banners as $banner)
 		@if (isset($banner->url))
-			<a href="#">
+			<a href="{{ $banner->url }}">
 		@endif
 		<div class="mySlides">
 			<img src="{{ route('home.banners.show-image', $banner->id) }}" alt="">
